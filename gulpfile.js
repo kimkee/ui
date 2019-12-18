@@ -14,26 +14,22 @@ const urlAdjuster_mc = require("gulp-css-url-adjuster");
 // const imgDomain_mc ="http:/\//dev-app.fapee.com:8081" ;
 const imgDomain_mc ="/\//10.120.160.172:8081" ;
 const css_mc = [
-	"css/jquery-ui.css",
-	"css/swiper.css",
-	"css/base.css",
-	"css/common.css",
-	"css/member.css",
-	"css/look.css",
-	"css/home.css"
+	"static/css/jquery-ui.css",
+	"static/css/swiper.css",
+	"static/css/base.css",
+	"static/css/common.css",
 ];
 
 const js_mc = [
-	"js/iscroll.js",
-	"js/swiper.js",
-	"js/hammer.js",
-	"js/imagesloaded.pkgd.js",
-	"js/masonry.pkgd.js",
-	"js/pullToRefresh.js",
-	"js/jquery-listswipe.js",
-	"js/autosize.js",
-	"js/ui.js"
+	"static/js/iscroll.js",
+	"static/js/swiper.js",
 ];
+
+const inc_mc = [
+	"src/inc",
+];
+
+
 
 const d = new Date();
 const css_ver = d.getFullYear() +"."+ d.getMonth() +"."+ d.getDay() +"."+ d.getHours() +"."+ d.getMinutes() +"."+ d.getSeconds();
@@ -41,8 +37,8 @@ const css_ver = d.getFullYear() +"."+ d.getMonth() +"."+ d.getDay() +"."+ d.getH
 function styles() {
 	return gulp.src(css_mc)
 		.pipe(urlAdjuster_mc({
-			replace: ["../","/"],
-			prepend: imgDomain_mc+"/resources2/app",
+			replace: ["/","/"],
+			prepend: imgDomain_mc+"/resources/app",
 			append: "?v="+css_ver
 		}))
 		// .pipe(cssmin())
@@ -50,7 +46,7 @@ function styles() {
 		.pipe(cssmin({debug: true}, function(details) {
 			console.log(details.name + ' : ' + details.stats.originalSize +' > '+ details.stats.minifiedSize);
 		}))
-		.pipe(gulp.dest("css/"))
+		.pipe(gulp.dest("static/dist/css/"))
 		.on('end', function(e) {
 			console.log("CSS완료");
 		});
@@ -65,18 +61,21 @@ function scripts(){
 				min:'.min.js'
         	},
 		}))
-		.pipe(gulp.dest('js/'))
+		.pipe(gulp.dest('static/dist/js/'))
 		.on('end', function() {
 			console.log("JS완료");
 		});
 }
-
+function includes(){
+	console.log(css_ver);
+}
 function watch() {
 	gulp.watch(css_mc, styles);
 	gulp.watch(js_mc, scripts);
+	gulp.watch(inc_mc, includes);
 }
 
-const build = gulp.series(styles,scripts, gulp.parallel(watch));
+const build = gulp.series(gulp.parallel(watch));
 
 
 exports.default = build;

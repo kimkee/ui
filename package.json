@@ -4,7 +4,8 @@
 	"description": "dededede",
 	"main": "gulpfile.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"compile": "html-includes --src static/src --dest static/dist"
 	},
 	"author": "Kim Kee Hyun",
 	"license": "ISC",
@@ -19,6 +20,7 @@
 		"gulp-rename": "^1.4.0",
 		"gulp-sourcemaps": "^2.6.5",
 		"gulp-uglify": "^3.0.2",
-		"gulp-webserver": "^0.9.1"
+		"gulp-webserver": "^0.9.1",
+		"html-includes": "^4.2.0"
 	}
 }

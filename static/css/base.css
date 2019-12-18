@@ -69,7 +69,6 @@ input[type=number]{-moz-appearance:textfield;}
 .ui-datepicker-calendar tbody td a{text-align:center;padding: 3px 5px;color:#666666;}
 
 
-
 .ui-datepicker.week .ui-state-default.ui-state-active,
 .ui-datepicker.week .ui-state-default.ui-state-active:hover{color: #666666;background-color: #ffffff;}
 
