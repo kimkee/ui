@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery List Swipe Demos</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="jquery-listswipe.js"></script>
+<script type="text/javascript">
+		$(function() {
+			$('.example-1').listSwipe();
+
+			$('.example-2').listSwipe({
+				rightAction: false,
+				closeOnOpen: false
+			});
+
+			$('.example-3').listSwipe({
+				itemActionWidth: 140,
+				snapDuration: 1000
+			});
+		});
+	</script>
+<style type="text/css">
+body {
+  font-family: 'Roboto',Arial, sans-serif;
+  background: #EEE;
+  margin: 0;
+}
+
+header {
+  background: #AEAEAE;
+  color: #FFF;
+  padding: 15px 0;
+}
+
+header .title { font-size: 34px; }
+
+.inner {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto;
+  min-width: 320px;
+  padding: 0 10px;
+}
+</style>
+<style type="text/css">
+/* jQuery List Swipe Example CSS */
+
+
+
+
+.item-list { overflow: hidden; }
+
+.item-list .item {
+  position: relative;
+  display: table;
+  width: 100%;
+  background: #FFF;
+  margin-top: 5px;
+}
+
+.item-list .item > div {
+  padding: 10px;
+}
+
+.item-list .item .action {
+  position: absolute;
+  width: 80px;
+  height: 100%;
+  top: 0;
+  border: 0;
+  color: #FFF;
+  outline: none;
+}
+
+.item-list .item .action:first-child::before, .item-list .item .action:last-child::before {
+  position: absolute;
+  top: 0;
+  content: '';
+  width: 2000px;
+  height: 100%;
+}
+
+.item-list .item .action:first-child { left: -80px; }
+
+.item-list .item .action:first-child::before { right: 80px; }
+
+.item-list .item .action:last-child { right: -80px; }
+
+.item-list .item .action:last-child::before { left: 80px; }
+
+.item-list .item .action, .item-list .item .action::before { background: #E74C3C; }
+
+.item-list.example-3 .action { width: 140px; }
+
+.item-list.example-3 .item .action:first-child { left: -140px; }
+
+.item-list.example-3 .item .action:first-child::before { right: 140px; }
+
+.item-list.example-3 .item .action:last-child { right: -140px; }
+
+.item-list.example-3 .item .action:last-child::before { left: 140px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="inner">
+    <div class="title">jQuery List Swipe Demos</div>
+  </div>
+</header>
+<div align="center">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- jQuery_download_side -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-2783044520727903"
+     data-ad-slot="5747103992"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+<main>
+  <div class="inner">
+    <h2>Example 1 (Default settings)</h2>
+    <div class="item-list example-1">
+      <div class="item">
+        <button class="action">Left Button</button>
+        <div>First Item</div>
+        <button class="action">Right Button</button>
+      </div>
+      <div class="item">
+        <button class="action">Left Button</button>
+        <div>Second Item</div>
+        <button class="action">Right Button</button>
+      </div>
+      <div class="item">
+        <button class="action">Left Button</button>
+        <div>Third Item</div>
+        <button class="action">Right Button</button>
+      </div>
+    </div>
+    <h2>Example 2 (Left action only, no auto-close)</h2>
+    <div class="item-list example-2">
+      <div class="item">
+        <button class="action">Left Button</button>
+        <div>First Item</div>
+      </div>
+      <div class="item">
+        <button class="action">Left Button</button>
+        <div>Second Item</div>
+      </div>
+      <div class="item">
+        <button class="action">Left Button</button>
+        <div>Third Item</div>
+      </div>
+    </div>
+    <h2>Example 3 (Wide actions, long snap duration)</h2>
+    <div class="item-list example-3">
+      <div class="item">
+        <button class="action">Left Button</button>
+        <div>First Item</div>
+        <button class="action">Right Button</button>
+      </div>
+      <div class="item">
+        <button class="action">Left Button</button>
+        <div>Second Item</div>
+        <button class="action">Right Button</button>
+      </div>
+      <div class="item">
+        <button class="action">Left Button</button>
+        <div>Third Item</div>
+        <button class="action">Right Button</button>
+      </div>
+    </div>
+  </div>
+</main>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

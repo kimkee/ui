@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link href="../dist/styles/ios/style.css" rel="stylesheet">
+    <script src="../dist/styles/ios/animates.js"></script>
+    <script src="../dist/pullToRefresh.js"></script>
+    <meta name="theme-color" content="#f7f7f8">
+    <title>Pull to refresh - iOS</title>
+
+    <style>
+      body {
+        margin: 0;
+        margin-top: 44px;
+        font-family: sans-serif;
+        background: #fafafa;
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 44px;
+        line-height: 44px;
+        font-size: 17px;
+        font-weight: bold;
+        color: #000;
+        text-align: center;
+        background: #f7f7f8;
+        z-index: 9999;
+        border-bottom: 1px solid #c4c4c4;
+        box-sizing: border-box;
+      }
+
+      main {
+        height: 1000px;
+        background: #fff;
+        padding: 1em;
+      }
+
+      h1 {
+        font-size: 18px;
+        text-align: center;
+        padding-top: 8em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>Header</header>
+    <div class="container pull-to-refresh-ios">
+      <div class="pull-to-refresh-ios__spinner">
+        <div class="pull-to-refresh-ios__blade"></div>
+        <div class="pull-to-refresh-ios__blade"></div>
+        <div class="pull-to-refresh-ios__blade"></div>
+        <div class="pull-to-refresh-ios__blade"></div>
+        <div class="pull-to-refresh-ios__blade"></div>
+        <div class="pull-to-refresh-ios__blade"></div>
+        <div class="pull-to-refresh-ios__blade"></div>
+        <div class="pull-to-refresh-ios__blade"></div>
+        <div class="pull-to-refresh-ios__blade"></div>
+        <div class="pull-to-refresh-ios__blade"></div>
+        <div class="pull-to-refresh-ios__blade"></div>
+        <div class="pull-to-refresh-ios__blade"></div>
+      </div>
+
+      <main class="pull-to-refresh-ios__main">
+        <h1>Pull down to refresh</h1>
+        <p>Pulling up should shrink the address bar in Chrome mobile and Safari mobile</p>
+        <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p><p>11</p><p>12</p>
+      </main>
+    </div>
+
+    <script>
+      pullToRefresh({
+        container: document.querySelector('.container'),
+        animates: ptrAnimatesIos,
+
+        refresh() {
+          return new Promise(resolve => {
+            setTimeout(resolve, 2000)
+          })
+        }
+      })
+    </script>
+  </body>
+</html>
