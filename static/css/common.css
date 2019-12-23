@@ -86,7 +86,7 @@ select::-ms-expand {display:none;}
 .uiStar .p{height:33px;font-size:20px;font-weight:bold;color:#666666;display:inline-block;vertical-align:middle;margin-left:5px;}
 
 /* 슬라이더 */
-.uiSlider{}
+.uiSlider{} 
 .uiSlider.ui-slider{background:#dddddd;border: none;height: 4px;border-radius: 0px;margin: 0 10px;}
 .uiSlider.ui-slider .ui-slider-handle{width: 24px;height: 24px;top: -10px;border-radius: 100%;border: 3px solid #000;background:#ffffff;outline: none;}
 .uiSlider.ui-slider .ui-slider-handle span{position:absolute;top: -24px;width: 40px;color: #333333;text-align: center;margin-left: -11px;}
