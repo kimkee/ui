@@ -27,12 +27,12 @@ const js_mc = [
 ];
 
 const inc_mc = [
-	"src/inc",
+	"static/src/inc",
 ];
 
 function styles() {
 	var d = new Date();
-	var css_ver = d.getFullYear() +"_"+ 1+d.getMonth() +"_"+ d.getDate() +"_"+ d.getHours() +"_"+ d.getMinutes() +"_"+ d.getSeconds();	
+	var css_ver = d.getFullYear() +"_"+ (d.getMonth()+1) +"_"+ d.getDate() +"_"+ d.getHours() +"_"+ d.getMinutes() +"_"+ d.getSeconds();	
 	return gulp.src(css_mc)
 		.pipe(urlAdjuster_mc({
 			replace: ["../img/","/static/img/"],
@@ -40,8 +40,8 @@ function styles() {
 			append: "?v="+css_ver
 		}))
 		//.pipe(cssmin())
-		.pipe(concatCss("_style.min.css"))
-		.pipe(cssmin({debug: true}, function(details) {
+		.pipe(concatCss("style.min.css"))
+		.pipe(cssmin({debug: true /* ,format: 'keep-breaks' */}, function(details) {
 			console.log(details.name + ' : ' + details.stats.originalSize +' > '+ details.stats.minifiedSize);
 		}))
 		.pipe(gulp.dest("static/dist/css/"))
@@ -52,7 +52,7 @@ function styles() {
 
 function scripts(){
 	return gulp.src(js_mc)
-		.pipe(concat('_bundle.js'))
+		.pipe(concat('bundle.js'))
 		.pipe(minify({
 			ext:{
 				src:'.js',

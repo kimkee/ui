@@ -7,7 +7,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"compile": "html-includes --src static/src --dest static/dist"
 	},
-	"author": "Kim Kee Hyun",
+	"author": "KimKeeHyun",
 	"license": "ISC",
 	"dependencies": {
 		"gulp": "^4.0.2",

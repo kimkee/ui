@@ -4,8 +4,8 @@
 <title>Document</title>
 <meta name="format-detection" content="telephone=no">
 <meta name="theme-color" content="#ffffff">
-<link href="/static/img/common/favicon.ico" rel="shrtcut icon">
-<link href="/static/img/common/favicon.png" rel="apple-touch-icon-precomposed">
+<link href="../../img/common/favicon.ico" rel="shrtcut icon">
+<link href="../../img/common/favicon.png" rel="apple-touch-icon-precomposed">
 
 <!-- 개발에서 아래코드 삭제 -->
 <%@ page import="java.util.*" %>
@@ -19,15 +19,15 @@ String nn = Integer.toString( now.getMinutes() ) ;
 String ss = Integer.toString( now.getSeconds() ) ;
 String version =  yy  +"-"+ mm +"-"+ dd +"-"+ hh +"-"+ nn +"-"+ ss ;
 %>
-<link rel="stylesheet" href="/static/css/jquery-ui.css?v=<%=version%>">
-<link rel="stylesheet" href="/static/css/swiper.css?v=<%=version%>">
-<link rel="stylesheet" href="/static/css/reset.css?v=<%=version%>">
-<link rel="stylesheet" href="/static/css/common.css?v=<%=version%>">
+<link rel="stylesheet" href="../../css/jquery-ui.css?v=<%=version%>">
+<link rel="stylesheet" href="../../css/swiper.css?v=<%=version%>">
+<link rel="stylesheet" href="../../css/base.css?v=<%=version%>">
+<link rel="stylesheet" href="../../css/common.css?v=<%=version%>">
 
-<script src="/static/js/jquery-3.4.1.js"></script>
-<!-- <script src="/static/js/jquery-2.2.4.js"></script> -->
-<script src="/static/js/jquery-ui.js"></script>
-<script src="/static/js/jquery.ui.touch-punch.js"></script>
+<script src="../../js/jquery-3.4.1.js"></script>
+<!-- <script src="../../js/jquery-2.2.4.js"></script> -->
+<script src="../../js/jquery-ui.js"></script>
+<script src="../../js/jquery.ui.touch-punch.js"></script>
 
 
 	
