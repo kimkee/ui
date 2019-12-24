@@ -1,17 +1,17 @@
 ﻿<!doctype html>
 <html lang="ko">
 <head>
-<%@ include file="../_inc/meta.jsp" %>
+<%@ include file="../inc/meta.jsp" %>
 
-<link href="../common/shCore.css" rel="stylesheet">
-<script src="../common/shCore.js"></script>
+<link href="../guide/shCore.css" rel="stylesheet">
+<script src="../guide/shCore.js"></script>
 
 </head>
 <body class="body">
 <div class="wrap" id="wrap">
 	
 		
-	<%@ include file="../_inc/head.jsp" %>
+	<%@ include file="../inc/head.jsp" %>
 	
 	<!-- 컨텐츠 시작 -->
 	<div class="contain ui" id="contain">
@@ -19,7 +19,7 @@
 		<main class="contents" id="contents">
 			
 		
-			<h2 class="hdt">UI Guide Kim KeeHyun</h2>
+			<h2 class="hdt">UI Guide KimKeeHyun</h2>
 
 			<section class="dromDownSample">
 				
@@ -120,7 +120,7 @@
 				<div id="cssStatus"></div>
 				<div id="browserStatus"></div>
 			</div>
-
+			<div id="barH"></div>
 			<p class="gap"></p>
 			
 			<p class="gap"></p>
@@ -169,7 +169,7 @@
 
 			<p class="gap"></p>
 
-			<%@ include file="../_inc/paging.jsp" %>
+			<%@ include file="../inc/paging.jsp" %>
 
 
 			<section class="codeBox"> 
@@ -639,6 +639,43 @@
 
 
 			<p class="gap"></p>
+			<a href="#tog_sample2" data-ui-tog="btn" class="btn">토글버튼2</a>
+			<div id="tog_sample2" data-ui-tog="ctn">
+				<p>토글내용 토글내용</p>
+				<p>토글내용 토글내용</p>
+			</div>
+			<p class="gap"></p>
+
+			<ul class="uiTabs type a">
+				<li class="active"><a href="javascript:;" data-ui-tab-btn="tab_ctn_C" data-ui-tab-val="tab_id_C_1">탭메뉴1</a></li>
+				<li class=""><a href="javascript:;" data-ui-tab-btn="tab_ctn_C" data-ui-tab-val="tab_id_C_2">탭메뉴2</a></li>
+			</ul>
+			<div class="panel active" data-ui-tab-ctn="tab_ctn_C" id="tab_id_C_1">
+				<p>탭내용1</p>
+			</div>
+			<div class="panel" data-ui-tab-ctn="tab_ctn_C" id="tab_id_C_2">
+				<p>탭내용2</p>
+			</div>
+			
+
+			<div class="codeBox">
+				<div class="code">
+					<pre class="brush: html">
+						<ul class="uiTabs type a">
+							<li class="active"><a href="javascript:;" data-ui-tab-btn="tab_ctn_C" data-ui-tab-val="tab_id_C_1">탭메뉴1</a></li>
+							<li class=""><a href="javascript:;" data-ui-tab-btn="tab_ctn_C" data-ui-tab-val="tab_id_C_2">탭메뉴2</a></li>
+						</ul>
+						<div class="panel active" data-ui-tab-ctn="tab_ctn_C" id="tab_id_C_1">
+							<p>탭내용1</p>
+						</div>
+						<div class="panel" data-ui-tab-ctn="tab_ctn_C" id="tab_id_C_2">
+							<p>탭내용2</p>
+						</div></pre>
+				</div>
+			</div>
+
+
+			<p class="gap"></p>
 			<!-- 아코디언형 -->
 			<ul class="uiAccd" data-accd="accd">
 				<li class="open">
@@ -871,7 +908,7 @@
 			window.setTimeout(function(){
 				$.ajax({
 					type: "post",
-					url: "../_inc/list_more.jsp",
+					url: "../inc/list_more.jsp",
 					dataType: "html",
 					success: function(html) {
 						$("#dp_list").append(html).addClass("load");
@@ -898,7 +935,7 @@
 	};
 	</script>
 
-	<%@ include file="../_inc/foot.jsp" %>
+	<%@ include file="../inc/foot.jsp" %>
 
 </div>
 
@@ -926,7 +963,7 @@ $(function() {
 });
 </script>
 
-<%@ include file="../_inc/bottom.jsp" %>
-<%@ include file="../_inc/scripts.jsp" %>
+<%@ include file="../inc/bottom.jsp" %>
+<%@ include file="../inc/scripts.jsp" %>
 </body>
 </html>

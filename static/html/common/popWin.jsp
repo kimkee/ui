@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 	
-<%@ include file="../_inc/meta.jsp" %>
+<%@ include file="../inc/meta.jsp" %>
 
 </head>
 <body class="body">
@@ -79,7 +79,7 @@ $(document).ready(function(){
 });
 </script>
 
-<%@ include file="../_inc/bottom.jsp" %>
-<%@ include file="../_inc/scripts.jsp" %>
+<%@ include file="../inc/bottom.jsp" %>
+<%@ include file="../inc/scripts.jsp" %>
 </body>
 </html>

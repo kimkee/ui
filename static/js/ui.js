@@ -10,7 +10,9 @@ var ui = {
 		this.ly.init();
 		this.form.init();
 		this.accd.init();
+		this.tog.init();
 		this.tab.init();
+		this.tabs.init();
 		this.dropDown.init();
 		this.popLayer.init();
 		this.slides.init();
@@ -438,6 +440,50 @@ var ui = {
 
 		}
 	},
+	tog:{ // 토글 UI
+		init: function() {
+			this.using();
+			// this.set();
+			ui.param.tog  && this.set( ui.param.tog );
+		},
+		set:function(id){
+			$("[data-ui-tog='ctn']").hide();
+			$("[data-ui-tog='ctn'].open").show();
+			var _this = this;
+			var togid = id.split(",");
+			$("[data-ui-tog='btn']").each(function(idx){
+				// console.log(idx,togid[idx] );
+				// $("[data-ui-tog='btn'][href='#"+togid[idx]+"']").trigger("click");
+				_this.open(togid[idx]);
+			});
+		},
+		open:function(id){
+			$("#"+id).slideDown(100,function(){
+				$(this).addClass("open");
+				$("[data-ui-tog='btn'][href='#"+id+"']").addClass("open");
+			});
+		},
+		close:function(id){
+			$("#"+id).slideUp(100,function(){
+				$(this).removeClass("open");
+				$("[data-ui-tog='btn'][href='#"+id+"']").removeClass("open");
+			});
+		},
+		using:function(){
+			var _this = this;
+			$(document).on("click", "[data-ui-tog='btn']", function(e) {
+				// console.log("클릭");
+				var id = $(this).attr("href").replace("#","");
+				var bt = $(this);
+				if( bt.hasClass("open") ) {				
+					_this.close(id);
+				}else{
+					_this.open(id);
+				}
+				e.preventDefault();
+			});
+		}
+	},
 	tab:{ //탭형식컨텐츠
 		init:function(){
 			this.using();
@@ -457,6 +503,33 @@ var ui = {
 				}
 				e.preventDefault();
 			});
+		}
+	},
+	tabs:{ // 탭 UI
+		init: function() {
+			this.evt();
+			ui.param.tab  && this.set( ui.param.tab );
+		},
+		set:function(id){
+			var tabid = id.split(",");
+			$("[data-ui-tab-btn][data-ui-tab-val]").each(function(idx){
+				// console.log(idx,tabid[idx] );
+				$("[data-ui-tab-btn][data-ui-tab-val='"+tabid[idx]+"']").trigger("click");
+			});
+		},
+		evt:function(){
+			var _this = this;
+			$(document).on("click", "[data-ui-tab-btn]", function(e){
+				_this.using(this);
+			});
+		},
+		using:function(els){
+			var btn = $(els).data("ui-tab-val");
+			var ctn = $(els).data("ui-tab-btn");
+			$("[data-ui-tab-btn="+ctn+"]").removeClass("active").closest("li").removeClass("active");
+			$(els).addClass("active").closest("li").addClass("active");;
+			$("[data-ui-tab-ctn="+ctn+"]").removeClass("active");;
+			$("[data-ui-tab-ctn]#"+btn).addClass("active");
 		}
 	},
 	lock:{ // 스크롤 막기,풀기

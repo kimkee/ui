@@ -1,9 +1,54 @@
 ﻿var uiHtml = {
 	init: function () {
-		this.menu.init();
+		
+		this.tit();
+		this.layout();
+		$(window).on("load scroll",function(){
+			var winH = $(window).height();
+			var docH = $(document).height();
+			var scrT = $(window).scrollTop();
+			var pct =  scrT / ( docH - winH ) * 100 ;
+			// console.log( winH , docH , scrT ,  pct );
+			$("#barH").css({"width":pct+"%"});
+		});
+	},
+	tit:function(){
 		var tit = window.location.pathname.split("/");
-		// console.log( tit , tit.length);
-		document.title = "MO > " + tit[tit.length - 1];
+		document.title = "/" + tit[tit.length - 2] + "/" + tit[tit.length - 1];
+	},
+	incCallbacks:false,
+	layout:function(){
+		html_layers = false;
+		var _this = this;
+		var $inc_html = $("[data-include-html]");
+		if ($inc_html.length) {
+			$inc_html.each(function(idx){
+				var inc = $(this).data("include-html");
+				var incNums = $inc_html.length ;
+				$(this).load( inc ,function(){
+					console.log( inc,idx+1 , incNums );
+					// _this.incCallbacks ++ ;
+					if( incNums == idx+1 ){
+						_this.incCallbacks = true ;
+					}
+					//$(this).removeAttr("data-include-html");
+				});
+			});
+		}else{
+			_this.incCallbacks = true ;
+		}
+
+		
+		/* $.ajax({
+			type: "post",
+			url: "../../html/inc/layers.html",
+			dataType: "html",
+			success: function(html) {
+				$("#layers").append(html);
+				html_layers = true;
+			}
+		}); */
+
 	},
 	param:(function(a) { // URL에서 파라미터 읽어오기
 		if (a == "") return {};
@@ -20,6 +65,7 @@
 			this.addEvent();
 		},
 		addEvent: function () {
+			var _this = this;
 			var keyM = this.togMenu;
 			var keyF2 = this.togUrl;
 			var keyF7 = this.togMobile;
@@ -37,7 +83,9 @@
 				}
 			}, "textarea , input:not([type=radio],[type=checkbox])");
 
-			$("body").append('<a class="btnLinkHtml" href="javascript:;">링크열기</a>')
+			$(document).ready(function(){
+				$("body").append('<a class="btnLinkHtml" href="javascript:;">링크열기</a>');
+			});
 
 
 			$(document).on("click", ".btnLinkHtml", this.togMenu);
@@ -54,39 +102,51 @@
 				$(".tempLink").remove();
 			});
 
-			var ckidObj = {};
+
+			
 			$(document).on("click", ".linkHtml .cont>ul>li>h3>a", function () {
-				var els = $(this).closest("li");
-
-				//var linkData = $.cookie("linkMenu");
-				var linkData = window.localStorage.getItem("linkMenu");
-				if (linkData) {
-					ckidObj = JSON.parse(linkData);
-				}
-				var ckid = els.attr("id").replace("linkID", "");
-
-				ckidObj["linkID" + ckid] = true;
-
-				if (els.hasClass("open")) {
-					els.removeClass("open");
-					els.find("ul").slideUp(200);
-					//$.cookie(ckid,null,{path:'/'}); 
-					JSON.parse(linkData);
-					ckidObj["linkID" + ckid] = false;
-					//console.log(ckidObj["linkID"+ckid])
-				} else {
-					els.addClass("open");
-					els.find("ul").slideDown(200);
-					//console.log(  "linkID"+ckid ,  ckidObj["linkID"+ckid]);
-				}
-				// $.cookie("linkMenu", ckidObj , { expires:1000, path:"/" });
-				ckidObj = JSON.stringify(ckidObj);
-				window.localStorage.setItem("linkMenu", ckidObj);
+				_this.linkSet(this);
 			});
+				
+
+			if ( !window.localStorage.getItem("linkMenu") ) {
+			}
+				
+			$(".linkHtml .cont>ul>li:not(.open)").addClass("open");
 
 		},
-		linkStat: function () {
+		linkSet:function(my){
+			var ckidObj = {};
+			var els = $(my).closest("li");
 
+			//var linkData = $.cookie("linkMenu");
+			var linkData = window.localStorage.getItem("linkMenu");
+			if (linkData) {
+				ckidObj = JSON.parse(linkData);
+			}
+			var ckid = els.attr("id").replace("linkID", "");
+
+			// ckidObj["linkID" + ckid] = true;
+
+			if (els.hasClass("open")) {
+				els.find("ul").slideUp(200,function(){
+					els.removeClass("open");
+				});
+				JSON.parse(linkData);
+				ckidObj["linkID" + ckid] = false;
+				//console.log(ckidObj["linkID"+ckid])
+			} else {
+				els.find("ul").slideDown(200,function(){
+					els.addClass("open");
+				});
+				ckidObj["linkID" + ckid] = true;
+				//console.log(  "linkID"+ckid ,  ckidObj["linkID"+ckid]);
+			}
+			ckidObj = JSON.stringify(ckidObj);
+			window.localStorage.setItem("linkMenu", ckidObj);			
+		},
+		linkStat: function () {
+			$(".linkHtml .cont>ul>li:not(.open)").addClass("open");
 			$(".linkHtml .cont>ul>li").each(function (i) {
 				$(this).attr("id", "linkID" + i);
 			});
@@ -97,10 +157,12 @@
 				for (var key in linkObj) { //console.log( key );
 					if (linkObj[key]) {
 						$("#" + key).addClass("open").find(">ul").show();
+					}else{
+						$("#" + key).removeClass("open").find(">ul").hide();
 					}
 				}
 			}
-			var thisPg = window.location.pathname;
+			var thisPg = window.location.pathname.replace("/hdebt_mag/static/","../../");
 
 			$(".linkHtml .cont ul ul>li").each(function () {
 				var text = $(this).find("em").text();
@@ -111,7 +173,7 @@
 				var link = $(this).find(">mark").text();
 				if (link) {
 					$(this).find(">mark").wrapInner('<a href="' + link + '"></a>');
-					var lk = link.replace("/static/", "./");
+					var lk = link.replace("../../", "./");
 					$(this).find("mark>a").text(lk);
 				} else {
 					$(this).wrapInner('<a href="javascript:;"></a>');
@@ -147,7 +209,7 @@
 		},
 		keyBack: function () {
 			console.log("뒤로");
-			window.history.back();
+			// window.history.back();
 		},
 		togMenu: function () {
 			if ($(".tempLink").length) {
@@ -159,7 +221,7 @@
 					'</article>';
 				$("body").append(list);
 
-				$(".tempLink>.pan").load("/static/html/common/link.jsp .linkHtml", function () {
+				$(".tempLink>.pan").load("../../html/guide/link.jsp .linkHtml", function () {
 					uiHtml.menu.linkStat();
 				});
 
@@ -178,12 +240,25 @@
 
 		},
 		togDev: function () { // F4 키
-
+			var tUrl = window.location.href;
+			var tPort = window.location.port;
+			var tHost = window.location.host;
+			var tOrg = window.location.origin;
+			var tIp = window.location.hostname;
+			//console.log(tPort, tUrl);
+			if(tPort == "8083"){
+				location.href = tUrl.replace(tHost,"ojkim-thenet-global.gitlab.io");
+			}
+			if(tOrg == "https://ojkim-thenet-global.gitlab.io"){
+				location.href = tUrl.replace(tOrg,"http://10.120.180.246:8083");
+			}
 
 		}
 	}
 };
 
-
-uiHtml.init();
+uiHtml.menu.init();
+$(document).ready(function(){
+	uiHtml.init();
+});
 

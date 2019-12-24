@@ -147,6 +147,7 @@ input[type=number]{-moz-appearance:textfield;}
 .linkHtml .cont>ul>li>h3>a:after{height:34px;width:34px;display:block;position:absolute;right:0px;top:0px;background: url(../img/common/htmlTog.png) no-repeat;background-size:100% auto;/* text-indent:-9999px; *//* overflow:hidden; */content:"";}
 .linkHtml .cont>ul>li.open>h3>a:after{ background-position:0px -36px; }
 .linkHtml .cont>ul>li>ul{ display:none; }
+.linkHtml .cont>ul>li.open>ul{display:block;}
 .linkHtml .cont>ul>li>ul>li{padding: 2px 43px 2px 10px;border-top: 1px solid #e0e0e0;font-size:12px;position:relative;align-items: center;display: flex;}
 .linkHtml .cont>ul>li>ul>li>a{display:block; padding:3px 34px 7px 2px ; color:#000000}
 .linkHtml .cont>ul>li>ul>li.active{background-color: #fffdd8; font-weight:bold;}
@@ -178,14 +179,14 @@ input[type=number]{-moz-appearance:textfield;}
 .btnLinkHtml{width: 36px;height: 36px;text-indent:-9999px;overflow:hidden;position:fixed;bottom: 0px;left: 0px;display:block;z-index:999999;background-color:rgba(100,100,100,0.0);border-radius:30px;}
 
 .linkHtml .cont>ul>li{float:left;width: 33.333%;padding:4px;}
-.linkHtml .cont>ul>li:nth-child(3n+1){ clear:left; }
+.linkHtml .cont>ul>li:nth-child(3n+1){clear:left;}
 .linkHtml .cont>ul:after{ content:""; display:table; clear:both; }
 .linkHtml .cont>ul>li>ul{ }
 
 
 @media screen and ( max-width:1024px)  {
-	.linkHtml .cont>ul>li{ float:left; width:50%; padding:4px; }
-	.linkHtml .cont>ul>li:nth-child(odd){ clear:left; }
+	.linkHtml .cont>ul>li{float:left;width:50%;padding:4px;clear: initial !important;}
+	.linkHtml .cont>ul>li:nth-child(odd){/* clear:left; */}
 	.linkHtml .cont>ul:after{ content:""; display:table; clear:both; }
 	.linkHtml .cont>ul>li>ul{ }
 }
@@ -217,5 +218,5 @@ input[type=number]{-moz-appearance:textfield;}
 .contain.ui h2.hdt{ text-align: center; margin-bottom: 10px; font-size: 16px; font-weight: bold;}
 .contain.ui p.gap{ height:10px; overflow:hidden; }
 .contain.ui h4{ font-size:13px; font-weight:bold; margin:5px 0 5px 0;}
-
+.contain.ui #barH{height:2px;background-color: #ff424d;position:fixed;left:0px;top: 0px;z-index: 1000;transition: width .4s ease-out;}
 

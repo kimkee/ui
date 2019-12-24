@@ -23,6 +23,8 @@ const css_mc = [
 const js_mc = [
 	"static/js/iscroll.js",
 	"static/js/swiper.js",
+	"static/js/moment.js",
+	"static/js/circle-progress.js",
 	"static/js/ui.js",
 ];
 
