@@ -730,143 +730,141 @@ var ui = {
 	},
 	popLayer: { // 레이어팝업
 		init: function() {
-
+			var _this = this;
 			$(document).on("click", ".popLayer:not(.win) .btnPopClose", function() {
 				var id = $(this).closest(".popLayer").attr("id");
 				// console.log(id);
-				ui.popLayer.close(id,{
-					"stat":true
-				});
-				window.history.back();
+				if (_this.opt.hash) {
+					window.history.back();
+				}else{
+					_this.close(id);
+				}
 			});
 
 			$(document).on("click", ".popLayer", function(e) {
-				// window.history.back();
 				$(this).find(".btnPopClose").trigger("click");
 			});
 
-			$(document).on("click", ".popLayer>.pbd", function(e) {
+			$(document).on("click", ".popLayer>.pbd , .btnPopClose", function(e) {
 				e.stopPropagation();
 			});
 
-
-
 			if( $(".popLayer.win").length ) {
 				var id = $(".popLayer.win").attr("id");
-				ui.popLayer.open(id);
+				_this.open(id);
 			}
 			$(window).on("load resize",this.resize);
-
-
 			$(window).on("hashchange",function(){
-				ui.popLayer.stat(true);
-			})
-			$(document).ready(function(){
-				ui.popLayer.stat(true);
+				// _this.history(true);
 			});
-		},
-		openPop:[],
-		stat:function(){
-			ui.popLayer.openPop = location.hash.replace("#pop=","").split(",");
-			
-			if ( ui.popLayer.openPop == "" ) { ui.popLayer.openPop = []	}
-
-			console.log(ui.popLayer.openPop);
-
-			$(".popLayer").hide();
-			
-			ui.lock.using(true);
-			for (var index = 0; index < ui.popLayer.openPop.length; index++) {
-				console.log(ui.popLayer.openPop[index]);
-				var id = ui.popLayer.openPop[index];
-				if( $("#" + id).length ) {
-					$("#" + id).attr("tabindex","0").fadeIn(0);
-					this.resize(id);
-					this.lyScroll(id);
-				}
+			window.onpopstate = history.onpushstate = function(e) {
+				_this.history(true);
 			}
 
+			// 레이어팝업내에서 입력시 스크롤 조정
+			var elsInput =  ".popLayer:visible input:not(input:radio, input:checkbox) ,"+
+							".popLayer:visible textarea ,"+
+							".popLayer:visible .iscPosit";
+			$(document).on("click", elsInput  , function(e) {
+				var els = $(this);
+				var id = $(this).closest(".popLayer").attr("id");
+				window.setTimeout(function(){
+					var myTop = els.offset().top - $("#"+id+" .phd").outerHeight() - $(window).scrollTop() -  _this.scroll[id].y - $("#"+id+">.pbd").position().top - 10;
+					var myMax = Math.abs( _this.scroll[id].maxScrollY );
+					console.log(myTop , myMax , _this.scroll[id].y , $("#"+id+" .phd").position().top );
+					if ( myTop >= myMax ) { myTop = myMax ; }
+					_this.scroll[id].scrollTo(0,-myTop,300);
+				},600);
+			});
+
 		},
+		history:function(){
+			var _this = this;
+			var h_prev = _this.openPop ; 
+			_this.openPop = location.hash.replace("#pop=","").split(",");
+			if ( _this.openPop == "" ) { _this.openPop = []	}
+			var h_now = _this.openPop ;		
+			// console.log( h_prev , h_now );
+			if( h_prev > h_now ){
+				result = h_prev.filter(function (a) {
+ 					return h_now.indexOf(a) === -1;
+				});
+				// console.log("뒤로옴" , result[0] ,h_prev , h_now  );
+				_this.close(result[0],true);
+			}else{
+				// console.log("앞으로");
+			}
+		},
+		openPop:[],
 		callbacks:{},
 		open: function(id,params) {
 			// console.log(id,params);
 			_this = this;
+
+			if ( $("#" + id).length  <= 0  ) return ;   // id 호출팝업이 없으면 리턴
+
 			_this.opt = $.extend({
 				ocb: null ,
 				ccb: null,
-			}, params);
+				zIndex: 1000,
+				hash: false, // true  //  뒤로가기 버튼으로 팝업닫기 옵션
+			}, params); 
 
-			ui.popLayer.openPop.push(id);
-			window.history.pushState({}, 'pop', '#pop='+ui.popLayer.openPop );
-			
 			_this.callbacks[id] = {} ;
 			_this.callbacks[id].open  = _this.opt.ocb ? _this.opt.ocb : null ;
-			_this.callbacks[id].close = _this.opt.ccb ? _this.opt.ccb : null ;
-			
-			
-			console.log(ui.popLayer.openPop);
-			if( $("#" + id).length ) {
-				$("#" + id).attr("tabindex","0").fadeIn(300,function(){					
-					if (_this.callbacks[id].open)  _this.callbacks[id].open();
-				});
-				ui.lock.using(true);
-				this.resize(id);
-				this.lyScroll(id);
-			}
+			_this.callbacks[id].close = _this.opt.ccb ? _this.opt.ccb : null ;		
 
-			$(document).on("focus click",  "#"+id+">.pbd input:not(input:radio, input:checkbox) , #"+id+">.pbd textarea"  , function(e) {  // 레이어 안에 입력폼 포커스시 키보드 가만한 위치잡기
-				var $this = $(this);
-				setTimeout(() => {
-					var myTop = $this.position().top - 50 ;
-					var myMax =  Math.abs( ui.popLayer.scroll[id].maxScrollY );
-					// console.log(myTop , myMax);
-					if ( myTop >= myMax   ) {
-						myTop = myMax ;
-					}					
-					ui.popLayer.scroll[id].scrollTo(0,-myTop);
-				}, 600);
-			});
-		},
-		close: function(id, params) {
-			_this = this;
-			_this.opt = $.extend({
-				stat:false,
-			}, params);
+			if (_this.opt.hash) {
 
-			$("#"+id).fadeOut(200,function(){
-				if( !$(".popLayer:visible").length ) ui.lock.using(false);
-				if (_this.callbacks[id] != undefined) {
-					_this.callbacks[id].close ? _this.callbacks[id].close() : null ;
+				if ( $(".popLayer:visible").length <= 0 &&  location.href.split("#")[1] != undefined && location.href.split("#pop=")[1] != undefined ) {  //
+					_this.openPop = [];
+					window.history.pushState({}, 'pop', '#' );
 				}
 
-			});
-			this.scroll[id] = undefined;
-			console.log(_this.opt.stat);
-			if (_this.opt.stat == true) {
-				return;
-			}else{
-				window.history.back();	
+				_this.openPop.push(id);
+				window.history.pushState({}, 'pop', '#pop='+_this.openPop );
 			}
+
+			ui.lock.using(true);
+
+			$("#" + id).css({ zIndex: _this.opt.zindex });
+			$("#" + id).fadeIn(100,function(){
+				if(_this.callbacks[id].open)  _this.callbacks[id].open();			
+				$(this).addClass("on");
+
+			}).attr("tabindex","0").focus();
+			
+			window.setTimeout(function(){
+				_this.resize(id);
+				_this.lyScroll(id);
+			});
+
+		},
+		close: function(id,set) {
+			_this = this;
+
+			// console.log(_this.opt.hash , set);	
+			if( _this.opt.hash && set != true && $("#"+id+":visible").length  ) {  // 해쉬 
+				window.history.back();
+			}
+
+			$("#"+id).removeClass("on").fadeOut(150,function(){
+				if( !$(".popLayer:visible").length ) ui.lock.using(false);
+				try { _this.callbacks[id].close(); } catch (error) { }
+			});
 		},
 		resize:function(id){
-			var pctnH =  $(".popLayer:visible").outerHeight() ;
-			if ( $(".popLayer:visible>.pbd>.phd").length ){
-				pctnH = pctnH - $(".popLayer:visible>.pbd>.phd").outerHeight()
-			}
-			if ( $(".popLayer:visible>.pbd>.pbt").length ){
-				pctnH = pctnH - $(".popLayer:visible>.pbd>.pbt").outerHeight()
-			}
+			var pctnH =  $(".popLayer:visible").outerHeight() ;		
+			pctnH = pctnH - ( $(".popLayer:visible>.pbd>.phd").outerHeight() || 0 ) - (  $(".popLayer:visible>.pbd>.pbt").outerHeight() || 0 );
+			
 			$(".popLayer.a:visible>.pbd>.pct").css({"height": pctnH });
-			$(".popLayer.b:visible>.pbd>.pct").css({"height": pctnH -70 });
+			$(".popLayer.b:visible>.pbd>.pct").css({"max-height": pctnH - 70 });
+			$(".popLayer.c:visible>.pbd>.pct").css({"max-height": pctnH - 30 });
 		},
 		scroll:{},
 		lyScroll: function(id) {
 			
-			if ( ui.isUA("Mac OS") ){
-				bounce = true;
-			}else{
-				bounce = true;
-			}
+			bounce = ui.isUA("Mac OS") ?  true : false;
 
 			if( this.scroll[id] == undefined ) {
 				this.scroll[id] = new IScroll('#'+id+'>.pbd>.pct', {
@@ -884,16 +882,20 @@ var ui = {
 				//  ui.popLayer.scroll.popLayerSample1.scrollTo(0, ui.popLayer.scroll.popLayerSample1.maxScrollY, 400);
 				this.scroll[id].on('scrollEnd', function () {
 					if( this.maxScrollY == this.y ){						
-						console.log("끝",this.maxScrollY , this.y);
+						// console.log("끝",this.maxScrollY , this.y);
 						// $('#'+id+'>.pbd>.pct .poptents').append('<p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p>')
 						// ui.popLayer.refresh(id);
 					}
 				});
 			}
 		},
-		refresh:function(id){
-			$(window).trigger("resize");
-			ui.popLayer.scroll[id].refresh();
+		refresh:function(){
+			var iscr = Object.keys(this.scroll);
+			for (var key in iscr) {
+				var idx = iscr[key];
+				console.log(idx, iscr);
+				this.scroll[idx].refresh(); 
+			}
 		}
 	},
 	listMore: { // 더 불러오기 
