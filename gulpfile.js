@@ -25,6 +25,7 @@ const js_mc = [
 	"static/js/swiper.js",
 	"static/js/moment.js",
 	"static/js/circle-progress.js",
+	"static/js/pullToRefresh.js",
 	"static/js/ui.js",
 ];
 

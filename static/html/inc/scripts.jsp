@@ -3,6 +3,7 @@
 <script src="../../js/swiper.js"></script>
 <script src="../../js/moment.js"></script>
 <script src="../../js/circle-progress.js"></script>
+<script src="../../js/pullToRefresh.js"></script>
 
 <script src="../../js/ui.js?v=<%=version%>"></script>
 

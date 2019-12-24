@@ -895,6 +895,10 @@
 	<script>
 	$(document).ready(function(){
 		ui.listMore.init(itemListAdd);
+
+		ui.refresh.init(function(){
+			location.reload();
+		});
 	});
 
 	var page = 0;
