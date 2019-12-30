@@ -185,8 +185,8 @@ input[type=number]{-moz-appearance:textfield;}
 
 
 @media screen and ( max-width:1024px)  {
-	.linkHtml .cont>ul>li{float:left;width:50%;padding:4px;clear: initial !important;}
-	.linkHtml .cont>ul>li:nth-child(odd){/* clear:left; */}
+	.linkHtml .cont>ul>li{ float:left; width:50%; padding:4px; }
+	.linkHtml .cont>ul>li:nth-child(3n+1){clear: none;}
 	.linkHtml .cont>ul:after{ content:""; display:table; clear:both; }
 	.linkHtml .cont>ul>li>ul{ }
 }
