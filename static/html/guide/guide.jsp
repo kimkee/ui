@@ -129,8 +129,8 @@
 			<a href="javascript:;" class="btn md">버튼</a>
 			<a href="javascript:;" class="btn lg">버튼</a>
 			<a href="javascript:;" class="btn xl">버튼</a>
-			<a href="javascript:;" class="btn" disabled="disabled">버튼</a>
-			<button class="btn" disabled="disabled">버튼</button>
+			<a href="javascript:;" class="btn" disabled>버튼</a>
+			<button type="button" class="btn" disabled>버튼</button>
 			<p class="gap"></p>
 			<a href="javascript:;" class="btn type a">버튼</a>
 			<a href="javascript:;" class="btn type b">버튼</a>
@@ -161,8 +161,8 @@
 						<a href="javascript:;" class="btn md">버튼</a>
 						<a href="javascript:;" class="btn lg">버튼</a>
 						<a href="javascript:;" class="btn xl">버튼</a>
-						<a href="javascript:;" class="btn" disabled="disabled">버튼</a>
-						<button class="btn" disabled="disabled">버튼</button></pre>
+						<a href="javascript:;" class="btn" disabled>버튼</a>
+						<button class="btn" disabled>버튼</button></pre>
 				</div>
 			</div>
 			
@@ -944,15 +944,11 @@
 </div>
 
 <style>
-#debug{ position:fixed; left:10px;; bottom: 10px;}
+#debug{ position:fixed; left:10px; bottom: 10px;}
 </style>
 <div id="debug"></div>
 
 <script>
-
-
-
-
 var html = document.documentElement;
 function showInfo() {
 	$('#cssStatus').html(html.className);
@@ -961,9 +957,9 @@ function showInfo() {
 $(function() {
 	$('#userAgent').html(navigator.userAgent);
 	showInfo();
-	$(document.body).bind('orientationchange', showInfo);
-	$(window).bind('orientationchange', showInfo);
-	$(window).bind('resize', showInfo);
+	$(document.body).on('orientationchange', showInfo);
+	$(window).on('orientationchange', showInfo);
+	$(window).on('resize', showInfo);
 });
 </script>
 
