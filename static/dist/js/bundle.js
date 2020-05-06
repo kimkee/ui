@@ -15694,6 +15694,243 @@ $.circleProgress.defaults.drawEmptyArc = function(v) {
     ctx.restore();
   }
 };
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+		typeof define === 'function' && define.amd ? define(factory) :
+		(global.ptrAnimatesMaterial2 = factory());
+}(this, (function () {
+	'use strict';
+
+	var animates = {
+		pulling: function pulling(d, opts) {
+			if (!opts.elControl) opts.elControl = opts.container.querySelector('.pull-to-refresh-material2__control');
+
+			var container = opts.container,
+				threshold = opts.threshold,
+				elControl = opts.elControl;
+
+
+			var p = d / threshold;
+			if (p > 1) p = 1;
+			else p = p * p * p;
+
+			var y = d / 2.5;
+			container.style.transform = y ? 'translate3d(0, ' + y + 'px, 0)' : '';
+			elControl.style.opacity = p;
+			elControl.style.transform = 'translate3d(-50%, 0, 0) rotate(' + 360 * p + 'deg)';
+		},
+		refreshing: function refreshing(_ref) {
+			var container = _ref.container,
+				threshold = _ref.threshold;
+
+			container.style.transition = 'transform 0.2s';
+			container.style.transform = 'translate3d(0, ' + threshold / 2.5 + 'px, 0)';
+		},
+		restoring: function restoring(_ref2) {
+			var container = _ref2.container;
+
+			return new Promise(function (resolve) {
+				if (container.style.transform) {
+					container.style.transition = 'transform 0.3s';
+					container.style.transform = 'translate3d(0, 0, 0)';
+					container.addEventListener('transitionend', function () {
+						container.style.transition = '';
+						resolve();
+					});
+				} else {
+					resolve();
+				}
+			});
+		}
+	};
+
+	animates.aborting = animates.restoring;
+
+	return animates;
+
+})));
+
+
+
+
+
+
+
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+		typeof define === 'function' && define.amd ? define(factory) :
+		(global.pullToRefresh = factory());
+}(this, (function () {
+	'use strict';
+
+	function ontouchpan(_ref) {
+		var element = _ref.element,
+			onpanstart = _ref.onpanstart,
+			onpanmove = _ref.onpanmove,
+			onpanend = _ref.onpanend;
+
+		var touchId = void 0,
+			startX = void 0,
+			startY = void 0,
+			panstartCalled = void 0;
+
+		function calcMovement(e) {
+			var touch = Array.prototype.slice.call(e.changedTouches).filter(function (touch) {
+				return touch.identifier === touchId;
+			})[0];
+			if (!touch) return false;
+
+			e.deltaX = touch.screenX - startX;
+			e.deltaY = touch.screenY - startY;
+			return true;
+		}
+
+		function touchstart(e) {
+			var touch = e.changedTouches[0];
+			touchId = touch.identifier;
+			startX = touch.screenX;
+			startY = touch.screenY;
+		}
+
+		function touchmove(e) {
+			if (calcMovement(e)) {
+				if (onpanstart && !panstartCalled) {
+					onpanstart(e);
+					panstartCalled = true;
+				}
+
+				onpanmove(e);
+			}
+		}
+
+		function touchend(e) {
+			if (calcMovement(e)) onpanend(e);
+		}
+
+		element.addEventListener('touchstart', touchstart);
+		if (onpanmove) element.addEventListener('touchmove', touchmove);
+		if (onpanend) element.addEventListener('touchend', touchend);
+
+		return function () {
+			element.removeEventListener('touchstart', touchstart);
+			if (onpanmove) element.removeEventListener('touchmove', touchmove);
+			if (onpanend) element.removeEventListener('touchend', touchend);
+		};
+	}
+
+	function pullToRefresh(opts) {
+		opts = Object.assign({
+			// https://bugs.chromium.org/p/chromium/issues/detail?id=766938
+			scrollable: document.body,
+			threshold: 150,
+			onStateChange: function onStateChange() {
+				/* noop */
+			}
+		}, opts);
+
+		var _opts = opts,
+			container = _opts.container,
+			scrollable = _opts.scrollable,
+			threshold = _opts.threshold,
+			refresh = _opts.refresh,
+			onStateChange = _opts.onStateChange,
+			animates = _opts.animates;
+
+
+		var distance = void 0,
+			offset = void 0,
+			state = void 0; // state: pulling, aborting, reached, refreshing, restoring
+
+		function addClass(cls) {
+			container.classList.add('pull-to-refresh--' + cls);
+		}
+
+		function removeClass(cls) {
+			container.classList.remove('pull-to-refresh--' + cls);
+		}
+
+		function scrollTop() {
+			if (!scrollable || [window, document, document.body, document.documentElement].includes(scrollable)) {
+				return document.documentElement.scrollTop || document.body.scrollTop;
+			} else {
+				return scrollable.scrollTop;
+			}
+		}
+
+		return ontouchpan({
+			element: container,
+
+			onpanmove: function onpanmove(e) {
+				var d = e.deltaY;
+
+				if (scrollTop() > 0 || d < 0 && !state || state in {
+						aborting: 1,
+						refreshing: 1,
+						restoring: 1
+					}) return;
+
+				e.preventDefault();
+
+				if (distance == null) {
+					offset = d;
+					state = 'pulling';
+					addClass(state);
+					onStateChange(state, opts);
+				}
+
+				d = d - offset;
+				if (d < 0) d = 0;
+				distance = d;
+
+				if (d >= threshold && state !== 'reached' || d < threshold && state !== 'pulling') {
+					removeClass(state);
+					state = state === 'reached' ? 'pulling' : 'reached';
+					addClass(state);
+					onStateChange(state, opts);
+				}
+
+				animates.pulling(d, opts);
+			},
+			onpanend: function onpanend() {
+				if (state == null) return;
+
+				if (state === 'pulling') {
+					removeClass(state);
+					state = 'aborting';
+					onStateChange(state);
+					addClass(state);
+					animates.aborting(opts).then(function () {
+						removeClass(state);
+						distance = state = offset = null;
+						onStateChange(state);
+					});
+				} else if (state === 'reached') {
+					removeClass(state);
+					state = 'refreshing';
+					addClass(state);
+					onStateChange(state, opts);
+					animates.refreshing(opts);
+
+					refresh().then(function () {
+						removeClass(state);
+						state = 'restoring';
+						addClass(state);
+						onStateChange(state);
+
+						animates.restoring(opts).then(function () {
+							removeClass(state);
+							distance = state = offset = null;
+							onStateChange(state);
+						});
+					});
+				}
+			}
+		});
+	}
+
+	return pullToRefresh;
+
+})));
 //*******************************************//
 // 김기현 : kimkee@naver.com    
 // url : http://kimkee.myds.me:8000
@@ -15708,7 +15945,7 @@ var ui = {
 		this.accd.init();
 		this.tog.init();
 		this.tab.init();
-		this.tabs.init();
+		// this.tabs.init();
 		this.dropDown.init();
 		this.popLayer.init();
 		this.slides.init();
@@ -15753,6 +15990,44 @@ var ui = {
 			}
 			return b;
 		})(window.location.search.substr(1).split('&')),
+	
+	refresh:{ // PULL Refresh 
+		init:function(callback){
+			if( typeof callback == "function" ){
+				this.pullCallback = callback;	
+			}else{
+				this.pullCallback = function(){};
+			}
+			$("#contain").length && this.using();
+			$("#contain").prepend( this.icon );
+		},
+		icon:
+			'<div class="pull-to-refresh-material2__control">' +
+				'<svg class="pull-to-refresh-material2__icon" fill="#666666" width="30" height="30" viewBox="0 0 24 24">' +
+					'<path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />'+
+					'<path d="M0 0h24v24H0z" fill="none" />'+
+				'</svg>'+
+				'<svg class="pull-to-refresh-material2__spinner" width="24" height="24" viewBox="25 25 50 50">'+
+					'<circle class="pull-to-refresh-material2__path" cx="50" cy="50" r="20" fill="none" stroke="#666666" stroke-width="4" stroke-miterlimit="10" />'+
+				'</svg>'+
+			'</div>'
+		,
+		using:function(){
+			var _this = this;
+			pullToRefresh({
+				container: document.querySelector('#contain'),
+				animates: ptrAnimatesMaterial2,
+				refresh: function() {
+					return new Promise( function(resolve){
+						setTimeout(resolve, 1500)
+						setTimeout(function(){
+							_this.pullCallback();
+						}, 1500)
+					})
+				}
+			})
+		}
+	},
 	ly:{ // 레이아웃
 		init:function(){
 			if ( $("#contain").length ) {
@@ -15839,48 +16114,43 @@ var ui = {
 		},
 		attach:function(){
 
-			$(document).on("change","[data-ui='attach'].uiAttach .fileButton .fileInput", function(){
-				var fSize = $(this).closest(".uiAttach").find(".file").find("li").length;
-				var maxSize = $(this).closest(".uiAttach").data("maxSize");
-				console.log( fSize , maxSize);
-				if( fSize >= maxSize ){
-					// console.log("최대갯수 = "+maxSize);
-					return false;
-				}
-				var fUrl = (this.value).split("\\");
-				var fName = fUrl[fUrl.length-1];
-				console.log(fName);
-				if (fName) $(this).closest(".uiAttach").find("ul").append('<li><span class="name">'+fName+'</span><button type="button" class="delete">삭제</button></li>');
-				var locVar = $(this).closest(".uiAttach").find(".file .name").text();
-
-				if(locVar) $(this).closest(".uiAttach").addClass("on");
-				// console.log( $(this).closest(".uiAttach").find(".fileButton .fileInput").val()  ) ;
+			$("img").on("error",function(){
+				$(this).attr("src","../../img/temp/sss.png");
 			});
-			$(document).on("click","[data-ui='attach'].uiAttach .file .delete", function(){
-				var lsize = $(this).closest(".file").find("li").length;
-				// console.log( lsize , $(this).closest(".uiAttach").find(".fileButton .fileInput").value );
-				if ( lsize > 1) {
-					$(this).closest("li").remove();
-				}else{
-					$(this).closest(".uiAttach").find(".fileButton .fileInput").val("");
-					$(this).closest(".uiAttach").removeClass("on");
-					$(this).closest("li").remove();
-				}
-			});
-
-			$(document).on("change", "[data-ui='attach'].uiAddFile .fileButton .fileInput", function() {
+			$(document).on("change", "[data-ui='attach'] .fileButton .fileInput", function() {
+				var $elsAdd = $(this).closest("[data-ui='attach']");
 				var fUrl = (this.value).split("\\"),
 					fName = fUrl[fUrl.length - 1];
-				$(this).closest(".uiAddFile").find(".file .loc").val(fName);
-				var locVar = $(this).closest(".uiAddFile").find(".file .loc").val();
-				if (locVar) {
-					$(this).closest(".uiAddFile").addClass("on");
+				var locVar = $elsAdd.find(".file").length;
+				if (!locVar) {
+					// console.log("132132");
+					if( $elsAdd.hasClass("ui-add-pic") ) {
+						var lcEls = 
+						'<span class="file">'+
+						'    <img class="img" src="" alt="" onerror="this.src=\'../../img/common/blank.png\'" >'+
+						'    <button type="button" class="delete">삭제</button>'+
+						'</span>'
+					}else{
+						var lcEls = 
+						'<span class="file">'+
+						'    <span class="loc"></span>'+
+						'    <button type="button" class="delete">삭제</button>'+
+						'</span>'
+					}
+
+					$elsAdd.append( lcEls );
 				}
+				
+				$elsAdd.addClass("on");
+				$elsAdd.find(".file .loc").text(fName);
+				$elsAdd.find(".file .img").attr("src",this.value);
 			});
-			$(document).on("click", "[data-ui='attach'].uiAddFile .file .delete", function() {
-				$(this).closest(".uiAddFile").find(".file .loc").val("");
-				$(this).closest(".uiAddFile").find(".fileButton .fileInput").val("");
-				$(this).closest(".uiAddFile").removeClass("on");
+			$(document).on("click", "[data-ui='attach'] .file .delete", function() {
+				var $elsAdd = $(this).closest("[data-ui='attach']");
+				$elsAdd.find(".fileButton .fileInput").val("");
+				$elsAdd.find(".file").remove();
+				$elsAdd.find(".file .loc").text("");
+				$elsAdd.removeClass("on");
 			});
 
 
@@ -16154,23 +16424,23 @@ var ui = {
 			});
 		},
 		open:function(id){
-			$("#"+id).slideDown(100,function(){
+			$("[data-ui-tog='btn'][data-ui-tog-val='"+id+"']").addClass("open");
+			$("[data-ui-tog='ctn'][data-ui-tog-val='"+id+"']").slideDown(100,function(){
 				$(this).addClass("open");
-				$("[data-ui-tog='btn'][href='#"+id+"']").addClass("open");
 			});
 		},
 		close:function(id){
-			$("#"+id).slideUp(100,function(){
+			$("[data-ui-tog='btn'][data-ui-tog-val='"+id+"']").removeClass("open");
+			$("[data-ui-tog='ctn'][data-ui-tog-val='"+id+"']").slideUp(100,function(){
 				$(this).removeClass("open");
-				$("[data-ui-tog='btn'][href='#"+id+"']").removeClass("open");
 			});
 		},
 		using:function(){
 			var _this = this;
 			$(document).on("click", "[data-ui-tog='btn']", function(e) {
-				// console.log("클릭");
-				var id = $(this).attr("href").replace("#","");
+				var id = $(this).data("ui-tog-val");
 				var bt = $(this);
+				console.log(id);
 				if( bt.hasClass("open") ) {				
 					_this.close(id);
 				}else{
@@ -16180,28 +16450,28 @@ var ui = {
 			});
 		}
 	},
-	tab:{ //탭형식컨텐츠
-		init:function(){
-			this.using();
-			// console.log(  ui.param.tab );
-			ui.tab.set( ui.param.tab );
-		},
-		set:function(id){
-			$(".uiTab>li>a[href='#"+id+"']").trigger("click");
-		},
-		using:function(){
-			$(document).on('click',".uiTab:not([data-ui*='link'])>li>a", function(e){
-				$(this).closest("li").addClass("active").siblings("li").removeClass("active");
-				var thisId = $(this).attr("href");
-				//console.log(thisId);
-				if (thisId.indexOf("#") > -1 ) {
-					$(thisId).addClass("active").siblings(".panel").removeClass("active");
-				}
-				e.preventDefault();
-			});
-		}
-	},
-	tabs:{ // 탭 UI
+	// tab:{ //탭형식컨텐츠
+	// 	init:function(){
+	// 		this.using();
+	// 		// console.log(  ui.param.tab );
+	// 		ui.tab.set( ui.param.tab );
+	// 	},
+	// 	set:function(id){
+	// 		$(".uiTab>li>a[href='#"+id+"']").trigger("click");
+	// 	},
+	// 	using:function(){
+	// 		$(document).on('click',".uiTab:not([data-ui*='link'])>li>a", function(e){
+	// 			$(this).closest("li").addClass("active").siblings("li").removeClass("active");
+	// 			var thisId = $(this).attr("href");
+	// 			//console.log(thisId);
+	// 			if (thisId.indexOf("#") > -1 ) {
+	// 				$(thisId).addClass("active").siblings(".panel").removeClass("active");
+	// 			}
+	// 			e.preventDefault();
+	// 		});
+	// 	}
+	// },
+	tab:{ // 탭 UI
 		init: function() {
 			this.evt();
 			ui.param.tab  && this.set( ui.param.tab );
@@ -16210,6 +16480,7 @@ var ui = {
 			var tabid = id.split(",");
 			$("[data-ui-tab-btn][data-ui-tab-val]").each(function(idx){
 				// console.log(idx,tabid[idx] );
+				$("#"+id).closest("li").addClass("active");;
 				$("[data-ui-tab-btn][data-ui-tab-val='"+tabid[idx]+"']").trigger("click");
 			});
 		},
@@ -16226,6 +16497,7 @@ var ui = {
 			$(els).addClass("active").closest("li").addClass("active");;
 			$("[data-ui-tab-ctn="+ctn+"]").removeClass("active");;
 			$("[data-ui-tab-ctn]#"+btn).addClass("active");
+			$("[data-ui-tab-ctn][data-ui-tab-val='"+btn+"']").addClass("active");
 		}
 	},
 	lock:{ // 스크롤 막기,풀기
@@ -16426,143 +16698,141 @@ var ui = {
 	},
 	popLayer: { // 레이어팝업
 		init: function() {
-
+			var _this = this;
 			$(document).on("click", ".popLayer:not(.win) .btnPopClose", function() {
 				var id = $(this).closest(".popLayer").attr("id");
 				// console.log(id);
-				ui.popLayer.close(id,{
-					"stat":true
-				});
-				window.history.back();
+				if (_this.opt.hash) {
+					window.history.back();
+				}else{
+					_this.close(id);
+				}
 			});
 
 			$(document).on("click", ".popLayer", function(e) {
-				// window.history.back();
 				$(this).find(".btnPopClose").trigger("click");
 			});
 
-			$(document).on("click", ".popLayer>.pbd", function(e) {
+			$(document).on("click", ".popLayer>.pbd , .btnPopClose", function(e) {
 				e.stopPropagation();
 			});
 
-
-
 			if( $(".popLayer.win").length ) {
 				var id = $(".popLayer.win").attr("id");
-				ui.popLayer.open(id);
+				_this.open(id);
 			}
 			$(window).on("load resize",this.resize);
-
-
 			$(window).on("hashchange",function(){
-				ui.popLayer.stat(true);
-			})
-			$(document).ready(function(){
-				ui.popLayer.stat(true);
+				// _this.history(true);
 			});
-		},
-		openPop:[],
-		stat:function(){
-			ui.popLayer.openPop = location.hash.replace("#pop=","").split(",");
-			
-			if ( ui.popLayer.openPop == "" ) { ui.popLayer.openPop = []	}
-
-			console.log(ui.popLayer.openPop);
-
-			$(".popLayer").hide();
-			
-			ui.lock.using(true);
-			for (var index = 0; index < ui.popLayer.openPop.length; index++) {
-				console.log(ui.popLayer.openPop[index]);
-				var id = ui.popLayer.openPop[index];
-				if( $("#" + id).length ) {
-					$("#" + id).attr("tabindex","0").fadeIn(0);
-					this.resize(id);
-					this.lyScroll(id);
-				}
+			window.onpopstate = history.onpushstate = function(e) {
+				_this.history(true);
 			}
 
+			// 레이어팝업내에서 입력시 스크롤 조정
+			var elsInput =  ".popLayer:visible input:not(input:radio, input:checkbox) ,"+
+							".popLayer:visible textarea ,"+
+							".popLayer:visible .iscPosit";
+			$(document).on("click", elsInput  , function(e) {
+				var els = $(this);
+				var id = $(this).closest(".popLayer").attr("id");
+				window.setTimeout(function(){
+					var myTop = els.offset().top - $("#"+id+" .phd").outerHeight() - $(window).scrollTop() -  _this.scroll[id].y - $("#"+id+">.pbd").position().top - 10;
+					var myMax = Math.abs( _this.scroll[id].maxScrollY );
+					console.log(myTop , myMax , _this.scroll[id].y , $("#"+id+" .phd").position().top );
+					if ( myTop >= myMax ) { myTop = myMax ; }
+					_this.scroll[id].scrollTo(0,-myTop,300);
+				},600);
+			});
+
 		},
+		history:function(){
+			var _this = this;
+			var h_prev = _this.openPop ; 
+			_this.openPop = location.hash.replace("#pop=","").split(",");
+			if ( _this.openPop == "" ) { _this.openPop = []	}
+			var h_now = _this.openPop ;		
+			// console.log( h_prev , h_now );
+			if( h_prev > h_now ){
+				result = h_prev.filter(function (a) {
+ 					return h_now.indexOf(a) === -1;
+				});
+				// console.log("뒤로옴" , result[0] ,h_prev , h_now  );
+				_this.close(result[0],true);
+			}else{
+				// console.log("앞으로");
+			}
+		},
+		openPop:[],
 		callbacks:{},
 		open: function(id,params) {
 			// console.log(id,params);
 			_this = this;
+
+			if ( $("#" + id).length  <= 0  ) return ;   // id 호출팝업이 없으면 리턴
+
 			_this.opt = $.extend({
 				ocb: null ,
 				ccb: null,
-			}, params);
+				zIndex: 1000,
+				hash: false, // true  //  뒤로가기 버튼으로 팝업닫기 옵션
+			}, params); 
 
-			ui.popLayer.openPop.push(id);
-			window.history.pushState({}, 'pop', '#pop='+ui.popLayer.openPop );
-			
 			_this.callbacks[id] = {} ;
 			_this.callbacks[id].open  = _this.opt.ocb ? _this.opt.ocb : null ;
-			_this.callbacks[id].close = _this.opt.ccb ? _this.opt.ccb : null ;
-			
-			
-			console.log(ui.popLayer.openPop);
-			if( $("#" + id).length ) {
-				$("#" + id).attr("tabindex","0").fadeIn(300,function(){					
-					if (_this.callbacks[id].open)  _this.callbacks[id].open();
-				});
-				ui.lock.using(true);
-				this.resize(id);
-				this.lyScroll(id);
-			}
+			_this.callbacks[id].close = _this.opt.ccb ? _this.opt.ccb : null ;		
 
-			$(document).on("focus click",  "#"+id+">.pbd input:not(input:radio, input:checkbox) , #"+id+">.pbd textarea"  , function(e) {  // 레이어 안에 입력폼 포커스시 키보드 가만한 위치잡기
-				var $this = $(this);
-				setTimeout(() => {
-					var myTop = $this.position().top - 50 ;
-					var myMax =  Math.abs( ui.popLayer.scroll[id].maxScrollY );
-					// console.log(myTop , myMax);
-					if ( myTop >= myMax   ) {
-						myTop = myMax ;
-					}					
-					ui.popLayer.scroll[id].scrollTo(0,-myTop);
-				}, 600);
-			});
-		},
-		close: function(id, params) {
-			_this = this;
-			_this.opt = $.extend({
-				stat:false,
-			}, params);
+			if (_this.opt.hash) {
 
-			$("#"+id).fadeOut(200,function(){
-				if( !$(".popLayer:visible").length ) ui.lock.using(false);
-				if (_this.callbacks[id] != undefined) {
-					_this.callbacks[id].close ? _this.callbacks[id].close() : null ;
+				if ( $(".popLayer:visible").length <= 0 &&  location.href.split("#")[1] != undefined && location.href.split("#pop=")[1] != undefined ) {  //
+					_this.openPop = [];
+					window.history.pushState({}, 'pop', '#' );
 				}
 
-			});
-			this.scroll[id] = undefined;
-			console.log(_this.opt.stat);
-			if (_this.opt.stat == true) {
-				return;
-			}else{
-				window.history.back();	
+				_this.openPop.push(id);
+				window.history.pushState({}, 'pop', '#pop='+_this.openPop );
 			}
+
+			ui.lock.using(true);
+
+			$("#" + id).css({ zIndex: _this.opt.zindex });
+			$("#" + id).fadeIn(100,function(){
+				if(_this.callbacks[id].open)  _this.callbacks[id].open();			
+				$(this).addClass("on");
+
+			}).attr("tabindex","0").focus();
+			
+			window.setTimeout(function(){
+				_this.resize(id);
+				_this.lyScroll(id);
+			});
+
+		},
+		close: function(id,set) {
+			_this = this;
+
+			// console.log(_this.opt.hash , set);	
+			if( _this.opt.hash && set != true && $("#"+id+":visible").length  ) {  // 해쉬 
+				window.history.back();
+			}
+
+			$("#"+id).removeClass("on").fadeOut(150,function(){
+				if( !$(".popLayer:visible").length ) ui.lock.using(false);
+				try { _this.callbacks[id].close(); } catch (error) { }
+			});
 		},
 		resize:function(id){
-			var pctnH =  $(".popLayer:visible").outerHeight() ;
-			if ( $(".popLayer:visible>.pbd>.phd").length ){
-				pctnH = pctnH - $(".popLayer:visible>.pbd>.phd").outerHeight()
-			}
-			if ( $(".popLayer:visible>.pbd>.pbt").length ){
-				pctnH = pctnH - $(".popLayer:visible>.pbd>.pbt").outerHeight()
-			}
+			var pctnH =  $(".popLayer:visible").outerHeight() ;		
+			pctnH = pctnH - ( $(".popLayer:visible>.pbd>.phd").outerHeight() || 0 ) - (  $(".popLayer:visible>.pbd>.pbt").outerHeight() || 0 );
+			
 			$(".popLayer.a:visible>.pbd>.pct").css({"height": pctnH });
-			$(".popLayer.b:visible>.pbd>.pct").css({"height": pctnH -70 });
+			$(".popLayer.b:visible>.pbd>.pct").css({"max-height": pctnH - 70 });
+			$(".popLayer.c:visible>.pbd>.pct").css({"max-height": pctnH - 30 });
 		},
 		scroll:{},
 		lyScroll: function(id) {
 			
-			if ( ui.isUA("Mac OS") ){
-				bounce = true;
-			}else{
-				bounce = true;
-			}
+			bounce = ui.isUA("Mac OS") ?  true : false;
 
 			if( this.scroll[id] == undefined ) {
 				this.scroll[id] = new IScroll('#'+id+'>.pbd>.pct', {
@@ -16580,16 +16850,20 @@ var ui = {
 				//  ui.popLayer.scroll.popLayerSample1.scrollTo(0, ui.popLayer.scroll.popLayerSample1.maxScrollY, 400);
 				this.scroll[id].on('scrollEnd', function () {
 					if( this.maxScrollY == this.y ){						
-						console.log("끝",this.maxScrollY , this.y);
+						// console.log("끝",this.maxScrollY , this.y);
 						// $('#'+id+'>.pbd>.pct .poptents').append('<p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p>')
 						// ui.popLayer.refresh(id);
 					}
 				});
 			}
 		},
-		refresh:function(id){
-			$(window).trigger("resize");
-			ui.popLayer.scroll[id].refresh();
+		refresh:function(){
+			var iscr = Object.keys(this.scroll);
+			for (var key in iscr) {
+				var idx = iscr[key];
+				console.log(idx, iscr);
+				this.scroll[idx].refresh(); 
+			}
 		}
 	},
 	listMore: { // 더 불러오기 

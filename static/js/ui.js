@@ -181,48 +181,43 @@ var ui = {
 		},
 		attach:function(){
 
-			$(document).on("change","[data-ui='attach'].uiAttach .fileButton .fileInput", function(){
-				var fSize = $(this).closest(".uiAttach").find(".file").find("li").length;
-				var maxSize = $(this).closest(".uiAttach").data("maxSize");
-				console.log( fSize , maxSize);
-				if( fSize >= maxSize ){
-					// console.log("최대갯수 = "+maxSize);
-					return false;
-				}
-				var fUrl = (this.value).split("\\");
-				var fName = fUrl[fUrl.length-1];
-				console.log(fName);
-				if (fName) $(this).closest(".uiAttach").find("ul").append('<li><span class="name">'+fName+'</span><button type="button" class="delete">삭제</button></li>');
-				var locVar = $(this).closest(".uiAttach").find(".file .name").text();
-
-				if(locVar) $(this).closest(".uiAttach").addClass("on");
-				// console.log( $(this).closest(".uiAttach").find(".fileButton .fileInput").val()  ) ;
+			$("img").on("error",function(){
+				$(this).attr("src","../../img/temp/sss.png");
 			});
-			$(document).on("click","[data-ui='attach'].uiAttach .file .delete", function(){
-				var lsize = $(this).closest(".file").find("li").length;
-				// console.log( lsize , $(this).closest(".uiAttach").find(".fileButton .fileInput").value );
-				if ( lsize > 1) {
-					$(this).closest("li").remove();
-				}else{
-					$(this).closest(".uiAttach").find(".fileButton .fileInput").val("");
-					$(this).closest(".uiAttach").removeClass("on");
-					$(this).closest("li").remove();
-				}
-			});
-
-			$(document).on("change", "[data-ui='attach'].uiAddFile .fileButton .fileInput", function() {
+			$(document).on("change", "[data-ui='attach'] .fileButton .fileInput", function() {
+				var $elsAdd = $(this).closest("[data-ui='attach']");
 				var fUrl = (this.value).split("\\"),
 					fName = fUrl[fUrl.length - 1];
-				$(this).closest(".uiAddFile").find(".file .loc").val(fName);
-				var locVar = $(this).closest(".uiAddFile").find(".file .loc").val();
-				if (locVar) {
-					$(this).closest(".uiAddFile").addClass("on");
+				var locVar = $elsAdd.find(".file").length;
+				if (!locVar) {
+					// console.log("132132");
+					if( $elsAdd.hasClass("ui-add-pic") ) {
+						var lcEls = 
+						'<span class="file">'+
+						'    <img class="img" src="" alt="" onerror="this.src=\'../../img/common/blank.png\'" >'+
+						'    <button type="button" class="delete">삭제</button>'+
+						'</span>'
+					}else{
+						var lcEls = 
+						'<span class="file">'+
+						'    <span class="loc"></span>'+
+						'    <button type="button" class="delete">삭제</button>'+
+						'</span>'
+					}
+
+					$elsAdd.append( lcEls );
 				}
+				
+				$elsAdd.addClass("on");
+				$elsAdd.find(".file .loc").text(fName);
+				$elsAdd.find(".file .img").attr("src",this.value);
 			});
-			$(document).on("click", "[data-ui='attach'].uiAddFile .file .delete", function() {
-				$(this).closest(".uiAddFile").find(".file .loc").val("");
-				$(this).closest(".uiAddFile").find(".fileButton .fileInput").val("");
-				$(this).closest(".uiAddFile").removeClass("on");
+			$(document).on("click", "[data-ui='attach'] .file .delete", function() {
+				var $elsAdd = $(this).closest("[data-ui='attach']");
+				$elsAdd.find(".fileButton .fileInput").val("");
+				$elsAdd.find(".file").remove();
+				$elsAdd.find(".file .loc").text("");
+				$elsAdd.removeClass("on");
 			});
 
 
@@ -496,23 +491,23 @@ var ui = {
 			});
 		},
 		open:function(id){
-			$("#"+id).slideDown(100,function(){
+			$("[data-ui-tog='btn'][data-ui-tog-val='"+id+"']").addClass("open");
+			$("[data-ui-tog='ctn'][data-ui-tog-val='"+id+"']").slideDown(100,function(){
 				$(this).addClass("open");
-				$("[data-ui-tog='btn'][href='#"+id+"']").addClass("open");
 			});
 		},
 		close:function(id){
-			$("#"+id).slideUp(100,function(){
+			$("[data-ui-tog='btn'][data-ui-tog-val='"+id+"']").removeClass("open");
+			$("[data-ui-tog='ctn'][data-ui-tog-val='"+id+"']").slideUp(100,function(){
 				$(this).removeClass("open");
-				$("[data-ui-tog='btn'][href='#"+id+"']").removeClass("open");
 			});
 		},
 		using:function(){
 			var _this = this;
 			$(document).on("click", "[data-ui-tog='btn']", function(e) {
-				// console.log("클릭");
-				var id = $(this).attr("href").replace("#","");
+				var id = $(this).data("ui-tog-val");
 				var bt = $(this);
+				console.log(id);
 				if( bt.hasClass("open") ) {				
 					_this.close(id);
 				}else{
@@ -567,9 +562,9 @@ var ui = {
 			var ctn = $(els).data("ui-tab-btn");
 			$("[data-ui-tab-btn="+ctn+"]").removeClass("active").closest("li").removeClass("active");
 			$(els).addClass("active").closest("li").addClass("active");;
-			$("[data-ui-tab-ctn="+ctn+"]").removeClass("open");;
-			$("[data-ui-tab-ctn]#"+btn).addClass("open");
-			$("[data-ui-tab-ctn][data-ui-tab-val='"+btn+"']").addClass("open");
+			$("[data-ui-tab-ctn="+ctn+"]").removeClass("active");;
+			$("[data-ui-tab-ctn]#"+btn).addClass("active");
+			$("[data-ui-tab-ctn][data-ui-tab-val='"+btn+"']").addClass("active");
 		}
 	},
 	lock:{ // 스크롤 막기,풀기

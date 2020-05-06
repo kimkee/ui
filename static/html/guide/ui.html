@@ -519,33 +519,37 @@
 			</div>
 
 			<p class="gap"></p>
-			<span class="btnAttach">
-				<label class="fileButton">파일등록<input type="file" class="fileInput" accept="image/*"></label>
+			<span class="ui-add-file" data-ui="attach">
+				<span class="btn-attach btn">
+					<label class="fileButton">파일선택<input type="file" class="fileInput" accept="*/*"></label>
+				</span>
 			</span>
-			
-			<p class="gap"></p>
-
-			<span class="uiAddFile" data-ui="attach">
+			<span class="ui-add-file on" data-ui="attach">
+				<span class="btn-attach btn">
+					<label class="fileButton">파일선택<input type="file" class="fileInput" accept="*/*"></label>
+				</span>
 				<span class="file">
-					<input type="text" class="loc" readonly="readonly" value="" placeholder="첨부파일">
+					<span class="loc">파일이름.psd</span>
 					<button type="button" class="delete">삭제</button>
 				</span>
-				<span class="btnAttach">
-					<label class="fileButton">찾기<input type="file" class="fileInput" accept="*/*"></label>
-				</span>
-				<ul class="file"></ul>
 			</span>
 
 			<p class="gap"></p>
-
-			<span class="uiAttach" data-ui="attach" data-max-size="3">
-				<span class="btnAttach">
-					<label class="fileButton">사진추가<input type="file" class="fileInput" accept="image/*"></label>
+			<span class="ui-add-pic on" data-ui="attach">
+				<span class="btn-add-pic">
+					<label class="fileButton">이미지선택<input type="file" class="fileInput" accept="image/*"></label>
 				</span>
-				<ul class="file"></ul>
+				<span class="file">
+					<img class="img" src="../../img/temp/sss.png" alt="">
+					<button type="button" class="delete">삭제</button>
+				</span>
+			</span>
+			<span class="ui-add-pic" data-ui="attach">
+				<span class="btn-add-pic">
+					<label class="fileButton">이미지선택<input type="file" class="fileInput" accept="image/*"></label>
+				</span>
 			</span>
 
-			
 			<p class="gap"></p>
 			
 			<label class="checkbox"><input type="checkbox"><span>선택</span></label>
@@ -643,72 +647,58 @@
 			<p class="gap"></p>
 			
 			<ul class="uiTab type a">
-				<li class="active"><a href="javascript:;">탭메뉴1</a></li>
-				<li><a href="javascript:;">탭메뉴2</a></li>
+				<li class="active"><a data-ui-tab-btn="tab_a" data-ui-tab-val="tab_a_1" href="javascript:;">탭메뉴1</a></li>
+				<li><a data-ui-tab-btn="tab_a" data-ui-tab-val="tab_a_2" href="javascript:;">탭메뉴2</a></li>
 			</ul>
 			
 			<p class="gap"></p>
 
 			<ul class="uiTab type a">
-				<li class="active"><a href="#tabPanelA1">탭메뉴1</a></li>
-				<li class=""><a href="#tabPanelA2">탭메뉴2</a></li>
+				<li class="active"><a data-ui-tab-btn="tab_b" data-ui-tab-val="tab_b_1" href="javascript:;">탭메뉴1</a></li>
+				<li><a data-ui-tab-btn="tab_b" data-ui-tab-val="tab_b_2" href="javascript:;">탭메뉴2</a></li>
 			</ul>
-			<div class="uiTabPan">
-				<div class="panel active" id="tabPanelA1">
-					<p><a href="javascript:;">탭내용1</a></p>
-				</div>
-				<div class="panel" id="tabPanelA2">
-					<p><a href="javascript:;">탭내용2</a></p>
-				</div>
+			
+			<div data-ui-tab-ctn="tab_b" data-ui-tab-val="tab_b_1" class="active">
+				<p><a href="javascript:;">탭내용1</a></p>
 			</div>
+			<div data-ui-tab-ctn="tab_b" data-ui-tab-val="tab_b_2">
+				<p><a href="javascript:;">탭내용2</a></p>
+			</div>
+		
 
 			<div class="codeBox">
 				<div class="code">
 					<pre class="brush: html">
-						<ul class="uiTab type b">
-							<li class="active"><a href="#tabPanelB1">탭메뉴1</a></li>
-							<li><a href="#tabPanelB2">탭메뉴2</a></li>
+						<ul class="uiTab a">
+							<li class="active"><a data-ui-tab-btn="tab_a" data-ui-tab-val="tab_a_1" href="javascript:;">탭메뉴1</a></li>
+							<li class="      "><a data-ui-tab-btn="tab_a" data-ui-tab-val="tab_a_2" href="javascript:;">탭메뉴2</a></li>
 						</ul>
-						<div class="uiTabPan">
-							<div class="panel active" id="tabPanelB1">탭내용1</div>
-							<div class="panel" id="tabPanelB2">탭내용2</div>
+						<div data-ui-tab-ctn="tab_b" data-ui-tab-val="tab_b_1" class="active">
+							<p><a href="javascript:;">탭내용1</a></p>
+						</div>
+						<div data-ui-tab-ctn="tab_b" data-ui-tab-val="tab_b_2" class="      ">
+							<p><a href="javascript:;">탭내용2</a></p>
 						</div></pre>
 				</div>
 			</div>
 
 
 			<p class="gap"></p>
-			<a href="#tog_sample2" data-ui-tog="btn" class="btn">토글버튼2</a>
-			<div id="tog_sample2" data-ui-tog="ctn">
+			<a href="javascript:;" data-ui-tog="btn" data-ui-tog-val="tog_sample1" class="btn">토글UI</a>
+			<div data-ui-tog="ctn" data-ui-tog-val="tog_sample1">
 				<p>토글내용 토글내용</p>
 				<p>토글내용 토글내용</p>
 			</div>
 			<p class="gap"></p>
-
-			<ul class="uiTabs type a">
-				<li class="active"><a href="javascript:;" data-ui-tab-btn="tab_ctn_C" data-ui-tab-val="tab_id_C_1">탭메뉴1</a></li>
-				<li class=""><a href="javascript:;" data-ui-tab-btn="tab_ctn_C" data-ui-tab-val="tab_id_C_2">탭메뉴2</a></li>
-			</ul>
-			<div class="panel active" data-ui-tab-ctn="tab_ctn_C" id="tab_id_C_1">
-				<p>탭내용1</p>
-			</div>
-			<div class="panel" data-ui-tab-ctn="tab_ctn_C" id="tab_id_C_2">
-				<p>탭내용2</p>
-			</div>
 			
 
 			<div class="codeBox">
 				<div class="code">
 					<pre class="brush: html">
-						<ul class="uiTabs type a">
-							<li class="active"><a href="javascript:;" data-ui-tab-btn="tab_ctn_C" data-ui-tab-val="tab_id_D_1">탭메뉴1</a></li>
-							<li class=""><a href="javascript:;" data-ui-tab-btn="tab_ctn_C" data-ui-tab-val="tab_id_D_2">탭메뉴2</a></li>
-						</ul>
-						<div class="panel active" data-ui-tab-ctn="tab_ctn_C" id="tab_id_D_1">
-							<p>탭내용1</p>
-						</div>
-						<div class="panel" data-ui-tab-ctn="tab_ctn_C" id="tab_id_D_2">
-							<p>탭내용2</p>
+						<a href="javascript:;" data-ui-tog="btn" data-ui-tog-val="tog_sample1" class="btn">토글UI</a>
+						<div data-ui-tog="ctn" data-ui-tog-val="tog_sample1">
+							<p>토글내용 토글내용</p>
+							<p>토글내용 토글내용</p>
 						</div></pre>
 				</div>
 			</div>
@@ -915,15 +905,76 @@
 				<ul class="list" id="dp_list"></ul>
 				<div class="uiLoadMore">
 					<em></em>
-					<button type="button" class="btnLoad" onclick="itemListAdd()" id="btnListMore">불러오기</button>
+					<button type="button" class="btnLoad" onclick="addItem.using()" id="btnListMore">불러오기</button>
 				</div>
 			</section>
+			<script>
+				var addItem = {
+					init:function(){
+						this.using();
+						this.evt();
+					},
+					stat:true,
+					page:0,
+					evt:function(){
+						var _this = this;
+						$(window).on("scroll", function() { // 바닥 확인
+							var docH = $(document).height();
+							var scr = $(window).scrollTop() + $(window).height() + 30;
+							// console.log(docH,scr);
+							if (docH <= scr  && _this.stat == true) {
+								console.log("바닥sss");
+								_this.using();
+								_this.stat = false;
+							}
+						});
+					},
+					using:function(){
+						var _this = this;
+						_this.stat = false ;
+						$(".uiLoadMore").addClass("active");
+						
+						$.ajax({
+							type: "get",
+							url: "../inc/list_more.html",
+							dataType: "html",
+							success: function(html) {
+								window.setTimeout(function(){
+									_this.page ++ ;
+									$("#dp_list").append(html).addClass("load");
+									console.log("페이징 = " + _this.page);
+									_this.stat = true ;
+									if (_this.page >= 3) {
+										console.log("끝");
+										$(".uiLoadMore").addClass("hide");
+										_this.stat = false ;
+									}
+									$(".uiLoadMore").removeClass("active").removeClass("error");
+									$("#btnListMore").prop("disabled",true);
+									_this.evt();
+									
+								},500);
+							},
+							error:function(error){
+								// _this.page --;
+								console.log("페이징 = " + _this.page + "에러 = " + error.readyState);
+								$(".uiLoadMore").removeClass("active").addClass("error");
+								$(window).off("scroll");
+								$("#btnListMore").prop("disabled",false);
+							}
+						});
+					}
+				};
+
+				addItem.init();
+		
+			</script>
 			
 
 		</main>
 
 		<div id="layers">
-			<!-- 팝레이어 A -->
+			<!-- 팝레이어 A 전체 덮는 크기 -->
 			<article class="popLayer a popSample1" id="popSample1">
 				<div class="pbd">
 					<div class="phd">
@@ -966,7 +1017,7 @@
 			</article>
 
 
-			<!-- 팝레이어 B -->
+			<!-- 팝레이어 B 가운데 뜨는 크기 -->
 			<article class="popLayer b popSample2" id="popSample2">
 				<div class="pbd">
 					<div class="phd">
@@ -1014,7 +1065,7 @@
 			</article>
 
 
-			<!-- 팝레이어 C  아래에서 올라오는 팝업 type c -->
+			<!-- 팝레이어 C  아래에서 올라오는 -->
 			<article class="popLayer c popSample4" id="popSample4">
 				<div class="pbd">
 					<button type="button" class="btnPopClose">닫기</button>
@@ -1045,50 +1096,15 @@
 
 	<script>
 	$(document).ready(function(){
-		ui.listMore.init(itemListAdd);
+		// ui.listMore.init(itemListAdd);
 
 		ui.refresh.init(function(){
 			location.reload();
+			console.log("댕겨서 새로고침");
 		});
 	});
-
-	var page = 0;
-	var itemListAdd = function(){
-		ui.listLoad.attach(); // 로딩이미지 Show
-		$("#btnListMore").prop("disabled",true);
-		if( ui.listMore.active ){
-			ui.listMore.active = false;
-			ui.listMore.using();
-			page ++;
-			window.setTimeout(function(){
-				$.ajax({
-					type: "get",
-					url: "../inc/list_more.html",
-					dataType: "html",
-					success: function(html) {
-						$("#dp_list").append(html).addClass("load");
-						$("#btnListMore").prop("disabled",false);
-						ui.listLoad.detach();
-						ui.listMore.active = true;
-						// console.log("페이징 = " + page);
-						$("#debug").html("페이징 = " + page );
-						if (page >= 5) {
-							// console.log("끝");
-							ui.listMore.removeEvent();
-						}
-					},
-					error:function(error){
-						page --;
-						console.log("페이징 = " + page);
-						console.log("에러 = " + error.readyState);
-						ui.listLoad.error();
-						$("#btnListMore").prop("disabled",false);
-					}
-				});
-			},1000);
-		}
-	};
 	</script>
+
 
 <div class="foot"></div>
 

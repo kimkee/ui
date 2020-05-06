@@ -29,6 +29,13 @@ input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
 input[type=number] { -moz-appearance:textfield;}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+/* Firefox */
+input[type=number] { -moz-appearance: textfield; }
+
+
 
 input.valid{background: url(../img/common/validation.png) no-repeat right 5px top 9px;background-size: 20px auto;padding-right: 31px;}
 input.valid.ok{background-position-y: -31px;}
@@ -132,6 +139,38 @@ select::-ms-expand {display:none;}
 .uiAttach .file>li .delete{position: absolute;right: 2px;top: 50%;width: 26px;height: 26px;background: url(../img/common/delete.png) no-repeat center;background-size: 12px auto;text-indent:-9999px;overflow:hidden;border-radius: 100px;margin-top: -13px;border: none;}
 .uiAttach.on .txt{}
 .uiAttach.on .file{ display:block; }
+
+.ui-add-file{position:relative;display:inline-block;overflow:hidden;vertical-align:middle;line-height: 0.9;}
+.ui-add-file .file{position:relative;display: inline-block;vertical-align:middle;padding: 0px 20px 0px 0px;}
+.ui-add-file .file button.delete{display:none;position:absolute;right: 0px;top: 4px;width:20px;height:20px;background: url(../img/common/delete.png) no-repeat center;text-indent:-9999px;overflow:hidden;border: none;background-size: 10px auto;}
+.ui-add-file.on .file button.delete{display:block;cursor: pointer;}
+.ui-add-file .file .loc{vertical-align:middle;white-space:nowrap;overflow:hidden;width:100%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;display:inline-block;border: none;height: 25px;max-width: 170px;/* padding: 1px 27px 1px 6px; */margin-left: 5px;font-size: 14px;line-height: 1.6;}
+.ui-add-file.on .file .loc{}
+.btn-attach{padding: 2px 0px;}
+.btn-attach{position:relative;overflow:hidden;width: 110px;height: 25px;font-size: 15px;} 
+.btn-attach .fileButton{line-height: 18px;} 
+.btn-attach .bt{} 
+.btn-attach .fileInput{font-size:100px;position:absolute;right:0px;top: -1px;width:100%;height: 25px;opacity:0;filter:alpha(opacity=0);cursor:pointer;padding:0px !important;border:none;}
+
+
+.ui-add-pic{position:relative;display:inline-block;overflow:hidden;vertical-align:middle;line-height: 0.9;}
+.ui-add-pic .file{position: absolute;display: block;vertical-align:middle;padding: 0px 0px 0px 0px;right: 0;top: 0px;line-height: 1;z-index: 100;width: 50px;height: 50px;overflow: hidden;}
+.ui-add-pic .file button.delete{display:none;position:absolute;right: 0px;top: 0px;width:21px;height:21px;background: url(../img/common/btn_pic_del.png) no-repeat center;text-indent:-9999px;overflow:hidden;border: none;}
+.ui-add-pic.on .file button.delete{display:block;cursor: pointer;}
+.ui-add-pic .file .loc{vertical-align:middle;overflow:hidden;width:100%;overflow:hidden;display: block;border: none;height: 50px;/* max-width: 170px; *//* padding: 1px 27px 1px 6px; */font-size: 14px;line-height: 1.6;}
+.ui-add-pic .file .img{width: 100%;height: 100%;}
+.ui-add-pic.on .file .loc{}
+
+.btn-add-pic{position:relative;overflow:hidden;width: 50px;height: 50px;font-size: 15px;border: #4555d1 solid 1px;display: inline-block;vertical-align: middle;} 
+.btn-add-pic:hover{background-color:#4555d1;}
+.btn-add-pic:hover::after{color:#ffffff;}
+.btn-add-pic::after{width: 100%;height: 100%;content: "+";display:inline-block;vertical-align:middle;/* background:url(../img/common/ico_file_add.png) no-repeat; */margin: 0px 0px 0px 0px;font-size: 28px;color: #4555d1;position: absolute;left: 0px;top: 0;z-index: 1;text-align: center;padding: 10px 0px;}
+.btn-add-pic .fileButton{line-height: 0px;font-size: 0;z-index: 100;position: relative;width: 48px;height: 48px;} 
+.btn-add-pic .bt{} 
+.btn-add-pic .fileInput{font-size:100px;position:absolute;right:0px;top: -1px;width:100%;height: 25px;opacity:0;filter:alpha(opacity=0);cursor:pointer;padding:0px !important;border:none;}
+
+
+
 
 /* 말줄임 ...  */
 .ellip1{text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
@@ -405,8 +444,6 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .btnList::after{ clear:both; content:""; display:table;}
 .btnList .fl{float:left;}
 .btnList .fr{float:right;}
-.btnList .btn.xl{min-width: 110px;}
-.btnList .btn + .btn{ margin-left: 5px;}
 
 
 /* 페이지 로딩 */
@@ -435,7 +472,7 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .uiLoadMore.error .btnLoad{ position:relative; left:auto; width:100%; margin-top:8px; }
 .uiLoadMore.error .btnLoad:after{left:50%; top:50%; margin:-15px 0 0 -15px; }
 .uiLoadMore.error .btnLoad{text-indent:-9999px;overflow:hidden;}
-
+.uiLoadMore.hide{display:none;}
 
 /* 드롭다운 UI*/
 .uiDropDown.on{ z-index:300; }
@@ -586,7 +623,7 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .popLayer.c .list{padding: 5px 0px;}
 .popLayer.c .list>li{text-align: center;border-bottom: #4c4c4c solid 1px;}
 .popLayer.c .list>li:last-child{border-bottom-width: 0px;}
-.popLayer.c .list>li .bt{padding: 10px 10px;font-size: 13px;display:block;font-family:"BlairMd","NotoSansCJKkr";text-transform: uppercase;}
+.popLayer.c .list>li .bt{padding: 10px 10px;font-size: 13px;display:block;text-transform: uppercase;}
 .popLayer.c .list>li.st .bt{color:#ff414d;}
 .popLayer.c .btnPopClose{position: absolute;left: -99999px;}
 
