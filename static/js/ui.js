@@ -12,7 +12,7 @@ var ui = {
 		this.accd.init();
 		this.tog.init();
 		this.tab.init();
-		this.tabs.init();
+		// this.tabs.init();
 		this.dropDown.init();
 		this.popLayer.init();
 		this.slides.init();
@@ -522,28 +522,28 @@ var ui = {
 			});
 		}
 	},
-	tab:{ //탭형식컨텐츠
-		init:function(){
-			this.using();
-			// console.log(  ui.param.tab );
-			ui.tab.set( ui.param.tab );
-		},
-		set:function(id){
-			$(".uiTab>li>a[href='#"+id+"']").trigger("click");
-		},
-		using:function(){
-			$(document).on('click',".uiTab:not([data-ui*='link'])>li>a", function(e){
-				$(this).closest("li").addClass("active").siblings("li").removeClass("active");
-				var thisId = $(this).attr("href");
-				//console.log(thisId);
-				if (thisId.indexOf("#") > -1 ) {
-					$(thisId).addClass("active").siblings(".panel").removeClass("active");
-				}
-				e.preventDefault();
-			});
-		}
-	},
-	tabs:{ // 탭 UI
+	// tab:{ //탭형식컨텐츠
+	// 	init:function(){
+	// 		this.using();
+	// 		// console.log(  ui.param.tab );
+	// 		ui.tab.set( ui.param.tab );
+	// 	},
+	// 	set:function(id){
+	// 		$(".uiTab>li>a[href='#"+id+"']").trigger("click");
+	// 	},
+	// 	using:function(){
+	// 		$(document).on('click',".uiTab:not([data-ui*='link'])>li>a", function(e){
+	// 			$(this).closest("li").addClass("active").siblings("li").removeClass("active");
+	// 			var thisId = $(this).attr("href");
+	// 			//console.log(thisId);
+	// 			if (thisId.indexOf("#") > -1 ) {
+	// 				$(thisId).addClass("active").siblings(".panel").removeClass("active");
+	// 			}
+	// 			e.preventDefault();
+	// 		});
+	// 	}
+	// },
+	tab:{ // 탭 UI
 		init: function() {
 			this.evt();
 			ui.param.tab  && this.set( ui.param.tab );
@@ -552,6 +552,7 @@ var ui = {
 			var tabid = id.split(",");
 			$("[data-ui-tab-btn][data-ui-tab-val]").each(function(idx){
 				// console.log(idx,tabid[idx] );
+				$("#"+id).closest("li").addClass("active");;
 				$("[data-ui-tab-btn][data-ui-tab-val='"+tabid[idx]+"']").trigger("click");
 			});
 		},
@@ -566,8 +567,9 @@ var ui = {
 			var ctn = $(els).data("ui-tab-btn");
 			$("[data-ui-tab-btn="+ctn+"]").removeClass("active").closest("li").removeClass("active");
 			$(els).addClass("active").closest("li").addClass("active");;
-			$("[data-ui-tab-ctn="+ctn+"]").removeClass("active");;
-			$("[data-ui-tab-ctn]#"+btn).addClass("active");
+			$("[data-ui-tab-ctn="+ctn+"]").removeClass("open");;
+			$("[data-ui-tab-ctn]#"+btn).addClass("open");
+			$("[data-ui-tab-ctn][data-ui-tab-val='"+btn+"']").addClass("open");
 		}
 	},
 	lock:{ // 스크롤 막기,풀기

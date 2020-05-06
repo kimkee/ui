@@ -401,6 +401,13 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .floatNav.active .top{ transform: translateY(0px); }
 
 
+.btnList{text-align: center; padding: 15px 0px;}
+.btnList::after{ clear:both; content:""; display:table;}
+.btnList .fl{float:left;}
+.btnList .fr{float:right;}
+.btnList .btn.xl{min-width: 110px;}
+.btnList .btn + .btn{ margin-left: 5px;}
+
 
 /* 페이지 로딩 */
 .loadingPage{position:fixed;left:0;right:0;top:0;bottom:0;z-index: 2000;background-color: rgba(255, 255, 255, 0.3);}
@@ -537,26 +544,55 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .popLayer>.pbd>.pbt .bts {width:100%;display: flex;}
 .popLayer>.pbd>.pbt .bts .btn{ width:100%;}
 /* 팝업 레이어 typeA */
-.popLayer.type.a{}
-.popLayer.type.a .pbd{}
-.popLayer.type.a .pct{/* max-height: calc(100vh - 50px); */}
-.popLayer.type.a .poptents{}
-.popLayer.type.a .pbt{}
-.popLayer.type.a .pbt .bots{/* position:fixed; */}
+.popLayer.a{}
+.popLayer.a .pbd{}
+.popLayer.a .pct{/* max-height: calc(100vh - 50px); */}
+.popLayer.a .poptents{}
+.popLayer.a .pbt{}
+.popLayer.a .pbt .bots{/* position:fixed; */}
 
 /* 팝업 레이어 typeB */
-.popLayer.type.b{white-space:nowrap;text-align:center;font-size: 0px;}
-.popLayer.type.b:after{content: '';width:0;height:100%;display:inline-block;vertical-align:middle;}
-.popLayer.type.b .pbd{font-size:16px;display:inline-block;max-width: calc(100% - 60px);vertical-align:middle;text-align:left;white-space:normal;padding-top: 0;min-width: 90%;}
-.popLayer.type.b .phd{position: relative;border-bottom-color: #c7c7c7;}
-.popLayer.type.b .phd>.in{ position:relative;}
-.popLayer.type.b .phd .tit{ font-size: 18px;}
-.popLayer.type.b .phd button.close{ background-image: url(../img/common/popLayerClose.png)}
-.popLayer.type.b .pct{min-width: 100%;max-height: 300px;min-height: 70px;}
-.popLayer.type.b .pct .poptents{}
-.popLayer.type.b .pbt{}
-.popLayer.type.b .pbt .bots{/* position:fixed; *//* width: auto; *//* right: 0; */}
-.popLayer.type.b .pbt .btn{font-size: 14px;width: 50%;}
+.popLayer.b{white-space:nowrap;text-align:center;font-size: 0px;}
+.popLayer.b:after{content: '';width:0;height:100%;display:inline-block;vertical-align:middle;}
+.popLayer.b .pbd{font-size:16px;display:inline-block;max-width: calc(100% - 60px);vertical-align:middle;text-align:left;white-space:normal;padding-top: 0;min-width: 90%;}
+.popLayer.b .phd{position: relative;border-bottom-color: #c7c7c7;}
+.popLayer.b .phd>.in{ position:relative;}
+.popLayer.b .phd .tit{ font-size: 18px;}
+.popLayer.b .phd button.close{ background-image: url(../img/common/popLayerClose.png)}
+.popLayer.b .pct{min-width: 100%;max-height: 300px;min-height: 70px;}
+.popLayer.b .pct .poptents{}
+.popLayer.b .pbt{}
+.popLayer.b .pbt .bots{/* position:fixed; *//* width: auto; *//* right: 0; */}
+.popLayer.b .pbt .btn{font-size: 14px;width: 50%;}
+
+
+
+/* 팝업 레이어 typeC */
+.popLayer.c{white-space:nowrap;text-align:center;font-size: 0px;padding: 10px 0px;}
+.popLayer.c::after{content: '';width:0;height:100%;display:inline-block;vertical-align:middle;}
+.popLayer.c .pbd{transform: translateY(110%);transition: transform 0.3s ease 0s;font-size:16px;bottom: 10px;display:inline-block;vertical-align: bottom;text-align:left;white-space:normal;/* max-width: 310px; */width: calc(100% - 40px);border-radius: 3px;}
+.popLayer.c .phd{position: relative;}
+.popLayer.c .phd>.in{ position:relative;}
+.popLayer.c .phd .tit{ font-size: 18px;}
+.popLayer.c .phd button.close{ background-image: url(../images/common/popLayerClose.png)}
+.popLayer.c .pct{/* max-height: 240px; *//* min-height: 70px; */}
+.popLayer.c .pct .poptents{}
+.popLayer.c .pbt{ min-height: auto;}
+.popLayer.c .pbt .bots{/* position:fixed; *//* width: auto; *//* right: 0; */}
+.popLayer.c .pbt .btn{font-size: 14px;/* width: 50%; */}
+
+.popLayer.c.on .pbd{transform: translateY(0%);}
+
+.popLayer.c .list{padding: 5px 0px;}
+.popLayer.c .list>li{text-align: center;border-bottom: #4c4c4c solid 1px;}
+.popLayer.c .list>li:last-child{border-bottom-width: 0px;}
+.popLayer.c .list>li .bt{padding: 10px 10px;font-size: 13px;display:block;font-family:"BlairMd","NotoSansCJKkr";text-transform: uppercase;}
+.popLayer.c .list>li.st .bt{color:#ff414d;}
+.popLayer.c .btnPopClose{position: absolute;left: -99999px;}
+
+
+
+
 
 .popLayer.win{display: block;background-color: #ffffff;padding:0px;}
 .popLayer.win::after{ display:none;}

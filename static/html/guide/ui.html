@@ -1,7 +1,24 @@
 ﻿<!doctype html>
 <html lang="ko">
 <head>
-<%@ include file="../inc/meta.jsp" %>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<meta name="format-detection" content="telephone=no">
+	<meta name="theme-color" content="#ffffff">
+	<link href="../../img/common/favicon.ico" rel="shrtcut icon">
+	<link href="../../img/common/favicon.png" rel="apple-touch-icon-precomposed">
+	<link rel="stylesheet" href="../../css/jquery-ui.css?v=1">
+	<link rel="stylesheet" href="../../css/swiper.css?v=1">
+	<link rel="stylesheet" href="../../css/base.css?v=1">
+	<link rel="stylesheet" href="../../css/common.css?v=1">
+	
+	<script src="../../js/jquery-3.4.1.js"></script>
+	<!-- <script src="../../js/jquery-2.2.4.js"></script> -->
+	<script src="../../js/jquery-ui.js"></script>
+	<script src="../../js/jquery.ui.touch-punch.js"></script>
+	
 
 <link href="../guide/shCore.css" rel="stylesheet">
 <script src="../guide/shCore.js"></script>
@@ -11,7 +28,7 @@
 <div class="wrap" id="wrap">
 	
 		
-	<%@ include file="../inc/head.jsp" %>
+	<div class="head"></div>
 	
 	<!-- 컨텐츠 시작 -->
 	<div class="contain ui" id="contain">
@@ -169,14 +186,31 @@
 
 			<p class="gap"></p>
 
-			<%@ include file="../inc/paging.jsp" %>
+			<div class="paging">
+				<div class="nav prev">
+					<a href="javascript:;" class="prev end">처음</a>
+					<a href="javascript:;" class="prev">이전 10개</a>
+				</div>
+				<div class="link">
+					<a href="javascript:;">1</a>
+					<a href="javascript:;">2</a>
+					<a class="active" href="javascript:;">3</a>
+					<a href="javascript:;">4</a>
+					<a href="javascript:;">5</a>
+				</div>
+				<div class="nav next">
+					<a href="javascript:;" class="next">다음 10개</a>
+					<a href="javascript:;" class="next end">마지막</a>
+				</div>
+			</div>
 
 
 			<section class="codeBox"> 
 				<div class="code">
 					<div class="bts">
-						<a class="btn" href="javascript:samplePop1();">팝레이어1</a>
-						<a class="btn" href="javascript:ui.popLayer.open('popSample2');">팝레이어2</a>
+						<a class="btn" href="javascript:samplePopA();">팝레이어A</a>
+						<a class="btn" href="javascript:ui.popLayer.open('popSample2');">팝레이어B</a>
+						<a class="btn" href="javascript:samplePopC();">팝레이어C</a>
 					</div>
 					<pre class="brush: js">
 						ui.popLayer.open('popSample1'); // 팝레이어열기
@@ -185,21 +219,26 @@
 				</div>	
 			</section>
 			<script>
-				$(document).ready(function(){
-					
-					samplePop1 = function(){
-						// 레이어팝업 열기 콜백
-						ui.popLayer.open('popSample1',{
-							ocb:function(){
-								console.log("popSample1 열림");
-							},
-							ccb:function(){
-								console.log("popSample1 닫힘");
-							}						
-						});
-					}
-
-				});
+				
+				var samplePopA = function(){
+					// 레이어팝업 열기 콜백
+					ui.popLayer.open('popSample1',{
+						ocb:function(){
+							console.log("popSample1 열림");
+						},
+						ccb:function(){
+							console.log("popSample1 닫힘");
+						}						
+					});
+				}
+				var samplePopC = function(){
+					// 레이어팝업 열기 콜백
+					ui.popLayer.open('popSample4',{
+						ccb:function(){
+							// console.log("popSample4 닫힘");
+						}
+					});
+				}
 			</script>
 
 			<section class="codeBox">
@@ -387,7 +426,7 @@
 			<div class="uiCircle c1" 
 				data-value="0.9"
 				data-size="100"
-				data-fill= "{ 'color': '#000000' }" 
+				data-fill= '{ "color": "#000000" }' 
 				data-empty-fill="#ddd"
 				data-thickness="5"
 				data-animation-start-value="0.0" >
@@ -408,7 +447,7 @@
 				data-arc-coef= "0.7"
 				data-start-angle = "1.6"
 				data-empty-fill="rgba(0, 0, 0, .5)"
-				data-fill = '{"image": "http://i.imgur.com/pT0i89v.png"}'
+				data-fill = '{"image": "https://i.imgur.com/pT0i89v.png"}'
 				data-thickness="20"
 				data-animation-start-value="0.0" >
 				<strong></strong>
@@ -589,7 +628,7 @@
 
 
 
-			<!--
+			
 			<p class="gap"></p>
 			<div class="btnList">
 				<a href="javascript:;" class="btn">가운데</a>
@@ -599,7 +638,7 @@
 				<div class="fl"><a href="javascript:;" class="btn">왼쪽</a></div>
 				<div class="fr"><a href="javascript:;" class="btn">오른쪽</a></div>
 			</div>
-			-->
+			
 			
 			<p class="gap"></p>
 			
@@ -882,6 +921,118 @@
 			
 
 		</main>
+
+		<div id="layers">
+			<!-- 팝레이어 A -->
+			<article class="popLayer a popSample1" id="popSample1">
+				<div class="pbd">
+					<div class="phd">
+						<div class="in">
+							<h1 class="tit">타이틀111</h1>
+							<button type="button" class="btnPopClose">닫기</button>
+						</div>
+					</div>
+					<div class="pct">
+						<main class="poptents">
+							<a class="btn" href="javascript:ui.popLayer.open('popSample2');">팝레이어2</a>
+							<p>sdfsdfsfsd</p>
+							<a class="btn" href="javascript:ui.popLayer.open('popSample3');">팝레이어3</a>
+							<p>sdfsdfsfsd</p>
+							<label class="checkbox"><input type="checkbox" checked="checked"><span></span></label>
+							<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
+							<input type="text">
+							<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
+							<input type="text">
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<label class="checkbox"><input type="checkbox"><span></span></label>
+							<label class="radio"><input type="radio"><span></span></label>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<input type="text">
+						</main>
+					</div>
+					<div class="pbt">
+						<div class="bts">
+							<a href="javascript:;" class="btn type e">버튼</a>
+							<a href="javascript:;" class="btn type a">버튼</a>
+						</div>
+					</div>
+				</div>
+			</article>
+
+
+			<!-- 팝레이어 B -->
+			<article class="popLayer b popSample2" id="popSample2">
+				<div class="pbd">
+					<div class="phd">
+						<div class="in">
+							<h1 class="tit">타이틀222</h1>
+							<button type="button" class="btnPopClose">닫기</button>
+						</div>
+					</div>
+					<div class="pct">
+						<main class="poptents">
+							
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<a class="btn" href="javascript:ui.popLayer.open('popSample3');">팝레이어3</a>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<input type="text">
+							<p>sdfsdfsfsd</p>
+							<textarea></textarea>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							<p>sdfsdfsfsd</p>
+							
+						</main>
+					</div>
+					<div class="pbt">
+						<div class="bts">
+							<a href="javascript:;" class="btn type e">버튼</a>
+							<a href="javascript:;" class="btn type a">버튼</a>
+						</div>
+					</div>
+				</div>
+			</article>
+
+
+			<!-- 팝레이어 C  아래에서 올라오는 팝업 type c -->
+			<article class="popLayer c popSample4" id="popSample4">
+				<div class="pbd">
+					<button type="button" class="btnPopClose">닫기</button>
+					<div class="pct">
+						<main class="poptents">
+							<ul class="list">
+								<li class="twitter"><a href="javascript:;" class="bt">TYPE c</a></li>
+								<li class="twitter"><a href="javascript:;" class="bt">TWITTER</a></li>
+								<li class="katalk"><a href="javascript:;" class="bt">KAKAOTALK</a></li>
+								<li class="facebook"><a href="javascript:;" class="bt">FACEBOOK</a></li>
+								<li class="kastory"><a href="javascript:;" class="bt">KAKAOSTORY</a></li>
+							</ul>
+						</main>
+					</div>
+				</div>
+			</article>
+
+		</div>
 	
 	</div>
 
@@ -911,8 +1062,8 @@
 			page ++;
 			window.setTimeout(function(){
 				$.ajax({
-					type: "post",
-					url: "../inc/list_more.jsp",
+					type: "get",
+					url: "../inc/list_more.html",
 					dataType: "html",
 					success: function(html) {
 						$("#dp_list").append(html).addClass("load");
@@ -939,7 +1090,7 @@
 	};
 	</script>
 
-	<%@ include file="../inc/foot.jsp" %>
+<div class="foot"></div>
 
 </div>
 
@@ -963,7 +1114,18 @@ $(function() {
 });
 </script>
 
-<%@ include file="../inc/bottom.jsp" %>
-<%@ include file="../inc/scripts.jsp" %>
+
+
+
+
+<script src="../../js/iscroll.js"></script>
+<script src="../../js/swiper.js"></script>
+<script src="../../js/moment.js"></script>
+<script src="../../js/circle-progress.js"></script>
+<script src="../../js/pullToRefresh.js"></script>
+
+<script src="../../js/ui.js?v=<%=version%>"></script>
+
+<script src="../guide/html.js"></script><!-- 개발페이지에서는 html.js 임포트 하지말아주세요. -->
 </body>
 </html>
