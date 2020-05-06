@@ -1,4 +1,4 @@
-# ui 
+# ui.js
 HTML,CSS,JS UI
 ## https://kimkee.github.io/ui/
 
