@@ -38,98 +38,6 @@
 		
 			<h2 class="hdt">UI Guide KimKeeHyun</h2>
 
-			<section class="dromDownSample">
-				
-				<div class="uiDropDown" data-ui="val" id="kkk">
-					<div class="list">
-						<ul>
-							<li><button type="button" value="1">선택메뉴1선택메뉴1선택메뉴1</button></li>
-							<li><button type="button" value="2">선택메뉴2</button></li>
-							<li><button type="button" value="3">선택메뉴3</button></li>
-							<li><button type="button" value="4">선택메뉴4</button></li>
-							<li><button type="button" value="5">선택메뉴5</button></li>
-							<li><button type="button" value="6">선택메뉴6</button></li>
-							<li><button type="button" value="7">선택메뉴7</button></li>
-							<li><button type="button" value="8">선택메뉴8</button></li>
-							<li><button type="button" value="9">선택메뉴9</button></li>
-						</ul>
-					</div>
-				</div>
-
-
-
-				<div class="uiDropDown sm" data-ui="val">
-					<div class="list">
-						<ul>
-							<li><button type="button" value="1">남</button></li>
-							<li class="active"><button type="button" value="2">여</button></li>
-						</ul>
-					</div>
-				</div>
-				<div class="uiDropDown" data-ui="val">
-					<div class="list">
-						<ul>
-							<li><button type="button" value="1">02</button></li>
-							<li><button type="button" value="2">1</button></li>
-						</ul>
-					</div>
-				</div>
-			
-				<div class="uiDropDown disabled" data-ui="val">
-					<div class="list">
-						<ul>
-							<li><button type="button" value="1">선택메뉴1</button></li>
-							<li><button type="button" value="2">선택메뉴2</button></li>
-							<li><button type="button" value="3">선택메뉴3</button></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="uiDropDown" data-ui="val">
-					<div class="list">
-						<ul>
-							<li><button type="button" value="1">선택메뉴1</button></li>
-							<li><button type="button" value="2">선택메뉴2</button></li>
-							<li><button type="button" value="3">선택메뉴3</button></li>
-							<li><button type="button" value="4">선택메뉴444444444444444444</button></li>
-						</ul>
-					</div>
-				</div>
-
-
-				<div class="uiDropDown noWidth" data-ui="val">
-					<div class="list">
-						<ul>
-							<li><button type="button" value="1">선택메뉴1</button></li>
-							<li><button type="button" value="2">선택메뉴2222222</button></li>
-							<li><button type="button" value="3">선택메뉴3333333333333</button></li>
-							<li><button type="button" value="4">선택메뉴444444444444444444</button></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="uiDropDown" data-ui="link-sel" id="aaa">
-					<div class="list">
-						<ul>
-							<li><a href="/html/">네이버</a></li>
-							<li class="active"><a href="/html/">다음</a></li>
-							<li><a href="/html/">구글</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="uiDropDown" data-ui="link">
-					<a class="bt" href="javascript:;">링크</a>
-					<div class="list">
-						<ul>
-							<li><a href="javascript:;">네이버eeeeeeeeee</a></li>
-							<li><a href="javascript:;">다음</a></li>
-							<li><a href="javascript:;">구글</a></li>
-						</ul>
-					</div>
-				</div>
-
-			</section>
 			
 			<div class="device">
 				<h3>User Agent</h3>
@@ -331,35 +239,44 @@
 
 
 			<p class="gap"></p>
-			<input type="text" placeholder="텍스트">
+			<span class="input"><input type="text" placeholder="텍스트"></span>
 			<p class="gap"></p>
-			<input type="text" class="valid" placeholder="텍스트">
+			<span class="input"><input type="text" class="valid" placeholder="텍스트"></span>
 			<p class="gap"></p>
-			<input type="text" class="valid ok" placeholder="텍스트">
+			<span class="input"><input type="text" class="valid ok" placeholder="텍스트"></span>
 			<p class="gap"></p>
-			<input type="text" class="valid no" placeholder="텍스트">
+			<span class="input"><input type="text" class="valid no" placeholder="텍스트"></span>
 			<p class="gap"></p>
-			<input type="password" class="valid" placeholder="비밀번호">
+			<span class="input"><input type="password" class="valid" placeholder="비밀번호"></span>
 			<p class="gap"></p>
-			<input type="text" readonly="readonly" value="readonly">
+			<span class="input"><input type="text" readonly="readonly" value="readonly"></span>
 			<p class="gap"></p>
-			<input type="text" disabled="disabled" value="disabled">
+			<span class="input"><input type="text" disabled="disabled" value="disabled"></span>
 			<p class="gap"></p>
-			<textarea class="textarea" placeholder="내용"></textarea>
+			<span class="textarea"><textarea placeholder="내용"></textarea></span>
 			<p class="gap"></p>
-			<select class="select">
-				<option>선택</option>
-			</select>
+			<span class="select">
+				<select>
+					<option>선택</option>
+				</select>
+			</span>
 			<p class="gap"></p>
-			<select class="select" disabled="disabled">
-				<option>선택</option>
-			</select>
+			<span class="select">
+				<select disabled>
+					<option>선택</option>
+				</select>
+			</span>
+			<p class="gap"></p>
+			<span class="select jqui custom">
+				<select class="dd">
+					<option>선택1</option>
+					<option>선택2</option>
+					<option>선택3</option>
+				</select>
+			</span>
 			
 			<p class="gap"></p>
-			<div class="uiSchIpt">
-				<input type="search" placeholder="검색어를 입력하세요">
-				<button type="button" class="sch"></button>
-			</div>
+			<span class="input sch"><input type="text" placeholder="검색어 입력"><a href="javascript:;" class="btnSch">검색</a></span>
 
 			<section class="codeBox">
 				<div class="code">
@@ -584,13 +501,13 @@
 
 			<p class="gap"></p>
 
-			<div class="uiDate"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" readonly="readonly"></div>
+			<span class="input uiDate"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" readonly="readonly"></span>
 			<p class="gap"></p>
 
-			<div class="date">
+			<span class="input date">
 				<span class="weeks"><span id="START_DT"></span> ~ <span id="END_DT"></span></span>
-				<div class="uiDate week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly="readonly"></div>
-			</div>
+				<span class="uiDate input week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly="readonly"></span>
+			</span>
 			<p class="gap"></p>
 			<style>
 			
@@ -621,6 +538,8 @@
 					setWeeklyDateFnc(DD);
 					console.log(els);
 				});
+				$("input#schedWeek").datepicker( "option", "showOtherMonths", true );
+				$("input#schedWeek").datepicker( "option", "selectOtherMonths", true );
 
 				var now = new Date();
 				$("input#schedWeek").datepicker( "option", "minDate", new Date(2018, 1 - 1, 1) );
@@ -782,6 +701,100 @@
 
 			<p class="gap"></p>
 
+			<section class="dromDownSample">
+				
+				<div class="uiDropDown" data-ui="val" id="kkk">
+					<div class="list">
+						<ul>
+							<li><button type="button" value="1">선택메뉴1선택메뉴1선택메뉴1</button></li>
+							<li><button type="button" value="2">선택메뉴2</button></li>
+							<li><button type="button" value="3">선택메뉴3</button></li>
+							<li><button type="button" value="4">선택메뉴4</button></li>
+							<li><button type="button" value="5">선택메뉴5</button></li>
+							<li><button type="button" value="6">선택메뉴6</button></li>
+							<li><button type="button" value="7">선택메뉴7</button></li>
+							<li><button type="button" value="8">선택메뉴8</button></li>
+							<li><button type="button" value="9">선택메뉴9</button></li>
+						</ul>
+					</div>
+				</div>
+
+
+
+				<div class="uiDropDown sm" data-ui="val">
+					<div class="list">
+						<ul>
+							<li><button type="button" value="1">남</button></li>
+							<li class="active"><button type="button" value="2">여</button></li>
+						</ul>
+					</div>
+				</div>
+				<div class="uiDropDown" data-ui="val">
+					<div class="list">
+						<ul>
+							<li><button type="button" value="1">02</button></li>
+							<li><button type="button" value="2">1</button></li>
+						</ul>
+					</div>
+				</div>
+			
+				<div class="uiDropDown disabled" data-ui="val">
+					<div class="list">
+						<ul>
+							<li><button type="button" value="1">선택메뉴1</button></li>
+							<li><button type="button" value="2">선택메뉴2</button></li>
+							<li><button type="button" value="3">선택메뉴3</button></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="uiDropDown" data-ui="val">
+					<div class="list">
+						<ul>
+							<li><button type="button" value="1">선택메뉴1</button></li>
+							<li><button type="button" value="2">선택메뉴2</button></li>
+							<li><button type="button" value="3">선택메뉴3</button></li>
+							<li><button type="button" value="4">선택메뉴444444444444444444</button></li>
+						</ul>
+					</div>
+				</div>
+
+
+				<div class="uiDropDown noWidth" data-ui="val">
+					<div class="list">
+						<ul>
+							<li><button type="button" value="1">선택메뉴1</button></li>
+							<li><button type="button" value="2">선택메뉴2222222</button></li>
+							<li><button type="button" value="3">선택메뉴3333333333333</button></li>
+							<li><button type="button" value="4">선택메뉴444444444444444444</button></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="uiDropDown" data-ui="link-sel" id="aaa">
+					<div class="list">
+						<ul>
+							<li><a href="/html/">네이버</a></li>
+							<li class="active"><a href="/html/">다음</a></li>
+							<li><a href="/html/">구글</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="uiDropDown" data-ui="link">
+					<a class="bt" href="javascript:;">링크</a>
+					<div class="list">
+						<ul>
+							<li><a href="javascript:;">네이버eeeeeeeeee</a></li>
+							<li><a href="javascript:;">다음</a></li>
+							<li><a href="javascript:;">구글</a></li>
+						</ul>
+					</div>
+				</div>
+
+			</section>
+			
+			<p class="gap"></p>
 			<table class="list a" cellspacing="0" cellpadding="0" >
 				<colgroup>
 					<col>

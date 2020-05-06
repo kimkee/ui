@@ -21,7 +21,7 @@ legend,caption{width:0;height:0; visibility:hidden; font-size:0;line-height:0;}
 img{vertical-align:middle; border:none;}
 table{border-collapse:collapse; border-spacing:0;}
 address,em,i{font-style:normal; }
-*{-webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box;}
+*,::before,::after{-webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box;}
 ::-ms-clear{display: none; }
 /* clears the 'X' from Internet Explorer */
 input[type=search]::-ms-clear{display:none; width:0; height:0; }
@@ -101,7 +101,9 @@ input[type=number]{-moz-appearance:textfield;}
 .ui-datepicker .ui-state-default.ui-state-active,
 .ui-datepicker .ui-state-default.ui-state-active:hover{color:#ffffff;background-color: #0052bb;}
 .ui-datepicker .ui-datepicker-today .ui-state-highlight{color:#333333;border-color: #0052bb;}
-
+.ui-priority-secondary,
+.ui-widget-content .ui-priority-secondary,
+.ui-widget-header .ui-priority-secondary{opacity: 0.3;}
 
 
 

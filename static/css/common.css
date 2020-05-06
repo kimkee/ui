@@ -2,10 +2,10 @@
 img{max-width: 100%;}
 a,button,textarea{outline:none;}
 button{cursor:pointer;background: none;border: none;}
-input,
-textarea{display:block;width:100%;padding: 5px 10px 5px 10px;border-radius:0px;margin:0px 0;background-image:none;-webkit-appearance:none;color:#181818;border:#c7c7c7 solid 1px;resize:none;outline:none;vertical-align: middle;-webkit-border-radius: 0;}
-input{ height:40px; }
-textarea{ padding:9px 8px 9px 8px; height: 100px;}
+span.input>input,
+span.textarea>textarea{display:block;width:100%;padding: 5px 10px 5px 10px;border-radius:0px;margin:0px 0;background-image:none;-webkit-appearance:none;color:#181818;border:#c7c7c7 solid 1px;resize:none;outline:none;vertical-align: middle;-webkit-border-radius: 0;}
+span.input>input{ height:40px; }
+span.textarea>textarea{ padding:9px 8px 9px 8px; height: 100px;}
 
 textarea:not([readonly]):not([disabled]):focus,
 input:not([type=radio]):not([type=radio]):not([readonly]):not([disabled]):focus{ border-color:#333333; }
@@ -37,9 +37,9 @@ input[type=number] { -moz-appearance: textfield; }
 
 
 
-input.valid{background: url(../img/common/validation.png) no-repeat right 5px top 9px;background-size: 20px auto;padding-right: 31px;}
-input.valid.ok{background-position-y: -31px;}
-input.valid.no{background-position-y: -72px;border-color: #daa096 !important;}
+.input>input.valid{background: url(../img/common/validation.png) no-repeat right 5px top 9px;background-size: 20px auto;padding-right: 31px;}
+.input>input.valid.ok{background-position-y: -31px;}
+.input>input.valid.no{background-position-y: -72px;border-color: #daa096 !important;}
 
 .checkbox{position:relative;display:inline-block;vertical-align:middle;}
 .checkbox>input{position:absolute;left:0px;top:0px;padding:0px;z-index: 10;}
@@ -58,19 +58,37 @@ input.valid.no{background-position-y: -72px;border-color: #daa096 !important;}
 .radio>input:checked:disabled + span::before{ background-position-y:-90px; }
 .radio>span{display:inline-block;vertical-align:middle;/* line-height: 30px; */}
 
-.select{height: 40px;user-select:none;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;outline:none;background: url(../img/common/select.png) no-repeat right 3px top 5px transparent;background-size: 30px auto;position:relative;border:1px solid #cccccc;margin:0;overflow:hidden;padding: 0 45px 0 10px;text-overflow:ellipsis;white-space:nowrap;font-size: 16px;color:#181818;max-width: 100%;width: 100%;}
-.select:not([disabled]):focus{ border-color:#0052bb;}
-.select:after{content:"";width: 1px;height:30px;position:absolute;right: 30px;top:0px;background:#dddddd;}
+.select>select{height: 40px;user-select:none;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;outline:none;background: url(../img/common/select.png) no-repeat right 3px top 5px transparent;background-size: 30px auto;position:relative;border:1px solid #cccccc;margin:0;overflow:hidden;padding: 0 45px 0 10px;text-overflow:ellipsis;white-space:nowrap;font-size: 16px;color:#181818;max-width: 100%;width: 100%;}
+.select>select:not([disabled]):focus{ border-color:#0052bb;}
+.select>select:after{content:"";width: 1px;height:30px;position:absolute;right: 30px;top:0px;background:#dddddd;}
 select::-ms-expand {display:none;}
+
+
+/* jquery ui select */
+.ui-selectmenu-button.ui-button{background: #ffffff;width: 100%;padding: 8px 34px 8px 12px;outline: none;border-radius: 0px;border: #cccccc solid 1px;/* font-family: 'Noto Sans KR'; *//* color: #000000; */display: inline-block;height: 40px;font-size: 15px;/* font-weight: 300; */}
+.ui-selectmenu-button.ui-button.ui-state-disabled{opacity:1;background-color: #f5f9fc;border-color: #f5f9fc;}
+.ui-selectmenu-button.ui-button.ui-state-disabled .ui-selectmenu-icon{ opacity:0.5;}
+.ui-selectmenu-icon.ui-icon{background: url(../img/common/select.png) no-repeat -6px -7px transparent !important;/* margin-top: -1px; */position: absolute;right: 12px;top: 50%;margin-top: -8px;background-size: 30px auto !important;}
+.ui-selectmenu-text{margin-right: 0;/* font-family: 'Noto Sans KR'; */}
+.ui-selectmenu-menu .ui-menu{margin-top: -1px;border: #cccccc solid 1px;padding: 0px 0;border-radius: 0px;border-top-width: 1px;}
+.ui-selectmenu-menu .ui-menu>li{}
+.ui-selectmenu-menu .ui-menu>li .ui-menu-item-wrapper{border: #cccccc solid 0px;padding: 8px 10px 8px 11px;border-width: 1px 0px 0px 0px;/* font-family: "Noto Sans KR"; */font-size: 14px;line-height: 150%;/* height: 24px; */white-space: nowrap;font-weight: 300;}
+.ui-selectmenu-menu .ui-menu>li .ui-menu-item-wrapper.ui-state-active{/* border: #000000 solid 0px; */background-color: #f3f3f3;color: #4a4a4a;margin: 0px;border-width: 0px 0px 0px 0px;}
+.ui-selectmenu-menu .ui-menu>li:first-child .ui-menu-item-wrapper{border-top-color: transparent !important;}
+
+
+
+
+
 
 .uiDate{ position:relative; }
 .uiDate input.datepicker,
 .uiDate input.datepicker:hover{padding-right: 30px;background: url(../img/common/datepicker.png) no-repeat right 3px top 50% #ffffff;background-size: 32px auto;color:#181818;cursor: pointer;}
 .uiDate input.datepicker + .ui-datepicker-trigger{width: 40px;height: 40px;font-size:0px;vertical-align:middle;margin-left: -35px;outline:none;position: absolute;right:0px;top:0px;border: none;background: none;}
 
-.uiSchIpt{ position:relative; display:inline-block; vertical-align:middle; width:100%; }
-.uiSchIpt input.ipt{width:100%;padding-right: 45px;}
-.uiSchIpt .sch{ width:40px; height:38px; font-size:0px; position:absolute; right:1px; top:1px; background:url(../img/common/icoFormSch.png) no-repeat; background-size:auto 38px; cursor:pointer; background-color:transparent; border:none; padding:0;}
+.input.sch{ position:relative; display:inline-block; vertical-align:middle; width:100%; }
+.input.sch>input{width:100%;padding-right: 45px;}
+.input.sch .btnSch{ width:40px; height:38px; font-size:0px; position:absolute; right:1px; top:1px; background:url(../img/common/icoFormSch.png) no-repeat; background-size:auto 38px; cursor:pointer; background-color:transparent; border:none; padding:0;}
 
 /* 수량 +- */
 .uiSpinner{}
@@ -164,10 +182,10 @@ select::-ms-expand {display:none;}
 .btn-add-pic{position:relative;overflow:hidden;width: 50px;height: 50px;font-size: 15px;border: #4555d1 solid 1px;display: inline-block;vertical-align: middle;} 
 .btn-add-pic:hover{background-color:#4555d1;}
 .btn-add-pic:hover::after{color:#ffffff;}
-.btn-add-pic::after{width: 100%;height: 100%;content: "+";display:inline-block;vertical-align:middle;/* background:url(../img/common/ico_file_add.png) no-repeat; */margin: 0px 0px 0px 0px;font-size: 28px;color: #4555d1;position: absolute;left: 0px;top: 0;z-index: 1;text-align: center;padding: 10px 0px;}
+.btn-add-pic::after{width: 100%;height: 100%;content: "+";display:inline-block;vertical-align:middle;/* background:url(../img/common/ico_file_add.png) no-repeat; */margin: 0px 0px 0px 0px;font-size: 28px;color: #4555d1;position: absolute;left: 0px;top: 0;z-index: 1;text-align: center;padding: 8px 0px;}
 .btn-add-pic .fileButton{line-height: 0px;font-size: 0;z-index: 100;position: relative;width: 48px;height: 48px;} 
 .btn-add-pic .bt{} 
-.btn-add-pic .fileInput{font-size:100px;position:absolute;right:0px;top: -1px;width:100%;height: 25px;opacity:0;filter:alpha(opacity=0);cursor:pointer;padding:0px !important;border:none;}
+.btn-add-pic .fileInput{font-size:100px;position:absolute;right:0px;top: 0px;width:100%;height: 100%;opacity:0;filter:alpha(opacity=0);cursor:pointer;padding:0px !important;border:none;}
 
 
 

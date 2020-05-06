@@ -246,11 +246,11 @@
 			var tOrg = window.location.origin;
 			var tIp = window.location.hostname;
 			//console.log(tPort, tUrl);
-			if(tPort == "8083"){
-				location.href = tUrl.replace(tHost,"ojkim-thenet-global.gitlab.io");
+			if(tPort == "8082"){
+				location.href = tUrl.replace(tHost,"kimkee.gitlab.io");
 			}
-			if(tOrg == "https://ojkim-thenet-global.gitlab.io"){
-				location.href = tUrl.replace(tOrg,"http://10.120.180.246:8083");
+			if(tOrg == "https://kimkee.gitlab.io"){
+				location.href = tUrl.replace(tOrg,"http://localhost:8082");
 			}
 
 		}

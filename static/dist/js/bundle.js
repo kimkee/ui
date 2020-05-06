@@ -16099,17 +16099,20 @@ var ui = {
 	form:{  //  폼요소
 		init:function(){
 			this.attach();
-			this.search();
+			this.select();
 			this.chkall();
 			this.spinner.init();
 			this.star.init();
 		},
-		search:function(){
-			$(document).on("keyup",".uiSchIpt input",function (e) {
-			    if( e.keyCode == 13 ) {
-			        $(this).next(".sch").trigger("click");
-					console.log( $(this).val() );
-			    }
+		select:function(){
+			$(".select.jqui>select").each(function(i) {				
+				var thisCls = $(this).closest(".select").attr("class").replace("select","");
+				var thisCls2 = $(this).attr("class")+" "+thisCls;
+				$(this).selectmenu({
+					classes: {
+						"ui-selectmenu-menu": thisCls2
+					}
+				});
 			});
 		},
 		attach:function(){
