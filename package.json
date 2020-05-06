@@ -1,26 +1,41 @@
 {
-	"name": "test",
-	"version": "1.0.1",
-	"description": "dededede",
-	"main": "gulpfile.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"compile": "html-includes --src static/src --dest static/dist"
-	},
-	"author": "KimKeeHyun",
-	"license": "ISC",
-	"dependencies": {
-		"gulp": "^4.0.2",
-		"gulp-clean-css": "^4.2.0",
-		"gulp-concat": "^2.6.1",
-		"gulp-concat-css": "^3.1.0",
-		"gulp-connect": "^5.7.0",
-		"gulp-css-url-adjuster": "^0.2.3",
-		"gulp-minify": "^3.1.0",
-		"gulp-rename": "^2.0.0",
-		"gulp-sourcemaps": "^2.6.5",
-		"gulp-uglify": "^3.0.2",
-		"gulp-webserver": "^0.9.1",
-		"html-includes": "^4.2.0"
-	}
+  "name": "ui",
+  "version": "1.0.2",
+  "description": "HTML CSS JS UI",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "html-includes --src static/src --dest static/dist"
+  },
+  "author": "KimKeeHyun",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-concat-css": "^3.1.0",
+    "gulp-connect": "^5.7.0",
+    "gulp-css-url-adjuster": "^0.2.3",
+    "gulp-minify": "^3.1.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "gulp-webserver": "^0.9.1",
+    "html-includes": "^4.2.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/kimkee/ui.git"
+  },
+  "keywords": [
+    "Html",
+    "Css",
+    "Js",
+    "UI"
+  ],
+  "bugs": {
+    "url": "https://gitlab.com/kimkee/ui/issues"
+  },
+  "homepage": "https://gitlab.com/kimkee/ui/"
 }

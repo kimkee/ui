@@ -106,6 +106,11 @@ input[type=number]{-moz-appearance:textfield;}
 .ui-widget-header .ui-priority-secondary{opacity: 0.3;}
 
 
+.month_year_datepicker .ui-datepicker-calendar{display:none;}
+.month_year_datepicker .ui-datepicker-close{border: #ddd solid 1px !important;margin: 7px 0px 0px 0px !important;font-weight: normal;}
+.month_year_datepicker button.ui-datepicker-current{border: #ddd solid 1px !important;margin: 7px 0px 0px 0px !important; opacity:1;}
+
+
 
 
 
@@ -207,7 +212,7 @@ input[type=number]{-moz-appearance:textfield;}
 .contain.ui{padding: 10px;}
 .contain.ui .codeBox{ position:relative; margin:10px 0; overflow:hidden; }
 .contain.ui .codeBox .bts{padding:5px 0px 0px 0px;/* position:absolute; right:10px; top:10px;*/margin-bottom: 5px;}
-.contain.ui .codeBox .bts .btn{border-color:#bbbbbb;color:#555555;border-radius:3px;height:24px;line-height:22px;padding:0px 7px;background-color: #fff;}
+.contain.ui .codeBox .bts .btn{border-color:#bbbbbb;color:#555555;border-radius:3px;height:24px;line-height: 23px;padding:0px 7px;background-color: #fff;}
 .contain.ui .codeBox .code{ line-height:20px; color:#541717; font-size:11px; background-color:#fbfbfb; border:#dddddd solid 1px; border-radius:3px; padding:0 5px; margin:0px; font-family:"Consolas"; }
 .contain.ui .codeBox pre{display:none;}
 .contain.ui .btn.loadingClose{position:relative;z-index: 2500;}
@@ -217,8 +222,12 @@ input[type=number]{-moz-appearance:textfield;}
 .contain.ui div.syntaxhighlighter table td.code .line { padding:0.2em 0.5em 0.2em 1em !important; }
 .contain.ui div.syntaxhighlighter table td.code .container textarea{ line-height: 16px !important;}
 
-.contain.ui h2.hdt{ text-align: center; margin-bottom: 10px; font-size: 16px; font-weight: bold;}
+.contain.ui h2.title{text-align: center;margin-bottom: 7px;font-size: 16px;/* background: #4e4e4e; */padding: 6px 10px 7px 10px;border-radius: 5px;font-weight: 600;}
+.contain.ui h3.hdt{/* text-align: center; */margin-bottom: 10px;font-size: 16px;background: #545454;padding: 6px 13px 7px 11px;border-radius: 3px;/* border: 1px solid #eaecef; */margin-top: 20px;color: #ffffff;}
 .contain.ui p.gap{ height:10px; overflow:hidden; }
 .contain.ui h4{ font-size:13px; font-weight:bold; margin:5px 0 5px 0;}
-.contain.ui #barH{height:2px;background-color: #ff424d;position:fixed;left:0px;top: 0px;z-index: 1000;transition: width .4s ease-out;}
+.contain.ui .weeks{text-align:center;font-size: 14px;/* font-weight:bold; */margin:5px 0 5px 0;}
+.contain.ui [data-ui-tog='ctn']{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;margin-top: 10px;}
+.contain.ui [data-ui-tab-ctn]{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;margin-top: 10px;}
+.contain.ui #barH{height: 2px;background-color: #ff424d;position:fixed;left:0px;top: 0px;z-index: 1000;transition: width .4s ease-out;}
 

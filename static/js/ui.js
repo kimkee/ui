@@ -168,6 +168,7 @@ var ui = {
 			this.attach();
 			this.select();
 			this.chkall();
+			this.intdel();
 			this.spinner.init();
 			this.star.init();
 		},
@@ -181,6 +182,25 @@ var ui = {
 					}
 				});
 			});
+		},
+		intdel:function(){ // input.del 박스에 글자 삭제
+			$(document).on("input","span.input.del>input",function(e){
+				var myInput = $(this);
+				if( myInput.val() != ""  && myInput.closest(".input").find(".btnDel").length == 0  ) {
+					myInput.closest(".input").append('<button type="button" class="btnDel">삭제</button>');
+				}
+			});
+
+			$("span.input.del>input").each(function(){
+				$(this).trigger("input");
+			});
+
+			$(document).on("click","span.input.del .btnDel",function(e){
+				var myInput = $(this);
+				myInput.closest(".input").find("input").val("").focus();
+				myInput.remove();
+			});
+
 		},
 		attach:function(){
 
@@ -424,6 +444,7 @@ var ui = {
 			$("input.datepicker").on("focus",function(){
 				$(this).blur();
 			});
+			$("input.datepicker_month").length && this.month(); 
 		},
 		wkThis:function(){  // 일주일 단위선택 용 하이라이트
 			var idx = $(".ui-datepicker").find(".ui-datepicker-current-day").index();
@@ -474,6 +495,61 @@ var ui = {
 				}
 			});
 
+		},
+		month:function(){
+			
+			$('input.datepicker_month').datepicker({
+				showMonthAfterYear: true,
+				dateFormat: "yy-mm",
+				monthNamesShort: [ "1","2","3","4","5","6","7","8","9","10","11","12"],
+				changeMonth: true,
+				changeYear: true,
+				showButtonPanel: true,
+				closeText: "선택",
+				currentText: "이달",
+				onClose: function(dateText, inst) {
+					inst.dpDiv.hide();
+					inst.dpDiv.removeClass('month_year_datepicker');
+					function isDonePressed(){
+						return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
+					}
+					if (isDonePressed()){
+						var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+						var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+						$(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
+						
+						$('input.datepicker_month').focusout()//Added to remove focus from datepicker input box on selecting date
+					}
+					
+					// console.log(date,els);
+					ui.lock.using(false);
+					// $("#"+els.id).focus();
+					$(".ui-datepicker").unwrap(".uiDatePickWrap");
+					
+				},
+				beforeShow : function(datestr, inst) {
+					ui.lock.using(true);
+					$(".ui-datepicker").wrap('<div class="uiDatePickWrap"></div>');
+					var sted = $(datestr).closest(".uiDate").attr("class").replace(" ","").replace("uiDate","");
+					inst.dpDiv.addClass('month_year_datepicker');
+
+					if ((datestr = $(this).val()).length > 0) {
+						// console.log(datestr);
+						// console.log(datestr.substring(0, 4));
+						// console.log(datestr.substring(5, 7) );
+						year = datestr.substring(0, 4);
+						month = datestr.substring(5, 7);
+						$(this).datepicker('option', 'defaultDate', new Date(year,month-1,  1));
+						$(this).datepicker('setDate', new Date(year, month-1, 1));
+						$(".ui-datepicker-calendar").hide();
+					}
+					
+				},
+				onChangeMonthYear:function(ddd){
+					
+				}
+			});
+		   
 		}
 	},
 	tog:{ // 토글 UI
@@ -549,8 +625,7 @@ var ui = {
 		set:function(id){
 			var tabid = id.split(",");
 			$("[data-ui-tab-btn][data-ui-tab-val]").each(function(idx){
-				// console.log(idx,tabid[idx] );
-				$("#"+id).closest("li").addClass("active");;
+				// console.log(idx,tabid,tabid[idx] );
 				$("[data-ui-tab-btn][data-ui-tab-val='"+tabid[idx]+"']").trigger("click");
 			});
 		},
