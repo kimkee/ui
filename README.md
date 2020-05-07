@@ -6,7 +6,7 @@ HTML,CSS,JS UI
 ## https://kimkee.github.io/ui/
 
 ### ui.alert();
-  * 커스텀 알럿창 Alert UI
+  > 커스텀 알럿창 Alert UI
   ```
   ui.alert({  // 알럿창 띄우기
      msg:'<p>알럿 메시지<br> 입니다.</p>' ,
@@ -17,7 +17,7 @@ HTML,CSS,JS UI
  }); 
   ```
 ### ui.confirm();
-  * 커스텀 컨펌창 Confirm UI
+  > 커스텀 컨펌창 Confirm UI
   ```
   ui.confirm({ // 컨펌 창 띄우기
       msg:'<p>공통 컨펌창 샘플  <br><u>kimkee@naver.com</u> 님은</p>' +
@@ -34,7 +34,7 @@ HTML,CSS,JS UI
   });
   ```
 ### ui.toast();
-  * 토스트창 하단에서 올라오는 알림메시지 UI
+  > 토스트창 하단에서 올라오는 알림메시지 UI
   ```
   ui.toast({  // 토스트 창띄우기
       msg:'<p>토스트메시지입니다.</p>', // 메시지(HTML)
@@ -43,7 +43,7 @@ HTML,CSS,JS UI
   });
   ```
 ### ui.popLayer
-  * 레이어팝업 뛰우기 (전체,가운데,하단에 띄우기)  히스토리백 historyback 레이어팝업 닫기 지원
+  > 레이어팝업 뛰우기 (전체,가운데,하단에 띄우기)  히스토리백 historyback 레이어팝업 닫기 지원
   ```
   ui.popLayer.open('popSample1'); // 팝레이어열기
   ui.popLayer.close('popSample1'); // 팝레이어닫기
@@ -64,7 +64,7 @@ HTML,CSS,JS UI
   ui.isUA("Chrome Windows"); // false
   ```
 ### ui.form.attach();
-  * 첨부파일 UI
+  > 첨부파일 UI
   ```
   <span class="ui-add-file on" data-ui="attach">
       <span class="btn-attach btn">
@@ -77,7 +77,7 @@ HTML,CSS,JS UI
   </span>
   ```
 ### ui.form.chkall();
-  * 첵크박스 모두 첵크
+  > 첵크박스 모두 첵크
   ```
 <label class="checkbox"><input type="checkbox" data-check="all" data-check-id="checkTest1"><span>전체선택</span></label>
 <label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택1</span></label>
@@ -85,7 +85,7 @@ HTML,CSS,JS UI
 <label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택3</span></label>
   ```
 ### ui.form.spinner();
-  * 수량입력
+  > 수량입력
   ```
 <div class="uiSpinner" data-max="5">
 				<input class="n" type="number" value="1">
@@ -94,13 +94,13 @@ HTML,CSS,JS UI
 </div>
   ```
 ### ui.loading;
-  * 로딩중...  ui.loading.show(); ui.loading.hide();
+  > 로딩중...  ui.loading.show(); ui.loading.hide();
   ```
   ui.loading.show(); // 로딩열기
   ui.loading.hide(); // 로딩닫기
   ```
 ### ui.datePick
-  * 달력 날짜 선택 - 일선택,주선택,월선택
+  > 달력 날짜 선택 - 일선택,주선택,월선택
   ```
 <span class="input db uiDate"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
 <div class="weeks"><span id="START_DT"></span> ~ <span id="END_DT"></span></div>
@@ -108,7 +108,7 @@ HTML,CSS,JS UI
 <span class="input db uiDate"><input type="text" class="datepicker_month" placeholder="YYYY-MM-DD" value="2019-06" readonly></span>
   ```
 ### ui.tog
-  * 토글 UI
+  > 토글 UI
   ```
   <a href="javascript:;" data-ui-tog="btn" data-ui-tog-val="tog_sample1" class="btn">토글UI</a>
   <div data-ui-tog="ctn" data-ui-tog-val="tog_sample1">
@@ -117,7 +117,7 @@ HTML,CSS,JS UI
   </div>
   ```
 ### ui.tab
-  * 탭 UI
+  > 탭 UI
   ```
   <ul class="uiTab a">
       <li class="active"><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" href="javascript:;">탭메뉴1</a></li>
@@ -131,14 +131,14 @@ HTML,CSS,JS UI
   </div>
   ```
 ### ui.lock
-  * 화면 스크롤 잠금,풀기 (레이어팝업 띄울때 사용)
+  > 화면 스크롤 잠금,풀기 (레이어팝업 띄울때 사용)
   ``` 
   ui.lock.using(true);  // 잠금
   ui.lock.using(false); // 풀기
   ```
   
 ### ui.cookie;
-  * 쿠기설정, 
+  > 쿠기설정, 
   ``` 
   ui.cookie.set();
   ui.cookie.get();
@@ -170,7 +170,6 @@ HTML,CSS,JS UI
 <span class="textarea"><textarea placeholder="내용"></textarea></span>
 ```
 ### Select
-  * Select 메뉴
   ```
   <span class="select db">
       <select>
