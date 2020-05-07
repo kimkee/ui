@@ -105,6 +105,8 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
 <label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택2</span></label>
 <label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택3</span></label>
   ```
+  ![image](https://user-images.githubusercontent.com/6386956/81261190-90e9bf00-9076-11ea-8705-1724c0f7d368.png)
+
 ### ui.form.spinner();
   > 수량입력 최고수량 data-max="5"
   ```
@@ -130,7 +132,9 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
 <span class="input db uiDate"><input type="text" class="datepicker_month" placeholder="YYYY-MM-DD" value="2019-06" readonly></span>
   ```
 ![image](https://user-images.githubusercontent.com/6386956/81260888-ee314080-9075-11ea-85a2-1f8c50e17c6e.png)
+![image](https://user-images.githubusercontent.com/6386956/81261321-d4442d80-9076-11ea-86b7-b194139a6164.png)
 ![image](https://user-images.githubusercontent.com/6386956/81261023-381a2680-9076-11ea-9686-720367832b9f.png)
+![image](https://user-images.githubusercontent.com/6386956/81261279-c098c700-9076-11ea-8061-dda43bdb0a2c.png)
 ### ui.tog
   > 토글 UI
   ```
@@ -140,7 +144,7 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
       <p>토글내용 토글내용</p>
   </div>
   ```
-### ui.lock
+### ui.lock.using();
   > 화면 스크롤 잠금,풀기 (레이어팝업 띄울때 사용)
   ``` 
   ui.lock.using(true);  // 잠금
@@ -150,8 +154,8 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
 ### ui.cookie;
   > 쿠기설정, 
   ``` 
-  ui.cookie.set();
-  ui.cookie.get();
+  ui.cookie.set(cname, cvalue, exdays);  // cname(이름), cvalue(값), exdays(시간)
+  ui.cookie.get(cname); // cname(이름)
   ```
 
 ### 버튼
