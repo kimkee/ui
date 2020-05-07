@@ -116,20 +116,6 @@ HTML,CSS,JS UI
       <p>토글내용 토글내용</p>
   </div>
   ```
-### ui.tab
-  > 탭 UI
-  ```
-  <ul class="uiTab a">
-      <li class="active"><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" href="javascript:;">탭메뉴1</a></li>
-      <li><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2" href="javascript:;">탭메뉴2</a></li>
-  </ul>
-  <div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_1" class="active">
-      탭내용1
-  </div>
-  <div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_2">
-      탭내용2
-  </div>
-  ```
 ### ui.lock
   > 화면 스크롤 잠금,풀기 (레이어팝업 띄울때 사용)
   ``` 
@@ -206,13 +192,13 @@ HTML,CSS,JS UI
   ```
   <ul class="uiTab a">
       <li class="active"><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" href="javascript:;">탭메뉴1</a></li>
-      <li class="      "><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2" href="javascript:;">탭메뉴2</a></li>
+      <li><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2" href="javascript:;">탭메뉴2</a></li>
   </ul>
   <div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_1" class="active">
-      <p><a href="javascript:;">탭내용1</a></p>
+      탭내용1
   </div>
-  <div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_2" class="      ">
-      <p><a href="javascript:;">탭내용2</a></p>
+  <div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_2">
+      탭내용2
   </div>
   ```
 ![image](https://user-images.githubusercontent.com/6386956/81248519-748a5a00-9057-11ea-9c37-a7ba4f965ca6.png)
