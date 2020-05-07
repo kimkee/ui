@@ -44,19 +44,40 @@ HTML,CSS,JS UI
   ```
 ### ui.popLayer
   > 레이어팝업 뛰우기 (전체,가운데,하단에 띄우기)  히스토리백 historyback 레이어팝업 닫기 지원
-  ```
-  ui.popLayer.open('popSample1'); // 팝레이어열기
-  ui.popLayer.close('popSample1'); // 팝레이어닫기
-  ui.popLayer.refresh('popSample1'); // 팝스크롤새로고침
-  ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
-      ocb:function(){
-          console.log("popSample1 열림");
-      },
-      ccb:function(){
-          console.log("popSample1 닫힘");
-      }						
-  });
-  ```
+```
+ui.popLayer.open('popSample1'); // 팝레이어열기
+ui.popLayer.close('popSample1'); // 팝레이어닫기
+ui.popLayer.refresh('popSample1'); // 팝스크롤새로고침
+ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
+    ocb:function(){
+        console.log("popSample1 열림");
+    },
+    ccb:function(){
+        console.log("popSample1 닫힘");
+    }
+});
+<article class="popLayer a popSample1" id="popSample1">
+    <div class="pbd">
+        <div class="phd">
+            <div class="in">
+                <h1 class="tit">타이틀</h1>
+                <button type="button" class="btnPopClose">닫기</button>
+            </div>
+        </div>
+        <div class="pct">
+            <main class="poptents">
+                내용
+            </main>
+        </div>
+        <div class="pbt">
+            <div class="bts">
+                <a href="javascript:;" class="btn e">버튼</a>
+                <a href="javascript:;" class="btn a">버튼</a>
+            </div>
+        </div>
+    </div>
+</article>
+```
 ### ui.isUA(t);
   ```
   ui.isUA("Chrome");  // true
@@ -85,10 +106,10 @@ HTML,CSS,JS UI
 <label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택3</span></label>
   ```
 ### ui.form.spinner();
-  > 수량입력
+  > 수량입력 최고수량 data-max="5"
   ```
 <div class="uiSpinner" data-max="5">
-				<input class="n" type="number" value="1">
+    <input class="n" type="number" value="1">
     <button type="button" class="m">-</button>
     <button type="button" class="p">+</button>
 </div>
@@ -157,7 +178,13 @@ HTML,CSS,JS UI
 ```
 ### Select
   ```
-  <span class="select db">
+  <span class="select"> //기본UI
+      <select>
+          <option>선택1</option>
+          <option>선택2</option>
+      </select>
+  </span>
+  <span class="select jqui"> // jQuery selectmenu();
       <select>
           <option>선택1</option>
           <option>선택2</option>
@@ -166,23 +193,23 @@ HTML,CSS,JS UI
   ```
 ### 별점
 ```
-<div class="uiStar" data-star="3.5">
+<div class="uiStar" data-star="3.5">  // 별점 보기
     <ul>
-        <li class="f"><em class="st">별</em></li>
-        <li class="f"><em class="st">별</em></li>
-        <li class="f"><em class="st">별</em></li>
-        <li class="h"><em class="st">별</em></li>
-        <li class=""><em class="st">별</em></li>
+        <li><em class="st">별</em></li>
+        <li><em class="st">별</em></li>
+        <li><em class="st">별</em></li>
+        <li><em class="st">별</em></li>
+        <li><em class="st">별</em></li>
     </ul>
     <i class="p">3.5</i>
 </div>
-<div class="uiStar">
+<div class="uiStar"> // 별점 주기 버튼
     <ul>
-        <li class=""><button type="button" class="st">별</button></li>
-        <li class=""><button type="button" class="st">별</button></li>
-        <li class=""><button type="button" class="st">별</button></li>
-        <li class=""><button type="button" class="st">별</button></li>
-        <li class=""><button type="button" class="st">별</button></li>
+        <li><button type="button" class="st">별</button></li>
+        <li><button type="button" class="st">별</button></li>
+        <li><button type="button" class="st">별</button></li>
+        <li><button type="button" class="st">별</button></li>
+        <li><button type="button" class="st">별</button></li>
     </ul>
     <i class="p">0</i>
 </div>
@@ -207,15 +234,15 @@ HTML,CSS,JS UI
   <ul class="uiAccd" data-accd="accd">
       <li class="open">
           <div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
-          <div class="cBox" style="">내용</div>
+          <div class="cBox">내용</div>
       </li>
       <li>
           <div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
-          <div class="cBox" style="display: none;">내용</div>
+          <div class="cBox">내용</div>
       </li>
       <li class="except">
           <div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
-          <div class="cBox" style="">내용</div>
+          <div class="cBox">내용</div>
       </li>
   </ul>
   ```
