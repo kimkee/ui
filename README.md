@@ -114,6 +114,7 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
     <button type="button" class="p">+</button>
 </div>
   ```
+![image](https://user-images.githubusercontent.com/6386956/81260714-8a0e7c80-9075-11ea-8435-642a4a7dc9db.png)
 ### ui.loading;
   > 로딩중...  ui.loading.show(); ui.loading.hide();
   ```
@@ -128,6 +129,8 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
 <span class="uiDate input db week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
 <span class="input db uiDate"><input type="text" class="datepicker_month" placeholder="YYYY-MM-DD" value="2019-06" readonly></span>
   ```
+![image](https://user-images.githubusercontent.com/6386956/81260888-ee314080-9075-11ea-85a2-1f8c50e17c6e.png)
+![image](https://user-images.githubusercontent.com/6386956/81261023-381a2680-9076-11ea-9686-720367832b9f.png)
 ### ui.tog
   > 토글 UI
   ```
