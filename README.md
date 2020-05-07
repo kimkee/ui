@@ -78,12 +78,21 @@ HTML,CSS,JS UI
   ```
 ### ui.form.chkall();
   * 첵크박스 모두 첵크
-### ui.form.intdel();
-  * 입력내용지우는 input
+  ```
+<label class="checkbox"><input type="checkbox" data-check="all" data-check-id="checkTest1"><span>전체선택</span></label>
+<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택1</span></label>
+<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택2</span></label>
+<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택3</span></label>
+  ```
 ### ui.form.spinner();
   * 수량입력
-### ui.form.star();
-  * 별점주기
+  ```
+<div class="uiSpinner" data-max="5">
+				<input class="n" type="number" value="1">
+    <button type="button" class="m">-</button>
+    <button type="button" class="p">+</button>
+</div>
+  ```
 ### ui.loading;
   * 로딩중...  ui.loading.show(); ui.loading.hide();
   ```
@@ -226,3 +235,99 @@ HTML,CSS,JS UI
   </ul>
   ```
   ![image](https://user-images.githubusercontent.com/6386956/81160926-b4a0fc80-8fc5-11ea-8a31-f68701e4e9e8.png)
+
+### 툴팁레이어
+```
+<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
+<!-- 툴팁 레이어 -->
+<article class="ui-tooltips" data-tooltip-cont="tooltip-email">
+    <div class="pbd">
+        <div class="phd">
+            <div class="in">
+                <h1 class="tit">안내</h1>
+                <button type="button" class="btnPopClose">닫기</button>
+            </div>
+        </div>
+        <div class="pct">
+            <main class="poptents">
+                <ul class="bul-list">
+                    <li>가능한 이메일을 사용바랍니다.</li>
+                </ul>
+            </main>
+        </div>
+    </div>
+</article>
+```
+
+### 리스트 More Load
+```
+<section class="uiTbList">
+    <ul class="list" id="dp_list"></ul>
+    <div class="uiLoadMore">
+        <em></em>
+        <button type="button" class="btnLoad" onclick="addItem.using()" id="btnListMore">불러오기</button>
+    </div>
+</section>
+<script>
+    var addItem = {
+        init: function () {
+            this.using();
+            this.evt();
+        },
+        stat: true,
+        page: 0,
+        evt: function () {
+            var _this = this;
+            $(window).on("scroll resize", function () { // 바닥 확인
+                var wHt = window.visualViewport.height;
+                var docH = $(document).height();
+                var scr = $(window).scrollTop() + wHt + 30;
+                // console.log(docH,scr);
+                if (docH <= scr && _this.stat == true) {
+                    console.log("바닥sss");
+                    _this.using();
+                    _this.stat = false;
+                }
+            });
+        },
+        using: function () {
+            var _this = this;
+            _this.stat = false;
+            $(".uiLoadMore").addClass("active");
+
+            $.ajax({
+                type: "get",
+                url: "../inc/list_more.html",
+                dataType: "html",
+                success: function (html) {
+                    window.setTimeout(function () {
+                        _this.page++;
+                        $("#dp_list").append(html).addClass("load");
+                        console.log("페이징 = " + _this.page);
+                        _this.stat = true;
+                        if (_this.page >= 3) {
+                            console.log("끝");
+                            $(".uiLoadMore").addClass("hide");
+                            _this.stat = false;
+                        }
+                        $(".uiLoadMore").removeClass("active").removeClass("error");
+                        $("#btnListMore").prop("disabled", true);
+                        _this.evt();
+
+                    }, 500);
+                },
+                error: function (error) {
+                    // _this.page --;
+                    console.log("페이징 = " + _this.page + "에러 = " + error.readyState);
+                    $(".uiLoadMore").removeClass("active").addClass("error");
+                    $(window).off("scroll");
+                    $("#btnListMore").prop("disabled", false);
+                }
+            });
+        }
+    };
+
+    addItem.init();
+
+</script>
+   ```
