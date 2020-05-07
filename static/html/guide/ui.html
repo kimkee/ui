@@ -9,10 +9,10 @@
 	<meta name="theme-color" content="#ffffff">
 	<link href="../../img/common/favicon.ico" rel="shrtcut icon">
 	<link href="../../img/common/favicon.png" rel="apple-touch-icon-precomposed">
-	<link rel="stylesheet" href="../../css/jquery-ui.css?v=1">
-	<link rel="stylesheet" href="../../css/swiper.css?v=1">
-	<link rel="stylesheet" href="../../css/base.css?v=1">
-	<link rel="stylesheet" href="../../css/common.css?v=1">
+	<link rel="stylesheet" href="../../css/jquery-ui.css?v=2">
+	<link rel="stylesheet" href="../../css/swiper.css?v=2">
+	<link rel="stylesheet" href="../../css/base.css?v=2">
+	<link rel="stylesheet" href="../../css/common.css?v=2">
 	
 	<script src="../../js/jquery-3.4.1.js"></script>
 	<!-- <script src="../../js/jquery-2.2.4.js"></script> -->
@@ -958,9 +958,10 @@
 					page:0,
 					evt:function(){
 						var _this = this;
-						$(window).on("scroll", function() { // 바닥 확인
+						$(window).on("scroll resize", function() { // 바닥 확인
+							var wHt = window.visualViewport.height ;
 							var docH = $(document).height();
-							var scr = $(window).scrollTop() + $(window).height() + 30;
+							var scr = $(window).scrollTop() + wHt + 30; 
 							// console.log(docH,scr);
 							if (docH <= scr  && _this.stat == true) {
 								console.log("바닥sss");
@@ -1125,6 +1126,8 @@
 
 		</div>
 	
+		<div id="debug"></div>
+
 	</div>
 
 	<div class="floatNav">
@@ -1150,17 +1153,19 @@
 
 </div>
 
-<style>
-#debug{ position:fixed; left:10px; bottom: 10px;}
-</style>
-<div id="debug"></div>
 
 <script>
 var html = document.documentElement;
 function showInfo() {
 	$('#cssStatus').html(html.className);
-	$('#browserStatus').html('Client Size : ' + html.clientWidth + 'x' + html.clientHeight + ', Orientation : ' + window.orientation);
+	$('#browserStatus').html('Client Size : ' + html.clientWidth + 'x' + html.clientHeight + ', Orientation : ' + window.orientation +"visualViewport : "+ window.visualViewport.height);
 }
+// $(window).on("scroll resize", function() { // 바닥 확인
+// 	var wHt = window.visualViewport.height ;
+// 	var docH = $(document).height();
+// 	var scr = $(window).scrollTop() + wHt + 30; 
+// 	$('#debug').html('scr : '+ scr + 'doc : ' +docH + "visualViewport : "+ window.visualViewport.height);
+// });
 $(function() {
 	$('#userAgent').html(navigator.userAgent);
 	showInfo();

@@ -231,3 +231,4 @@ input[type=number]{-moz-appearance:textfield;}
 .contain.ui [data-ui-tab-ctn]{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;margin-top: 10px;}
 .contain.ui #barH{height: 2px;background-color: #ff424d;position:fixed;left:0px;top: 0px;z-index: 1000;transition: width .4s ease-out;}
 
+.contain.ui #debug{position:fixed;left:10px;bottom: 110px;background: rgba(255, 255, 255, 0.8);z-index: 9999;}
