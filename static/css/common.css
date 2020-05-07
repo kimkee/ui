@@ -94,7 +94,7 @@ select::-ms-expand {display:none;}
 .ui-selectmenu-menu .ui-menu>li:first-child .ui-menu-item-wrapper{border-top-color: transparent !important;}
 
 
-
+.icoWarning{border: 1px solid #909090;width: 24px;height: 24px;border-radius: 24px;font-size: 14px;display:inline-block;vertical-align:middle;font-weight: bold;color: #666;}
 
 
 
@@ -634,7 +634,7 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .popLayer.b .phd>.in{ position:relative;}
 .popLayer.b .phd .tit{ font-size: 18px;}
 .popLayer.b .phd button.close{ background-image: url(../img/common/popLayerClose.png)}
-.popLayer.b .pct{min-width: 100%;max-height: 300px;min-height: 70px;}
+.popLayer.b .pct{min-width: 100%;max-height: 300px;min-height: 70px;touch-action: initial !important;}
 .popLayer.b .pct .poptents{}
 .popLayer.b .pbt{}
 .popLayer.b .pbt .bots{/* position:fixed; *//* width: auto; *//* right: 0; */}
@@ -666,19 +666,32 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .popLayer.c .btnPopClose{position: absolute;left: -99999px;}
 
 
-
-
-
 .popLayer.win{display: block;background-color: #ffffff;padding:0px;}
 .popLayer.win::after{ display:none;}
 .popLayer.win .pbd{display:block; max-width:100%;}
 .popLayer.win .pct{border: #c7c7c7 solid 1px;border-width: 0px 0px;max-height:inherit !important;}
+
 
 .popSample1 .poptents{padding: 15px;}
 .popSample2 .poptents{padding: 15px;}
 .popSample3 .poptents{padding: 15px;}
 .popSample3.type.b .pct{max-height:200px;}
 .popSample3.type.b .pbd{min-width:70%;}
+
+
+
+/* 툴팁레이어 */
+.ui-tooltips{display: none;position: absolute;z-index: 1000;left: -9999em;top: -9999em;}
+.ui-tooltips>.pbd{max-width: 580px;border: 1px solid #cccccc;background: #ffffff;}
+.ui-tooltips>.pbd>.phd{background-color: #ffffff;height: 40px;position: relative;z-index: 90;padding: 0px 14px 0px 14px;}
+.ui-tooltips>.pbd>.phd>.in{ position:relative;}
+.ui-tooltips>.pbd>.phd .tit{font-size: 14px;padding: 9px 0px;/* color: #fdd768; */white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width: 100%;}
+.ui-tooltips .btnPopClose{position:absolute;right: -8px;top: 4px;width: 30px;height: 30px;text-indent:-9999px;overflow:hidden;background: url(../img/common/popLayerClose.png) no-repeat center;background-size: 18px auto;background-color:transparent;border:none;padding:0;cursor: pointer;z-index: 100;}
+.ui-tooltips>.pbd>.btnPopClose{right: 15px;top: 15px;}
+.ui-tooltips>.pbd>.pct{position: relative;background:#ffffff;border-top: 1px solid #cccccc;/* font-size: 16px; */font-weight:300;}
+.ui-tooltips>.pbd>.pct .poptents{margin: 20px 20px 20px 20px;}
+
+
 
 
 .noData{text-align: center;padding: 40px 0;position: relative;display: flex;align-content: center;flex-wrap: wrap;}

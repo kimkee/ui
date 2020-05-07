@@ -9,10 +9,10 @@
 	<meta name="theme-color" content="#ffffff">
 	<link href="../../img/common/favicon.ico" rel="shrtcut icon">
 	<link href="../../img/common/favicon.png" rel="apple-touch-icon-precomposed">
-	<link rel="stylesheet" href="../../css/jquery-ui.css?v=2">
-	<link rel="stylesheet" href="../../css/swiper.css?v=2">
-	<link rel="stylesheet" href="../../css/base.css?v=2">
-	<link rel="stylesheet" href="../../css/common.css?v=2">
+	<link rel="stylesheet" href="../../css/jquery-ui.css?v=12">
+	<link rel="stylesheet" href="../../css/swiper.css?v=12">
+	<link rel="stylesheet" href="../../css/base.css?v=12">
+	<link rel="stylesheet" href="../../css/common.css?v=12">
 	
 	<script src="../../js/jquery-3.4.1.js"></script>
 	<!-- <script src="../../js/jquery-2.2.4.js"></script> -->
@@ -87,6 +87,18 @@
 				</div>
 			</div>
 			
+			<h3 class="hdt">툴팁레이어</h3>
+			<div class="btnList">
+				<div class="fl">
+					<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
+					
+				</div>
+				<div class="fr">
+					<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
+
+				</div>
+			</div>
+
 			<h3 class="hdt">페이징</h3>
 			<div class="paging">
 				<div class="nav prev">
@@ -497,11 +509,11 @@
 			<p class="gap"></p>
 
 			<div class="uiSpinner" data-max="5">
-				<input class="n" type="number" value="1" disabled> <button type="button" class="m">-</button> <button type="button" class="p">+</button>
+				<input class="n" type="number" value="1"> <button type="button" class="m">-</button> <button type="button" class="p">+</button>
 			</div>
 
 			<div class="uiSpinner" data-max="3">
-				<input class="n" type="number" value="1" disabled> <button type="button" class="m">-</button> <button type="button" class="p">+</button>
+				<input class="n" type="number" value="1"> <button type="button" class="m">-</button> <button type="button" class="p">+</button>
 			</div>
 
 			<p class="gap"></p>
@@ -1032,11 +1044,11 @@
 							<p>sdfsdfsfsd</p>
 							<label class="checkbox"><input type="checkbox" checked="checked"><span></span></label>
 							<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
-							<span class="input"><input type="text"></span>
+							<span class="input db"><input type="text"></span>
 							<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
 							<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
 							<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
-							<span class="input"><input type="text"></span>
+							<span class="input db"><input type="text"></span>
 							<p>sdfsdfsfsd</p>
 							<p>sdfsdfsfsd</p>
 							<label class="checkbox"><input type="checkbox"><span></span></label>
@@ -1045,7 +1057,7 @@
 							<p>sdfsdfsfsd</p>
 							<p>sdfsdfsfsd</p>
 							<p>sdfsdfsfsd</p>
-							<span class="input"><input type="text"></span>
+							<span class="input db"><input type="text"></span>
 						</main>
 					</div>
 					<div class="pbt">
@@ -1087,9 +1099,9 @@
 							<p>sdfsdfsfsd</p>
 							<p>sdfsdfsfsd</p>
 							<p>sdfsdfsfsd</p>
-							<span class="input"><input type="text"></span>
+							<span class="input db"><input type="text"></span>
 							<p>sdfsdfsfsd</p>
-							<span class="textarea"><textarea></textarea></span>
+							<span class="textarea db"><textarea></textarea></span>
 							<p>sdfsdfsfsd</p>
 							<p>sdfsdfsfsd</p>
 							<p>sdfsdfsfsd</p>
@@ -1118,6 +1130,25 @@
 								<li class="katalk"><a href="javascript:;" class="bt">KAKAOTALK</a></li>
 								<li class="facebook"><a href="javascript:;" class="bt">FACEBOOK</a></li>
 								<li class="kastory"><a href="javascript:;" class="bt">KAKAOSTORY</a></li>
+							</ul>
+						</main>
+					</div>
+				</div>
+			</article>
+			
+			<!-- 툴팁 레이어 -->
+			<article class="ui-tooltips" data-tooltip-cont="tooltip-email">
+				<div class="pbd">
+					<div class="phd">
+						<div class="in">
+							<h1 class="tit">안내</h1>
+							<button type="button" class="btnPopClose">닫기</button>
+						</div>
+					</div>
+					<div class="pct">
+						<main class="poptents">
+							<ul class="bul-list">
+								<li>가능한 이메일을 사용바랍니다.</li>
 							</ul>
 						</main>
 					</div>
@@ -1185,7 +1216,7 @@ $(function() {
 <script src="../../js/circle-progress.js"></script>
 <script src="../../js/pullToRefresh.js"></script>
 
-<script src="../../js/ui.js?v=<%=version%>"></script>
+<script src="../../js/ui.js?v=12"></script>
 
 <script src="../guide/html.js"></script><!-- 개발페이지에서는 html.js 임포트 하지말아주세요. -->
 </body>

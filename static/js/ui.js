@@ -12,6 +12,7 @@ var ui = {
 		this.accd.init();
 		this.tog.init();
 		this.tab.init();
+		this.tooltips.init();
 		// this.tabs.init();
 		this.dropDown.init();
 		this.popLayer.init();
@@ -552,6 +553,51 @@ var ui = {
 		   
 		}
 	},
+	tooltips:{
+		init:function(){
+			var els = "[data-ui-tooltip='btn']";
+			$(document).on({
+			    "mouseenter": function(e) {
+					var  chl_id = $(this).data("ui-tooltip-cont");
+					var  chl = $(".ui-tooltips[data-tooltip-cont='"+chl_id+"']") ;
+					$(chl).hide();
+					$(chl).css({ "position": "fixed" }).show();
+					var scY = $(window).scrollTop() || 0;
+					var scX = $(window).scrollLeft() || 0;
+					var winWf = $(window).width() * 0.5  || 0;
+					var winHf = $(window).height() * 0.5  || 0;
+					var ulayH = $(chl).outerHeight()  || 0;
+					var ulayW = $(chl).outerWidth()  || 0;
+					var elH = $(this).outerHeight()  || 0;
+					var elW = $(this).outerWidth()  || 0;
+					var l = $(this).offset().left  || 0;
+					var t = $(this).offset().top  || 0;
+					console.log(l,t);
+					if (t >= winHf + scY) { // console.log("top-오버");
+					    t = t - scY - ulayH;
+					} else { // console.log("top-하프");
+					    t = t - scY + elH;
+					}
+					if (l >= winWf + scX) { // console.log("left-오버");
+					    l = l - scX - ulayW;
+					} else { // console.log("left-하프");
+					    l = l - scX + elW;
+					}
+					// console.log(l,t);
+					$(chl).css({ "top": t, "left": l });
+
+			    },
+			    "mouseleave": function(e) {
+					var  chl_id = $(this).data("ui-tooltip-cont");
+					var  chl = $(".ui-tooltips[data-tooltip-cont='"+chl_id+"']") ;
+					$(chl).hide();
+			    },
+			    "click": function(e) {
+					e.preventDefault();
+			    }
+			}, els);
+		}
+	},
 	tog:{ // 토글 UI
 		init: function() {
 			this.using();
@@ -973,6 +1019,7 @@ var ui = {
 			$(".popLayer.a:visible>.pbd>.pct").css({"height": pctnH });
 			$(".popLayer.b:visible>.pbd>.pct").css({"max-height": pctnH - 70 });
 			$(".popLayer.c:visible>.pbd>.pct").css({"max-height": pctnH - 30 });
+			$("#popSample2 input").val( $(".popLayer.b:visible>.pbd>.pct").css("max-height")  )
 		},
 		scroll:{},
 		lyScroll: function(id) {
