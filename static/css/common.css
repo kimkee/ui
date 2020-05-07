@@ -183,11 +183,11 @@ select::-ms-expand {display:none;}
 
 .uiChk{display:inline-block;vertical-align:middle;position:relative;}
 .uiChk em{width:52px;height:26px;background: #aaaaaa;position:relative;outline:none;border-radius:26px;-webkit-appearance:none;display:block;line-height: 1;}
-.uiChk input[type=checkbox] {width:52px;height:26px;padding:0px; position:absolute; z-index:10;}
-.uiChk input + em::after{content:"OFF";position:absolute;left:27px;top:7px;font-size:11px;color:#ffffff;font-family:'Tahoma';}
+.uiChk input[type=checkbox] {width:52px;height:26px;padding:0px;position:absolute;z-index:10;margin: 0;}
+.uiChk input + em::after{content:"OFF";position:absolute;left:27px;top: 8px;font-size: 10px;color:#ffffff;/* font-family:'Tahoma'; */line-height: 1;}
 .uiChk input + em::before{position:absolute;left:2px;top:2px;width:22px;height:22px;background:#ffffff;border-radius:30px;transition:all 0.2s;content:"";}
 .uiChk input:checked + em{background:#0052bb;}
-.uiChk input:checked + em::after{content:"ON";left:6px;}
+.uiChk input:checked + em::after{content:"ON";left: 8px;}
 .uiChk input:checked + em::before{left:28px;}
 .uiChk input:disabled + em{ opacity:0.5;}
 
@@ -478,7 +478,7 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 /* 페이징 */
 .paging{text-align:center;position:relative;display: flex;justify-content: space-between;}
 .paging>.in{display:inline-block; vertical-align:middle; }
-.paging a{padding:0 10px;margin:0px 0px;font-size: 14px;border:#aeaeae solid 1px;border-radius:0px;height: 30px;min-width: 30px;line-height: 27px;text-align:center;display:inline-block;vertical-align:middle;}
+.paging a{padding:0 10px;margin:0px 0px;font-size: 14px;border:#aeaeae solid 1px;border-radius:0px;height: 30px;min-width: 30px;line-height: 28px;text-align:center;display:inline-block;vertical-align:middle;}
 .paging .acc{ position:absolute; left:-9999px; }
 .paging .nav{display: flex;vertical-align:middle;}
 .paging .nav.prev{/* margin-right:12px; */}
@@ -508,7 +508,7 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 /* 플로팅 탑버튼 */
 .floatNav{position:fixed;right: 10px;bottom: 10px;z-index:100;transition:all 0.4s;}
 .floatNav.active{bottom: 60px;}
-.floatNav .bt{font-size: 0px;width:32px;height:32px; display:block; background: no-repeat rgba(255, 255, 255, 0.7); border: solid #999999 1px;transform: translateY(100px);transition: all 0.4s; background-size: 100% auto; margin-top: 10px;}
+.floatNav .bt{font-size: 0px;width:32px;height:32px;display:block;background: no-repeat rgba(255, 255, 255, 0.8);border: solid rgba(0, 0, 0, 0.3) 0.5px;transform: translateY(100px);transition: all 0.4s;background-size: 100% auto;margin-top: 10px;}
 .floatNav .bt.refresh{background-image: url(../img/common/ico_load.png); transition-delay: 0.0s;}
 .floatNav .bt.top{background-image: url(../img/common/btn_top.png); transition-delay: 0.1s;}
 .floatNav.active .refresh{ transform: translateY(0px);}

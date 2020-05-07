@@ -228,9 +228,9 @@ input[type=number] { -moz-appearance: textfield; }
 .contain.ui h3.hdt{/* text-align: center; */margin-bottom: 10px;font-size: 16px;background: #545454;padding: 6px 13px 7px 11px;border-radius: 3px;/* border: 1px solid #eaecef; */margin-top: 20px;color: #ffffff;font-weight: 300;}
 .contain.ui p.gap{ height:10px; overflow:hidden; }
 .contain.ui h4{ font-size:13px; font-weight:bold; margin:5px 0 5px 0;}
-.contain.ui .weeks{text-align:center;font-size: 14px;/* font-weight:bold; */margin:5px 0 5px 0;}
+.contain.ui .weeks{text-align:center;font-size: 14px;/* font-weight:bold; */margin: 10px 0 0px 0;border: #c7c7c7 solid 1px;border-radius: 4px 4px 0px 0px;padding: 9px 4px;border-width: 1px 1px 0px 1px;}
 .contain.ui [data-ui-tog='ctn']{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;margin-top: 10px;}
 .contain.ui [data-ui-tab-ctn]{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;margin-top: 10px;}
-.contain.ui #barH{height: 2px;background-color: #ff424d;position:fixed;left:0px;top: 0px;z-index: 1000;transition: width .4s ease-out;}
+.contain.ui #barH{height: 1px;background-color: #868686;position:fixed;left:0px;top: 49px;z-index: 1000;transition: width .4s ease-out;}
 
 .contain.ui #debug{position:fixed;left:10px;bottom: 110px;background: rgba(255, 255, 255, 0.8);z-index: 9999;}
