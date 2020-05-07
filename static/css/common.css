@@ -1,7 +1,67 @@
 @charset "utf-8";
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100;
+    src: url(../font/NotoSansKR-Thin.woff2) format('woff2'),
+         url(../font/NotoSansKR-Thin.woff) format('woff'),
+         url(../font/NotoSansKR-Thin.otf) format('opentype');
+}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;
+    src: url(../font/NotoSansKR-Light.woff2) format('woff2'),
+         url(../font/NotoSansKR-Light.woff) format('woff'),
+         url(../font/NotoSansKR-Light.otf) format('opentype');
+}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 400;
+    src: url(../font/NotoSansKR-Regular.woff2) format('woff2'),
+         url(../font/NotoSansKR-Regular.woff) format('woff'),
+         url(../font/NotoSansKR-Regular.otf) format('opentype');
+}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 500;
+    src: url(../font/NotoSansKR-Medium.woff2) format('woff2'),
+         url(../font/NotoSansKR-Medium.woff) format('woff'),
+         url(../font/NotoSansKR-Medium.otf) format('opentype');
+}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 700;
+    src: url(../font/NotoSansKR-Bold.woff2) format('woff2'),
+         url(../font/NotoSansKR-Bold.woff) format('woff'),
+         url(../font/NotoSansKR-Bold.otf) format('opentype');
+}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;
+    src: url(../font/NotoSansKR-Black.woff2) format('woff2'),
+         url(../font/NotoSansKR-Black.woff) format('woff'),
+         url(../font/NotoSansKR-Black.otf) format('opentype');
+}
+
+
 img{max-width: 100%;}
 a,button,textarea{outline:none;}
 button{cursor:pointer;background: none;border: none;}
+
+.header{height: 50px;text-align:center;display:block;z-index: 500;position: relative;}
+.header>.inner{/* color: #545454; */display:flex;height: 50px;align-items: center;justify-content: center;position: fixed;left: 0;right: 0;z-index: 500;top: 0px;background: #ffffff;border-bottom: rgba(0,0,0,0.2) solid 1px;box-shadow:rgba(0,0,0,0.1) 2px 2px 3px;}
+.header .title{/* font-family: "Verdana"; */font-weight: 600;}
+.footer{height:60px;background: #86a941;text-align:center;display:block;}
+.footer>.inner{color: #ffffff;display:flex; height:50px; align-items: center; justify-content: center;}
+
+
+.menubar{height: calc( 45px + env(safe-area-inset-bottom) );position:relative;transition: all 0.4s;}
+.menubar>.inner{height: calc( 45px + env(safe-area-inset-bottom) );}
+.menubar>.inner{position:fixed;background: rgba(255,255,255,1);transition: all 0.4s;z-index:300;bottom: 0px;left:0px;right: 0px;border-top: rgba(0,0,0,0.4) solid 0.5px;/* padding: 0 16px; */box-shadow: rgba(0,0,0,0.1) 0px 0px 3px;}
+.menubar.hide{}
+.menubar.hide>.inner{ transform: translateY(100%);}
+.menubar .menu{display:flex; justify-content:  space-between; align-content: center; align-items: center;}
+.menubar .menu>li{width:100%;display:flex;align-items: center;align-content: center;border-left: #dddddd solid 0.5px;}
+.menubar .menu>li>a{color: #545454;/* font-size: 0px; */height: 44px;display:flex;align-items: center;align-content: center;justify-content: center;width: 100%;padding-bottom: 0px;font-size: 12px;}
+.menubar .menu>li>a em{font-family:"NotoSansCJKkr-Md"; font-size: 0px; line-height: 10px;display: inline-block;margin: 0 4px 0px 4px;}
+.menubar .menu>li>a:before{background: no-repeat;background-size: 100% auto;content:"";display:block;width: 70px;height: 44px;opacity:0.5;position: absolute;}
+.menubar .menu>li.active>a{color: #000000;}
+.menubar .menu>li.active>a::before{/* background-position-y: -60px; */opacity:1;}
+.menubar .menu>li.look.on>a:before{color:#70f5c4;background-position-y: -60px;}
+
+
+
+
+
+
+/* 입력 */
 span.input{display:inline-block;vertical-align:middle;position: relative;}
 span.input>input,
 span.textarea>textarea{display:block;/* width:100%; */padding: 5px 10px 5px 10px;border-radius:0px;margin:0px 0;background-image:none;-webkit-appearance:none;color:#181818;border:#c7c7c7 solid 1px;resize:none;outline:none;vertical-align: middle;-webkit-border-radius: 0;}
@@ -11,7 +71,6 @@ span.textarea>textarea{ padding:9px 8px 9px 8px; height: 100px;}
 span.input.db{display:block;}
 span.input.db>input,
 span.textarea.db>textarea{display:block;width: 100%;}
-
 textarea:not([readonly]):not([disabled]):focus,
 input:not([type=radio]):not([type=radio]):not([readonly]):not([disabled]):focus{ border-color:#333333; }
 
@@ -19,11 +78,8 @@ select[disabled],
 textarea[disabled],textarea[readonly],
 input[readonly],
 input[disabled]{color:#959595;background-color:#f5f5f5;border-color:#c7c7c7;-webkit-text-fill-color:#959595;}
-
-
 input[type="radio"],
 input[type="checkbox"]{width:30px;height:30px;display:inline-block;vertical-align:middle;opacity:0;}
-
 
 .input>input.valid{background: url(../img/common/validation.png) no-repeat right 5px top 9px;background-size: 20px auto;padding-right: 31px;}
 .input>input.valid.ok{background-position-y: -31px;}
@@ -32,8 +88,6 @@ input[type="checkbox"]{width:30px;height:30px;display:inline-block;vertical-alig
 .input.del{}
 .input.del>input{padding-right: 29px;}
 .input.del .btnDel{background:url(../img/common/btn_ico_input_del.png) no-repeat;width:22px;height:22px;display:block;position: absolute;right: 6px;top: 9px;font-size: 0;padding: 0;}
-
-
 
 /* checkbox */
 .checkbox{position:relative;display:inline-block;vertical-align:middle;}
@@ -331,7 +385,7 @@ html.lock {position: fixed;width: 100%;height: 100%;overflow: hidden;}
 .btn.sm{ height:30px; min-width:30px; padding:0 6px; font-size:12px;}
 .btn.md{height:40px;min-width:30px;padding: 0 10px;font-size:12px;}
 .btn.lg{ height:50px; min-width:50px; padding:0 20px;  font-size:14px;}
-.btn.xl{height:60px;min-width: 90px;padding: 0 10px;font-size: 16px;font-weight:bold;}
+.btn.xl{height:60px;min-width: 90px;padding: 0 10px;font-size: 16px;font-weight: 400;}
 
 .btn.disabled,
 .btn[disabled]{opacity: 0.5;}
@@ -453,12 +507,20 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 
 /* 플로팅 탑버튼 */
 .floatNav{position:fixed;right: 10px;bottom: 10px;z-index:100;transition:all 0.4s;}
-.floatNav.active{}
+.floatNav.active{bottom: 60px;}
 .floatNav .bt{font-size: 0px;width:32px;height:32px; display:block; background: no-repeat rgba(255, 255, 255, 0.7); border: solid #999999 1px;transform: translateY(100px);transition: all 0.4s; background-size: 100% auto; margin-top: 10px;}
 .floatNav .bt.refresh{background-image: url(../img/common/ico_load.png); transition-delay: 0.0s;}
 .floatNav .bt.top{background-image: url(../img/common/btn_top.png); transition-delay: 0.1s;}
 .floatNav.active .refresh{ transform: translateY(0px);}
 .floatNav.active .top{ transform: translateY(0px); }
+
+.floatNav.active{}
+.floatNav.active .refresh{ transform: translateY(0px);}
+.floatNav.active .top{ transform: translateY(0px); }
+.floatNav.hide{transform: translateY(60%);}
+
+
+
 
 
 .btnList{text-align: center; padding: 15px 0px;}

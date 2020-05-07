@@ -3,6 +3,7 @@
 		
 		this.tit();
 		this.layout();
+		this.include();
 		$(window).on("load scroll",function(){
 			var winH = $(window).height();
 			var docH = $(document).height();
@@ -17,7 +18,7 @@
 		document.title = "/" + tit[tit.length - 2] + "/" + tit[tit.length - 1];
 	},
 	incCallbacks:false,
-	layout:function(){
+	include:function(){
 		html_layers = false;
 		var _this = this;
 		var $inc_html = $("[data-include-html]");
@@ -51,16 +52,10 @@
 			_this.incCallbacks = true ;
 		}
 		//console.log("완료" + _this.incCallbacks);
+
+	},
+	layout:function(){
 		
-		/* $.ajax({
-			type: "post",
-			url: "../../html/inc/layers.html",
-			dataType: "html",
-			success: function(html) {
-				$("#layers").append(html);
-				html_layers = true;
-			}
-		}); */
 
 	},
 	param:(function(a) { // URL에서 파라미터 읽어오기
