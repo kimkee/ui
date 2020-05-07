@@ -76,16 +76,6 @@ HTML,CSS,JS UI
       </span>
   </span>
   ```
-### ui.form.select();
-  * Select 메뉴
-  ```
-  <span class="select db">
-      <select>
-          <option>선택1</option>
-          <option>선택2</option>
-      </select>
-  </span>
-  ```
 ### ui.form.chkall();
   * 첵크박스 모두 첵크
 ### ui.form.intdel();
@@ -100,10 +90,14 @@ HTML,CSS,JS UI
   ui.loading.show(); // 로딩열기
   ui.loading.hide(); // 로딩닫기
   ```
-### ui.accd
-  * 아코디언 UI
 ### ui.datePick
   * 달력 날짜 선택 - 일선택,주선택,월선택
+  ```
+<span class="input db uiDate"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
+<div class="weeks"><span id="START_DT"></span> ~ <span id="END_DT"></span></div>
+<span class="uiDate input db week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
+<span class="input db uiDate"><input type="text" class="datepicker_month" placeholder="YYYY-MM-DD" value="2019-06" readonly></span>
+  ```
 ### ui.tog
   * 토글 UI
   ```
@@ -121,10 +115,10 @@ HTML,CSS,JS UI
       <li><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2" href="javascript:;">탭메뉴2</a></li>
   </ul>
   <div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_1" class="active">
-      <p><a href="javascript:;">탭내용1</a></p>
+      탭내용1
   </div>
   <div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_2">
-      <p><a href="javascript:;">탭내용2</a></p>
+      탭내용2
   </div>
   ```
 ### ui.lock
@@ -141,7 +135,7 @@ HTML,CSS,JS UI
   ui.cookie.get();
   ```
 
-## 버튼
+### 버튼
 ```
 <a href="javascript:;" class="btn xs">버튼</a>
 <a href="javascript:;" class="btn sm">버튼</a>
@@ -152,14 +146,31 @@ HTML,CSS,JS UI
 <button class="btn" disabled="">버튼</button>
 ```
 ![image](https://user-images.githubusercontent.com/6386956/81248582-a3a0cb80-9057-11ea-95a8-b7c92fdfcc75.png)
-## 폼요소
+### 폼요소
 ```
 <label class="checkbox"><input type="checkbox"><span>선택</span></label>
 <label class="radio"><input type="radio" name="radio1"><span>선택</span></label>
 <div class="uiChk"><input type="checkbox" checked="checked"><em></em></div>
 ```
 ![image](https://user-images.githubusercontent.com/6386956/81248230-da2a1680-9056-11ea-93cd-531aa590910d.png)
-## 별점
+### 입력
+```
+<span class="input"><input type="text" placeholder="텍스트"></span>
+<span class="input del"><input type="text" placeholder="삭제버튼" value="텍스트"></span>
+<span class="input sch"><input type="text" placeholder="검색어 입력"><a href="javascript:;" class="btnSch">검색</a></span>
+<span class="textarea"><textarea placeholder="내용"></textarea></span>
+```
+### Select
+  * Select 메뉴
+  ```
+  <span class="select db">
+      <select>
+          <option>선택1</option>
+          <option>선택2</option>
+      </select>
+  </span>
+  ```
+### 별점
 ```
 <div class="uiStar" data-star="3.5">
     <ul>
@@ -183,7 +194,7 @@ HTML,CSS,JS UI
 </div>
 ```
 ![image](https://user-images.githubusercontent.com/6386956/81248311-02b21080-9057-11ea-8174-fa4922a978d0.png)
-## 탭UI
+### 탭UI
   ```
   <ul class="uiTab a">
       <li class="active"><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" href="javascript:;">탭메뉴1</a></li>
@@ -197,7 +208,7 @@ HTML,CSS,JS UI
   </div>
   ```
 ![image](https://user-images.githubusercontent.com/6386956/81248519-748a5a00-9057-11ea-9c37-a7ba4f965ca6.png)
-## 아코디언
+### 아코디언
   ```
   <ul class="uiAccd" data-accd="accd">
       <li class="open">
@@ -215,6 +226,3 @@ HTML,CSS,JS UI
   </ul>
   ```
   ![image](https://user-images.githubusercontent.com/6386956/81160926-b4a0fc80-8fc5-11ea-8a31-f68701e4e9e8.png)
-
-
-  
