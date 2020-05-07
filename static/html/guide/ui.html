@@ -28,7 +28,7 @@
 <div class="wrap" id="wrap">
 	
 		
-	<div class="head"></div>
+	<include class="header" data-include-html="../inc/header.html"></include>
 	
 	<!-- 컨텐츠 시작 -->
 	<div class="contain ui" id="contain">
@@ -100,23 +100,7 @@
 			</div>
 
 			<h3 class="hdt">페이징</h3>
-			<div class="paging">
-				<div class="nav prev">
-					<a href="javascript:;" class="prev end">처음</a>
-					<a href="javascript:;" class="prev">이전 10개</a>
-				</div>
-				<div class="link">
-					<a href="javascript:;">1</a>
-					<a href="javascript:;">2</a>
-					<a class="active" href="javascript:;">3</a>
-					<a href="javascript:;">4</a>
-					<a href="javascript:;">5</a>
-				</div>
-				<div class="nav next">
-					<a href="javascript:;" class="next">다음 10개</a>
-					<a href="javascript:;" class="next end">마지막</a>
-				</div>
-			</div>
+			<include data-include-html="../inc/paging.html"></include>
 
 			<h3 class="hdt">레이어팝업 - ui.popLayer</h3>
 			<section class="codeBox"> 
@@ -1180,7 +1164,7 @@
 	</script>
 
 
-<div class="foot"></div>
+	<include class="footer" data-include-html="../inc/footer.html"></include>
 
 </div>
 
@@ -1189,7 +1173,7 @@
 var html = document.documentElement;
 function showInfo() {
 	$('#cssStatus').html(html.className);
-	$('#browserStatus').html('Client Size : ' + html.clientWidth + 'x' + html.clientHeight + ', Orientation : ' + window.orientation +"visualViewport : "+ window.visualViewport.height);
+	$('#browserStatus').html('Client Size : ' + html.clientWidth + 'x' + html.clientHeight + ', Orientation : ' + window.orientation +", visualViewport : "+ window.visualViewport.height);
 }
 // $(window).on("scroll resize", function() { // 바닥 확인
 // 	var wHt = window.visualViewport.height ;
