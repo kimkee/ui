@@ -44,19 +44,40 @@ HTML,CSS,JS UI
   ```
 ### ui.popLayer
   > 레이어팝업 뛰우기 (전체,가운데,하단에 띄우기)  히스토리백 historyback 레이어팝업 닫기 지원
-  ```
-  ui.popLayer.open('popSample1'); // 팝레이어열기
-  ui.popLayer.close('popSample1'); // 팝레이어닫기
-  ui.popLayer.refresh('popSample1'); // 팝스크롤새로고침
-  ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
-      ocb:function(){
-          console.log("popSample1 열림");
-      },
-      ccb:function(){
-          console.log("popSample1 닫힘");
-      }						
-  });
-  ```
+```
+ui.popLayer.open('popSample1'); // 팝레이어열기
+ui.popLayer.close('popSample1'); // 팝레이어닫기
+ui.popLayer.refresh('popSample1'); // 팝스크롤새로고침
+ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
+    ocb:function(){
+        console.log("popSample1 열림");
+    },
+    ccb:function(){
+        console.log("popSample1 닫힘");
+    }
+});
+<article class="popLayer a popSample1" id="popSample1">
+    <div class="pbd">
+        <div class="phd">
+            <div class="in">
+                <h1 class="tit">타이틀</h1>
+                <button type="button" class="btnPopClose">닫기</button>
+            </div>
+        </div>
+        <div class="pct">
+            <main class="poptents">
+                내용
+            </main>
+        </div>
+        <div class="pbt">
+            <div class="bts">
+                <a href="javascript:;" class="btn e">버튼</a>
+                <a href="javascript:;" class="btn a">버튼</a>
+            </div>
+        </div>
+    </div>
+</article>
+```
 ### ui.isUA(t);
   ```
   ui.isUA("Chrome");  // true
@@ -84,15 +105,18 @@ HTML,CSS,JS UI
 <label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택2</span></label>
 <label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택3</span></label>
   ```
+  ![image](https://user-images.githubusercontent.com/6386956/81261190-90e9bf00-9076-11ea-8705-1724c0f7d368.png)
+
 ### ui.form.spinner();
-  > 수량입력
+  > 수량입력 최고수량 data-max="5"
   ```
 <div class="uiSpinner" data-max="5">
-				<input class="n" type="number" value="1">
+    <input class="n" type="number" value="1">
     <button type="button" class="m">-</button>
     <button type="button" class="p">+</button>
 </div>
   ```
+![image](https://user-images.githubusercontent.com/6386956/81260714-8a0e7c80-9075-11ea-8435-642a4a7dc9db.png)
 ### ui.loading;
   > 로딩중...  ui.loading.show(); ui.loading.hide();
   ```
@@ -107,6 +131,10 @@ HTML,CSS,JS UI
 <span class="uiDate input db week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
 <span class="input db uiDate"><input type="text" class="datepicker_month" placeholder="YYYY-MM-DD" value="2019-06" readonly></span>
   ```
+![image](https://user-images.githubusercontent.com/6386956/81260888-ee314080-9075-11ea-85a2-1f8c50e17c6e.png)
+![image](https://user-images.githubusercontent.com/6386956/81261321-d4442d80-9076-11ea-86b7-b194139a6164.png)
+![image](https://user-images.githubusercontent.com/6386956/81261023-381a2680-9076-11ea-9686-720367832b9f.png)
+![image](https://user-images.githubusercontent.com/6386956/81261279-c098c700-9076-11ea-8061-dda43bdb0a2c.png)
 ### ui.tog
   > 토글 UI
   ```
@@ -116,7 +144,7 @@ HTML,CSS,JS UI
       <p>토글내용 토글내용</p>
   </div>
   ```
-### ui.lock
+### ui.lock.using();
   > 화면 스크롤 잠금,풀기 (레이어팝업 띄울때 사용)
   ``` 
   ui.lock.using(true);  // 잠금
@@ -126,8 +154,8 @@ HTML,CSS,JS UI
 ### ui.cookie;
   > 쿠기설정, 
   ``` 
-  ui.cookie.set();
-  ui.cookie.get();
+  ui.cookie.set(cname, cvalue, exdays);  // cname(이름), cvalue(값), exdays(시간)
+  ui.cookie.get(cname); // cname(이름)
   ```
 
 ### 버튼
@@ -157,7 +185,13 @@ HTML,CSS,JS UI
 ```
 ### Select
   ```
-  <span class="select db">
+  <span class="select"> //기본UI
+      <select>
+          <option>선택1</option>
+          <option>선택2</option>
+      </select>
+  </span>
+  <span class="select jqui"> // jQuery selectmenu();
       <select>
           <option>선택1</option>
           <option>선택2</option>
@@ -166,23 +200,23 @@ HTML,CSS,JS UI
   ```
 ### 별점
 ```
-<div class="uiStar" data-star="3.5">
+<div class="uiStar" data-star="3.5">  // 별점 보기
     <ul>
-        <li class="f"><em class="st">별</em></li>
-        <li class="f"><em class="st">별</em></li>
-        <li class="f"><em class="st">별</em></li>
-        <li class="h"><em class="st">별</em></li>
-        <li class=""><em class="st">별</em></li>
+        <li><em class="st">별</em></li>
+        <li><em class="st">별</em></li>
+        <li><em class="st">별</em></li>
+        <li><em class="st">별</em></li>
+        <li><em class="st">별</em></li>
     </ul>
     <i class="p">3.5</i>
 </div>
-<div class="uiStar">
+<div class="uiStar"> // 별점 주기 버튼
     <ul>
-        <li class=""><button type="button" class="st">별</button></li>
-        <li class=""><button type="button" class="st">별</button></li>
-        <li class=""><button type="button" class="st">별</button></li>
-        <li class=""><button type="button" class="st">별</button></li>
-        <li class=""><button type="button" class="st">별</button></li>
+        <li><button type="button" class="st">별</button></li>
+        <li><button type="button" class="st">별</button></li>
+        <li><button type="button" class="st">별</button></li>
+        <li><button type="button" class="st">별</button></li>
+        <li><button type="button" class="st">별</button></li>
     </ul>
     <i class="p">0</i>
 </div>
@@ -207,15 +241,15 @@ HTML,CSS,JS UI
   <ul class="uiAccd" data-accd="accd">
       <li class="open">
           <div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
-          <div class="cBox" style="">내용</div>
+          <div class="cBox">내용</div>
       </li>
       <li>
           <div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
-          <div class="cBox" style="display: none;">내용</div>
+          <div class="cBox">내용</div>
       </li>
       <li class="except">
           <div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
-          <div class="cBox" style="">내용</div>
+          <div class="cBox">내용</div>
       </li>
   </ul>
   ```
