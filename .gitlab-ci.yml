@@ -1,6 +1,6 @@
 pages: 
     image: jekyll/jekyll 
-    script: jekyll build -d public/ 
+    script: jekyll build -d public/ bundle exec jekyll serve
     artifacts: 
         paths: 
         - public/
