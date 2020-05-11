@@ -19,6 +19,7 @@ var ui = {
 		this.slides.init();
 		this.datePick.init();
 		this.listLoad.init();
+		console.log("ui.init();");
 	},
 	cm:{ // 공통
 		init:function(){
@@ -1363,7 +1364,20 @@ var ui = {
 	}
 };
 
-$(document).ready( ui.init() );
+// $(document).ready( ui.init() );
+$(document).ready(function(){
+	if( uiHtml ){   //  HTML 페이지일 경우 헤더,푸터 로딩완료 후 ui.init();
+		var uiSet = setInterval(function(){ // console.log("uiHtml" ,  incNums , uiHtml.incCallbacks);
+			
+			if (uiHtml.incCallbacks) {
+				ui.init();
+				clearInterval(uiSet);
+			}
+		});
+	}else{ 			// 개발페이지에서는 바로 ui.init();
+		ui.init();
+	}
+});
 
 
 function css_browser_selector(u) {
