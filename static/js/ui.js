@@ -22,16 +22,16 @@ var ui = {
 	},
 	cm:{ // 공통
 		init:function(){
-			// console.log("ui.mo.js init");
-			// $("#contain").hammer().on("swipeleft swiperight", function(e) {
-			// 	// console.log( e.type );
-			// 	if (e.type=="swiperight" && ui.movePage.prev) {
-			// 		ui.movePage.prev(e.type);
-			// 	}
-			// 	if (e.type=="swipeleft" && ui.movePage.next ) {
-			// 		ui.movePage.next(e.type);
-			// 	}
-			// });
+			
+			$("#contain").hammer().on("swipeleft swiperight", function(e) {
+				// console.log( e.type );
+				if (e.type=="swiperight" && ui.movePage.prev) {
+					ui.movePage.prev(e.type);
+				}
+				if (e.type=="swipeleft" && ui.movePage.next ) {
+					ui.movePage.next(e.type);
+				}
+			});
 		}
 	},
 	movePage:{ // 스와이프로 이동할 페이지
