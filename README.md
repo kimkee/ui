@@ -4,6 +4,7 @@
 # ui.js
 HTML,CSS,JS UI
 ## https://kimkee.github.io/ui/
+### https://kimkee.github.io/ui/static/js/ui.js
 
 ### ui.alert();
   > 커스텀 알럿창 Alert UI
