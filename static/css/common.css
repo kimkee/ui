@@ -216,16 +216,17 @@ select::-ms-expand {display:none;}
 .uiAttach.on .file{ display:block; }
 
 .ui-add-file{position:relative;display:inline-block;overflow:hidden;vertical-align:middle;line-height: 0.9;}
-.ui-add-file .file{position:relative;display: inline-block;vertical-align:middle;padding: 0px 20px 0px 0px;}
-.ui-add-file .file button.delete{display:none;position:absolute;right: 0px;top: 4px;width:20px;height:20px;background: url(../img/common/delete.png) no-repeat center;text-indent:-9999px;overflow:hidden;border: none;background-size: 10px auto;}
+.ui-add-file .file{position:relative;display: inline-block;vertical-align:middle;padding: 0px 0px 0px 0px;}
+.ui-add-file .file button.delete{display:none;position:absolute;right: 5px;top: 4px;width:20px;height:20px;background: url(../img/common/delete.png) no-repeat center;text-indent:-9999px;overflow:hidden;border: none;background-size: 10px auto;}
+.ui-add-file .file .loc{vertical-align:middle;white-space:nowrap;overflow:hidden;width:100%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;display:inline-block;border: none;height: 25px;max-width: 170px;margin-left: 0px;font-size: 12px;line-height: 1.6;}
+.ui-add-file.on .file{padding: 4px 34px 4px 4px;margin-right: 10px;border: #aaaaaa solid 1px;height: 30px;border-radius: 4px;}
 .ui-add-file.on .file button.delete{display:block;cursor: pointer;}
-.ui-add-file .file .loc{vertical-align:middle;white-space:nowrap;overflow:hidden;width:100%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;display:inline-block;border: none;height: 25px;max-width: 170px;/* padding: 1px 27px 1px 6px; */margin-left: 5px;font-size: 14px;line-height: 1.6;}
-.ui-add-file.on .file .loc{}
+.ui-add-file.on .file .loc{ margin-left: 5px; }
 .btn-attach{padding: 2px 0px;}
 .btn-attach{position:relative;overflow:hidden;width: 110px;height: 25px;font-size: 15px;} 
 .btn-attach .fileButton{line-height: 18px;} 
 .btn-attach .bt{} 
-.btn-attach .fileInput{font-size:100px;position:absolute;right:0px;top: -1px;width:100%;height: 25px;opacity:0;filter:alpha(opacity=0);cursor:pointer;padding:0px !important;border:none;}
+.btn-attach .fileInput{font-size:100px;position:absolute;right:0px;top: -1px;width:100%;height: 40px;opacity:0;filter:alpha(opacity=0);cursor:pointer;padding:0px !important;border:none;}
 
 
 .ui-add-pic{position:relative;display:inline-block;overflow:hidden;vertical-align:middle;line-height: 0.9;}
@@ -239,7 +240,7 @@ select::-ms-expand {display:none;}
 .btn-add-pic{position:relative;overflow:hidden;width: 50px;height: 50px;font-size: 15px;border: #4555d1 solid 1px;display: inline-block;vertical-align: middle;} 
 .btn-add-pic:hover{background-color:#4555d1;}
 .btn-add-pic:hover::after{color:#ffffff;}
-.btn-add-pic::after{width: 100%;height: 100%;content: "+";display:inline-block;vertical-align:middle;/* background:url(../img/common/ico_file_add.png) no-repeat; */margin: 0px 0px 0px 0px;font-size: 28px;color: #4555d1;position: absolute;left: 0px;top: 0;z-index: 1;text-align: center;padding: 8px 0px;}
+.btn-add-pic::after{width: 100%;height: 100%;content: "+";display:inline-block;vertical-align:middle;/* background:url(../img/common/ico_file_add.png) no-repeat; */margin: 0px 0px 0px 0px;font-size: 28px;color: #4555d1;position: absolute;left: 0px;top: 0;z-index: 1;text-align: center;padding: 9px 0px;}
 .btn-add-pic .fileButton{line-height: 0px;font-size: 0;z-index: 100;position: relative;width: 48px;height: 48px;} 
 .btn-add-pic .bt{} 
 .btn-add-pic .fileInput{font-size:100px;position:absolute;right:0px;top: 0px;width:100%;height: 100%;opacity:0;filter:alpha(opacity=0);cursor:pointer;padding:0px !important;border:none;}
@@ -335,25 +336,25 @@ ul.bullet.type.b>li:before{ content:""; background:#666666; top:6px; width:4px; 
 
 
 /* 테이블 type.a */
-table.type.a{border:none;width:100%;border-collapse:collapse;border-bottom: #aaaaaa solid 1px;border-right: #aaaaaa solid 1px;}
-table.type.a th,
-table.type.a td{padding: 5px 9px;border-top: #aaaaaa solid 1px;border-left: #aaaaaa solid 1px;min-height:34px;}
-table.type.a th{background: #f5f5f5;font-weight:normal;text-align:left;}
-table.type.a tr:first-child th,
-table.type.a tr:first-child td{border-top: #aaaaaa solid 1px;}
+table.tbform.a{border:none;width:100%;border-collapse:collapse;border-bottom: #dddddd solid 1px;border-right: #dddddd solid 1px;}
+table.tbform.a th,
+table.tbform.a td{padding: 5px 9px;border-top: #dddddd solid 1px;border-left: #dddddd solid 1px;min-height:34px;}
+table.tbform.a th{background: #f5f5f5;font-weight:normal;text-align:left;}
+table.tbform.a tr:first-child th,
+table.tbform.a tr:first-child td{border-top: #dddddd solid 1px;}
 
 
 /* 테이블 list.a */
-table.list.a{width:100%;border-top: 1px solid #aaa;border-collapse:collapse;}
-table.list.a>thead>tr>th {padding:14px 0; text-align:center; line-height:16px;}
-table.list.a>thead>tr>th, 
-table.list.a>tbody>tr>td{padding:14px 0;border-bottom: 1px solid #aaaaaa;border-left: 1px solid #aaaaaa;line-height:16px;vertical-align:middle;font-weight:normal;text-align:center;}
-table.list.a>thead>tr>th:first-child, 
-table.list.a>tbody>tr>td:first-child {border-left:none;}
-table.list.a>tbody>tr>th:last-child, 
-table.list.a>tbody>tr>td:last-child {border-right:none;}
-table.list.a>tbody>tr>td {}
-table.list.a>tbody>tr.nodata>td {width:100%; text-align:center !important;}
+table.tblist.a{width:100%;border-top: 1px solid #dddddd;border-collapse:collapse;}
+table.tblist.a>thead>tr>th {padding:14px 0;text-align:center;line-height:16px;background: #f5f5f5;}
+table.tblist.a>thead>tr>th, 
+table.tblist.a>tbody>tr>td{padding: 9px 5px;border-bottom: 1px solid #dddddd;border-left: 1px solid #dddddd;line-height:16px;vertical-align:middle;font-weight:normal;text-align:center;}
+table.tblist.a>thead>tr>th:first-child, 
+table.tblist.a>tbody>tr>td:first-child {border-left:none;}
+table.tblist.a>tbody>tr>th:last-child, 
+table.tblist.a>tbody>tr>td:last-child {border-right:none;}
+table.tblist.a>tbody>tr>td {}
+table.tblist.a>tbody>tr.nodata>td {width:100%; text-align:center !important;}
 
 
 

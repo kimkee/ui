@@ -63,7 +63,7 @@
 			</div>
 			<p class="gap"></p>
 			<div class="btnSet">
-				<a href="javascript:;" class="btn">버튼</a>
+				<a class="btn" href="../guide/ui.html" data-ui="pop-window" data-width="360" data-height="600">팝업윈도우1</a>
 				<a href="javascript:;" class="btn">버튼</a>
 			</div>
 			<p class="gap"></p>
@@ -89,11 +89,9 @@
 			<div class="btnList">
 				<div class="fl">
 					<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
-					
 				</div>
 				<div class="fr">
 					<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
-
 				</div>
 			</div>
 
@@ -105,7 +103,7 @@
 				<div class="code">
 					<div class="bts">
 						<a class="btn" href="javascript:samplePopA();">팝레이어A</a>
-						<a class="btn" href="javascript:ui.popLayer.open('popSample2');">팝레이어B</a>
+						<a class="btn" href="javascript:samplePopB();">팝레이어B</a>
 						<a class="btn" href="javascript:samplePopC();">팝레이어C</a>
 					</div>
 					<pre class="brush: js">
@@ -127,11 +125,22 @@
 						}						
 					});
 				}
+				var samplePopB = function(){
+					// 레이어팝업 열기 콜백
+					ui.popLayer.open('popSample2',{
+						ocb:function(){
+							console.log("popSample2 열림");
+						},
+						ccb:function(){
+							console.log("popSample2 닫힘");
+						}						
+					});
+				}
 				var samplePopC = function(){
 					// 레이어팝업 열기 콜백
 					ui.popLayer.open('popSample3',{
 						ccb:function(){
-							// console.log("popSample3 닫힘");
+							console.log("popSample3 닫힘");
 						}
 					});
 				}
@@ -535,6 +544,7 @@
 			</div>
 
 			<h3 class="hdt">첨부파일 - 파일,이미지</h3>
+
 			<span class="ui-add-file" data-ui="attach">
 				<span class="btn-attach btn">
 					<label class="fileButton">파일선택<input type="file" class="fileInput" accept="*/*"></label>
@@ -545,7 +555,7 @@
 					<label class="fileButton">파일선택<input type="file" class="fileInput" accept="*/*"></label>
 				</span>
 				<span class="file">
-					<span class="loc">파일이름.psd</span>
+					<span class="loc">abc1223.doc</span>
 					<button type="button" class="delete">삭제</button>
 				</span>
 			</span>
@@ -695,60 +705,80 @@
 
 			
 			<h3 class="hdt">테이블</h3>
-			
-			<table class="table type a" cellpadding="0" cellspacing="0">
+			<table class="tbform a" cellpadding="0" cellspacing="0">
 				<colgroup>
 					<col width="20%">
 					<col>
+					<col width="20%">
 					<col>
 				</colgroup>
 				<tbody>
 					<tr>
 						<th rowspan="2">소재</th>
 						<td>99(BLACK)</td>
-						<td rowspan="2">85(55),90(66)</td>
+						<th rowspan="2">TH</th>
+						<td>TD</td>
 					</tr>
 					<tr>
 						
 						<td>99(BLACK)</td>
+						<td>TD</td>
 					</tr>
 					<tr>
 						<th>치수</th>
 						<td>99(BLACK)</td>
-						<td>85(55),90(66)</td>
+						<th>TH</th>
+						<td>TD</td>
 					</tr>
 					<tr>
 						<th>치수</th>
 						<td rowspan="2">99(BLACK)</td>
-						<td>85(55),90(66)</td>
+						<th rowspan="2">TH</th>
+						<td>TD</td>
 					</tr>
 					<tr>
 						<th>치수</th>
-						<td>85(55),90(66)</td>
 						
+						<td>TD</td>
 					</tr>
 				</tbody>
 			</table>
 			<p class="gap"></p>
-			<table class="list a" cellspacing="0" cellpadding="0" >
+			
+			<table class="tblist a" cellspacing="0" cellpadding="0" >
 				<colgroup>
 					<col>
 					<col>
 				</colgroup>
 				<thead>
 					<tr>
-						<th scope="col">주소</th>
-						<th scope="col">우편번호</th>
+						<th>TH1</th>
+						<th colspan="2">TH2</th>
+						
+						<th rowspan="2">TH4</th>
+						<th rowspan="2">TH5</th>
+					</tr>
+					<tr>
+						
+						<th>TH6</th>
+						<th>TH7</th>
+						<th>TH8</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>서울 강남구 신사동 성도빌딩</td>
-						<td>15603</td>
+						<td>TD1</td>
+						<td>TD2</td>
+						<td>TD3</td>
+						<td>TD4</td>
+						<td>TD5</td>
 					</tr>
 					<tr>
-						<td>서울 강남구 신사동 성도빌딩</td>
-						<td>15603</td>
+						<td>TD1</td>
+						<td>TD2</td>
+						<td>TD3</td>
+						<td>TD4</td>
+						<td>TD5</td>
 					</tr>
 				</tbody>
 			</table>

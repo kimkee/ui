@@ -1,0 +1,151 @@
+{
+	"won": {
+		"prefix": "원",
+		"body": [
+			"₩"
+		],
+		"description": "₩"
+	},
+	"a": {
+		"prefix": "a",
+		"body": [
+			"<a href=\"${1:javascript:;}\">$2</a>"
+		],
+		"description": "A"
+	},
+	";btn": {
+		"prefix": ";btn",
+		"body": [
+			"<a href=\"javascript:;\" class=\"btn $1\">${2:버튼}</a>"
+		],
+		"description": ".btn 버튼"
+	},
+	";checkbox": {
+		"prefix": ";checkbox",
+		"body": [
+			"<label class=\"checkbox\"><input type=\"checkbox\"><span>${1:첵크박스}</span></label>"
+		],
+		"description": ".checkbox 첵크박스"
+	},
+	";radio": {
+		"prefix": ";radio",
+		"body": [
+			"<label class=\"radio\"><input type=\"radio\" name=\"radio1\"><span>${1:라디오}</span></label>"
+		],
+		"description": ".radio 라디오버튼"
+	},
+
+	";input": {
+		"prefix": ";input",
+		"body": [
+			"<span class=\"input$1\"><input type=\"text\"></span>"
+		],
+		"description": ".input 입력칸"
+	},
+	";select": {
+		"prefix": ";select",
+		"body": [
+			"<span class=\"select\">",
+			"    <select>",
+			"        <option>${1:선택}</option>",
+			"    </select>",
+			"</span>"
+		],
+		"description": ".select 셀렉트"
+	},
+	";date": {
+		"prefix": ";date",
+		"body": [
+			"<span class=\"input uiDate\"><input type=\"text\" class=\"datepicker\" placeholder=\"YYYY-MM-DD\" value=\"2019-06-07\" readonly></span>"
+		],
+		"description": "ui-date-input 날짜입력칸"
+	},
+	";date_month": {
+		"prefix": ";date_month",
+		"body": [
+			"<span class=\"input uiDate\"><input type=\"text\" class=\"datepicker_month\" placeholder=\"YYYY-MM-DD\" value=\"2019-06\" readonly></span>"
+		],
+		"description": "ui-date-input 날짜입력칸"
+	},
+	";textarea": {
+		"prefix": ";textarea",
+		"body": [
+			"<div class=\"textarea\">",
+			"    <textarea cols=\"30\" rows=\"3\" placeholder=\"${1:입력하세요}\"></textarea>",
+			"</div>"
+		],
+		"description": ".textarea 텍스트입력"
+	},
+	";file-add": {
+		"prefix": ";file-add",
+		"body": [
+			"<span class=\"ui-add-file on\" data-ui=\"attach\">",
+			"    <span class=\"btn-attach btn blue\">",
+			"        <label class=\"fileButton\">파일선택<input type=\"file\" class=\"fileInput\" accept=\"*/*\"></label>",
+			"    </span>",
+			"    <span class=\"file\">",
+			"        <span class=\"loc\">파일이름.zip</span>",
+			"        <button type=\"button\" class=\"delete\">삭제</button>",
+			"    </span>",
+			"</span>"
+		],
+		"description": ".ui-add-file 첨부파일"
+	},
+	
+
+
+	";gap": {
+		"prefix": ";gap",
+		"body": [
+			"<p class=\"gap ${1:h30}\"></p>"
+		],
+		"description": ";gap"
+	},
+
+	";popLayer.a": {
+		"prefix": ";pop",
+		"body": [
+			"<article class=\"popLayer a\" id=\"${1:popSample2}\">",
+			"    <div class=\"pbd\">",
+			"        <div class=\"phd\">",
+			"            <div class=\"in\">",
+			"                <h1 class=\"tit\">${2:팝업레이어 타이틀} <em class=\"num\">(<i>12</i>건)</em></h1>",
+			"                <button type=\"button\" class=\"btnPopClose\">닫기</button>",
+			"            </div>",
+			"        </div>",
+			"        <div class=\"pct\">",
+			"            <main class=\"poptents\">",
+			"            내용 내용.",
+			"            </main>",
+			"        </div>",
+			"    </div>",
+			"</article>",
+
+			"<script>",
+			"    ui.popLayer.open('${1:popSample2}');",
+			"</script>"
+		],
+		"description": "팝업레이어.popLayer.a "
+	},
+	";popLayer.win": {
+		"prefix": ";pop",
+		"body": [
+			"<article class=\"popLayer win\">",
+			"    <div class=\"pbd\">",
+			"        <div class=\"phd\">",
+			"            <div class=\"in\">",
+			"                <h1 class=\"tit\">${2:팝업윈도우 타이틀}</h1>",
+			"                <button type=\"button\" class=\"btnPopClose\">닫기</button>",
+			"            </div>",
+			"        </div>",
+			"        <div class=\"pct\">",
+			"            <main class=\"poptents\">",
+			"            내용 내용.",
+			"            </main>",
+			"        </div>",
+			"    </div>",
+			"</article>"
+		],
+		"description": "팝업윈도우.popLayer.win "
+	}
+}

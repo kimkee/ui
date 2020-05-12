@@ -15,6 +15,7 @@ var ui = {
 		this.tooltips.init();
 		this.dropDown.init();
 		this.popLayer.init();
+		this.popWin.init();
 		this.slides.init();
 		this.datepick.init();
 		this.listLoad.init();
@@ -286,13 +287,13 @@ var ui = {
 				$(this).attr("src","../../img/temp/sss.png");
 			});
 			$(document).on("change", "[data-ui='attach'] .fileButton .fileInput", function() {
-				var $elsAdd = $(this).closest("[data-ui='attach']");
+				var els = $(this).closest("[data-ui='attach']");
 				var fUrl = (this.value).split("\\"),
 					fName = fUrl[fUrl.length - 1];
-				var locVar = $elsAdd.find(".file").length;
+				var locVar = els.find(".file").length;
 				if (!locVar) {
 					// console.log("132132");
-					if( $elsAdd.hasClass("ui-add-pic") ) {
+					if( els.hasClass("ui-add-pic") ) {
 						var lcEls = 
 						'<span class="file">'+
 						'    <img class="img" src="" alt="" onerror="this.src=\'../../img/common/blank.png\'" >'+
@@ -306,19 +307,19 @@ var ui = {
 						'</span>'
 					}
 
-					$elsAdd.append( lcEls );
+					els.append( lcEls );
 				}
 				
-				$elsAdd.addClass("on");
-				$elsAdd.find(".file .loc").text(fName);
-				$elsAdd.find(".file .img").attr("src",this.value);
+				els.addClass("on");
+				els.find(".file .loc").text(fName);
+				els.find(".file .img").attr("src",this.value);
 			});
 			$(document).on("click", "[data-ui='attach'] .file .delete", function() {
-				var $elsAdd = $(this).closest("[data-ui='attach']");
-				$elsAdd.find(".fileButton .fileInput").val("");
-				$elsAdd.find(".file").remove();
-				$elsAdd.find(".file .loc").text("");
-				$elsAdd.removeClass("on");
+				var els = $(this).closest("[data-ui='attach']");
+				els.find(".fileButton .fileInput").val("");
+				els.find(".file").remove();
+				els.find(".file .loc").text("");
+				els.removeClass("on");
 			});
 
 
@@ -1134,6 +1135,33 @@ var ui = {
 				console.log(idx, iscr);
 				this.scroll[idx].refresh(); 
 			}
+		}
+	},
+	popWin:{ // 윈도우팝업
+		init:function(){
+			var els = "[data-ui='pop-window']";
+			$(document).on("click",els,function(e){
+				e.preventDefault();
+				var $this = $(this);
+				var _href = $this.attr("href");
+				var _width = $this.data("width");
+				var _height = $this.data("height");
+				var _left = $this.data("left");
+				var _top = $this.data("top");
+				var _scroll = $this.data("scroll");
+				ui.popWin.open(_href, _width, _height, _scroll ,_left, _top );
+			});
+			$(els).attr("target","_blank");
+		},
+		open:function(_href, _width, _height, _scroll, _left, _top){
+			if (_scroll==false){ _scroll="no"; }
+			if (_scroll==true ){ _scroll = "yes";}
+			if (_scroll==undefined ) { _scroll = "yes";}
+			if (_left==undefined) { _left = parseInt((screen.width - _width) *0.5, 10); }
+			if (_top==undefined) { _top = parseInt((screen.height - _height) *0.5, 10); }
+			var _name = "popup" + _href;
+			var modalWin =  window.open(_href, _name, "top="+ _top +", left="+ _left +", width="+ _width +", height="+ _height +", scrollbars="+ _scroll +", toolbar=no, menubar=no, location=no, resizable=yes, status=no");
+			modalWin.focus();
 		}
 	},
 	listMore: { // 더 불러오기 
