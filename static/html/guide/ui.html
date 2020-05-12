@@ -267,6 +267,15 @@
 			<p class="gap"></p>
 			<span class="textarea db"><textarea placeholder="내용"></textarea></span>
 			<p class="gap"></p>
+			<span class="textarea db"><textarea class="ment" placeholder="댓글달기 자동높이" id="input_reply"></textarea></span>
+			<script src="../../js/lib/autosize-master/dist/autosize.js"></script>
+			<script>
+				autosize( $('#input_reply') );
+				// $('#input_reply').on('autosize:resized', function(){
+				// 	console.log('textarea height updated');
+				// });
+			</script>
+			<p class="gap"></p>
 			<span class="select db">
 				<select>
 					<option>선택</option>
@@ -1145,10 +1154,6 @@
 
 	</div>
 
-	<div class="floatNav">
-		<button type="button" class="bt refresh">Refresh</button>
-		<button type="button" class="bt top">TOP</button>
-	</div>
 
 	<!--// 컨텐츠 끝 -->
 
@@ -1162,18 +1167,10 @@
 		});
 	});
 	</script>
-	<nav id="menubar" class="menubar">
-		<div class="inner">
-			<ul class="menu">
-				<li class="home"><a href="javascript:;">HOME</a></li>
-				<li class="adds"><a href="javascript:;" onclick="samplePopA();">MENU1</a></li>
-				<li class="look"><a href="javascript:;" onclick="samplePopC();">MENU2</a></li>
-				<li class="mypg"><a href="javascript:;">MENU3</a></li>
-			</ul>
-		</div>
-	</nav>
 
-	<include class="footer" data-include-html="../inc/footer.html"></include>
+
+
+	<include class="nav" data-include-html="../inc/nav.html"></include>
 
 </div>
 
@@ -1208,6 +1205,7 @@ $(function() {
 <script src="../../js/moment.js"></script>
 <script src="../../js/circle-progress.js"></script>
 <script src="../../js/pullToRefresh.js"></script>
+
 
 <script src="../../js/ui.js?v=12"></script>
 

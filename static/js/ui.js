@@ -1,7 +1,7 @@
 ﻿//*******************************************//
 // 김기현 : kimkee@naver.com    
-// url : http://kimkee.myds.me:8000
-// update : 2019-06-12
+// url : http://kimkee.github.io/
+// update : 2020-05-12
 //*******************************************//
 
 var ui = {
@@ -13,11 +13,10 @@ var ui = {
 		this.tog.init();
 		this.tab.init();
 		this.tooltips.init();
-		// this.tabs.init();
 		this.dropDown.init();
 		this.popLayer.init();
 		this.slides.init();
-		this.datePick.init();
+		this.datepick.init();
 		this.listLoad.init();
 		console.log("ui.init();");
 	},
@@ -513,7 +512,7 @@ var ui = {
 			});
 		}
 	},
-	datePick:{ // 달력피커 jQuery-ui
+	datepick:{ // 달력피커 jQuery-ui
 		init:function(){
 			$("input.datepicker").length && this.using(); 
 				
@@ -557,11 +556,11 @@ var ui = {
 					var sted = $(els).closest(".uiDate").attr("class").replace(" ","").replace("uiDate","");
 					$("#ui-datepicker-div").removeClass("week").addClass(sted);
 					// console.log(sted);
-					window.setTimeout(ui.datePick.wkThis);
+					window.setTimeout(ui.datepick.wkThis);
 				},
 				onChangeMonthYear:function(ddd){
 					// console.log("달,년  변경");
-					window.setTimeout(ui.datePick.wkThis);
+					window.setTimeout(ui.datepick.wkThis);
 				},
 				onSelect :function(ddd){
 
