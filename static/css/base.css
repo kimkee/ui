@@ -206,6 +206,8 @@ input[type=number] { -moz-appearance: textfield; }
 @media screen and ( max-width:360px)  {
 }
 
+.body.ui{background-color:#ffffff;}
+.contain.ui{background-color:#ffffff;}
 .contain.ui .device{ border:#ddd solid 1px; border-radius:4px; padding:10px; font-size:10px;}
 .contain.ui .device h3{ font-weight:bold; }
 .contain.ui .device #userAgent{ color:#7d51da; }
@@ -216,7 +218,7 @@ input[type=number] { -moz-appearance: textfield; }
 .contain.ui .codeBox .bts{padding:5px 0px 0px 0px;/* position:absolute; right:10px; top:10px;*/margin-bottom: 5px;}
 .contain.ui .codeBox .bts .btn{border-color:#bbbbbb;color:#555555;border-radius:3px;height:24px;line-height: 23px;padding:0px 7px;background-color: #fff;}
 .contain.ui .codeBox .code{ line-height:20px; color:#541717; font-size:11px; background-color:#fbfbfb; border:#dddddd solid 1px; border-radius:3px; padding:0 5px; margin:0px; font-family:"Consolas"; }
-.contain.ui .codeBox pre{display:none;}
+.contain.ui .codeBox pre{/* display:none; */}
 .contain.ui .btn.loadingClose{position:relative;z-index: 2500;}
 .contain.ui div.syntaxhighlighter{ margin:5px 0px !important; }
 .contain.ui div.syntaxhighlighter table td.gutter .line{ min-width:14px;}
@@ -233,4 +235,4 @@ input[type=number] { -moz-appearance: textfield; }
 .contain.ui [data-ui-tab-ctn]{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;margin-top: 10px;}
 .contain.ui #barH{height: 1px;background-color: #868686;position:fixed;left:0px;top: 49px;z-index: 1000;transition: width .4s ease-out;}
 
-.contain.ui #debug{position:fixed;left:10px;bottom: 110px;background: rgba(255, 255, 255, 0.8);z-index: 9999;}
+.body.ui #debug{position:fixed;left:10px;bottom: 110px;background: rgba(255, 255, 255, 0.8);z-index: 9999;}
