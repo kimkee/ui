@@ -9,10 +9,11 @@
 	<meta name="theme-color" content="#333333">
 	<link href="../../img/common/favicon.ico" rel="shrtcut icon">
 	<link href="../../img/common/favicon.png" rel="apple-touch-icon-precomposed">
-	<link rel="stylesheet" href="../../css/jquery-ui.css?v=12">
-	<link rel="stylesheet" href="../../css/swiper.css?v=12">
-	<link rel="stylesheet" href="../../css/base.css?v=12">
-	<link rel="stylesheet" href="../../css/common.css?v=12">
+	<link rel="stylesheet" href="../../css/jquery-ui.css?v=13">
+	<link rel="stylesheet" href="../../css/mCustomScrollbar.css?v=13">
+	<link rel="stylesheet" href="../../css/swiper.css?v=13">
+	<link rel="stylesheet" href="../../css/base.css?v=13">
+	<link rel="stylesheet" href="../../css/common.css?v=13">
 	
 	<script src="../../js/jquery-3.4.1.js"></script>
 	<!-- <script src="../../js/jquery-2.2.4.js"></script> -->
@@ -117,6 +118,7 @@
 				var samplePopA = function(){
 					// 레이어팝업 열기 콜백
 					ui.popLayer.open('popSample1',{
+						hash:true,
 						ocb:function(){
 							console.log("popSample1 열림");
 						},
@@ -397,7 +399,26 @@
 						ui.loading.hide(); // 로딩닫기 </pre>
 				</div>
 			</section>
-			<p class="gap"></p><p class="gap"></p><p class="gap"></p><p class="gap"></p>
+			<p class="gap"></p>
+			
+			<h3 class="hdt">mCustomScroll</h3>
+			<style>
+				.sampleMscroll{display:flex; justify-content: space-between;}
+				.sampleMscroll .ui-mcscroll{width: calc(50% - 5px); border:1px solid #dddddd; padding: 10px;}
+			</style>
+			<script src="../../js/jquery.mCustomScrollbar.js"></script>
+			<section class="sampleMscroll">
+				<div class="ui-mcscroll" style="max-height:150px">
+					<p>내용</p> <p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p>
+				</div>
+				<div class="ui-mcscroll x" style="max-height:150px">
+					<p style="white-space: nowrap;"> 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 </p>
+				</div>
+			</section>
+			
+			<p class="gap"></p>
+			
+			<p class="gap"></p><p class="gap"></p><p class="gap"></p>
 
 			<div class="uiSlider" id="slider">
 				<div class="ui-slider-handle"><span id="custom-handle"></span></div>
@@ -422,7 +443,9 @@
 			});
 			</script>
 
-			<p class="gap"></p><p class="gap"></p>
+			<p class="gap"></p>
+			<p class="gap"></p>
+			
 			
 
 			<div id="amount"></div>
@@ -1086,7 +1109,7 @@
 					</div>
 					<div class="pbt">
 						<div class="bts">
-							<a href="javascript:;" class="btn type e">버튼</a>
+							<a href="javascript:;" class="btn type e" onclick="ui.popLayer.close('popSample1');">닫기</a>
 							<a href="javascript:;" class="btn type a">버튼</a>
 						</div>
 					</div>
@@ -1134,8 +1157,8 @@
 					</div>
 					<div class="pbt">
 						<div class="bts">
-							<a href="javascript:;" class="btn type e">버튼</a>
-							<a href="javascript:;" class="btn type a">버튼</a>
+							<a href="javascript:;" class="btn type e" onclick="ui.popLayer.close('popSample2');">닫기</a>
+							<a href="javascript:;" class="btn type a">확인</a>
 						</div>
 					</div>
 				</div>
@@ -1240,7 +1263,7 @@ $(function() {
 <script src="../../js/lib/jquery.hammer.js-master/hammer.js"></script>
 <script src="../../js/lib/jquery.hammer.js-master/jquery.hammer.js"></script>
 
-<script src="../../js/ui.js?v=12"></script>
+<script src="../../js/ui.js?v=13"></script>
 
 <script src="../guide/html.js"></script><!-- 개발페이지에서는 html.js 임포트 하지말아주세요. -->
 </body>

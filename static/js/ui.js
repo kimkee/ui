@@ -13,6 +13,7 @@ var ui = {
 		this.tog.init();
 		this.tab.init();
 		this.tooltips.init();
+		this.mcscroll.init();
 		this.dropDown.init();
 		this.popLayer.init();
 		this.popWin.init();
@@ -445,6 +446,37 @@ var ui = {
 			$(".loadingPage").remove();
 		}
 	},
+	mcscroll:{
+		init:function(){
+			$(".ui-mcscroll").length && this.using();
+		},
+		opt:{
+			axis:"y" ,
+			scrollInertia:100, 
+			mouseWheel:{ 
+				scrollAmount:100,
+				preventDefault:true
+			},
+			callbacks:{
+				onTotalScroll:function(){ 
+					// console.log(this.mcs.top);
+				}
+			}
+		},
+		using:function() {
+			var _this = this;
+			$(".ui-mcscroll").each(function(){
+				_this.opt.axis = $(this).hasClass("x") ? "x" : "y" ;
+				console.log(_this.opt.axis);
+				if( $(this).find(">*").length >= 1 ){
+					$(this).mCustomScrollbar(_this.opt);
+				}
+			});
+			// $(".ui-mcscroll").mCustomScrollbar("update");
+			// $(".ui-mcscroll").mCustomScrollbar("destroy");
+			// $(".ui-mcscroll").mCustomScrollbar("disable",true);
+		}
+	},
 	accd: { // 아코디언 UI
 		init: function() {
 			$(window).on("load", this.using);
@@ -720,27 +752,6 @@ var ui = {
 			});
 		}
 	},
-	// tab:{ //탭형식컨텐츠
-	// 	init:function(){
-	// 		this.using();
-	// 		// console.log(  ui.param.tab );
-	// 		ui.tab.set( ui.param.tab );
-	// 	},
-	// 	set:function(id){
-	// 		$(".uiTab>li>a[href='#"+id+"']").trigger("click");
-	// 	},
-	// 	using:function(){
-	// 		$(document).on('click',".uiTab:not([data-ui*='link'])>li>a", function(e){
-	// 			$(this).closest("li").addClass("active").siblings("li").removeClass("active");
-	// 			var thisId = $(this).attr("href");
-	// 			//console.log(thisId);
-	// 			if (thisId.indexOf("#") > -1 ) {
-	// 				$(thisId).addClass("active").siblings(".panel").removeClass("active");
-	// 			}
-	// 			e.preventDefault();
-	// 		});
-	// 	}
-	// },
 	tab:{ // 탭 UI
 		init: function() {
 			this.evt();
@@ -778,16 +789,16 @@ var ui = {
 
 			if(opt === true && this.stat === false ){
 				this.stat = true;
-				// ui.lock.sct = $(window).scrollTop();
-				// $("body , html").addClass("lock");
-				// $("html").css({"top":""+(-ui.lock.sct)+"px"});
+				ui.lock.sct = $(window).scrollTop();
+				$("body , html").addClass("lock");
+				$("html").css({"top":""+(-ui.lock.sct)+"px"});
 				$(lockDiv).bind("touchmove scroll", function(e){ e.preventDefault() });
 			}
 			if(opt === false){
 				this.stat = false;
-				// $("body , html").removeClass("lock");
-				// $("html").css({"top":""});
-				// $(window).scrollTop( ui.lock.sct );
+				$("body , html").removeClass("lock");
+				$("html").css({"top":""});
+				$(window).scrollTop( ui.lock.sct );
 				$(lockDiv).unbind("touchmove scroll");
 			}
 		}
