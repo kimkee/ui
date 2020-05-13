@@ -1001,7 +1001,11 @@ var ui = {
 				var id = $(".popLayer.win").attr("id");
 				_this.open(id);
 			}
-			$(window).on("load resize",this.resize);
+			// $(window).on("load resize",this.resize);
+			visualViewport.onresize = function(){
+				_this.resize();
+				console.log("visualViewport.onresize");
+			}
 			$(window).on("hashchange",function(){
 				// _this.history(true);
 			});

@@ -677,6 +677,7 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 
 /* 팝업 레이어 */
 .popLayer{display:none;position:fixed;left:0px;right:0px;top:0px;bottom:0;z-index:1000;background-color: rgba(0,0,0,0.52);outline:none;}
+.popLayer.on{display:block;}
 .popLayer>.pbd{background: #ffffff;position:relative;overflow: hidden;/* padding-top:50px; */min-width: 200px;}
 .popLayer>.pbd>.phd{height: 50px;position: relative;}
 .popLayer>.pbd>.phd>.in{position:fixed;left:0px;right:0px;top:0px;z-index:10;height: 50px;text-align:center;background-color: #ffffff;box-sizing:border-box;border-bottom: #c7c7c7 solid 1px;display: flex;align-items: center;justify-content: center;}
@@ -732,6 +733,7 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .popLayer.c .list>li .bt{padding: 10px 10px;/* font-size: 13px; */display:block;text-transform: uppercase;}
 .popLayer.c .list>li.st .bt{color:#ff414d;}
 .popLayer.c .btnPopClose{position: absolute;left: -99999px;}
+
 
 
 .popLayer.win{display: block;background-color: #ffffff;padding:0px;}
