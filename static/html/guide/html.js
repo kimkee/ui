@@ -170,7 +170,7 @@
 					}
 				}
 			}
-			var thisPg = window.location.pathname.replace("/hdebt_mag/static/","../../");
+			var thisPg = window.location.pathname.replace("/ui/static/","../../");
 
 			$(".linkHtml .cont ul ul>li").each(function () {
 				var text = $(this).find("em").text();
@@ -211,6 +211,7 @@
 					var linkScr = window.localStorage.getItem("linkScr");
 					$(".linkHtml .cont").scrollTop(linkScr);
 				}
+				// console.log(linkTxtTop,linkScr);
 
 			});
 
