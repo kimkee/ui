@@ -666,46 +666,58 @@ var ui = {
 	tooltips:{
 		init:function(){
 			var els = "[data-ui-tooltip='btn']";
+			var _this = this;
+			$(document).on("click",".ui-tooltips .btnPopClose",function(e){
+				var els = $(this).closest(".ui-tooltips").data("tooltip-cont");
+				console.log(els);
+				var bt = $("[data-ui-tooltip='btn'][data-ui-tooltip-cont="+els+"]");
+				_this.close(bt);
+			});
 			$(document).on({
 			    "mouseenter": function(e) {
-					var  chl_id = $(this).data("ui-tooltip-cont");
-					var  chl = $(".ui-tooltips[data-tooltip-cont='"+chl_id+"']") ;
-					$(chl).hide();
-					$(chl).css({ "position": "fixed" }).show();
-					var scY = $(window).scrollTop() || 0;
-					var scX = $(window).scrollLeft() || 0;
-					var winWf = $(window).width() * 0.5  || 0;
-					var winHf = $(window).height() * 0.5  || 0;
-					var ulayH = $(chl).outerHeight()  || 0;
-					var ulayW = $(chl).outerWidth()  || 0;
-					var elH = $(this).outerHeight()  || 0;
-					var elW = $(this).outerWidth()  || 0;
-					var l = $(this).offset().left  || 0;
-					var t = $(this).offset().top  || 0;
-					console.log(l,t);
-					if (t >= winHf + scY) { // console.log("top-오버");
-					    t = t - scY - ulayH;
-					} else { // console.log("top-하프");
-					    t = t - scY + elH;
-					}
-					if (l >= winWf + scX) { // console.log("left-오버");
-					    l = l - scX - ulayW;
-					} else { // console.log("left-하프");
-					    l = l - scX + elW;
-					}
-					// console.log(l,t);
-					$(chl).css({ "top": t, "left": l });
-
+					_this.open(this);
 			    },
 			    "mouseleave": function(e) {
-					var  chl_id = $(this).data("ui-tooltip-cont");
-					var  chl = $(".ui-tooltips[data-tooltip-cont='"+chl_id+"']") ;
-					$(chl).hide();
+					_this.close(this);
 			    },
 			    "click": function(e) {
 					e.preventDefault();
 			    }
 			}, els);
+		},
+		open:function(els){
+			var chl_id = $(els).data("ui-tooltip-cont");
+			var chl = $(".ui-tooltips[data-tooltip-cont='"+chl_id+"']") ;
+			$(chl).hide();
+			$(chl).css({ "position": "fixed" }).show();
+			var scY = $(window).scrollTop() || 0;
+			var scX = $(window).scrollLeft() || 0;
+			var winWf = $(window).width() * 0.5  || 0;
+			var winHf = $(window).height() * 0.5  || 0;
+			var ulayH = $(chl).outerHeight()  || 0;
+			var ulayW = $(chl).outerWidth()  || 0;
+			var elH = $(els).outerHeight()  || 0;
+			var elW = $(els).outerWidth()  || 0;
+			var l = $(els).offset().left  || 0;
+			var t = $(els).offset().top  || 0;
+			console.log(l,t);
+			if (t >= winHf + scY) { // console.log("top-오버");
+			    t = t - scY - ulayH;
+			} else { // console.log("top-하프");
+			    t = t - scY + elH;
+			}
+			if (l >= winWf + scX) { // console.log("left-오버");
+			    l = l - scX - ulayW;
+			} else { // console.log("left-하프");
+			    l = l - scX + elW;
+			}
+			// console.log(l,t);
+			$(chl).css({ "top": t, "left": l });
+		},
+		close:function(els){
+			var  chl_id = $(els).data("ui-tooltip-cont");
+			var  chl = $(".ui-tooltips[data-tooltip-cont='"+chl_id+"']") ;
+			$(chl).hide();			
 		}
 	},
 	tog:{ // 토글 UI

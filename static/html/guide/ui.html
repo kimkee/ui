@@ -30,11 +30,11 @@
 	<include class="header" data-include-html="../inc/header.html"></include>
 	
 	<!-- 컨텐츠 시작 -->
+	<div id="barH"></div>
 	<div class="contain ui" id="contain">
 
 		<main class="contents" id="contents">
 			
-			<div id="barH"></div>
 			
 
 			<div class="device">
@@ -52,11 +52,13 @@
 			<a href="javascript:;" class="btn" disabled>버튼</a>
 			<button type="button" class="btn" disabled>버튼</button>
 			<p class="gap"></p>
+			<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
 			<a href="javascript:;" class="btn a">버튼</a>
 			<a href="javascript:;" class="btn b">버튼</a>
 			<a href="javascript:;" class="btn c">버튼</a>
 			<a href="javascript:;" class="btn d">버튼</a>
 			<a href="javascript:;" class="btn e">버튼</a>
+			<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
 
 			<p class="gap"></p>
 			<div class="btnSet">
@@ -279,7 +281,7 @@
 			<p class="gap"></p>
 			<span class="textarea db"><textarea class="ment" placeholder="댓글달기 자동높이" id="input_reply"></textarea></span>
 			<style>
-				span.textarea>textarea.ment{height: 40px;max-height: 98px;}
+				span.textarea>textarea.ment{height: 32px;max-height: 98px;}
 			</style>
 			<script src="../../js/lib/autosize-master/dist/autosize.js"></script>
 			<script>
@@ -631,10 +633,21 @@
 			</ul>
 			
 			<div data-ui-tab-ctn="tab_b" data-ui-tab-val="tab_b_1" class="active">
-				<p><a href="javascript:;">탭내용1</a></p>
+				탭내용1
 			</div>
 			<div data-ui-tab-ctn="tab_b" data-ui-tab-val="tab_b_2">
-				<p><a href="javascript:;">탭내용2</a></p>
+				탭내용2
+			</div>
+
+			<p class="gap"></p>
+
+			<label class="radio"><input type="radio" name="radio2" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" checked><span>탭선택1</span></label>
+			<label class="radio"><input type="radio" name="radio2" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2"><span>탭선택2</span></label>
+			<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_1" class="active">
+				탭내용1
+			</div>
+			<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_2">
+				탭내용2
 			</div>
 		
 
@@ -646,10 +659,10 @@
 							<li><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2" href="javascript:;">탭메뉴2</a></li>
 						</ul>
 						<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_1" class="active">
-							<p><a href="javascript:;">탭내용1</a></p>
+							탭내용1
 						</div>
 						<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_2">
-							<p><a href="javascript:;">탭내용2</a></p>
+							탭내용2
 						</div></pre>
 				</div>
 			</div>
