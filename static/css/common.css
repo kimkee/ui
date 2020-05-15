@@ -406,7 +406,7 @@ html.lock {position: fixed;width: 100%;height: 100%;overflow: hidden;}
 .btn{border: 1px solid rgba(27, 31, 35, 0.4);background: #ffffff;color: #333333;height: 32px;overflow:hidden;padding:0 12px;display: inline-flex;justify-content: center;align-items: center;vertical-align:middle;cursor:pointer;white-space:nowrap;/* border-radius: .25em; */}
 
 .btn.xs{height: 20px;min-width:30px;padding:0 6px;font-size: 11px;}
-.btn.sm{height: 24px;min-width:30px;padding:0 6px;font-size:12px;}
+.btn.sm{height: 24px;min-width:30px;padding: 0px 6px 1px 6px;font-size:12px;}
 .btn.md{/* height: 32px; */min-width:30px;padding: 0 10px;font-size: 13px;}
 .btn.lg{height: 40px;min-width:50px;padding:0 20px;font-size: 15px;}
 .btn.xl{height: 52px;min-width: 90px;padding: 0 10px;font-size: 16px;font-weight: 400;}
@@ -550,7 +550,7 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 
 
 
-.btnList{text-align: center; padding: 15px 0px;}
+.btnList{text-align: center;padding: 15px 0px 0 0;}
 .btnList::after{ clear:both; content:""; display:table;}
 .btnList .fl{float:left;}
 .btnList .fr{float:right;}
