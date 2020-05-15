@@ -28,14 +28,19 @@
 	
 		
 	<include class="header" data-include-html="../inc/header.html"></include>
-	
+	<a href="javascript:;" class="bt gnb"><b>GNB</b></a>
+	<nav class="gnb">
+		<!-- <a href="javascript:;" class="bt close">CLOSE</a> -->
+		<div class="menu">
+			<ul class="list"></ul>
+		</div>
+	</nav>
 	<!-- 컨텐츠 시작 -->
 	<div id="barH"></div>
+
 	<div class="contain ui" id="contain">
 
 		<main class="contents" id="contents">
-			
-			
 
 			<div class="device">
 				<h3>User Agent</h3>
@@ -43,130 +48,185 @@
 				<div id="cssStatus"></div>
 				<div id="browserStatus"></div>
 			</div>
-			<h3 class="hdt">버튼 - 높이,색상</h3>
-			<a href="javascript:;" class="btn xs">버튼</a>
-			<a href="javascript:;" class="btn sm">버튼</a>
-			<a href="javascript:;" class="btn md">버튼</a>
-			<a href="javascript:;" class="btn lg">버튼</a>
-			<a href="javascript:;" class="btn xl">버튼</a>
-			<a href="javascript:;" class="btn" disabled>버튼</a>
-			<button type="button" class="btn" disabled>버튼</button>
-			<p class="gap"></p>
-			<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
-			<a href="javascript:;" class="btn a">버튼</a>
-			<a href="javascript:;" class="btn b">버튼</a>
-			<a href="javascript:;" class="btn c">버튼</a>
-			<a href="javascript:;" class="btn d">버튼</a>
-			<a href="javascript:;" class="btn e">버튼</a>
-			<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
 
-			<p class="gap"></p>
-			<div class="btnSet">
-				<a href="javascript:;" class="btn">버튼</a>
-			</div>
-			<p class="gap"></p>
-			<div class="btnSet">
-				<a class="btn" href="../guide/ui.html" data-ui="pop-window" data-width="360" data-height="600">팝업윈도우1</a>
-				<a href="javascript:;" class="btn">버튼</a>
-				<a href="javascript:;" class="btn">버튼</a>
-			</div>
-			<p class="gap"></p>
-			<div class="btnSet fit">
-				<a href="javascript:;" class="btn type a">버튼</a>
-				<a href="javascript:;" class="btn type d">버튼</a>
-			</div>
+			<section class="sect" data-sid="ui-button">
+				<h3 class="hdt">버튼 - 높이,색상</h3>
+				<a href="javascript:;" class="btn xs">버튼</a>
+				<a href="javascript:;" class="btn sm">버튼</a>
+				<a href="javascript:;" class="btn md">버튼</a>
+				<a href="javascript:;" class="btn lg">버튼</a>
+				<a href="javascript:;" class="btn xl">버튼</a>
+				<a href="javascript:;" class="btn" disabled>버튼</a>
+				<button type="button" class="btn" disabled>버튼</button>
+				<p class="gap"></p>
+				<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
+				<a href="javascript:;" class="btn a">버튼</a>
+				<a href="javascript:;" class="btn b">버튼</a>
+				<a href="javascript:;" class="btn c">버튼</a>
+				<a href="javascript:;" class="btn d">버튼</a>
+				<a href="javascript:;" class="btn e">버튼</a>
+				<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
 
-			<div class="codeBox">
-				<div class="code">
-					<pre class="brush: html">
-						<a href="javascript:;" class="btn xs">버튼</a>
-						<a href="javascript:;" class="btn sm">버튼</a>
-						<a href="javascript:;" class="btn md">버튼</a>
-						<a href="javascript:;" class="btn lg">버튼</a>
-						<a href="javascript:;" class="btn xl">버튼</a>
-						<a href="javascript:;" class="btn" disabled>버튼</a>
-						<button class="btn" disabled>버튼</button></pre>
+				<p class="gap"></p>
+				<div class="btnSet">
+					<a href="javascript:;" class="btn">버튼</a>
 				</div>
-			</div>
-			
-			<h3 class="hdt">툴팁레이어</h3>
-			<div class="btnList">
-				<div class="fl">
-					<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
+				<p class="gap"></p>
+				<div class="btnSet">
+					<a class="btn" href="../guide/ui.html" data-ui="pop-window" data-width="360" data-height="600">팝업윈도우1</a>
+					<a href="javascript:;" class="btn">버튼</a>
+					<a href="javascript:;" class="btn">버튼</a>
 				</div>
-				<div class="fr">
-					<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
+				<p class="gap"></p>
+				<div class="btnSet fit">
+					<a href="javascript:;" class="btn type a">버튼</a>
+					<a href="javascript:;" class="btn type d">버튼</a>
 				</div>
-			</div>
 
-			<h3 class="hdt">페이징</h3>
-			<include data-include-html="../inc/paging.html"></include>
-
-			<h3 class="hdt">레이어팝업 - ui.popLayer</h3>
-			<section class="codeBox"> 
-				<div class="code">
-					<div class="bts">
-						<a class="btn" href="javascript:samplePopA();">팝레이어A</a>
-						<a class="btn" href="javascript:samplePopB();">팝레이어B</a>
-						<a class="btn" href="javascript:samplePopC();">팝레이어C</a>
+				<div class="codeBox">
+					<div class="code">
+						<pre class="brush: html">
+							<a href="javascript:;" class="btn xs">버튼</a>
+							<a href="javascript:;" class="btn sm">버튼</a>
+							<a href="javascript:;" class="btn md">버튼</a>
+							<a href="javascript:;" class="btn lg">버튼</a>
+							<a href="javascript:;" class="btn xl">버튼</a>
+							<a href="javascript:;" class="btn" disabled>버튼</a>
+							<button class="btn" disabled>버튼</button></pre>
 					</div>
-					<pre class="brush: js">
-						ui.popLayer.open('popSample1'); // 팝레이어열기
-						ui.popLayer.close('popSample1'); // 팝레이어닫기
-						ui.popLayer.refresh('popSample1'); // 팝스크롤새로고침</pre>
-				</div>	
-			</section>
-			<script>
+				</div>
+
+				<div class="btnList">
+					<a href="javascript:;" class="btn">가운데</a>
+				</div>
+
+				<div class="btnList">
+					<div class="fl"><a href="javascript:;" class="btn">왼쪽</a></div>
+					<div class="fr"><a href="javascript:;" class="btn">오른쪽</a></div>
+				</div>
 				
-				var samplePopA = function(){
-					// 레이어팝업 열기 콜백
-					ui.popLayer.open('popSample1',{
-						hash:true,
-						ocb:function(){
-							console.log("popSample1 열림");
-						},
-						ccb:function(){
-							console.log("popSample1 닫힘");
-						}						
-					});
-				}
-				var samplePopB = function(){
-					// 레이어팝업 열기 콜백
-					ui.popLayer.open('popSample2',{
-						ocb:function(){
-							console.log("popSample2 열림");
-						},
-						ccb:function(){
-							console.log("popSample2 닫힘");
-						}						
-					});
-				}
-				var samplePopC = function(){
-					// 레이어팝업 열기 콜백
-					ui.popLayer.open('popSample3',{
-						ccb:function(){
-							console.log("popSample3 닫힘");
-						}
-					});
-				}
-			</script>
+			</section>
 
-			<h3 class="hdt">알럿,컨펌 - Alert,Confirm</h3>
-			<section class="codeBox">
-				<div class="code">
-					<div class="bts">
-						<a class="btn" href="javascript:alert_sample();">알럿</a>
-						<a class="btn" href="javascript:confirm_sample();">컨펌</a>
+			<section class="sect" data-sid="ui-tooltips">
+				<h3 class="hdt">툴팁레이어</h3>
+				<div class="btnList">
+					<div class="fl">
+						<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
 					</div>
-					<pre class="brush: js">
-					ui.alert({  // 알럿창 띄우기
-						msg:'<p>알럿 메시지<br> 입니다.</p>' ,
-						ycb:function(){
-							console.log('알럿확인결과');
-						},
-						ybt:'확인'	
-					});	
+					<div class="fr">
+						<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
+					</div>
+				</div>
+			</section>
 
+			<section class="sect" data-sid="ui-paging">
+				<h3 class="hdt"><a href="#ui-paging">페이징</a></h3>
+				<include data-include-html="../inc/paging.html"></include>
+			</section>
+
+			<section class="sect" data-sid="ui-layerpop">
+				<h3 class="hdt">레이어팝업 - ui.popLayer</h3>
+				<section class="codeBox"> 
+					<div class="code">
+						<div class="bts">
+							<a class="btn" href="javascript:samplePopA();">팝레이어A</a>
+							<a class="btn" href="javascript:samplePopB();">팝레이어B</a>
+							<a class="btn" href="javascript:samplePopC();">팝레이어C</a>
+						</div>
+						<pre class="brush: js">
+							ui.popLayer.open('popSample1'); // 팝레이어열기
+							ui.popLayer.close('popSample1'); // 팝레이어닫기
+							ui.popLayer.refresh('popSample1'); // 팝스크롤새로고침</pre>
+					</div>	
+				</section>
+				<script>
+					
+					var samplePopA = function(){
+						// 레이어팝업 열기 콜백
+						ui.popLayer.open('popSample1',{
+							hash:true,
+							ocb:function(){
+								console.log("popSample1 열림");
+							},
+							ccb:function(){
+								console.log("popSample1 닫힘");
+							}						
+						});
+					}
+					var samplePopB = function(){
+						// 레이어팝업 열기 콜백
+						ui.popLayer.open('popSample2',{
+							ocb:function(){
+								console.log("popSample2 열림");
+							},
+							ccb:function(){
+								console.log("popSample2 닫힘");
+							}						
+						});
+					}
+					var samplePopC = function(){
+						// 레이어팝업 열기 콜백
+						ui.popLayer.open('popSample3',{
+							ccb:function(){
+								console.log("popSample3 닫힘");
+							}
+						});
+					}
+				</script>
+			</section>
+
+			<section class="sect" data-sid="ui-alert">
+				<h3 class="hdt">알럿,컨펌 - Alert,Confirm</h3>
+				<section class="codeBox">
+					<div class="code">
+						<div class="bts">
+							<a class="btn" href="javascript:alert_sample();">알럿</a>
+							<a class="btn" href="javascript:confirm_sample();">컨펌</a>
+						</div>
+						<pre class="brush: js">
+						ui.alert({  // 알럿창 띄우기
+							msg:'<p>알럿 메시지<br> 입니다.</p>' ,
+							ycb:function(){
+								console.log('알럿확인결과');
+							},
+							ybt:'확인'	
+						});	
+
+						ui.confirm({ // 컨펌 창 띄우기
+							msg:'<p>공통 컨펌창 샘플  <br><u>kimkee@naver.com</u> 님은</p>' +
+								'<p>이미 <b>네이버</b> 인증을 통해 회원<br> 가입되었습니다.</p>'+
+								'<p>(회원가입 : 2017-08-08)</p>',
+							ycb:function(){
+								console.log('컨펌확인결과');
+							},
+							ncb:function(){
+								console.log('컨펌취소결과');
+							},
+							ybt:'로그인하기',
+							nbt:'닫기'	
+						});</pre>
+					</div>	
+				</section>
+			</section>
+
+			<section class="sect" data-sid="ui-toast">
+				<h3 class="hdt">토스트UI - ui.toast</h3>
+				<section class="codeBox">
+					<div class="code">
+						<div class="bts">
+							<a class="btn" href="javascript:toast_sample1();">토스트1</a>
+							<a class="btn" href="javascript:toast_sample2();">토스트2</a>
+						</div>
+						<pre class="brush: js">
+							ui.toast({  // 토스트 창띄우기
+								msg:'<p>토스트메시지입니다.</p>', // 메시지(HTML)
+								cls:'wish', // null, 'wish' , 'cart'
+								sec:1500 // 사라질 시간
+							});</pre>
+					</div>
+				</section>
+				<script>
+				var confirm_sample = function(){
 					ui.confirm({ // 컨펌 창 띄우기
 						msg:'<p>공통 컨펌창 샘플  <br><u>kimkee@naver.com</u> 님은</p>' +
 							'<p>이미 <b>네이버</b> 인증을 통해 회원<br> 가입되었습니다.</p>'+
@@ -179,911 +239,886 @@
 						},
 						ybt:'로그인하기',
 						nbt:'닫기'	
-					});</pre>
-				</div>	
-			</section>
-			<h3 class="hdt">토스트UI - ui.toast</h3>
-			<section class="codeBox">
-				<div class="code">
-					<div class="bts">
-						<a class="btn" href="javascript:toast_sample1();">토스트1</a>
-						<a class="btn" href="javascript:toast_sample2();">토스트2</a>
-					</div>
-					<pre class="brush: js">
-						ui.toast({  // 토스트 창띄우기
-							msg:'<p>토스트메시지입니다.</p>', // 메시지(HTML)
-							cls:'wish', // null, 'wish' , 'cart'
-							sec:1500 // 사라질 시간
-						});</pre>
-				</div>
-			</section>
-			<script>
-			var confirm_sample = function(){
-				ui.confirm({ // 컨펌 창 띄우기
-					msg:'<p>공통 컨펌창 샘플  <br><u>kimkee@naver.com</u> 님은</p>' +
-						'<p>이미 <b>네이버</b> 인증을 통해 회원<br> 가입되었습니다.</p>'+
-						'<p>(회원가입 : 2017-08-08)</p>',
-					ycb:function(){
-						console.log('컨펌확인결과');
-					},
-					ncb:function(){
-						console.log('컨펌취소결과');
-					},
-					ybt:'로그인하기',
-					nbt:'닫기'	
-				});
-			}
-			var alert_sample = function(){
-				ui.alert({  // 알럿창 띄우기
-					msg:'<p><b>알럿</b> <u>메시지</u><br> 입니다.</p>' ,
-					ycb:function(){
-						console.log('알럿확인결과');
-					},
-					ybt:'확인'	
-				});
-			}
-			var toast_sample1 = function(){
-				ui.toast({   // 토스트 창띄우기
-					msg:'<p>토스트메시지입니다.</p>',
-					cls:'type a',
-					sec:1500
-				});
-			}
-			var toast_sample2 = function(){
-				ui.toast({   // 토스트 창띄우기
-					msg:'<p>토222스트메시지입니다.</p>',
-					cls:'type b',
-					sec:1500,
-					bot:50
-				});
-			}
-			</script>
-			
-			<p class="gap"></p>
-			<span class="nums" id="rwd_code">20200416-aBDS</span>
-			<a href="javascript:;" class="btn sm" onclick="tesCopyRwd();">복사 버튼</a>
-			<script>
-				function tesCopyRwd() {
-					// 클립보드로 복사하는 기능을 생성
-					var aux = document.createElement("input"); 
-					var rwd = document.getElementById("rwd_code");
-					aux.setAttribute("value", rwd.innerText ); 
-					document.body.appendChild(aux); 
-					aux.select(); 
-					document.execCommand("copy"); 
-					document.body.removeChild(aux); 
-					console.log(aux.value);		
-					ui.toast({msg:'<p>Link copied to clipboard</p>'});
+					});
 				}
-			</script>
-
-
-			<h3 class="hdt">입력 - input,textarea,select</h3>
-			<span class="input db"><input type="text" placeholder="텍스트"></span>
-			<p class="gap"></p>
-			<span class="input db del"><input type="text" placeholder="삭제버튼" value="텍스트"></span>
-			<p class="gap"></p>
-			<span class="input sch"><input type="text" placeholder="검색어 입력"><a href="javascript:;" class="btnSch">검색</a></span>
-			<p class="gap"></p>
-			<span class="input db"><input type="text" class="valid" placeholder="텍스트"></span>
-			<p class="gap"></p>
-			<span class="input db"><input type="text" class="valid ok" placeholder="텍스트"></span>
-			<p class="gap"></p>
-			<span class="input db"><input type="text" class="valid no" placeholder="텍스트"></span>
-			<p class="gap"></p>
-			<span class="input db"><input type="password" class="valid" placeholder="비밀번호"></span>
-			<p class="gap"></p>
-			<span class="input db"><input type="text" readonly value="readonly"></span>
-			<p class="gap"></p>
-			<span class="input db"><input type="text" disabled value="disabled"></span>
-			<p class="gap"></p>
-			<span class="textarea db"><textarea placeholder="내용"></textarea></span>
-			<p class="gap"></p>
-			<span class="textarea db"><textarea class="ment" placeholder="댓글달기 자동높이" id="input_reply"></textarea></span>
-			<style>
-				span.textarea>textarea.ment{height: 32px;max-height: 98px;}
-			</style>
-			<script src="../../js/lib/autosize-master/dist/autosize.js"></script>
-			<script>
-				autosize( $('#input_reply') );
-				// $('#input_reply').on('autosize:resized', function(){
-				// 	console.log('textarea height updated');
-				// });
-			</script>
-			<p class="gap"></p>
-			<span class="select db">
-				<select>
-					<option>선택</option>
-				</select>
-			</span>
-			<p class="gap"></p>
-			<span class="select db">
-				<select disabled>
-					<option>선택</option>
-				</select>
-			</span>
-			<p class="gap"></p>
-			<span class="select db jqui custom">
-				<select class="dd">
-					<option>선택1</option>
-					<option>선택2</option>
-					<option>선택3</option>
-				</select>
-			</span>
-			
-			
-			<h3 class="hdt">달력 - 일,주,월 선택</h3>
-			<span class="input db uiDate"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
-			
-			<div class="weeks"><span id="START_DT"></span> ~ <span id="END_DT"></span></div>
-			<span class="uiDate input db week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
-			
-			<p class="gap"></p>
-			<span class="input db uiDate"><input type="text" class="datepicker_month" placeholder="YYYY-MM-DD" value="2019-06" readonly></span>
-			
-			<script>
-			$(document).ready(function(){
-
-				// 달력 주간 선택 moment.js
-				setWeeklyDateFnc =  function (date){
-					var monday, sunday;
-					if(moment(date).day() === 0){
-						monday = moment(date).day(-6).format("YYYY-MM-DD");
-						sunday = moment(date).day(0).format("YYYY-MM-DD");
-					}else{
-						monday = moment(date).day(1).format("YYYY-MM-DD");
-						sunday = moment(date).day(7).format("YYYY-MM-DD");
-					}
-					// console.log(monday , sunday);
-					$("#START_DT").html(monday);
-					$("#END_DT").html(sunday);
+				var alert_sample = function(){
+					ui.alert({  // 알럿창 띄우기
+						msg:'<p><b>알럿</b> <u>메시지</u><br> 입니다.</p>' ,
+						ycb:function(){
+							console.log('알럿확인결과');
+						},
+						ybt:'확인'	
+					});
 				}
-				var today = $("#schedWeek").val();
-				setWeeklyDateFnc(today);
-
-				$("input#schedWeek").datepicker( "option", "onSelect", function(date,els){
-					DD = date.replace(/[-]/gi, "");
-					setWeeklyDateFnc(DD);
-					console.log(els);
-				});
-				$("input#schedWeek").datepicker( "option", "showOtherMonths", true );
-				$("input#schedWeek").datepicker( "option", "selectOtherMonths", true );
-
-				var now = new Date();
-				$("input#schedWeek").datepicker( "option", "minDate", new Date(2018, 1 - 1, 1) );
-				$("input#schedWeek").datepicker( "option", "maxDate", new Date( now.getFullYear() , now.getMonth() , now.getDate() ) );
-
-
-			});
-			</script>
-
-			<h3 class="hdt">첵크박스,라디오버튼</h3>
-			<label class="checkbox"><input type="checkbox"><span>선택</span></label>
-
-			<label class="checkbox"><input type="checkbox" checked="checked"><span></span></label>
-			<label class="checkbox"><input type="checkbox" checked="checked" disabled><span></span></label>
-			<label class="checkbox"><input type="checkbox" disabled><span></span></label>
-
-			<label class="radio"><input type="radio" name="radio1"><span>선택</span></label>
-			<label class="radio"><input type="radio" name="radio1" checked="checked"><span>선택</span></label>
-			<label class="radio"><input type="radio" name="radio2" checked="checked" disabled><span>선택</span></label>
-			<label class="radio"><input type="radio" name="radio2" disabled><span>선택</span></label>
-
-			<p class="gap"></p>
-			<label class="checkbox"><input type="checkbox" data-check="all" data-check-id="checkTest1"><span>전체선택</span></label>
-			<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택1</span></label>
-			<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택2</span></label>
-			<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택3</span></label>
-			<p class="gap"></p>
-			<div class="uiChk"><input type="checkbox" checked="checked"><em></em></div>
-			<div class="uiChk"><input type="checkbox" checked="checked" disabled><em></em></div>
-
-			<div class="codeBox">
-				<div class="code">
-					<pre class="brush: html">
-						<label class="checkbox"><input type="checkbox" data-check="all" data-check-id="checkTest1"><span>전체선택</span></label>
-						<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택1</span></label>
-						<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택2</span></label>
-						<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택3</span></label></pre>
-				</div>
-			</div>
-
-
-
-			<h3 class="hdt">로딩 - ui.loading</h3>
-			<section class="codeBox">
-				<div class="code">
-					<div class="bts">
-						<a class="btn" href="javascript:ui.loading.show();">로딩열기</a>
-						<a class="btn loadingClose" href="javascript:ui.loading.hide();">로딩닫기</a>
-					</div>
-					<pre class="brush: js">
-						ui.loading.show(); // 로딩열기
-						ui.loading.hide(); // 로딩닫기 </pre>
-				</div>
-			</section>
-			<p class="gap"></p>
-			
-			<h3 class="hdt">mCustomScroll</h3>
-			<style>
-				.sampleMscroll{display:flex; justify-content: space-between;}
-				.sampleMscroll .ui-mcscroll{width: calc(50% - 5px); border:1px solid #dddddd; padding: 10px;}
-			</style>
-			<script src="../../js/jquery.mCustomScrollbar.js"></script>
-			<section class="sampleMscroll">
-				<div class="ui-mcscroll" style="max-height:150px">
-					<p>내용</p> <p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p>
-				</div>
-				<div class="ui-mcscroll x" style="max-height:150px">
-					<p style="white-space: nowrap;"> 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 </p>
-				</div>
-			</section>
-			
-			<p class="gap"></p>
-			
-			<p class="gap"></p><p class="gap"></p><p class="gap"></p>
-
-			<div class="uiSlider" id="slider">
-				<div class="ui-slider-handle"><span id="custom-handle"></span></div>
-			</div>
-			<script>
-			$(document).ready(function(){
-				var handle = $( "#custom-handle" );
-				$( "#slider" ).slider({
-					orientation: "horizontal", // "vertical" , "horizontal"
-					value:55,
-					min: 0,
-					max: 100,
-					step: 1,
-					create: function() {
-						handle.text( $( this ).slider( "value" ) + "%");
-					},
-					slide: function( event, ui ) {
-						handle.text( ui.value + "%");
-						console.log(ui.value);	
-					}
-				});
-			});
-			</script>
-
-			<p class="gap"></p>
-			<p class="gap"></p>
-			
-			
-
-			<div id="amount"></div>
-			<p class="gap"></p>
-			<div class="uiSlider" id="slider-range"></div>
-			
-			<script>
-			$(document).ready(function(){
-				$( "#slider-range" ).slider({
-					range: true,
-					min: 0,
-					max: 500,
-					values: [ 75, 300 ],
-					slide: function( event, ui ) {
-						$( "#amount" ).text( ui.values[ 0 ] + "원 - " + ui.values[ 1 ] +"원" );
-						console.log(ui.values[0] ,ui.values[1]  );	
-					}
-				});
-				$( "#amount" ).text( $( "#slider-range" ).slider( "values", 0 ) + "원 - " + $( "#slider-range" ).slider( "values", 1 )+"원" );				
-			});
-			</script>
-
-			
-			<p class="gap"></p>
-			<p class="gap"></p>
-			<div class="uiCircle c1" 
-				data-value="0.9"
-				data-size="100"
-				data-fill= '{ "color": "#000000" }' 
-				data-empty-fill="#ddd"
-				data-thickness="5"
-				data-animation-start-value="0.0" >
-				<strong></strong>
-			</div>
-			<div class="uiCircle c2" 
-				data-value="0.45"
-				data-size="100"
-				data-fill= '{ "color": "#000000" }' 
-				data-empty-fill="rgba(0, 0, 0, .5)"
-				data-thickness="50"
-				data-animation-start-value="0.0" >
-				<strong style="color: #ffffff"></strong>
-			</div>
-			<div class="uiCircle c3" 
-				data-value="0.75"
-				data-size="100"
-				data-arc-coef= "0.7"
-				data-start-angle = "1.6"
-				data-empty-fill="rgba(0, 0, 0, .5)"
-				data-fill = '{"image": "https://i.imgur.com/pT0i89v.png"}'
-				data-thickness="20"
-				data-animation-start-value="0.0" >
-				<strong></strong>
-			</div>
-			<script>
-			$(document).ready(function(){
-
-				$('.uiCircle').circleProgress({
-					// value: 0.75,
-					// arcCoef: 1.0,
-					// startAngle : 1.5 * Math.PI,
-					// fill: {"image": "http://i.imgur.com/pT0i89v.png"},
-					// fill: {gradient: [['#000', .1], ['#444', .8]], gradientAngle: Math.PI / 4},
-				}).on('circle-animation-progress', function(event, progress, stepValue) {
-					//$(this).find('strong').text(stepValue.toFixed(2).substr(1));
-					$(this).find('strong').html(Math.round(100 * stepValue) + '<i>%</i>');
-				}).on('circle-animation-end', function (event, progress) {
-					// console.log("완료");
-					// $(this).find("canvas").css({"opacity":"0"});
-				});
-				circleSmaple = function(c){
-					if( c == 1 ) {
-						$('.uiCircle').circleProgress('value', 0.22);
-					}
-					if( c == 2 ) {
-						$('.uiCircle').circleProgress('value', 0.93);
-					}
-					if( c == 3 ) {
-						$('.uiCircle').circleProgress('redraw');
-					}
+				var toast_sample1 = function(){
+					ui.toast({   // 토스트 창띄우기
+						msg:'<p>토스트메시지입니다.</p>',
+						cls:'type a',
+						sec:1500
+					});
 				}
-			});
-			</script>
-			<a href="javascript:;" class="btn" onclick="circleSmaple(1);">22%</a>
-			<a href="javascript:;" class="btn" onclick="circleSmaple(2);">93%</a>
-			<a href="javascript:;" class="btn" onclick="circleSmaple(3);">redraw</a>
-			<p class="gap"></p>
+				var toast_sample2 = function(){
+					ui.toast({   // 토스트 창띄우기
+						msg:'<p>토222스트메시지입니다.</p>',
+						cls:'type b',
+						sec:1500,
+						bot:50
+					});
+				}
+				</script>
+			</section>
 
-			<div class="uiSpinner" data-max="5">
-				<input class="n" type="number" value="1"> <button type="button" class="m">-</button> <button type="button" class="p">+</button>
-			</div>
+			<section class="sect" data-sid="ui-copy">
+				<h3 class="hdt">복사 COPY Text</h3>
+				<span class="nums" id="rwd_code">20200416-aBDS</span>
+				<a href="javascript:;" class="btn sm" onclick="tesCopyRwd();">복사 버튼</a>
+				<script>
+					function tesCopyRwd() {
+						// 클립보드로 복사하는 기능을 생성
+						var aux = document.createElement("input"); 
+						var rwd = document.getElementById("rwd_code");
+						aux.setAttribute("value", rwd.innerText ); 
+						document.body.appendChild(aux); 
+						aux.select(); 
+						document.execCommand("copy"); 
+						document.body.removeChild(aux); 
+						console.log(aux.value);		
+						ui.toast({msg:'<p>Link copied to clipboard</p>'});
+					}
+				</script>
+			</section>
 
-			<div class="uiSpinner" data-max="3">
-				<input class="n" type="number" value="1"> <button type="button" class="m">-</button> <button type="button" class="p">+</button>
-			</div>
-
-			<p class="gap"></p>
-			<div class="uiStar" data-star="3.5">
-				<ul>
-					<li><em class="st">별</em></li>
-					<li><em class="st">별</em></li>
-					<li><em class="st">별</em></li>
-					<li><em class="st">별</em></li>
-					<li><em class="st">별</em></li>
-				</ul>
-				<i class="p">0.0</i>
-			</div>
-			
-			<p class="gap"></p>
-			<div class="uiStar">
-				<ul>
-					<li><button type="button" class="st">별</button></li>
-					<li><button type="button" class="st">별</button></li>
-					<li><button type="button" class="st">별</button></li>
-					<li><button type="button" class="st">별</button></li>
-					<li><button type="button" class="st">별</button></li>
-				</ul>
-				<i class="p">0</i>
-			</div>
-
-			<h3 class="hdt">첨부파일 - 파일,이미지</h3>
-
-			<span class="ui-add-file" data-ui="attach">
-				<span class="btn-attach btn">
-					<label class="fileButton">파일선택<input type="file" class="fileInput" accept="*/*"></label>
+			<section class="sect" data-sid="ui-inputs">
+				<h3 class="hdt">입력 - input,textarea,select</h3>
+				<span class="input db"><input type="text" placeholder="텍스트"></span>
+				<p class="gap"></p>
+				<span class="input db del"><input type="text" placeholder="삭제버튼" value="텍스트"></span>
+				<p class="gap"></p>
+				<span class="input sch"><input type="text" placeholder="검색어 입력"><a href="javascript:;" class="btnSch">검색</a></span>
+				<p class="gap"></p>
+				<span class="input db"><input type="text" class="valid" placeholder="텍스트"></span>
+				<p class="gap"></p>
+				<span class="input db"><input type="text" class="valid ok" placeholder="텍스트"></span>
+				<p class="gap"></p>
+				<span class="input db"><input type="text" class="valid no" placeholder="텍스트"></span>
+				<p class="gap"></p>
+				<span class="input db"><input type="password" class="valid" placeholder="비밀번호"></span>
+				<p class="gap"></p>
+				<span class="input db"><input type="text" readonly value="readonly"></span>
+				<p class="gap"></p>
+				<span class="input db"><input type="text" disabled value="disabled"></span>
+				<p class="gap"></p>
+				<span class="textarea db"><textarea placeholder="내용"></textarea></span>
+				<p class="gap"></p>
+				<span class="textarea db"><textarea class="ment" placeholder="댓글달기 자동높이" id="input_reply"></textarea></span>
+				<style>
+					span.textarea>textarea.ment{height: 32px;max-height: 98px;}
+				</style>
+				<script src="../../js/lib/autosize-master/dist/autosize.js"></script>
+				<script>
+					autosize( $('#input_reply') );
+					// $('#input_reply').on('autosize:resized', function(){
+					// 	console.log('textarea height updated');
+					// });
+				</script>
+				<p class="gap"></p>
+				<span class="select db">
+					<select>
+						<option>선택</option>
+					</select>
 				</span>
-			</span>
-			<span class="ui-add-file on" data-ui="attach">
-				<span class="btn-attach btn">
-					<label class="fileButton">파일선택<input type="file" class="fileInput" accept="*/*"></label>
+				<p class="gap"></p>
+				<span class="select db">
+					<select disabled>
+						<option>선택</option>
+					</select>
 				</span>
-				<span class="file">
-					<span class="loc">abc1223.doc</span>
-					<button type="button" class="delete">삭제</button>
+				<p class="gap"></p>
+				<span class="select db jqui custom">
+					<select class="dd">
+						<option>선택1</option>
+						<option>선택2</option>
+						<option>선택3</option>
+					</select>
 				</span>
-			</span>
+			</section>
 
-			<p class="gap"></p>
-			<span class="ui-add-pic on" data-ui="attach">
-				<span class="btn-add-pic">
-					<label class="fileButton">이미지선택<input type="file" class="fileInput" accept="image/*"></label>
-				</span>
-				<span class="file">
-					<img class="img" src="../../img/temp/sss.png" alt="">
-					<button type="button" class="delete">삭제</button>
-				</span>
-			</span>
-			<span class="ui-add-pic" data-ui="attach">
-				<span class="btn-add-pic">
-					<label class="fileButton">이미지선택<input type="file" class="fileInput" accept="image/*"></label>
-				</span>
-			</span>
-
-
-
-
-
-			
-			<p class="gap"></p>
-			<div class="btnList">
-				<a href="javascript:;" class="btn">가운데</a>
-			</div>
-
-			<div class="btnList">
-				<div class="fl"><a href="javascript:;" class="btn">왼쪽</a></div>
-				<div class="fr"><a href="javascript:;" class="btn">오른쪽</a></div>
-			</div>
-			
-			
-			<h3 class="hdt">탭메뉴</h3>
-			
-			<ul class="uiTab type a">
-				<li class="active"><a data-ui-tab-btn="tab_a" data-ui-tab-val="tab_a_1" href="javascript:;">탭메뉴1</a></li>
-				<li><a data-ui-tab-btn="tab_a" data-ui-tab-val="tab_a_2" href="javascript:;">탭메뉴2</a></li>
-			</ul>
-			
-			<p class="gap"></p>
-
-			<ul class="uiTab type a">
-				<li class="active"><a data-ui-tab-btn="tab_b" data-ui-tab-val="tab_b_1" href="javascript:;">탭메뉴1</a></li>
-				<li><a data-ui-tab-btn="tab_b" data-ui-tab-val="tab_b_2" href="javascript:;">탭메뉴2</a></li>
-			</ul>
-			
-			<div data-ui-tab-ctn="tab_b" data-ui-tab-val="tab_b_1" class="active">
-				탭내용1
-			</div>
-			<div data-ui-tab-ctn="tab_b" data-ui-tab-val="tab_b_2">
-				탭내용2
-			</div>
-
-			<p class="gap"></p>
-
-			<label class="radio"><input type="radio" name="radio2" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" checked><span>탭선택1</span></label>
-			<label class="radio"><input type="radio" name="radio2" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2"><span>탭선택2</span></label>
-			<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_1" class="active">
-				탭내용1
-			</div>
-			<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_2">
-				탭내용2
-			</div>
-		
-
-			<div class="codeBox">
-				<div class="code">
-					<pre class="brush: html">
-						<ul class="uiTab a">
-							<li class="active"><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" href="javascript:;">탭메뉴1</a></li>
-							<li><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2" href="javascript:;">탭메뉴2</a></li>
-						</ul>
-						<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_1" class="active">
-							탭내용1
-						</div>
-						<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_2">
-							탭내용2
-						</div></pre>
-				</div>
-			</div>
-
-
-			<h3 class="hdt">토글UI</h3>
-			
-			<a href="javascript:;" data-ui-tog="btn" data-ui-tog-val="tog_sample1" class="btn sm">토글UI</a>
-			<div data-ui-tog="ctn" data-ui-tog-val="tog_sample1">
-				<p>토글내용 토글내용</p>
-				<p>토글내용 토글내용</p>
-			</div>	
-
-			<div class="codeBox">
-				<div class="code">
-					<pre class="brush: html">
-						<a href="javascript:;" data-ui-tog="btn" data-ui-tog-val="tog_sample1" class="btn">토글UI</a>
-						<div data-ui-tog="ctn" data-ui-tog-val="tog_sample1">
-							<p>토글내용 토글내용</p>
-							<p>토글내용 토글내용</p>
-						</div></pre>
-				</div>
-			</div>
-
-
-			<h3 class="hdt">아코디언UI</h3>
-			<!-- 아코디언형 -->
-			<ul class="uiAccd" data-accd="accd">
-				<li class="open">
-					<div class="hBox"> 아코디언 UI Accd <button type="button" class="btnTog">버튼</button></div>
-					<div class="cBox">내용 내용 내용 <br> 내용</div>
-				</li>
-				<li>
-					<div class="hBox"> 아코디언 UI Accd <button type="button" class="btnTog">버튼</button></div>
-					<div class="cBox">내용 내용 내용 <br> 내용</div>
-				</li>
-				<li class="except">
-					<div class="hBox"> 아코디언 UI Accd 제외 <button type="button" class="btnTog">버튼</button></div>
-					<div class="cBox">내용 내용 내용 <br> 내용</div>
-				</li>
-			</ul>
-			<p class="gap"></p>
-			<!-- 토글형 -->
-			<ul class="uiAccd" data-accd="tog">
-				<li class="open">
-					<div class="hBox"> 아코디언 UI Tog <a class="btnTog" href="javascript:;">버튼</a></div>
-					<div class="cBox">내용 내용 내용 <br> 내용</div>
-				</li>
-				<li>
-					<div class="hBox"> 아코디언 UI Tog <a class="btnTog" href="javascript:;">버튼</a></div>
-					<div class="cBox">내용 내용 내용 <br> 내용</div>
-				</li>
-				<li class="except">
-					<div class="hBox"> 아코디언 UI Tog 제외 <div class="btnTog" href="javascript:;">버튼</div></div>
-					<div class="cBox">내용 내용 내용 <br> 내용</div>
-				</li>
-			</ul>
-			<div class="codeBox">
-				<div class="code">
-					<pre class="brush: html">
-						<ul class="uiAccd" data-accd="accd">
-							<li class="open">
-								<div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
-								<div class="cBox">내용</div>
-							</li>
-							<li>
-								<div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
-								<div class="cBox">내용</div>
-							</li>
-							<li class="except">
-								<div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
-								<div class="cBox">내용</div>
-							</li>
-						</ul></pre>
-				</div>
-			</div>
-
-			
-			<h3 class="hdt">테이블</h3>
-			<table class="tbform a" cellpadding="0" cellspacing="0">
-				<colgroup>
-					<col width="20%">
-					<col>
-					<col width="20%">
-					<col>
-				</colgroup>
-				<tbody>
-					<tr>
-						<th rowspan="2">소재</th>
-						<td>99(BLACK)</td>
-						<th rowspan="2">TH</th>
-						<td>TD</td>
-					</tr>
-					<tr>
-						
-						<td>99(BLACK)</td>
-						<td>TD</td>
-					</tr>
-					<tr>
-						<th>치수</th>
-						<td>99(BLACK)</td>
-						<th>TH</th>
-						<td>TD</td>
-					</tr>
-					<tr>
-						<th>치수</th>
-						<td rowspan="2">99(BLACK)</td>
-						<th rowspan="2">TH</th>
-						<td>TD</td>
-					</tr>
-					<tr>
-						<th>치수</th>
-						
-						<td>TD</td>
-					</tr>
-				</tbody>
-			</table>
-			<p class="gap"></p>
-			
-			<table class="tblist a" cellspacing="0" cellpadding="0" >
-				<colgroup>
-					<col>
-					<col>
-				</colgroup>
-				<thead>
-					<tr>
-						<th>TH1</th>
-						<th colspan="2">TH2</th>
-						
-						<th rowspan="2">TH4</th>
-						<th rowspan="2">TH5</th>
-					</tr>
-					<tr>
-						
-						<th>TH6</th>
-						<th>TH7</th>
-						<th>TH8</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>TD1</td>
-						<td>TD2</td>
-						<td>TD3</td>
-						<td>TD4</td>
-						<td>TD5</td>
-					</tr>
-					<tr>
-						<td>TD1</td>
-						<td>TD2</td>
-						<td>TD3</td>
-						<td>TD4</td>
-						<td>TD5</td>
-					</tr>
-				</tbody>
-			</table>
-
-			<h3 class="hdt">드롭다운</h3>
-
-			<section class="dromDownSample">
+			<section class="sect" data-sid="ui-datepickers">
+				<h3 class="hdt">달력 - 일,주,월 선택</h3>
+				<span class="input db uiDate"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
 				
-				<div class="uiDropDown" data-ui="val" id="kkk">
-					<div class="list">
-						<ul>
-							<li><button type="button" value="1">선택메뉴1선택메뉴1선택메뉴1</button></li>
-							<li><button type="button" value="2">선택메뉴2</button></li>
-							<li><button type="button" value="3">선택메뉴3</button></li>
-							<li><button type="button" value="4">선택메뉴4</button></li>
-							<li><button type="button" value="5">선택메뉴5</button></li>
-							<li><button type="button" value="6">선택메뉴6</button></li>
-							<li><button type="button" value="7">선택메뉴7</button></li>
-							<li><button type="button" value="8">선택메뉴8</button></li>
-							<li><button type="button" value="9">선택메뉴9</button></li>
-						</ul>
-					</div>
-				</div>
+				<div class="weeks"><span id="START_DT"></span> ~ <span id="END_DT"></span></div>
+				<span class="uiDate input db week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
+				
+				<p class="gap"></p>
+				<span class="input db uiDate"><input type="text" class="datepicker_month" placeholder="YYYY-MM-DD" value="2019-06" readonly></span>
+				
+				<script>
+				$(document).ready(function(){
 
-
-
-				<div class="uiDropDown sm" data-ui="val">
-					<div class="list">
-						<ul>
-							<li><button type="button" value="1">남</button></li>
-							<li class="active"><button type="button" value="2">여</button></li>
-						</ul>
-					</div>
-				</div>
-				<div class="uiDropDown" data-ui="val">
-					<div class="list">
-						<ul>
-							<li><button type="button" value="1">02</button></li>
-							<li><button type="button" value="2">1</button></li>
-						</ul>
-					</div>
-				</div>
-			
-				<div class="uiDropDown disabled" data-ui="val">
-					<div class="list">
-						<ul>
-							<li><button type="button" value="1">선택메뉴1</button></li>
-							<li><button type="button" value="2">선택메뉴2</button></li>
-							<li><button type="button" value="3">선택메뉴3</button></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="uiDropDown" data-ui="val">
-					<div class="list">
-						<ul>
-							<li><button type="button" value="1">선택메뉴1</button></li>
-							<li><button type="button" value="2">선택메뉴2</button></li>
-							<li><button type="button" value="3">선택메뉴3</button></li>
-							<li><button type="button" value="4">선택메뉴444444444444444444</button></li>
-						</ul>
-					</div>
-				</div>
-
-
-				<div class="uiDropDown noWidth" data-ui="val">
-					<div class="list">
-						<ul>
-							<li><button type="button" value="1">선택메뉴1</button></li>
-							<li><button type="button" value="2">선택메뉴2222222</button></li>
-							<li><button type="button" value="3">선택메뉴3333333333333</button></li>
-							<li><button type="button" value="4">선택메뉴444444444444444444</button></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="uiDropDown" data-ui="link-sel" id="aaa">
-					<div class="list">
-						<ul>
-							<li><a href="/html/">네이버</a></li>
-							<li class="active"><a href="/html/">다음</a></li>
-							<li><a href="/html/">구글</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="uiDropDown" data-ui="link">
-					<a class="bt" href="javascript:;">링크</a>
-					<div class="list">
-						<ul>
-							<li><a href="javascript:;">네이버eeeeeeeeee</a></li>
-							<li><a href="javascript:;">다음</a></li>
-							<li><a href="javascript:;">구글</a></li>
-						</ul>
-					</div>
-				</div>
-
-			</section>
-
-
-
-			
-			<h3 class="hdt">슬라이드</h3>
-
-			<div class="slideSample1">
-				<div class="swiper-container">
-					<ul class="swiper-wrapper slide">
-						<li class="swiper-slide">
-							<div class="item">
-								<div class="thumb"><a href="javascript:;"><span class="img"><img src="//placeimg.com/720/720/1" alt=""></span></a></div>
-							</div>
-						</li>
-						<li class="swiper-slide">
-							<div class="item">
-								<div class="thumb"><a href="javascript:;"><span class="img"><img src="//placeimg.com/720/720/2" alt=""></span></a></div>
-							</div>
-						</li>
-					</ul>
-					<div class="pagination"></div>
-					<div class="navigation">
-						<button type="button" class="nav prev">이전</button>
-						<button type="button" class="nav next">다음</button>
-					</div>
-				</div>
-			</div>
-
-			<p class="gap"></p>
-
-			<div class="slideSample2">
-				<div class="swiper-container">
-					<ul class="swiper-wrapper slide">
-						<li class="swiper-slide">
-							<div class="item">
-								<div class="thumb"><a href="javascript:;"><span class="img"><img src="//placeimg.com/720/720/10" alt=""></span></a></div>
-								<div class="info">
-									<div class="name">뉴욕양키스 액센트 커브조절캡</div>
-									<div class="prc"><em class="p">59,000원</em></div>
-								</div>
-							</div>
-						</li>
-						<li class="swiper-slide">
-							<div class="item">
-								<div class="thumb"><a href="javascript:;"><span class="img"><img src="//placeimg.com/720/720/11" alt=""></span></a></div>
-								<div class="info">
-									<div class="name">뉴욕양키스 액센트 커브조절캡</div>
-									<div class="prc"><em class="p">59,000원</em></div>
-								</div>
-							</div>
-						</li>
-						<li class="swiper-slide">
-							<div class="item">
-								<div class="thumb"><a href="javascript:;"><span class="img"><img src="//placeimg.com/720/720/12" alt=""></span></a></div>
-								<div class="info">
-									<div class="name">뉴욕양키스 액센트 커브조절캡</div>
-									<div class="prc"><em class="p">59,000원</em></div>
-								</div>
-							</div>
-						</li>
-						<li class="swiper-slide">
-							<div class="item">
-								<div class="thumb"><a href="javascript:;"><span class="img"><img src="//placeimg.com/720/720/13" alt=""></span></a></div>
-								<div class="info">
-									<div class="name">액센트 커브조절캡</div>
-									<div class="prc"><em class="p">59,000원</em></div>
-								</div>
-							</div>
-						</li>
-					</ul>              
-				</div>
-			</div>
-
-			<script>
-			$(document).ready(function(){
-				// http://idangero.us/swiper/api/
-				// ui.slides.sample1.slide.on('slideChange', function () {
-				// 	console.log('cmRecom slideChange');
-				// });
-			});
-			</script>
-			
-			<h3 class="hdt">불릿 리스트</h3>
-
-			<div style="border:#cccccc solid 1px; padding:10px 15px ;">
-				<h4>블릿타입A ul.bullet.type.a</h4>	
-				<ul class="bullet type a">
-					<li>도로명을 입력하세요.  예) 중앙로, 불정로432번길 도로명을 입력하세요.도로명을 입력하세요.  예) 중앙로, 불정로432번길 도로명을 입력하세요.도로명을 입력하세요.  예) 중앙로, 불정로432번길 도로명을 입력하세요.</li>
-					<li>동/읍/면/리 이름을 입력하세요.  예) 역삼동, 화도읍, 장유면</li>
-				</ul>
-				<h4>블릿타입B ul.bullet.type.b</h4>	
-				<ul class="bullet type b">
-					<li>사진은 2MB 미만의 JPG, PNG, GIF 형식으로 업로드 가능합니다.</li>
-					<li>파일명은 영문과 숫자로 작성해 주시기 바랍니다.</li>
-				</ul>
-			</div>
-
-			
-			<h3 class="hdt">리스트 Load</h3>
-
-			<section class="uiTbList">
-				<ul class="list" id="dp_list"></ul>
-				<div class="uiLoadMore">
-					<em></em>
-					<button type="button" class="btnLoad" onclick="addItem.using()" id="btnListMore">불러오기</button>
-				</div>
-			</section>
-			<script>
-				var addItem = {
-					init:function(){
-						this.using();
-						this.evt();
-					},
-					stat:true,
-					page:0,
-					evt:function(){
-						var _this = this;
-						$(window).on("scroll resize", function() { // 바닥 확인
-							var wHt = window.visualViewport.height ;
-							var docH = $(document).height();
-							var scr = $(window).scrollTop() + wHt + 30; 
-							// console.log(docH,scr);
-							if (docH <= scr  && _this.stat == true) {
-								console.log("바닥sss");
-								_this.using();
-								_this.stat = false;
-							}
-						});
-					},
-					using:function(){
-						var _this = this;
-						_this.stat = false ;
-						$(".uiLoadMore").addClass("active");
-						
-						$.ajax({
-							type: "get",
-							url: "../inc/list_more.html",
-							dataType: "html",
-							success: function(html) {
-								window.setTimeout(function(){
-									_this.page ++ ;
-									$("#dp_list").append(html).addClass("load");
-									console.log("페이징 = " + _this.page);
-									_this.stat = true ;
-									if (_this.page >= 3) {
-										console.log("끝");
-										$(".uiLoadMore").addClass("hide");
-										_this.stat = false ;
-									}
-									$(".uiLoadMore").removeClass("active").removeClass("error");
-									$("#btnListMore").prop("disabled",true);
-									_this.evt();
-									
-								},500);
-							},
-							error:function(error){
-								// _this.page --;
-								console.log("페이징 = " + _this.page + "에러 = " + error.readyState);
-								$(".uiLoadMore").removeClass("active").addClass("error");
-								$(window).off("scroll");
-								$("#btnListMore").prop("disabled",false);
-							}
-						});
+					// 달력 주간 선택 moment.js
+					setWeeklyDateFnc =  function (date){
+						var monday, sunday;
+						if(moment(date).day() === 0){
+							monday = moment(date).day(-6).format("YYYY-MM-DD");
+							sunday = moment(date).day(0).format("YYYY-MM-DD");
+						}else{
+							monday = moment(date).day(1).format("YYYY-MM-DD");
+							sunday = moment(date).day(7).format("YYYY-MM-DD");
+						}
+						// console.log(monday , sunday);
+						$("#START_DT").html(monday);
+						$("#END_DT").html(sunday);
 					}
-				};
+					var today = $("#schedWeek").val();
+					setWeeklyDateFnc(today);
 
-				addItem.init();
-		
-			</script>
+					$("input#schedWeek").datepicker( "option", "onSelect", function(date,els){
+						DD = date.replace(/[-]/gi, "");
+						setWeeklyDateFnc(DD);
+						console.log(els);
+					});
+					$("input#schedWeek").datepicker( "option", "showOtherMonths", true );
+					$("input#schedWeek").datepicker( "option", "selectOtherMonths", true );
+
+					var now = new Date();
+					$("input#schedWeek").datepicker( "option", "minDate", new Date(2018, 1 - 1, 1) );
+					$("input#schedWeek").datepicker( "option", "maxDate", new Date( now.getFullYear() , now.getMonth() , now.getDate() ) );
+
+
+				});
+				</script>
+			</section>
+
+			<section class="sect" data-sid="ui-checkradio">
+				<h3 class="hdt">첵크박스,라디오버튼</h3>
+				<label class="checkbox"><input type="checkbox"><span>선택</span></label>
+
+				<label class="checkbox"><input type="checkbox" checked="checked"><span></span></label>
+				<label class="checkbox"><input type="checkbox" checked="checked" disabled><span></span></label>
+				<label class="checkbox"><input type="checkbox" disabled><span></span></label>
+
+				<label class="radio"><input type="radio" name="radio1"><span>선택</span></label>
+				<label class="radio"><input type="radio" name="radio1" checked="checked"><span>선택</span></label>
+				<label class="radio"><input type="radio" name="radio2" checked="checked" disabled><span>선택</span></label>
+				<label class="radio"><input type="radio" name="radio2" disabled><span>선택</span></label>
+
+				<p class="gap"></p>
+				<label class="checkbox"><input type="checkbox" data-check="all" data-check-id="checkTest1"><span>전체선택</span></label>
+				<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택1</span></label>
+				<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택2</span></label>
+				<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택3</span></label>
+				<p class="gap"></p>
+				<div class="uiChk"><input type="checkbox" checked="checked"><em></em></div>
+				<div class="uiChk"><input type="checkbox" checked="checked" disabled><em></em></div>
+
+				<div class="codeBox">
+					<div class="code">
+						<pre class="brush: html">
+							<label class="checkbox"><input type="checkbox" data-check="all" data-check-id="checkTest1"><span>전체선택</span></label>
+							<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택1</span></label>
+							<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택2</span></label>
+							<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택3</span></label></pre>
+					</div>
+				</div>
+			</section>
+
+			<section class="sect" data-sid="ui-loading">
+				<h3 class="hdt">로딩 - ui.loading</h3>
+				<section class="codeBox">
+					<div class="code">
+						<div class="bts">
+							<a class="btn" href="javascript:ui.loading.show();">로딩열기</a>
+							<a class="btn loadingClose" href="javascript:ui.loading.hide();">로딩닫기</a>
+						</div>
+						<pre class="brush: js">
+							ui.loading.show(); // 로딩열기
+							ui.loading.hide(); // 로딩닫기 </pre>
+					</div>
+				</section>
+			</section>
+
+			<section class="sect" data-sid="ui-mcscrolls">
+				<h3 class="hdt">mCustomScroll</h3>
+				<style>
+					.sampleMscroll{display:flex; justify-content: space-between;}
+					.sampleMscroll .ui-mcscroll{width: calc(50% - 5px); border:1px solid #dddddd; padding: 10px;}
+				</style>
+				<script src="../../js/jquery.mCustomScrollbar.js"></script>
+				<section class="sampleMscroll">
+					<div class="ui-mcscroll" style="max-height:150px">
+						<p>내용</p> <p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p>
+					</div>
+					<div class="ui-mcscroll x" style="max-height:150px">
+						<p style="white-space: nowrap;"> 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 </p>
+					</div>
+				</section>
+			</section>
+
+			<section class="sect" data-sid="ui-sliders">
+				<h3 class="hdt">jQui슬라이더</h3>
+				<p class="gap"></p><p class="gap"></p><p class="gap"></p>
+				<div class="uiSlider" id="slider">
+					<div class="ui-slider-handle"><span id="custom-handle"></span></div>
+				</div>
+				<script>
+				$(document).ready(function(){
+					var handle = $( "#custom-handle" );
+					$( "#slider" ).slider({
+						orientation: "horizontal", // "vertical" , "horizontal"
+						value:55,
+						min: 0,
+						max: 100,
+						step: 1,
+						create: function() {
+							handle.text( $( this ).slider( "value" ) + "%");
+						},
+						slide: function( event, ui ) {
+							handle.text( ui.value + "%");
+							console.log(ui.value);	
+						}
+					});
+				});
+				</script>
+
+				<p class="gap"></p>
+				<p class="gap"></p>
+				
+				
+
+				<div id="amount"></div>
+				<p class="gap"></p>
+				<div class="uiSlider" id="slider-range"></div>
+				
+				<script>
+				$(document).ready(function(){
+					$( "#slider-range" ).slider({
+						range: true,
+						min: 0,
+						max: 500,
+						values: [ 75, 300 ],
+						slide: function( event, ui ) {
+							$( "#amount" ).text( ui.values[ 0 ] + "원 - " + ui.values[ 1 ] +"원" );
+							console.log(ui.values[0] ,ui.values[1]  );	
+						}
+					});
+					$( "#amount" ).text( $( "#slider-range" ).slider( "values", 0 ) + "원 - " + $( "#slider-range" ).slider( "values", 1 )+"원" );				
+				});
+				</script>
+			</section>
+
+			<section class="sect" data-sid="ui-pie">
+				<h3 class="hdt">Graph - Pie</h3>
+				<p class="gap"></p>
+				<p class="gap"></p>
+				<div class="uiCircle c1" 
+					data-value="0.9"
+					data-size="100"
+					data-fill= '{ "color": "#000000" }' 
+					data-empty-fill="#ddd"
+					data-thickness="5"
+					data-animation-start-value="0.0" >
+					<strong></strong>
+				</div>
+				<div class="uiCircle c2" 
+					data-value="0.45"
+					data-size="100"
+					data-fill= '{ "color": "#000000" }' 
+					data-empty-fill="rgba(0, 0, 0, .5)"
+					data-thickness="50"
+					data-animation-start-value="0.0" >
+					<strong style="color: #ffffff"></strong>
+				</div>
+				<div class="uiCircle c3" 
+					data-value="0.75"
+					data-size="100"
+					data-arc-coef= "0.7"
+					data-start-angle = "1.6"
+					data-empty-fill="rgba(0, 0, 0, .5)"
+					data-fill = '{"image": "https://i.imgur.com/pT0i89v.png"}'
+					data-thickness="20"
+					data-animation-start-value="0.0" >
+					<strong></strong>
+				</div>
+				<script>
+				$(document).ready(function(){
+
+					$('.uiCircle').circleProgress({
+						// value: 0.75,
+						// arcCoef: 1.0,
+						// startAngle : 1.5 * Math.PI,
+						// fill: {"image": "http://i.imgur.com/pT0i89v.png"},
+						// fill: {gradient: [['#000', .1], ['#444', .8]], gradientAngle: Math.PI / 4},
+					}).on('circle-animation-progress', function(event, progress, stepValue) {
+						//$(this).find('strong').text(stepValue.toFixed(2).substr(1));
+						$(this).find('strong').html(Math.round(100 * stepValue) + '<i>%</i>');
+					}).on('circle-animation-end', function (event, progress) {
+						// console.log("완료");
+						// $(this).find("canvas").css({"opacity":"0"});
+					});
+					circleSmaple = function(c){
+						if( c == 1 ) {
+							$('.uiCircle').circleProgress('value', 0.22);
+						}
+						if( c == 2 ) {
+							$('.uiCircle').circleProgress('value', 0.93);
+						}
+						if( c == 3 ) {
+							$('.uiCircle').circleProgress('redraw');
+						}
+					}
+				});
+				</script>
+				<a href="javascript:;" class="btn" onclick="circleSmaple(1);">22%</a>
+				<a href="javascript:;" class="btn" onclick="circleSmaple(2);">93%</a>
+				<a href="javascript:;" class="btn" onclick="circleSmaple(3);">redraw</a>
+				<p class="gap"></p>
+			</section>
+
+			<section class="sect" data-sid="ui-spinners">
+				<h3 class="hdt">jQui Spinner 스피너</h3>
+				<div class="uiSpinner" data-max="5">
+					<input class="n" type="number" value="1"> <button type="button" class="m">-</button> <button type="button" class="p">+</button>
+				</div>
+
+				<div class="uiSpinner" data-max="3">
+					<input class="n" type="number" value="1"> <button type="button" class="m">-</button> <button type="button" class="p">+</button>
+				</div>
+			</section>
+
+			<section class="sect" data-sid="ui-startpoint">
+				<h3 class="hdt">별점</h3>
+				<div class="uiStar" data-star="3.5">
+					<ul>
+						<li><em class="st">별</em></li>
+						<li><em class="st">별</em></li>
+						<li><em class="st">별</em></li>
+						<li><em class="st">별</em></li>
+						<li><em class="st">별</em></li>
+					</ul>
+					<i class="p">0.0</i>
+				</div>
+				
+				<p class="gap"></p>
+				<div class="uiStar">
+					<ul>
+						<li><button type="button" class="st">별</button></li>
+						<li><button type="button" class="st">별</button></li>
+						<li><button type="button" class="st">별</button></li>
+						<li><button type="button" class="st">별</button></li>
+						<li><button type="button" class="st">별</button></li>
+					</ul>
+					<i class="p">0</i>
+				</div>
+			</section>
+
+			<section class="sect" data-sid="ui-addfiles">
+				<h3 class="hdt">첨부파일 - 파일,이미지</h3>
+				<span class="ui-add-file" data-ui="attach">
+					<span class="btn-attach btn">
+						<label class="fileButton">파일선택<input type="file" class="fileInput" accept="*/*"></label>
+					</span>
+				</span>
+				<span class="ui-add-file on" data-ui="attach">
+					<span class="btn-attach btn">
+						<label class="fileButton">파일선택<input type="file" class="fileInput" accept="*/*"></label>
+					</span>
+					<span class="file">
+						<span class="loc">abc1223.doc</span>
+						<button type="button" class="delete">삭제</button>
+					</span>
+				</span>
+
+				<p class="gap"></p>
+				<span class="ui-add-pic on" data-ui="attach">
+					<span class="btn-add-pic">
+						<label class="fileButton">이미지선택<input type="file" class="fileInput" accept="image/*"></label>
+					</span>
+					<span class="file">
+						<img class="img" src="../../img/temp/sss.png" alt="">
+						<button type="button" class="delete">삭제</button>
+					</span>
+				</span>
+				<span class="ui-add-pic" data-ui="attach">
+					<span class="btn-add-pic">
+						<label class="fileButton">이미지선택<input type="file" class="fileInput" accept="image/*"></label>
+					</span>
+				</span>
+			</section>
+
+			<section class="sect" data-sid="ui-tabs">
+				<h3 class="hdt">탭메뉴</h3>
+				
+				<ul class="uiTab type a">
+					<li class="active"><a data-ui-tab-btn="tab_a" data-ui-tab-val="tab_a_1" href="javascript:;">탭메뉴1</a></li>
+					<li><a data-ui-tab-btn="tab_a" data-ui-tab-val="tab_a_2" href="javascript:;">탭메뉴2</a></li>
+				</ul>
+				
+				<p class="gap"></p>
+
+				<ul class="uiTab type a">
+					<li class="active"><a data-ui-tab-btn="tab_b" data-ui-tab-val="tab_b_1" href="javascript:;">탭메뉴1</a></li>
+					<li><a data-ui-tab-btn="tab_b" data-ui-tab-val="tab_b_2" href="javascript:;">탭메뉴2</a></li>
+				</ul>
+				
+				<div data-ui-tab-ctn="tab_b" data-ui-tab-val="tab_b_1" class="active">
+					탭내용1
+				</div>
+				<div data-ui-tab-ctn="tab_b" data-ui-tab-val="tab_b_2">
+					탭내용2
+				</div>
+
+				<p class="gap"></p>
+
+				<label class="radio"><input type="radio" name="radio2" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" checked><span>탭선택1</span></label>
+				<label class="radio"><input type="radio" name="radio2" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2"><span>탭선택2</span></label>
+				<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_1" class="active">
+					탭내용1
+				</div>
+				<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_2">
+					탭내용2
+				</div>
+
+				<div class="codeBox">
+					<div class="code">
+						<pre class="brush: html">
+							<ul class="uiTab a">
+								<li class="active"><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" href="javascript:;">탭메뉴1</a></li>
+								<li><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2" href="javascript:;">탭메뉴2</a></li>
+							</ul>
+							<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_1" class="active">
+								탭내용1
+							</div>
+							<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_2">
+								탭내용2
+							</div></pre>
+					</div>
+				</div>
+			</section>
+
+			<section class="sect" data-sid="ui-toggle">
+				<h3 class="hdt">토글UI</h3>
+				
+				<a href="javascript:;" data-ui-tog="btn" data-ui-tog-val="tog_sample1" class="btn sm">토글UI</a>
+				<div data-ui-tog="ctn" data-ui-tog-val="tog_sample1">
+					<p>토글내용 토글내용</p>
+					<p>토글내용 토글내용</p>
+				</div>	
+
+				<div class="codeBox">
+					<div class="code">
+						<pre class="brush: html">
+							<a href="javascript:;" data-ui-tog="btn" data-ui-tog-val="tog_sample1" class="btn">토글UI</a>
+							<div data-ui-tog="ctn" data-ui-tog-val="tog_sample1">
+								<p>토글내용 토글내용</p>
+								<p>토글내용 토글내용</p>
+							</div></pre>
+					</div>
+				</div>
+			</section>
+
+			<section class="sect" data-sid="ui-accodion">
+				<h3 class="hdt">아코디언UI</h3>
+				<!-- 아코디언형 -->
+				<ul class="uiAccd" data-accd="accd">
+					<li class="open">
+						<div class="hBox"> 아코디언 UI Accd <button type="button" class="btnTog">버튼</button></div>
+						<div class="cBox">내용 내용 내용 <br> 내용</div>
+					</li>
+					<li>
+						<div class="hBox"> 아코디언 UI Accd <button type="button" class="btnTog">버튼</button></div>
+						<div class="cBox">내용 내용 내용 <br> 내용</div>
+					</li>
+					<li class="except">
+						<div class="hBox"> 아코디언 UI Accd 제외 <button type="button" class="btnTog">버튼</button></div>
+						<div class="cBox">내용 내용 내용 <br> 내용</div>
+					</li>
+				</ul>
+				<p class="gap"></p>
+				<!-- 토글형 -->
+				<ul class="uiAccd" data-accd="tog">
+					<li class="open">
+						<div class="hBox"> 아코디언 UI Tog <a class="btnTog" href="javascript:;">버튼</a></div>
+						<div class="cBox">내용 내용 내용 <br> 내용</div>
+					</li>
+					<li>
+						<div class="hBox"> 아코디언 UI Tog <a class="btnTog" href="javascript:;">버튼</a></div>
+						<div class="cBox">내용 내용 내용 <br> 내용</div>
+					</li>
+					<li class="except">
+						<div class="hBox"> 아코디언 UI Tog 제외 <div class="btnTog" href="javascript:;">버튼</div></div>
+						<div class="cBox">내용 내용 내용 <br> 내용</div>
+					</li>
+				</ul>
+				<div class="codeBox">
+					<div class="code">
+						<pre class="brush: html">
+							<ul class="uiAccd" data-accd="accd">
+								<li class="open">
+									<div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
+									<div class="cBox">내용</div>
+								</li>
+								<li>
+									<div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
+									<div class="cBox">내용</div>
+								</li>
+								<li class="except">
+									<div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
+									<div class="cBox">내용</div>
+								</li>
+							</ul></pre>
+					</div>
+				</div>
+			</section>
+
+			<section class="sect" data-sid="ui-tables">
+				<h3 class="hdt">테이블</h3>
+				<table class="tbform a" cellpadding="0" cellspacing="0">
+					<colgroup>
+						<col width="20%">
+						<col>
+						<col width="20%">
+						<col>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th rowspan="2">소재</th>
+							<td>99(BLACK)</td>
+							<th rowspan="2">TH</th>
+							<td>TD</td>
+						</tr>
+						<tr>
+							
+							<td>99(BLACK)</td>
+							<td>TD</td>
+						</tr>
+						<tr>
+							<th>치수</th>
+							<td>99(BLACK)</td>
+							<th>TH</th>
+							<td>TD</td>
+						</tr>
+						<tr>
+							<th>치수</th>
+							<td rowspan="2">99(BLACK)</td>
+							<th rowspan="2">TH</th>
+							<td>TD</td>
+						</tr>
+						<tr>
+							<th>치수</th>
+							
+							<td>TD</td>
+						</tr>
+					</tbody>
+				</table>
+				<p class="gap"></p>
+				
+				<table class="tblist a" cellspacing="0" cellpadding="0" >
+					<colgroup>
+						<col>
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>TH1</th>
+							<th colspan="2">TH2</th>
+							
+							<th rowspan="2">TH4</th>
+							<th rowspan="2">TH5</th>
+						</tr>
+						<tr>
+							
+							<th>TH6</th>
+							<th>TH7</th>
+							<th>TH8</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>TD1</td>
+							<td>TD2</td>
+							<td>TD3</td>
+							<td>TD4</td>
+							<td>TD5</td>
+						</tr>
+						<tr>
+							<td>TD1</td>
+							<td>TD2</td>
+							<td>TD3</td>
+							<td>TD4</td>
+							<td>TD5</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section class="sect" data-sid="ui-dropdown">
+				<h3 class="hdt">드롭다운</h3>
+
+				<section class="dromDownSample">
+					
+					<div class="uiDropDown" data-ui="val" id="kkk">
+						<div class="list">
+							<ul>
+								<li><button type="button" value="1">선택메뉴1선택메뉴1선택메뉴1</button></li>
+								<li><button type="button" value="2">선택메뉴2</button></li>
+								<li><button type="button" value="3">선택메뉴3</button></li>
+								<li><button type="button" value="4">선택메뉴4</button></li>
+								<li><button type="button" value="5">선택메뉴5</button></li>
+								<li><button type="button" value="6">선택메뉴6</button></li>
+								<li><button type="button" value="7">선택메뉴7</button></li>
+								<li><button type="button" value="8">선택메뉴8</button></li>
+								<li><button type="button" value="9">선택메뉴9</button></li>
+							</ul>
+						</div>
+					</div>
+
+
+
+					<div class="uiDropDown sm" data-ui="val">
+						<div class="list">
+							<ul>
+								<li><button type="button" value="1">남</button></li>
+								<li class="active"><button type="button" value="2">여</button></li>
+							</ul>
+						</div>
+					</div>
+					<div class="uiDropDown" data-ui="val">
+						<div class="list">
+							<ul>
+								<li><button type="button" value="1">02</button></li>
+								<li><button type="button" value="2">1</button></li>
+							</ul>
+						</div>
+					</div>
+				
+					<div class="uiDropDown disabled" data-ui="val">
+						<div class="list">
+							<ul>
+								<li><button type="button" value="1">선택메뉴1</button></li>
+								<li><button type="button" value="2">선택메뉴2</button></li>
+								<li><button type="button" value="3">선택메뉴3</button></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="uiDropDown" data-ui="val">
+						<div class="list">
+							<ul>
+								<li><button type="button" value="1">선택메뉴1</button></li>
+								<li><button type="button" value="2">선택메뉴2</button></li>
+								<li><button type="button" value="3">선택메뉴3</button></li>
+								<li><button type="button" value="4">선택메뉴444444444444444444</button></li>
+							</ul>
+						</div>
+					</div>
+
+
+					<div class="uiDropDown noWidth" data-ui="val">
+						<div class="list">
+							<ul>
+								<li><button type="button" value="1">선택메뉴1</button></li>
+								<li><button type="button" value="2">선택메뉴2222222</button></li>
+								<li><button type="button" value="3">선택메뉴3333333333333</button></li>
+								<li><button type="button" value="4">선택메뉴444444444444444444</button></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="uiDropDown" data-ui="link-sel" id="aaa">
+						<div class="list">
+							<ul>
+								<li><a href="/html/">네이버</a></li>
+								<li class="active"><a href="/html/">다음</a></li>
+								<li><a href="/html/">구글</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="uiDropDown" data-ui="link">
+						<a class="bt" href="javascript:;">링크</a>
+						<div class="list">
+							<ul>
+								<li><a href="javascript:;">네이버eeeeeeeeee</a></li>
+								<li><a href="javascript:;">다음</a></li>
+								<li><a href="javascript:;">구글</a></li>
+							</ul>
+						</div>
+					</div>
+
+				</section>
+			</section>
+
+			<section class="sect" data-sid="ui-swipers">
+				<h3 class="hdt">Swiper 슬라이드</h3>
+
+				<div class="slideSample1">
+					<div class="swiper-container">
+						<ul class="swiper-wrapper slide">
+							<li class="swiper-slide">
+								<div class="item">
+									<div class="thumb"><a href="javascript:;"><span class="img"><img src="//placeimg.com/720/720/1" alt=""></span></a></div>
+								</div>
+							</li>
+							<li class="swiper-slide">
+								<div class="item">
+									<div class="thumb"><a href="javascript:;"><span class="img"><img src="//placeimg.com/720/720/2" alt=""></span></a></div>
+								</div>
+							</li>
+						</ul>
+						<div class="pagination"></div>
+						<div class="navigation">
+							<button type="button" class="nav prev">이전</button>
+							<button type="button" class="nav next">다음</button>
+						</div>
+					</div>
+				</div>
+
+				<p class="gap"></p>
+
+				<div class="slideSample2">
+					<div class="swiper-container">
+						<ul class="swiper-wrapper slide">
+							<li class="swiper-slide">
+								<div class="item">
+									<div class="thumb"><a href="javascript:;"><span class="img"><img src="//placeimg.com/720/720/10" alt=""></span></a></div>
+									<div class="info">
+										<div class="name">뉴욕양키스 액센트 커브조절캡</div>
+										<div class="prc"><em class="p">59,000원</em></div>
+									</div>
+								</div>
+							</li>
+							<li class="swiper-slide">
+								<div class="item">
+									<div class="thumb"><a href="javascript:;"><span class="img"><img src="//placeimg.com/720/720/11" alt=""></span></a></div>
+									<div class="info">
+										<div class="name">뉴욕양키스 액센트 커브조절캡</div>
+										<div class="prc"><em class="p">59,000원</em></div>
+									</div>
+								</div>
+							</li>
+							<li class="swiper-slide">
+								<div class="item">
+									<div class="thumb"><a href="javascript:;"><span class="img"><img src="//placeimg.com/720/720/12" alt=""></span></a></div>
+									<div class="info">
+										<div class="name">뉴욕양키스 액센트 커브조절캡</div>
+										<div class="prc"><em class="p">59,000원</em></div>
+									</div>
+								</div>
+							</li>
+							<li class="swiper-slide">
+								<div class="item">
+									<div class="thumb"><a href="javascript:;"><span class="img"><img src="//placeimg.com/720/720/13" alt=""></span></a></div>
+									<div class="info">
+										<div class="name">액센트 커브조절캡</div>
+										<div class="prc"><em class="p">59,000원</em></div>
+									</div>
+								</div>
+							</li>
+						</ul>              
+					</div>
+				</div>
+
+				<script>
+				$(document).ready(function(){
+					// http://idangero.us/swiper/api/
+					// ui.slides.sample1.slide.on('slideChange', function () {
+					// 	console.log('cmRecom slideChange');
+					// });
+				});
+				</script>
+			</section>
+
+			<section class="sect" data-sid="ui-bullets">
+				<h3 class="hdt">불릿 리스트</h3>
+
+				<div style="border:#cccccc solid 1px; padding:10px 15px ;">
+					<h4>블릿타입A ul.bullet.type.a</h4>	
+					<ul class="bullet type a">
+						<li>도로명을 입력하세요.  예) 중앙로, 불정로432번길 도로명을 입력하세요.도로명을 입력하세요.  예) 중앙로, 불정로432번길 도로명을 입력하세요.도로명을 입력하세요.  예) 중앙로, 불정로432번길 도로명을 입력하세요.</li>
+						<li>동/읍/면/리 이름을 입력하세요.  예) 역삼동, 화도읍, 장유면</li>
+					</ul>
+					<h4>블릿타입B ul.bullet.type.b</h4>	
+					<ul class="bullet type b">
+						<li>사진은 2MB 미만의 JPG, PNG, GIF 형식으로 업로드 가능합니다.</li>
+						<li>파일명은 영문과 숫자로 작성해 주시기 바랍니다.</li>
+					</ul>
+				</div>
+			</section>
+
+			<section class="sect" data-sid="ui-loadlist">
+				<h3 class="hdt">리스트 Load</h3>
+
+				<div class="uiTbList">
+					<ul class="list" id="dp_list"></ul>
+					<div class="uiLoadMore">
+						<em></em>
+						<button type="button" class="btnLoad" onclick="addItem.using()" id="btnListMore">불러오기</button>
+					</div>
+				</div>
+				<script>
+					var addItem = {
+						init:function(){
+							this.using();
+							this.evt();
+						},
+						stat:true,
+						page:0,
+						evt:function(){
+							var _this = this;
+							$(window).on("scroll resize", function() { // 바닥 확인
+								var wHt = window.visualViewport.height ;
+								var docH = $(document).height();
+								var scr = $(window).scrollTop() + wHt + 30; 
+								// console.log(docH,scr);
+								if (docH <= scr  && _this.stat == true) {
+									console.log("바닥sss");
+									_this.using();
+									_this.stat = false;
+								}
+							});
+						},
+						using:function(){
+							var _this = this;
+							_this.stat = false ;
+							$(".uiLoadMore").addClass("active");
+							
+							$.ajax({
+								type: "get",
+								url: "../inc/list_more.html",
+								dataType: "html",
+								success: function(html) {
+									window.setTimeout(function(){
+										_this.page ++ ;
+										$("#dp_list").append(html).addClass("load");
+										console.log("페이징 = " + _this.page);
+										_this.stat = true ;
+										if (_this.page >= 3) {
+											console.log("끝");
+											$(".uiLoadMore").addClass("hide");
+											_this.stat = false ;
+										}
+										$(".uiLoadMore").removeClass("active").removeClass("error");
+										$("#btnListMore").prop("disabled",true);
+										_this.evt();
+										
+									},500);
+								},
+								error:function(error){
+									// _this.page --;
+									console.log("페이징 = " + _this.page + "에러 = " + error.readyState);
+									$(".uiLoadMore").removeClass("active").addClass("error");
+									$(window).off("scroll");
+									$("#btnListMore").prop("disabled",false);
+								}
+							});
+						}
+					};
+
+					addItem.init();
 			
+				</script>
+			</section>
 
 		</main>
 
@@ -1222,8 +1257,8 @@
 
 	<div id="debug"></div>
 
-
 	<!--// 컨텐츠 끝 -->
+
 
 	<script>
 	$(document).ready(function(){
@@ -1235,8 +1270,6 @@
 		});
 	});
 	</script>
-
-
 
 	<include class="nav" data-include-html="../inc/nav.html"></include>
 
@@ -1264,21 +1297,15 @@ $(function() {
 });
 </script>
 
-
-
-
-
 <script src="../../js/iscroll.js"></script>
 <script src="../../js/swiper.js"></script>
 <script src="../../js/moment.js"></script>
 <script src="../../js/circle-progress.js"></script>
 <script src="../../js/pullToRefresh.js"></script>
-
 <script src="../../js/lib/jquery.hammer.js-master/hammer.js"></script>
 <script src="../../js/lib/jquery.hammer.js-master/jquery.hammer.js"></script>
-
 <script src="../../js/ui.js?v=13"></script>
-
 <script src="../guide/html.js"></script><!-- 개발페이지에서는 html.js 임포트 하지말아주세요. -->
+
 </body>
 </html>
