@@ -17,6 +17,7 @@ var ui = {
 		this.mcscroll.init();
 		this.dropDown.init();
 		this.popLayer.init();
+		this.popFrame.init();
 		this.popWin.init();
 		this.slides.init();
 		this.datepick.init();
@@ -1261,6 +1262,53 @@ var ui = {
 				console.log(idx, iscr);
 				this.scroll[idx].refresh(); 
 			}
+		}
+	},
+	popFrame:{
+		init:function(){
+			var _this = this;
+			$(document).on("click", ".popFrame .btnPopClose", function() {
+				var id = $(this).closest(".popFrame").attr("id");
+				
+				_this.close(id);
+				
+			});
+		},
+		sct:0,
+		callbacks:{},
+		open:function(id,params){
+			_this = this;
+
+			if ( $("#" + id).length  <= 0  ) return ;   // id 호출팝업이 없으면 리턴
+
+
+			_this.opt = $.extend({
+				ocb: null ,
+				ccb: null,
+				zIndex: 1000,
+			}, params); 
+
+			_this.callbacks[id] = {} ;
+			_this.callbacks[id].open  = _this.opt.ocb ? _this.opt.ocb : null ;
+			_this.callbacks[id].close = _this.opt.ccb ? _this.opt.ccb : null ;		
+
+
+			this.sct = $(window).scrollTop();
+			$(window).scrollTop( 0 );
+			console.log(this.sct);
+			// ui.lock.using(true);
+			$("#" + id).show(0,function(){
+				if(_this.callbacks[id].open)  _this.callbacks[id].open();			
+				$(this).addClass("on");
+			});
+			$("body").addClass("isFrame");
+		},
+		close:function(id){
+			$("body").removeClass("isFrame");
+			$("#" + id).hide();
+			console.log(this.sct);
+			$(window).scrollTop( this.sct );
+			// ui.lock.using(false);
 		}
 	},
 	popWin:{ // 윈도우팝업

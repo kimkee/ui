@@ -132,6 +132,7 @@
 							<a class="btn" href="javascript:samplePopA();">팝레이어A</a>
 							<a class="btn" href="javascript:samplePopB();">팝레이어B</a>
 							<a class="btn" href="javascript:samplePopC();">팝레이어C</a>
+							<a class="btn" href="javascript:samplePopFrameA();">팝프레임A</a>
 						</div>
 						<pre class="brush: js">
 							ui.popLayer.open('popSample1'); // 팝레이어열기
@@ -141,6 +142,18 @@
 				</section>
 				<script>
 					
+					var samplePopFrameA = function(){
+						// 레이어팝업 열기 콜백
+						ui.popFrame.open('popFrame1',{
+							hash:true,
+							ocb:function(){
+								console.log("popFrame1 열림");
+							},
+							ccb:function(){
+								console.log("popFrame1 닫힘");
+							}						
+						});
+					}
 					var samplePopA = function(){
 						// 레이어팝업 열기 콜백
 						ui.popLayer.open('popSample1',{
@@ -1125,6 +1138,52 @@
 	</div>
 
 	<div id="layers">
+
+
+
+		<!-- 팝레이어 A 전체 덮는 크기 -->
+		<article class="popFrame a popFrame1" id="popFrame1">
+			<div class="pbd">
+				<div class="phd">
+					<div class="in">
+						<h1 class="tit">팝 프레임 111</h1>
+						<button type="button" class="btnPopClose">닫기</button>
+					</div>
+				</div>
+				<div class="pct">
+					<main class="poptents">
+						<a class="btn" href="javascript:ui.popLayer.open('popSample2');">팝레이어2</a>
+						<p>sdfsdfsfsd</p>
+						<a class="btn" href="javascript:ui.popLayer.open('popSample3');">팝레이어3</a>
+						<p>sdfsdfsfsd</p>
+						<label class="checkbox"><input type="checkbox" checked="checked"><span></span></label>
+						<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
+						<span class="input db"><input type="text"></span>
+						<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
+						<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
+						<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
+						<span class="input db"><input type="text"></span>
+						<p>sdfsdfsfsd</p>
+						<p>sdfsdfsfsd</p>
+						<label class="checkbox"><input type="checkbox"><span></span></label>
+						<label class="radio"><input type="radio"><span></span></label>
+						<p>sdfsdfsfsd</p>
+						<p>sdfsdfsfsd</p>
+						<p>sdfsdfsfsd</p>
+						<p>sdfsdfsfsd</p>
+						<span class="input db"><input type="text"></span>
+					</main>
+				</div>
+				<div class="pbt">
+					<div class="bts">
+						<a href="javascript:;" class="btn type e" onclick="ui.popLayer.close('popFrame1');">닫기</a>
+						<a href="javascript:;" class="btn type a">버튼</a>
+					</div>
+				</div>
+			</div>
+		</article>
+
+
 		<!-- 팝레이어 A 전체 덮는 크기 -->
 		<article class="popLayer a popSample1" id="popSample1">
 			<div class="pbd">

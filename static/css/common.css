@@ -762,7 +762,36 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .popLayer.c .list>li.st .bt{color:#ff414d;}
 .popLayer.c .btnPopClose{position: absolute;left: -99999px;}
 
+.isFrame #header{display:none;}
+.isFrame .bt.gnb{display:none;}
+.isFrame .floatNav{display:none;}
+.isFrame #barH{display:none;}
+.isFrame .menubar{display:none;}
+.isFrame #contain{position:absolute;position:absolute; height:50vh; width: 50vw; overflow:hidden; display:none;}
 
+/* 팝프레임 */
+.popFrame{display:none;/* position:fixed; */left:0px;right:0px;top:0px;bottom:0;z-index:1000;background-color: rgba(0,0,0,0.52);outline:none;}
+.popFrame.on{display:block;}
+.popFrame>.pbd{background: #ffffff;position:relative;/* overflow: hidden; *//* padding-top:50px; */min-width: 200px;}
+.popFrame>.pbd>.phd{height: 50px;position: relative;}
+.popFrame>.pbd>.phd>.in{position:fixed;left:0px;right:0px;top:0px;z-index:10;height: 50px;text-align:center;background-color: #ffffff;box-sizing:border-box;border-bottom: #c7c7c7 solid 1px;display: flex;align-items: center;justify-content: center;}
+.popFrame>.pbd>.phd .tit{font-size: 20px;color:#000000;font-family:"CJ Medium";width: calc(100% - 70px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.popFrame>.pbd .btnPopClose{position:absolute;right: 10px;top: 9px;width: 30px;height: 30px;text-indent:-9999px;overflow:hidden;background: url(../img/common/popLayerClose.png) no-repeat center;background-size: 20px auto;background-color:transparent;border:none;padding:0;cursor: pointer;z-index: 100;}
+.popFrame>.pbd>.pct{position: relative;}
+.popFrame>.pbd>.pbt{position:relative;width:100%;min-height: 32px;}
+.popFrame>.pbd>.pbt .bts {width:100%;display: flex;position: fixed;bottom: 0;left: 0;right: 0;}
+.popFrame>.pbd>.pbt .bts .btn{ width:100%;}
+.popFrame.a{}
+.popFrame.a .pbd{}
+.popFrame.a .pct{/* max-height: calc(100vh - 50px); */}
+.popFrame.a .poptents{}
+.popFrame.a .pbt{}
+.popFrame.a .pbt .bots{/* position:fixed; */}
+
+
+
+.popFrame.popSize>.pbd>.phd{height: 124px;}
+.popFrame.popSize.a .pbt{height: 60px;}
 
 .popLayer.win{display: block;background-color: #ffffff;padding:0px;}
 .popLayer.win::after{ display:none;}
@@ -770,6 +799,7 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .popLayer.win .pct{border: #c7c7c7 solid 1px;border-width: 0px 0px;max-height:inherit !important;}
 
 
+.popFrame1 .poptents{padding: 15px;}
 .popSample1 .poptents{padding: 15px;}
 .popSample2 .poptents{padding: 15px;}
 .popSample3 .poptents{padding: 15px;}
