@@ -1206,10 +1206,15 @@ var ui = {
 			if( _this.opt.hash && set != true && $("#"+id+":visible").length  ) {  // 해쉬 
 				window.history.back();
 			}
+			
+			_this.scroll[id] = undefined;
+			// console.log( _this.scroll[id] + " close end"); // 팝업 닫을때 스크롤객체 지움;
 
 			$("#"+id).removeClass("on").fadeOut(150,function(){
 				if( !$(".popLayer:visible").length ) ui.lock.using(false);
-				try { _this.callbacks[id].close(); } catch (error) { }
+				try { 
+					_this.callbacks[id].close(); 
+				} catch (error) { }
 			});
 		},
 		resize:function(id){
