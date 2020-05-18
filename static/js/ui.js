@@ -1207,7 +1207,7 @@ var ui = {
 				window.history.back();
 			}
 			
-			_this.scroll[id] = undefined;
+			delete _this.scroll[id];
 			// console.log( _this.scroll[id] + " close end"); // 팝업 닫을때 스크롤객체 지움;
 
 			$("#"+id).removeClass("on").fadeOut(150,function(){
