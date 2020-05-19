@@ -777,7 +777,7 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .isFrame #contain{position:absolute;position:absolute; height:50vh; width: 50vw; overflow:hidden; display:none;}
 
 /* 팝프레임 */
-.popFrame{display:none;/* position:fixed; */left:0px;right:0px;top:0px;bottom:0;z-index:1000;background-color: rgba(0,0,0,0.52);outline:none;}
+.popFrame{display:none;position: relative;left:0px;right:0px;top:0px;bottom:0;z-index:1000;background-color: rgba(0,0,0,0.52);outline:none;}
 .popFrame.on{display:block;}
 .popFrame>.pbd{background: #ffffff;position:relative;/* overflow: hidden; *//* padding-top:50px; */min-width: 200px;}
 .popFrame>.pbd>.phd{height: 50px;position: relative;}
