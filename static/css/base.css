@@ -14,7 +14,7 @@ html *{max-height:1000000px;} /* Android tablet bug fix */
 h1, h2, h3, h4, h5, h6{font-size:100%;font-weight: normal;}
 a{color:#333333; text-decoration: none;}
 a,button,input{-webkit-tap-highlight-color: rgba(0, 0, 0, 0.2);}
-body,select,input,textarea,button{font-size: 13px;font-family:"Noto Sans KR","Malgun Gothic", "맑은 고딕" , Helvetica, Arial, sans-serif,"Apple Gothic","NotoSans","돋음", "Dotum";vertical-align:middle;}
+body,select,input,textarea,button{font-size: 13px;font-family:"NotoSansKR","Malgun Gothic", "맑은 고딕" , Helvetica, Arial, sans-serif,"Apple Gothic","NotoSans","돋음", "Dotum";vertical-align:middle;}
 ol,ul,li{list-style:none;}
 label{vertical-align:middle; display:inline-block;}
 legend,caption{width:0;height:0; visibility:hidden; font-size:0;line-height:0;}
