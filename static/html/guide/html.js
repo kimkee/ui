@@ -10,7 +10,7 @@
 			var scrT = $(window).scrollTop();
 			var pct =  scrT / ( docH - winH ) * 100 ;
 			// console.log( winH , docH , scrT ,  pct );
-			$("#barH").css({"width":pct+"%"});
+			$("#barH>i").css({"width":pct+"%"});
 		});
 	},
 	tit:function(){

@@ -141,11 +141,13 @@ var ui = {
 				$("nav.gnb .menu .list").append('<li><a href="javascript:;" data-btn-sid="'+msid+'">'+mtxt+'</a></li>');
 			});
 			$(document).on("click","nav.gnb .menu .list>li>a",function(e){
-				ui.gnb.using("close");
+				if ($("body").hasClass("lock")) {
+					ui.gnb.using("close");
+				}
 				var _this = this;
 				setTimeout(function(){
 					var sc_msid = $(_this).data("btn-sid");
-					var sc_msid_top = $("[data-sid="+sc_msid+"]").offset().top - 65;
+					var sc_msid_top = $("[data-sid="+sc_msid+"]").offset().top - 10 - $("#header").outerHeight() || 0 ;
 					console.log(sc_msid,sc_msid_top);
 
 					$("body,html").animate({ scrollTop: sc_msid_top }, 100, function() {
@@ -547,9 +549,9 @@ var ui = {
 		},
 		opt:{
 			axis:"y" ,
-			scrollInertia:100, 
+			scrollInertia:500, 
 			mouseWheel:{ 
-				scrollAmount:100,
+				scrollAmount:400,
 				preventDefault:true
 			},
 			callbacks:{
