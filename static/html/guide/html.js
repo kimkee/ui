@@ -15,7 +15,9 @@
 	},
 	tit:function(){
 		var tit = window.location.pathname.split("/");
-		document.title = "/" + tit[tit.length - 2] + "/" + tit[tit.length - 1];
+		if ( !$("#contain").hasClass("ui") ) {
+			document.title = "/" + tit[tit.length - 2] + "/" + tit[tit.length - 1];
+		}
 	},
 	incCallbacks:false,
 	include:function(){
