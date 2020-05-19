@@ -137,13 +137,14 @@
 						<pre class="brush: js">
 							ui.popLayer.open('popSample1'); // 팝레이어열기
 							ui.popLayer.close('popSample1'); // 팝레이어닫기
-							ui.popLayer.refresh('popSample1'); // 팝스크롤새로고침</pre>
+							ui.popLayer.refresh('popSample1'); // 팝스크롤새로고침
+							ui.popFrame.open('popFrame1'); // 팝프레임열기</pre>
 					</div>	
 				</section>
 				<script>
 					
 					var samplePopFrameA = function(){
-						// 레이어팝업 열기 콜백
+						// 팝프레임 열기 콜백
 						ui.popFrame.open('popFrame1',{
 							hash:true,
 							ocb:function(){

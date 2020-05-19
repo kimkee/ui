@@ -241,5 +241,5 @@ input[type=number] { -moz-appearance: textfield; }
 .contain.ui [data-ui-tog='ctn']{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;margin-top: 10px;}
 .contain.ui [data-ui-tab-ctn]{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;border-top-width: 0;}
 #barH{height: 1px;background-color: rgba(0, 0, 0, 0.16);position:fixed;left:0px;top: 49px;z-index: 1000;transition: width .4s ease-out;width: 100%;}
-#barH>i{content:"";height: 1px;background-color: #0365d5;display: block;}
+#barH>i{content:"";height: 1px;background-color: #0365d5;display: block;transition: width .4s ease-out;}
 .body.ui #debug{position:fixed;left:10px;bottom: 110px;background: rgba(255, 255, 255, 0.8);z-index: 9999;}

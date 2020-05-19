@@ -1226,8 +1226,8 @@ var ui = {
 			
 			$(".popLayer.a:visible>.pbd>.pct").css({"height": pctnH });
 			$(".popLayer.b:visible>.pbd>.pct").css({"max-height": pctnH - 70 });
-			$(".popLayer.c:visible>.pbd>.pct").css({"max-height": pctnH - 30 });
-			$("#popSample2 input").val( $(".popLayer.b:visible>.pbd>.pct").css("max-height")  )
+			$(".popLayer.c:visible>.pbd>.pct").css({"max-height": pctnH - 70 });
+			// $("#popSample2 input").val( $(".popLayer.b:visible>.pbd>.pct").css("max-height")  )
 		},
 		scroll:{},
 		lyScroll: function(id) {
@@ -1283,7 +1283,6 @@ var ui = {
 
 			if ( $("#" + id).length  <= 0  ) return ;   // id 호출팝업이 없으면 리턴
 
-
 			_this.opt = $.extend({
 				ocb: null ,
 				ccb: null,
@@ -1307,10 +1306,14 @@ var ui = {
 		},
 		close:function(id){
 			$("body").removeClass("isFrame");
-			$("#" + id).hide();
+			$("#" + id).hide(0,function(){
+				if( !$(".popFrame:visible").length ) ui.lock.using(false);
+				try { 
+					_this.callbacks[id].close(); 
+				} catch (error) { }
+			});
 			console.log(this.sct);
 			$(window).scrollTop( this.sct );
-			// ui.lock.using(false);
 		}
 	},
 	popWin:{ // 윈도우팝업
