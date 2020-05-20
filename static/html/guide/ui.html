@@ -47,6 +47,7 @@
 				<div id="userAgent"></div>
 				<div id="cssStatus"></div>
 				<div id="browserStatus"></div>
+				<div id="iosSafe"></div>
 			</div>
 
 			<section class="sect" data-sid="ui-button">
@@ -284,8 +285,10 @@
 
 			<section class="sect" data-sid="ui-copy">
 				<h3 class="hdt">복사 COPY Text</h3>
-				<span class="nums" id="rwd_code">20200416-aBDS</span>
-				<a href="javascript:;" class="btn sm" onclick="tesCopyRwd();">복사 버튼</a>
+				<div class="nums" id="rwd_code">20200416-aBDS</div>
+				<div class="btnSet">
+					<a href="javascript:;" class="btn" onclick="tesCopyRwd();">복사 버튼</a>
+				</div>
 				<script>
 					function tesCopyRwd() {
 						// 클립보드로 복사하는 기능을 생성
@@ -458,6 +461,7 @@
 					.sampleMscroll{display:flex; justify-content: space-between;}
 					.sampleMscroll .ui-mcscroll{width: calc(50% - 5px); border:1px solid #dddddd; padding: 10px;}
 				</style>
+				<script src="../../js/jquery.mousewheel.min.js"></script>
 				<script src="../../js/jquery.mCustomScrollbar.js"></script>
 				<section class="sampleMscroll">
 					<div class="ui-mcscroll" style="max-height:150px">
@@ -523,8 +527,6 @@
 
 			<section class="sect" data-sid="ui-pie">
 				<h3 class="hdt">Graph - Pie</h3>
-				<p class="gap"></p>
-				<p class="gap"></p>
 				<div class="uiCircle c1" 
 					data-value="0.9"
 					data-size="100"
@@ -583,10 +585,11 @@
 					}
 				});
 				</script>
-				<a href="javascript:;" class="btn" onclick="circleSmaple(1);">22%</a>
-				<a href="javascript:;" class="btn" onclick="circleSmaple(2);">93%</a>
-				<a href="javascript:;" class="btn" onclick="circleSmaple(3);">redraw</a>
-				<p class="gap"></p>
+				<div class="btnSet">
+					<a href="javascript:;" class="btn" onclick="circleSmaple(1);">22%</a>
+					<a href="javascript:;" class="btn" onclick="circleSmaple(2);">93%</a>
+					<a href="javascript:;" class="btn" onclick="circleSmaple(3);">redraw</a>
+				</div>
 			</section>
 
 			<section class="sect" data-sid="ui-spinners">
@@ -1348,12 +1351,14 @@ function showInfo() {
 // 	var scr = $(window).scrollTop() + wHt + 30; 
 // 	$('#debug').html('scr : '+ scr + 'doc : ' +docH + "visualViewport : "+ window.visualViewport.height);
 // });
-$(function() {
+$(document).ready(function(){
 	$('#userAgent').html(navigator.userAgent);
-	showInfo();
 	$(document.body).on('orientationchange', showInfo);
 	$(window).on('orientationchange', showInfo);
-	$(window).on('resize', showInfo);
+	$(window).on('load resize', showInfo);
+	$(window).on('load resize', function(){
+		$('#iosSafe').html( "iosSafeArea "+JSON.stringify( ui.getSafe ) );
+	});
 });
 </script>
 

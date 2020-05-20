@@ -22,6 +22,7 @@ var ui = {
 		this.slides.init();
 		this.datepick.init();
 		this.listLoad.init();
+		this.getSafe.init();
 		console.log("ui.init();");
 	},
 	cm:{ // 공통
@@ -51,6 +52,20 @@ var ui = {
 			}
 		}
 		return result ;
+	},
+	getSafe:{ // 아이폰X 여백값
+		init:function(){
+			var _this = this;
+			var computed, div = document.createElement('div');
+			div.style.padding = 'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';
+			document.body.appendChild(div);
+			computed = getComputedStyle(div);
+			_this.top= parseInt(computed.paddingTop) || 0;
+			_this.right= parseInt(computed.paddingRight) || 0;
+			_this.bottom= parseInt(computed.paddingBottom) || 0;
+			_this.left= parseInt(computed.paddingLeft) || 0;
+			document.body.removeChild(div);
+		}
 	},
 	param:(function(a) { // URL에서 파라미터 읽어오기  ui.param.***
 			if (a == "") return {};

@@ -240,6 +240,6 @@ input[type=number] { -moz-appearance: textfield; }
 .contain.ui .weeks{text-align:center;font-size: 12px;/* font-weight:bold; */margin: 10px 0 0px 0;border: #c7c7c7 solid 1px;border-radius: 4px 4px 0px 0px;padding: 5px 4px;border-width: 1px 1px 0px 1px;}
 .contain.ui [data-ui-tog='ctn']{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;margin-top: 10px;}
 .contain.ui [data-ui-tab-ctn]{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;border-top-width: 0;}
-#barH{height: 1px;background-color: rgba(0, 0, 0, 0.16);position:fixed;left:0px;top: 49px;z-index: 1000;transition: width .4s ease-out;width: 100%;}
-#barH>i{content:"";height: 1px;background-color: #0365d5;display: block;transition: width .4s ease-out;}
+#barH{height: 1px;background-color: #d4d4d4;position:fixed;left:0px;top: 49px;z-index: 1000;transition: width .4s ease-out;width: 100%;}
+#barH>i{content:"";height: 1px;background-color: #0365d5;display: block;transition: width .4s ease-out;width: 1px;}
 .body.ui #debug{position:fixed;left:10px;bottom: 110px;background: rgba(255, 255, 255, 0.8);z-index: 9999;}
