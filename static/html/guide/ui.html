@@ -85,7 +85,7 @@
 				</div>
 
 				<div class="codeBox">
-					<div class="code">
+					<div class="code" style="height: 127px;">
 						<pre class="brush: html">
 							<a href="javascript:;" class="btn xs">버튼</a>
 							<a href="javascript:;" class="btn sm">버튼</a>
@@ -123,6 +123,42 @@
 			<section class="sect" data-sid="ui-paging">
 				<h3 class="hdt"><a href="#ui-paging">페이징</a></h3>
 				<include data-include-html="../inc/paging.html"></include>
+			</section>
+
+			<section class="sect" data-sid="ui-lnbs">
+				<h3 class="hdt">LNB 메뉴</h3>
+				<nav class="lnb">
+					<ul class="menu">
+						<li>
+							<a class="bt" href="javascript:;">메뉴-1</a>
+						</li>
+						<li>
+							<a class="bt" href="javascript:;">메뉴-2</a>
+							<ul>
+								<li><a class="bt" href="javascript:;">메뉴-2-1</a></li>
+								<li><a class="bt" href="javascript:;">메뉴-2-2</a></li>
+							</ul>
+						</li>
+						<li>
+							<a class="bt" href="javascript:;">메뉴-3</a>
+							<ul>
+								<li><a class="bt" href="javascript:;">메뉴-3-1</a></li>
+								<li><a class="bt" href="javascript:;">메뉴-3-2</a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+				<script>
+					$(document).ready(function(){
+						ui.lnb.act("메뉴-2","메뉴-2-2");  // LNB Active
+					});
+				</script>
+				<div class="codeBox">
+					<div class="code">
+						<pre class="brush: html">
+							ui.lnb.act("메뉴-2","메뉴-2-2");  // LNB Active</pre>
+					</div>
+				</div>
 			</section>
 
 			<section class="sect" data-sid="ui-layerpop">
@@ -551,7 +587,7 @@
 					data-arc-coef= "0.7"
 					data-start-angle = "1.6"
 					data-empty-fill="rgba(0, 0, 0, .5)"
-					data-fill = '{"image": "https://i.imgur.com/pT0i89v.png"}'
+					data-fill = '{"image": "../../img/common/pT0i89v.png"}'
 					data-thickness="20"
 					data-animation-start-value="0.0" >
 					<strong></strong>
@@ -603,7 +639,7 @@
 				</div>
 			</section>
 
-			<section class="sect" data-sid="ui-startpoint">
+			<section class="sect" data-sid="ui-starpoint">
 				<h3 class="hdt">별점</h3>
 				<div class="uiStar" data-star="3.5">
 					<ul>

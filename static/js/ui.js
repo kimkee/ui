@@ -8,6 +8,7 @@ var ui = {
 	init:function(){
 		this.cm.init();
 		this.gnb.init();
+		this.lnb.init();
 		this.ly.init();
 		this.form.init();
 		this.accd.init();
@@ -208,6 +209,62 @@ var ui = {
 
 				ui.lock.using(false);
 			}
+		}
+	},
+	lnb:{
+		init:function(){
+			$("nav.lnb").length && this.using();
+			$("nav.lnb .menu>li").each(function(){
+				if( !$(this).find(">.bt").next("ul").length  ){
+					$(this).find(">.bt").addClass("link");
+				}else{
+					// $(this).removeClass("active");
+				}
+			});
+		},
+		act:function(dep1,dep2,dep3){ // LNB 활성화
+			var dep1 = dep1 || 0;
+			var dep2 = dep2 || 0;
+			var dep3 = dep3 || 0;
+			if (typeof dep1 ==  "string") { // 1뎁스
+				$("nav.lnb .menu>li").each(function(){
+					if( $(this).find(">.bt").text() == dep1 ){
+						$(this).addClass("active").siblings("li").removeClass("active");
+					}
+				});
+			}else{
+				$("nav.lnb .menu>li:nth-child("+dep1+")").addClass("active").siblings("li").removeClass("active");
+			}
+
+			if (typeof dep2 ==  "string") { // 2뎁스
+				$("nav.lnb .menu>li>ul>li").each(function(){
+					if( $(this).find(">.bt").text() == dep2 ){
+						$(this).addClass("active").siblings("li").removeClass("active");
+					}
+				});
+			}else{
+				$("nav.lnb .menu>li.active>ul>li:nth-child("+dep2+") ").addClass("active").siblings("li").removeClass("active");
+			}
+
+		},
+		using:function(){
+			$(document).on("click","nav.lnb .menu>li>.bt:not(.link)",function(e){
+				$(this).closest(".menu").find("ul").slideUp(200,function(){
+					$(this).closest("li").removeClass("active");
+				});
+				if ( $(this).next("ul").find("li").length ){
+					if( $(this).closest("li").hasClass("active") ){
+						// $(this).next("ul").slideUp(200,function(){
+						// 	$(this).closest("li").removeClass("active");
+						// });
+					}else{
+						$(this).next("ul").slideDown(200,function(){
+							$(this).closest("li").addClass("active");
+						});
+
+					}
+				}
+			});
 		}
 	},
 	ly:{ // 레이아웃
@@ -549,7 +606,7 @@ var ui = {
 			}
 		}
 	},
-	loading: { // 로딩중..
+	loading:{ // 로딩중..
 		show: function () {
 			var els = '<div class="loadingPage"><em></em></div>';
 			$("body").prepend(els);
@@ -564,9 +621,9 @@ var ui = {
 		},
 		opt:{
 			axis:"y" ,
-			scrollInertia:500, 
+			scrollInertia:100, 
 			mouseWheel:{ 
-				scrollAmount:400,
+				scrollAmount:800,
 				preventDefault:true
 			},
 			callbacks:{
@@ -589,7 +646,7 @@ var ui = {
 			// $(".ui-mcscroll").mCustomScrollbar("disable",true);
 		}
 	},
-	accd: { // 아코디언 UI
+	accd:{ // 아코디언 UI
 		init: function() {
 			$(window).on("load", this.using);
 			$(window).on("load", this.tbl);
@@ -1100,7 +1157,7 @@ var ui = {
 			}, opt.sec);
 		}
 	},
-	popLayer: { // 레이어팝업
+	popLayer:{ // 레이어팝업
 		init: function() {
 			var _this = this;
 			$(document).on("click", ".popLayer:not(.win) .btnPopClose", function() {
@@ -1358,7 +1415,7 @@ var ui = {
 			modalWin.focus();
 		}
 	},
-	listMore: { // 더 불러오기 
+	listMore:{ // 더 불러오기 
 		active: false,
 		init: function(paramCallback) {
 			this.active = true;
@@ -1385,7 +1442,7 @@ var ui = {
 			this.loading.hide();
 		}
 	},
-	listLoad: { // 더 불러오기 
+	listLoad:{ // 더 불러오기 
 		init: function() {
 			this.loading = $(".uiLoadMore");
 		},
@@ -1408,7 +1465,7 @@ var ui = {
 			var d = new Date();
 			d.setTime( d.getTime() + (exdays * 60 * 60 * 1000) );
 			var expires = "expires=" + d.toUTCString();
-			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/html";
+			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 		},
 		get:function(cname){
 			var name = cname + "=";
@@ -1424,6 +1481,9 @@ var ui = {
 				}
 			}
 			return "";
+		},
+		del:function(cname){
+			document.cookie = cname + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
 		}
 	},
 	dropDown:{	// 드롭다운 메뉴
