@@ -215,7 +215,7 @@ input[type=number] { -moz-appearance: textfield; }
 
 .body.ui{background-color:#ffffff;}
 .contain.ui{background-color:#ffffff;}
-.contain.ui .device{border:#ddd solid 1px;border-radius:4px;padding:10px;font-size:10px;min-height: 134px;}
+.contain.ui .device{border:#ddd solid 1px;border-radius:4px;padding:10px;font-size:10px;min-height: 118px;}
 .contain.ui .device h3{ font-weight:bold; }
 .contain.ui .device #userAgent{ color:#7d51da; }
 .contain.ui .device #cssStatus{ color:#000000; }
