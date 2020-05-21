@@ -85,7 +85,7 @@
 				</div>
 
 				<div class="codeBox">
-					<div class="code" style="height: 127px;">
+					<div class="code">
 						<pre class="brush: html">
 							<a href="javascript:;" class="btn xs">버튼</a>
 							<a href="javascript:;" class="btn sm">버튼</a>
@@ -122,43 +122,7 @@
 
 			<section class="sect" data-sid="ui-paging">
 				<h3 class="hdt"><a href="#ui-paging">페이징</a></h3>
-				<include data-include-html="../inc/paging.html"></include>
-			</section>
-
-			<section class="sect" data-sid="ui-lnbs">
-				<h3 class="hdt">LNB 메뉴</h3>
-				<nav class="lnb">
-					<ul class="menu">
-						<li>
-							<a class="bt" href="javascript:;">메뉴-1</a>
-						</li>
-						<li>
-							<a class="bt" href="javascript:;">메뉴-2</a>
-							<ul>
-								<li><a class="bt" href="javascript:;">메뉴-2-1</a></li>
-								<li><a class="bt" href="javascript:;">메뉴-2-2</a></li>
-							</ul>
-						</li>
-						<li>
-							<a class="bt" href="javascript:;">메뉴-3</a>
-							<ul>
-								<li><a class="bt" href="javascript:;">메뉴-3-1</a></li>
-								<li><a class="bt" href="javascript:;">메뉴-3-2</a></li>
-							</ul>
-						</li>
-					</ul>
-				</nav>
-				<script>
-					$(document).ready(function(){
-						ui.lnb.act("메뉴-2","메뉴-2-2");  // LNB Active
-					});
-				</script>
-				<div class="codeBox">
-					<div class="code">
-						<pre class="brush: html">
-							ui.lnb.act("메뉴-2","메뉴-2-2");  // LNB Active</pre>
-					</div>
-				</div>
+				<include class="paging" data-include-html="../inc/paging.html"></include>
 			</section>
 
 			<section class="sect" data-sid="ui-layerpop">
@@ -472,6 +436,42 @@
 							<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택1</span></label>
 							<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택2</span></label>
 							<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택3</span></label></pre>
+					</div>
+				</div>
+			</section>
+
+			<section class="sect" data-sid="ui-lnbs">
+				<h3 class="hdt">LNB 메뉴</h3>
+				<nav class="lnb">
+					<ul class="menu">
+						<li>
+							<a class="bt" href="javascript:;">메뉴-1</a>
+						</li>
+						<li>
+							<a class="bt" href="javascript:;">메뉴-2</a>
+							<ul>
+								<li><a class="bt" href="javascript:;">메뉴-2-1</a></li>
+								<li><a class="bt" href="javascript:;">메뉴-2-2</a></li>
+							</ul>
+						</li>
+						<li>
+							<a class="bt" href="javascript:;">메뉴-3</a>
+							<ul>
+								<li><a class="bt" href="javascript:;">메뉴-3-1</a></li>
+								<li><a class="bt" href="javascript:;">메뉴-3-2</a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+				<script>
+					$(document).ready(function(){
+						ui.lnb.act("메뉴-2","메뉴-2-2");  // LNB Active
+					});
+				</script>
+				<div class="codeBox">
+					<div class="code">
+						<pre class="brush: html">
+							ui.lnb.act("메뉴-2","메뉴-2-2");  // LNB Active</pre>
 					</div>
 				</div>
 			</section>
@@ -1380,6 +1380,7 @@ var html = document.documentElement;
 function showInfo() {
 	$('#cssStatus').html(html.className);
 	$('#browserStatus').html('Client Size : ' + html.clientWidth + 'x' + html.clientHeight + ', Orientation : ' + window.orientation +", visualViewport : "+ window.visualViewport.height);
+	$('#iosSafe').html( "iosSafeArea "+JSON.stringify( ui.getSafe ) );
 }
 // $(window).on("scroll resize", function() { // 바닥 확인
 // 	var wHt = window.visualViewport.height ;
@@ -1389,12 +1390,10 @@ function showInfo() {
 // });
 $(document).ready(function(){
 	$('#userAgent').html(navigator.userAgent);
+	showInfo();
 	$(document.body).on('orientationchange', showInfo);
 	$(window).on('orientationchange', showInfo);
 	$(window).on('load resize', showInfo);
-	$(window).on('load resize', function(){
-		$('#iosSafe').html( "iosSafeArea "+JSON.stringify( ui.getSafe ) );
-	});
 });
 </script>
 
