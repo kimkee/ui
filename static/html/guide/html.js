@@ -2,6 +2,7 @@
 	init: function () {
 		
 		this.tit();
+		this.menu.init();
 		this.layout();
 		this.include();
 		$(window).on("load scroll",function(){
@@ -268,8 +269,7 @@
 	}
 };
 
-uiHtml.menu.init();
-$(document).ready(function(){
-	uiHtml.init();
-});
+
+uiHtml.init();
+
 
