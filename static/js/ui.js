@@ -78,7 +78,6 @@ var ui = {
 			}
 			return b;
 		})(window.location.search.substr(1).split('&')),
-	
 	refresh:{ // PULL Refresh 
 		init:function(callback){
 			if( typeof callback == "function" ){
@@ -1120,7 +1119,7 @@ var ui = {
 			}
 		}
 	},
-	toast: function(params) { // 토스트창 ui.toast();
+	toast:function(params){ // 토스트창 ui.toast();
 
 		var opt = $.extend({
 			msg:"토스트메시지",
@@ -1129,33 +1128,29 @@ var ui = {
 			bot:20,
 		}, params);
 
-		var toastStat = false ;
-		if ( !$(".popToast:visible").length && toastStat == false ) {
+		if ( $(".popToast:visible").length ) { return }
 
-			var lyToast =
-				'<article class="popToast ' + opt.cls + '">' +
-					'<div class="pbd">' +
-						'<div class="pct">' + opt.msg + '</div>' +
-					'</div>' +
-				'</article>';
+		var lyToast =
+			'<article class="popToast ' + opt.cls + '">' +
+				'<div class="pbd">' +
+					'<div class="pct">' + opt.msg + '</div>' +
+				'</div>' +
+			'</article>';
 
-			$("body").append(lyToast);
+		$("body").append(lyToast);
 
-			window.setTimeout(function() {
-				$(".popToast").addClass("on").css({"padding-bottom" : opt.bot});
-			},100);
+		window.setTimeout(function() {
+			$(".popToast").addClass("on").css({"padding-bottom" : opt.bot});
+		});
+		// console.log(this.toast.times);
 
-			this.times = window.setTimeout(function() {
-				$(".popToast").removeClass("on").on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd",function(){
-					// console.log("fsd");
-					$(".popToast").remove();
-					// toastStat = true ;
-				});
-				// $(".popToast").fadeOut(400, function() {
-					
-				// });
-			}, opt.sec);
-		}
+		window.setTimeout(function() {
+			$(".popToast").removeClass("on").on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd",function(){
+				// console.log("fsd");
+				$(".popToast").remove();
+			});
+		}, opt.sec);
+		
 	},
 	popLayer:{ // 레이어팝업
 		init: function() {

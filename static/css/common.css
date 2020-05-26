@@ -121,8 +121,8 @@ nav.lnb .menu>li>ul>li>.bt::before{background-color:#fff;width:2px;height:2px;di
 /* 입력 */
 span.input{display:inline-block;vertical-align:middle;position: relative;}
 span.input>input,
-span.textarea>textarea{display:block;/* width:100%; */padding: 5px 10px 5px 10px;border-radius:0px;margin:0px 0;background-image:none;-webkit-appearance:none;color:#181818;border:#c7c7c7 solid 1px;resize:none;outline:none;vertical-align: middle;-webkit-border-radius: 0;}
-span.input>input{height: 32px;}
+span.textarea>textarea{display:block;/* width:100%; */padding: 3px 10px 4px 10px;border-radius:0px;margin:0px 0;background-image:none;-webkit-appearance:none;color:#181818;border:#c7c7c7 solid 1px;resize:none;outline:none;vertical-align: middle;-webkit-border-radius: 0;}
+span.input>input{height: 32px;line-height: 2;}
 span.textarea>textarea{padding: 5px 8px 5px 8px;height: 100px;}
 
 span.input.db{display:block;}
@@ -169,7 +169,8 @@ input[type="checkbox"]{width:30px;height:30px;display:inline-block;vertical-alig
 .select{display:inline-block; vertical-align:middle;}
 .select.db{ display: block; }
 .select.db>select{display:block;width: 100%;}
-.select>select{height: 32px;user-select:none;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;outline:none;background: url(../img/common/select.png) no-repeat right 0px top 0px transparent;background-size: 30px auto;position:relative;border:1px solid #cccccc;margin:0;overflow:hidden;padding: 0 35px 1px 10px;text-overflow:ellipsis;white-space:nowrap;font-size: 13px;color:#181818;max-width: 100%;}
+.select>select{height: 32px;user-select:none;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;outline:none;background: url(../img/common/select.png) no-repeat right 0px top 0px transparent;background-size: 30px auto;position:relative;border:1px solid #cccccc;margin:0;overflow:hidden;padding: 5px 35px 6px 10px;text-overflow:ellipsis;white-space:nowrap;font-size: 13px;color:#181818;max-width: 100%;/* outline: none; */}
+.select>select>option{outline:none;padding: 5px;line-height: 2;}
 .select>select:not([disabled]):focus{ border-color:#0052bb;}
 .select>select:after{content:"";width: 1px;height:30px;position:absolute;right: 30px;top:0px;background:#dddddd;}
 select::-ms-expand {display:none;}
@@ -185,7 +186,7 @@ select::-ms-expand {display:none;}
 .ui-selectmenu-menu .ui-menu{margin-top: -1px;border: #cccccc solid 1px;padding: 0px 0;border-radius: 0px;border-top-width: 1px;}
 .ui-selectmenu-menu .ui-menu>li{}
 .ui-selectmenu-menu .ui-menu>li .ui-menu-item-wrapper{border: #cccccc solid 0px;padding: 5px 10px 5px 9px;border-width: 1px 0px 0px 0px;/* font-family: "Noto Sans KR"; */font-size: 13px;line-height: 150%;/* height: 24px; */white-space: nowrap;font-weight: 300;}
-.ui-selectmenu-menu .ui-menu>li .ui-menu-item-wrapper.ui-state-active{/* border: #000000 solid 0px; */background-color: #f3f3f3;color: #4a4a4a;margin: 0px;border-width: 0px 0px 0px 0px;}
+.ui-selectmenu-menu .ui-menu>li .ui-menu-item-wrapper.ui-state-active{/* border: #000000 solid 0px; */background-color: #f3f3f3;color: #4a4a4a;margin: 0px;/* border-width: 0px 0px 0px 0px; */}
 .ui-selectmenu-menu .ui-menu>li:first-child .ui-menu-item-wrapper{border-top-color: transparent !important;}
 
 
@@ -195,8 +196,8 @@ select::-ms-expand {display:none;}
 
 .uiDate{position:relative;display: inline-block;width: 100%;}
 .uiDate input.datepicker,
-.uiDate input.datepicker:hover{padding-right: 30px;background: url(../img/common/datepicker.png) no-repeat right 3px top 50% #ffffff;background-size: 32px auto;color:#181818;cursor: pointer;}
-.uiDate input.datepicker + .ui-datepicker-trigger{width: 40px;height: 40px;font-size:0px;vertical-align:middle;/* margin-left: -35px; */outline:none;position: absolute;right:0px;top:0px;border: none;background: none;}
+.uiDate input.datepicker:hover{padding-right: 30px;background: url(../img/common/datepicker.png) no-repeat right -1px top 50% #ffffff;background-size: 32px auto;-webkit-text-fill-color: #181818;cursor: pointer;}
+.uiDate input.datepicker + .ui-datepicker-trigger{width: 32px;height: 32px;font-size:0px;vertical-align:middle;/* margin-left: -35px; */outline:none;position: absolute;right:0px;top:0px;border: none;background: none;padding: 0px;}
 .uiDate input.datepicker_month{border-radius: 0px;padding-right: 30px;background: url(../img/common/datepicker.png) no-repeat right 3px top 50% #ffffff;background-size: 32px auto;color: #181818;cursor: pointer;}
 
 
@@ -777,7 +778,7 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 /* 팝업 레이어 typeC */
 .popLayer.c{white-space:nowrap;text-align:center;font-size: 0px;padding: 10px 0px 0px 0px;}
 .popLayer.c::after{content: '';width:0;height:100%;display:inline-block;vertical-align:middle;}
-.popLayer.c .pbd{transform: translateY(110%);transition: transform 0.3s ease 0s;font-size:16px;bottom: 10px;display:inline-block;vertical-align: bottom;text-align:left;white-space:normal;/* max-width: 310px; */width: calc(100% - 40px);padding-bottom: 40px;/* overflow: initial; */}
+.popLayer.c .pbd{transform: translateY(110%);transition: transform 0.3s ease 0s;font-size:16px;bottom: 10px;display:inline-block;vertical-align: bottom;text-align:left;white-space:normal;/* max-width: 310px; */width: calc(100% - 40px);margin-bottom: 40px;overflow: initial;}
 .popLayer.c .phd{position: relative;}
 .popLayer.c .phd>.in{ position:relative;}
 .popLayer.c .phd .tit{ font-size: 18px;}
@@ -795,7 +796,7 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .popLayer.c .list>li:last-child{border-bottom-width: 0px;}
 .popLayer.c .list>li .bt{padding: 7px 10px 8px 10px;font-size: 14px;display:block;text-transform: uppercase;}
 .popLayer.c .list>li.st .bt{color:#ff414d;}
-.popLayer.c .btnPopClose{/* position: absolute; */left: 50%;bottom: 0px;top: auto;background-color: #FFFFFF;border-radius: 30px;background-size: 14px auto;margin-left: -15px;}
+.popLayer.c .btnPopClose{/* position: absolute; */left: 50%;bottom: -40px;top: auto;background-color: #FFFFFF;border-radius: 30px;background-size: 14px auto;margin-left: -15px;}
 
 .isFrame #header{display:none;}
 .isFrame{}
@@ -909,4 +910,6 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 	nav.gnb .menu{/* padding-top: 0px; *//* border-bottom: 1px #ddd solid; */}
 	nav.gnb{left:0px;}
 	nav.gnb::before{display:none;}
+
+	.contain.ui .sect{/* width:50%; */}
 }

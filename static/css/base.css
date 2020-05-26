@@ -93,7 +93,7 @@ input[type=number] { -moz-appearance: textfield; }
 .ui-datepicker th:first-child{color:#ec151e}
 .ui-datepicker-trigger{ cursor:pointer;}
 .ui-datepicker .ui-datepicker-title{text-align: left;}
-.ui-datepicker .ui-datepicker-title select{margin: 0 6px 0 0;height: 40px;border-color: #c7c7c7;width: 100px;padding: 0 45px 0 10px;background: url(../img/common/select.png) no-repeat right 2px top 5px transparent;background-size: 28px auto;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;}
+.ui-datepicker .ui-datepicker-title select{margin: 0 6px 0 0;height: 40px;border-color: #c7c7c7;width: 100px;padding: 0 45px 0 10px;background: url(../img/common/select.png) no-repeat right 2px top 5px transparent;background-size: 28px auto;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;font-size: 15px;}
 .ui-datepicker .ui-datepicker-title select.ui-datepicker-month{width: 80px;}
 
 
@@ -221,6 +221,7 @@ input[type=number] { -moz-appearance: textfield; }
 .contain.ui .device #cssStatus{ color:#000000; }
 .contain.ui .device #browserStatus{ color:#e84e4e; }
 .contain.ui{padding: 15px 10px 10px 10px;}
+.contain.ui .sect{}
 .contain.ui .codeBox{ position:relative; margin:10px 0; overflow:hidden; }
 .contain.ui .codeBox .bts{padding:5px 0px 0px 0px;/* position:absolute; right:10px; top:10px;*/margin-bottom: 5px;}
 .contain.ui .codeBox .bts .btn{border-color:#bbbbbb;color:#555555;border-radius:3px;height:24px;line-height: 19px;padding: 3px 7px 3px;background-color: #fff;}
