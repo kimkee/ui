@@ -5,7 +5,7 @@
 //*******************************************//
 
 var ui = {
-	init:function(){
+	init:function(){ // 초기구동
 		this.cm.init();
 		this.gnb.init();
 		this.lnb.init();
@@ -24,11 +24,16 @@ var ui = {
 		this.datepick.init();
 		this.listLoad.init();
 		this.getSafe.init();
+		this.movePage.init();
 		console.log("ui.init();");
 	},
 	cm:{ // 공통
 		init:function(){
 			
+		}
+	},
+	movePage:{ // 스와이프로 이동할 페이지
+		init:function(){
 			$("#contain").hammer().on("swipeleft swiperight", function(e) {
 				// console.log( e.type );
 				if (e.type=="swiperight" && ui.movePage.prev) {
@@ -38,13 +43,15 @@ var ui = {
 					ui.movePage.next(e.type);
 				}
 			});
+		},
+		prev:function(e){
+			console.log("<< 이전 페이지 가기 ]] "+e);
+		},
+		next:function(e){
+			console.log("[[ 다음 페이지 가기 >>"+e);
 		}
 	},
-	movePage:{ // 스와이프로 이동할 페이지
-		prev:function(e){console.log("<< 이전 페이지 가기 ]] "+e);},
-		next:function(e){console.log("[[ 다음 페이지 가기 >>"+e);}
-	},
-	isUA:function(t){
+	isUA:function(t){ // 디바이스 구분
 		t = t.split(" ");
 		for (let i = 0; i < t.length; i++) {
 			result = navigator.userAgent.indexOf(t[i]) > -1 ? true : false ;
@@ -210,7 +217,7 @@ var ui = {
 			}
 		}
 	},
-	lnb:{
+	lnb:{ // LNB
 		init:function(){
 			$("nav.lnb").length && this.using();
 			$("nav.lnb .menu>li").each(function(){
@@ -614,7 +621,7 @@ var ui = {
 			$(".loadingPage").remove();
 		}
 	},
-	mcscroll:{
+	mcscroll:{ // 커스텀 스크롤
 		init:function(){
 			$(".ui-mcscroll").length && this.using();
 		},
@@ -831,7 +838,7 @@ var ui = {
 		   
 		}
 	},
-	tooltips:{
+	tooltips:{ // 툴팁레이어
 		init:function(){
 			var els = "[data-ui-tooltip='btn']";
 			var _this = this;
@@ -983,7 +990,7 @@ var ui = {
 			}
 		}
 	},
-	slides:{
+	slides:{ // 스와이프 슬라이드
 		init:function(){
 			$(this.sample1.els +" ul.slide" ).length && this.sample1.using();
 			$(this.sample2.els +" ul.slide" ).length && this.sample2.using();
@@ -1333,7 +1340,7 @@ var ui = {
 			}
 		}
 	},
-	popFrame:{
+	popFrame:{ // 팝프레임
 		init:function(){
 			var _this = this;
 			$(document).on("click", ".popFrame .btnPopClose", function() {

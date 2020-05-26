@@ -70,7 +70,7 @@
 
 				<p class="gap"></p>
 				<div class="btnSet">
-					<a href="javascript:;" class="btn">버튼</a>
+					<a href="javascript:;" class="btn" onclick="dubleClick();">더블클릭</a>
 				</div>
 				<p class="gap"></p>
 				<div class="btnSet">
@@ -83,7 +83,23 @@
 					<a href="javascript:;" class="btn type a">버튼</a>
 					<a href="javascript:;" class="btn type d">버튼</a>
 				</div>
-
+				<script>
+					var tapped = false;
+					var dubleClick = function(){
+						if( !tapped ){ // single_tap 
+							tapped = setTimeout(function(){			
+								tapped = null;
+								console.log("싱글터치");
+								ui.toast({msg:"싱글터치",cls:'c'})
+							},300); //wait 300ms
+						}else{  // double_tap
+							clearTimeout(tapped);
+							tapped = null;
+							console.log("더블터치");
+							ui.toast({msg:"더블터치",cls:'b'})
+						}
+					}
+				</script>
 				<div class="codeBox">
 					<div class="code">
 						<pre class="brush: html">
@@ -268,14 +284,14 @@
 				var toast_sample1 = function(){
 					ui.toast({   // 토스트 창띄우기
 						msg:'<p>토스트메시지입니다.</p>',
-						cls:'type a',
+						cls:'a',
 						sec:1500
 					});
 				}
 				var toast_sample2 = function(){
 					ui.toast({   // 토스트 창띄우기
 						msg:'<p>토222스트메시지입니다.</p>',
-						cls:'type b',
+						cls:'b',
 						sec:1500,
 						bot:50
 					});

@@ -330,7 +330,7 @@ ul.bullet.type.b>li:before{ content:""; background:#666666; top:6px; width:4px; 
 /* 풀다운 새로고침 */
 .pull-to-refresh--refreshing{}
 .pull-to-refresh-material2 {  position: relative; background-color:#dddddd;}
-.pull-to-refresh-material2__control {position: absolute;top: -47px;left: 50%;-webkit-transform: translate3d(-50%, 0, 0);transform: translate3d(-50%, 0, 0);width: 36px;height: 36px;justify-content: center;align-items: center;background: #fff;border-radius: 50%;box-shadow: 0 1px 6px rgba(0,0,0,.117647), 0 1px 3px rgba(0,0,0,.117647);display: none;}
+.pull-to-refresh-material2__control {position: absolute;top: -40px;left: 50%;-webkit-transform: translate3d(-50%, 0, 0);transform: translate3d(-50%, 0, 0);width: 36px;height: 36px;justify-content: center;align-items: center;background: #fff;border-radius: 50%;box-shadow: 0 1px 6px rgba(0,0,0,.117647), 0 1px 3px rgba(0,0,0,.117647);display: none;}
 
 .pull-to-refresh--pulling .pull-to-refresh-material2__control,
 .pull-to-refresh--aborting .pull-to-refresh-material2__control,
@@ -727,11 +727,11 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .popToast{position:fixed;left:0px;right:0px;transform: translateY(150%);bottom:0px;transition: all 0.4s;opacity: 0;text-align:center;overflow-y:auto;z-index:500;outline:none;}
 .popToast.on{opacity: 1;transform: translateY(0);}
 .popToast>.pbd{color:#ffffff;padding: 0px 15px;}
-.popToast>.pbd>.pct{padding: 10px 18px 9px 17px;background-color:#468d42;font-size: 13px;line-height: 19px;text-align:center;border-radius: 20px;display: inline-block;}
-.popToast.type.a>.pbd>.pct{background-color:#468d42;}
-.popToast.type.b>.pbd>.pct{background-color:#b88c33;}
-.popToast.type.c>.pbd>.pct{background-color:#af5c4b;}
-.popToast.type.d>.pbd>.pct{background-color:#333333;}
+.popToast>.pbd>.pct{padding: 8px 18px 9px 17px;background-color:#468d42;font-size: 13px;line-height: 19px;text-align:center;border-radius: 20px;display: inline-block;}
+.popToast.a>.pbd>.pct{background-color:#468d42;}
+.popToast.b>.pbd>.pct{background-color:#b88c33;}
+.popToast.c>.pbd>.pct{background-color:#af5c4b;}
+.popToast.d>.pbd>.pct{background-color:#333333;}
 
 
 .iScrollVerticalScrollbar.iScrollLoneScrollbar{}
