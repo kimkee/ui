@@ -7,6 +7,7 @@
 var ui = {
 	init:function(){ // 초기구동
 		this.cm.init();
+		this.skip.init();
 		this.gnb.init();
 		this.lnb.init();
 		this.ly.init();
@@ -26,6 +27,18 @@ var ui = {
 		this.getSafe.init();
 		this.movePage.init();
 		console.log("ui.init();");
+	},
+	skip:{ // 본문으로 스킵
+		init:function() {
+			this.using();
+		},
+		els:'<div id="skipNav">'+
+				'<a href="#gnb"><span>메뉴 바로가기</span></a>'+
+				'<a href="#contain"><span>본문 바로가기</span></a>'+
+			'</div>',
+		using:function() {
+			$("#gnb").length || $("#contain").length && $("body").prepend(this.els);
+		}
 	},
 	cm:{ // 공통
 		init:function(){
