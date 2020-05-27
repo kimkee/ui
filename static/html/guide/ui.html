@@ -1144,7 +1144,7 @@
 							$(window).on("scroll resize", function() { // 바닥 확인
 								var wHt = window.visualViewport.height ;
 								var docH = $(document).height();
-								var scr = $(window).scrollTop() + wHt + 30; 
+								var scr = $(window).scrollTop() + wHt + 0; 
 								// console.log(docH,scr);
 								if (docH <= scr  && _this.stat == true) {
 									console.log("바닥sss");
@@ -1214,6 +1214,8 @@
 				</div>
 				<div class="pct">
 					<main class="poptents">
+						<a class="btn" href="javascript:samplePopA();">팝레이어1</a>
+						<p>sdfsdfsfsd</p>
 						<a class="btn" href="javascript:ui.popLayer.open('popSample2');">팝레이어2</a>
 						<p>sdfsdfsfsd</p>
 						<a class="btn" href="javascript:ui.popLayer.open('popSample3');">팝레이어3</a>
@@ -1415,12 +1417,12 @@ function showInfo() {
 	$('#browserStatus').html('Client Size : ' + html.clientWidth + 'x' + html.clientHeight + ', Orientation : ' + window.orientation +", visualViewport : "+ window.visualViewport.height);
 	$('#iosSafe').html( "iosSafeArea "+JSON.stringify( ui.getSafe ) );
 }
-// $(window).on("scroll resize", function() { // 바닥 확인
-// 	var wHt = window.visualViewport.height ;
-// 	var docH = $(document).height();
-// 	var scr = $(window).scrollTop() + wHt + 30; 
-// 	$('#debug').html('scr : '+ scr + 'doc : ' +docH + "visualViewport : "+ window.visualViewport.height);
-// });
+$(window).on("scroll resize", function() { // 바닥 확인
+	var wHt = window.visualViewport.height ;
+	var docH = $(document).height();
+	var scr = $(window).scrollTop() + wHt + 0; 
+	//$('#debug').html('SCR : '+ scr + ' , DOCH : ' +docH + " , visualViewport : "+ window.visualViewport.height);
+});
 $(document).ready(function(){
 	$('#userAgent').html(navigator.userAgent);
 	showInfo();

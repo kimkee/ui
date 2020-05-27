@@ -244,4 +244,4 @@ input[type=number] { -moz-appearance: textfield; }
 .contain.ui [data-ui-tab-ctn]{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;border-top-width: 0;}
 #barH{height: 1px;background-color: #d4d4d4;position:fixed;left:0px;top: 49px;z-index: 600;transition: width .4s ease-out;width: 100%;}
 #barH>i{content:"";height: 1px;background-color: #0365d5;display: block;transition: width .4s ease-out;width: 1px;}
-.body.ui #debug{position:fixed;left:10px;bottom: 110px;background: rgba(255, 255, 255, 0.8);z-index: 9999;}
+.body.ui #debug{position:fixed;left: 20px;bottom: 110px;background: rgba(0, 0, 0, 0.7);z-index: 9999;color: #ffffff;padding: 0px 7px;}
