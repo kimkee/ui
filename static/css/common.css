@@ -157,22 +157,22 @@ input[type="checkbox"]{width:30px;height:30px;display:inline-block;vertical-alig
 
 /* checkbox */
 .checkbox{position:relative;display:inline-block;vertical-align:middle;}
-.checkbox>input{position:absolute;left:0px;top:0px;padding:0px;z-index: 10;}
-.checkbox>span::before{width:30px;height: 30px;background: url(../img/common/form.png) no-repeat;display:inline-block;vertical-align:middle;background-size: 75px auto;margin-left: -4px;content:"";}
+.checkbox>input{position:absolute;left:0px;top:0px;padding:0px;z-index: 10;margin: 0;}
+.checkbox>span::before{width:30px;height: 30px;background: url(../img/common/form.png) no-repeat;display:inline-block;vertical-align: -10px;background-size: 75px auto;/* margin-left: -4px; */content:"";}
 .checkbox>input:checked + span::before{background-position-y: -30px;}
 .checkbox>input:disabled + span::before{background-position-y: -60px;}
 .checkbox>input:checked:disabled + span::before{background-position-y: -90px;}
-.checkbox>span{display:inline-block;vertical-align:middle;/* margin-left:5px; *//* line-height: 30px; */}
+.checkbox>span{display:inline-block;vertical-align:middle;/* margin-left:5px; */}
 
 /* radio */
 .radio{ position:relative; display:inline-block; vertical-align:middle; }
 .radio + .radio{margin-left:5px;}
 .radio>input{position:absolute;left:0px;top:0px;padding: 0;margin: 0px;}
-.radio>span::before{width:30px;height:30px;background: url(../img/common/form.png) no-repeat;content:"";display:inline-block;vertical-align:middle;background-size: 75px auto;background-position-x: -30px;margin-left: 0px;}
+.radio>span::before{width:30px;height:30px;background: url(../img/common/form.png) no-repeat;content:"";display:inline-block;vertical-align: -10px;background-size: 75px auto;background-position-x: -30px;margin-left: 0px;}
 .radio>input:checked + span::before{background-position-y: -30px;}
 .radio>input:disabled + span::before{background-position-y: -60px;}
 .radio>input:checked:disabled + span::before{ background-position-y:-90px; }
-.radio>span{display:inline-block;vertical-align:middle;/* line-height: 30px; */}
+.radio>span{display:inline-block;vertical-align:middle;}
 
 /* select */
 .select{display:inline-block; vertical-align:middle;}
@@ -545,8 +545,8 @@ html.lock {position: fixed;width: 100%;height: 100%;overflow: hidden;}
 .uiAccd{ border:#ddd solid 1px; }
 .uiAccd>li{ border-bottom:#ddd solid 1px; }
 .uiAccd>li:last-child{ border-bottom-width:0px; }
-.uiAccd>li .hBox{padding: 9px;position:relative;}
-.uiAccd>li .hBox .btnTog{display:block;position:absolute;right:0px;top:0px;bottom:0px;padding: 12px;width:100%;font-size: 0px;box-sizing:border-box;text-align:right;background: none;border: none;}
+.uiAccd>li .hBox{padding: 10px;position:relative;}
+.uiAccd>li .hBox .btnTog{display:block;position:absolute;right:0px;top:0px;bottom:0px;padding: 12px;width:100%;font-size: 0px;box-sizing:border-box;text-align:right;background: none;border: none;outline: none;}
 .uiAccd>li .hBox .btnTog:before{width:40px; height:40px; background:url(../img/common/accd_tog.png); background-size:100% auto; position:absolute; right:0px; top:0px; content:"";}
 .uiAccd>li.open .hBox{ font-weight: bold;}
 .uiAccd>li.open .hBox .btnTog:before{background-position-y: -43px;}
