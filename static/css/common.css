@@ -1,33 +1,39 @@
 @charset "utf-8";
-@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100;
-    src: url(../font/NotoSansKR-Thin.woff2) format('woff2'),
-         url(../font/NotoSansKR-Thin.woff) format('woff'),
-         url(../font/NotoSansKR-Thin.otf) format('opentype');
+@font-face {font-family: 'NotoSansKR';font-style: normal;font-weight: 100;
+	src: url('../font/NotoSansKR-Thin.eot');
+	src: url('../font/NotoSansKR-Thin.eot?#iefix') format('embedded-opentype'),
+		 url('../font/NotoSansKR-Thin.woff2') format('woff2'),
+         url('../font/NotoSansKR-Thin.woff') format('woff');
 }
-@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;
-    src: url(../font/NotoSansKR-Light.woff2) format('woff2'),
-         url(../font/NotoSansKR-Light.woff) format('woff'),
-         url(../font/NotoSansKR-Light.otf) format('opentype');
+@font-face {font-family: 'NotoSansKR';font-style: normal;font-weight: 300;
+	src: url('../font/NotoSansKR-Light.eot');
+	src: url('../font/NotoSansKR-Light.eot?#iefix') format('embedded-opentype'),
+		 url('../font/NotoSansKR-Light.woff2') format('woff2'),
+         url('../font/NotoSansKR-Light.woff') format('woff');
 }
-@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 400;
-    src: url(../font/NotoSansKR-Regular.woff2) format('woff2'),
-         url(../font/NotoSansKR-Regular.woff) format('woff'),
-         url(../font/NotoSansKR-Regular.otf) format('opentype');
+@font-face {font-family: 'NotoSansKR';font-style: normal;font-weight: 400;
+	src: url('../font/NotoSansKR-Regular.eot');
+	src: url('../font/NotoSansKR-Regular.eot?#iefix') format('embedded-opentype'),
+		 url('../font/NotoSansKR-Regular.woff2') format('woff2'),
+         url('../font/NotoSansKR-Regular.woff') format('woff');
 }
-@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 500;
-    src: url(../font/NotoSansKR-Medium.woff2) format('woff2'),
-         url(../font/NotoSansKR-Medium.woff) format('woff'),
-         url(../font/NotoSansKR-Medium.otf) format('opentype');
+@font-face {font-family: 'NotoSansKR';font-style: normal;font-weight: 500;
+    src: url('../font/NotoSansKR-Medium.eot');
+	src: url('../font/NotoSansKR-Medium.eot?#iefix') format('embedded-opentype'),
+		 url('../font/NotoSansKR-Medium.woff2') format('woff2'),
+         url('../font/NotoSansKR-Medium.woff') format('woff');
 }
-@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 700;
-    src: url(../font/NotoSansKR-Bold.woff2) format('woff2'),
-         url(../font/NotoSansKR-Bold.woff) format('woff'),
-         url(../font/NotoSansKR-Bold.otf) format('opentype');
+@font-face {font-family: 'NotoSansKR';font-style: normal;font-weight: 700;
+    src: url('../font/NotoSansKR-Bold.eot');
+	src: url('../font/NotoSansKR-Bold.eot?#iefix') format('embedded-opentype'),
+		 url('../font/NotoSansKR-Bold.woff2') format('woff2'),
+         url('../font/NotoSansKR-Bold.woff') format('woff');
 }
-@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;
-    src: url(../font/NotoSansKR-Black.woff2) format('woff2'),
-         url(../font/NotoSansKR-Black.woff) format('woff'),
-         url(../font/NotoSansKR-Black.otf) format('opentype');
+@font-face {font-family: 'NotoSansKR';font-style: normal;font-weight: 900;
+    src: url('../font/NotoSansKR-Black.eot');
+	src: url('../font/NotoSansKR-Black.eot?#iefix') format('embedded-opentype'),
+		 url('../font/NotoSansKR-Black.woff2') format('woff2'),
+         url('../font/NotoSansKR-Black.woff') format('woff');
 }
 
 
@@ -144,11 +150,11 @@ select::-ms-expand {display:none;}
 
 /* jquery ui select */
 .select.db .ui-selectmenu-button.ui-button{width: 100%;}
-.ui-selectmenu-button.ui-button{background: #ffffff;/* width: 100%; */padding: 5px 35px 5px 10px;outline: none;border-radius: 0px;border: #cccccc solid 1px;font-family: 'Noto Sans KR';/* color: #000000; */display: inline-block;height: 32px;font-size: 13px;/* font-weight: 300; */margin-right: 0;}
+.ui-selectmenu-button.ui-button{background: #ffffff;/* width: 100%; */padding: 5px 35px 5px 10px;outline: none;border-radius: 0px;border: #cccccc solid 1px;font-family: 'NotoSansKR';/* color: #000000; */display: inline-block;height: 32px;font-size: 13px;/* font-weight: 300; */margin-right: 0;}
 .ui-selectmenu-button.ui-button.ui-state-disabled{opacity:1;background-color: #f5f9fc;border-color: #f5f9fc;}
 .ui-selectmenu-button.ui-button.ui-state-disabled .ui-selectmenu-icon{ opacity:0.5;}
 .ui-selectmenu-icon.ui-icon{background: url(../img/common/select.png) no-repeat -6px -7px transparent !important;/* margin-top: -1px; */position: absolute;right: 8px;top: 50%;margin-top: -8px;background-size: 30px auto !important;}
-.ui-selectmenu-text{margin-right: 0;/* font-family: 'Noto Sans KR'; */}
+.ui-selectmenu-text{margin-right: 0;/* font-family: 'NotoSansKR'; */}
 .ui-selectmenu-menu .ui-menu{margin-top: -1px;border: #cccccc solid 1px;padding: 0px 0;border-radius: 0px;border-top-width: 1px;}
 .ui-selectmenu-menu .ui-menu>li{}
 .ui-selectmenu-menu .ui-menu>li .ui-menu-item-wrapper{border: #cccccc solid 0px;padding: 5px 10px 5px 9px;border-width: 1px 0px 0px 0px;/* font-family: "Noto Sans KR"; */font-size: 13px;line-height: 150%;/* height: 24px; */white-space: nowrap;font-weight: 300;}
