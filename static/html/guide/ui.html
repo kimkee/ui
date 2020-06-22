@@ -4,19 +4,18 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
+	<title>UI GUIDE</title>
 	<meta name="format-detection" content="telephone=no">
 	<meta name="theme-color" content="#333333">
 	<link href="../../img/common/favicon.ico" rel="shrtcut icon">
 	<link href="../../img/common/favicon.png" rel="apple-touch-icon-precomposed">
-	<link rel="stylesheet" href="../../css/jquery-ui.css?v=16">
-	<link rel="stylesheet" href="../../css/mCustomScrollbar.css?v=16">
-	<link rel="stylesheet" href="../../css/swiper.css?v=16">
-	<link rel="stylesheet" href="../../css/base.css?v=16">
-	<link rel="stylesheet" href="../../css/common.css?v=16">
+	<link rel="stylesheet" href="../../css/jquery-ui.css?v=20">
+	<link rel="stylesheet" href="../../css/mCustomScrollbar.css?v=20">
+	<link rel="stylesheet" href="../../css/swiper.css?v=20">
+	<link rel="stylesheet" href="../../css/base.css?v=20">
+	<link rel="stylesheet" href="../../css/common.css?v=20">
 	
 	<script src="../../js/jquery-3.4.1.js"></script>
-	<!-- <script src="../../js/jquery-2.2.4.js"></script> -->
 	<script src="../../js/jquery-ui.js"></script>
 	<script src="../../js/jquery.ui.touch-punch.js"></script>
 	<link href="../guide/shCore.css" rel="stylesheet">
@@ -31,12 +30,12 @@
 	<a href="javascript:;" class="bt gnb"><b>GNB</b></a>
 	<nav class="gnb">
 		<!-- <a href="javascript:;" class="bt close">CLOSE</a> -->
-		<div class="menu">
+		<div class="menu ui-mcscroll">
 			<ul class="list"></ul>
 		</div>
 	</nav>
 	<!-- 컨텐츠 시작 -->
-	<div id="barH"></div>
+	<div id="barH"><i></i></div>
 
 	<div class="contain ui" id="contain">
 
@@ -47,6 +46,7 @@
 				<div id="userAgent"></div>
 				<div id="cssStatus"></div>
 				<div id="browserStatus"></div>
+				<div id="iosSafe"></div>
 			</div>
 
 			<section class="sect" data-sid="ui-button">
@@ -69,7 +69,7 @@
 
 				<p class="gap"></p>
 				<div class="btnSet">
-					<a href="javascript:;" class="btn">버튼</a>
+					<a href="javascript:;" class="btn" onclick="dubleClick();">더블클릭</a>
 				</div>
 				<p class="gap"></p>
 				<div class="btnSet">
@@ -82,7 +82,23 @@
 					<a href="javascript:;" class="btn type a">버튼</a>
 					<a href="javascript:;" class="btn type d">버튼</a>
 				</div>
-
+				<script>
+					var tapped = false;
+					var dubleClick = function(){
+						if( !tapped ){ // single_tap 
+							tapped = setTimeout(function(){			
+								tapped = null;
+								console.log("싱글터치");
+								ui.toast({msg:"싱글터치",cls:'c'})
+							},300); //wait 300ms
+						}else{  // double_tap
+							clearTimeout(tapped);
+							tapped = null;
+							console.log("더블터치");
+							ui.toast({msg:"더블터치",cls:'b'})
+						}
+					}
+				</script>
 				<div class="codeBox">
 					<div class="code">
 						<pre class="brush: html">
@@ -120,8 +136,8 @@
 			</section>
 
 			<section class="sect" data-sid="ui-paging">
-				<h3 class="hdt"><a href="#ui-paging">페이징</a></h3>
-				<include data-include-html="../inc/paging.html"></include>
+				<h3 class="hdt">페이징</h3>
+				<include class="paging" data-include-html="../inc/paging.html"></include>
 			</section>
 
 			<section class="sect" data-sid="ui-layerpop">
@@ -137,13 +153,14 @@
 						<pre class="brush: js">
 							ui.popLayer.open('popSample1'); // 팝레이어열기
 							ui.popLayer.close('popSample1'); // 팝레이어닫기
-							ui.popLayer.refresh('popSample1'); // 팝스크롤새로고침</pre>
+							ui.popLayer.refresh('popSample1'); // 팝스크롤새로고침
+							ui.popFrame.open('popFrame1'); // 팝프레임열기</pre>
 					</div>	
 				</section>
 				<script>
 					
 					var samplePopFrameA = function(){
-						// 레이어팝업 열기 콜백
+						// 팝프레임 열기 콜백
 						ui.popFrame.open('popFrame1',{
 							hash:true,
 							ocb:function(){
@@ -151,7 +168,7 @@
 							},
 							ccb:function(){
 								console.log("popFrame1 닫힘");
-							}						
+							}
 						});
 					}
 					var samplePopA = function(){
@@ -163,7 +180,7 @@
 							},
 							ccb:function(){
 								console.log("popSample1 닫힘");
-							}						
+							}
 						});
 					}
 					var samplePopB = function(){
@@ -174,7 +191,7 @@
 							},
 							ccb:function(){
 								console.log("popSample2 닫힘");
-							}						
+							}
 						});
 					}
 					var samplePopC = function(){
@@ -266,14 +283,14 @@
 				var toast_sample1 = function(){
 					ui.toast({   // 토스트 창띄우기
 						msg:'<p>토스트메시지입니다.</p>',
-						cls:'type a',
+						cls:'a',
 						sec:1500
 					});
 				}
 				var toast_sample2 = function(){
 					ui.toast({   // 토스트 창띄우기
 						msg:'<p>토222스트메시지입니다.</p>',
-						cls:'type b',
+						cls:'b',
 						sec:1500,
 						bot:50
 					});
@@ -283,8 +300,10 @@
 
 			<section class="sect" data-sid="ui-copy">
 				<h3 class="hdt">복사 COPY Text</h3>
-				<span class="nums" id="rwd_code">20200416-aBDS</span>
-				<a href="javascript:;" class="btn sm" onclick="tesCopyRwd();">복사 버튼</a>
+				<div class="nums" id="rwd_code">20200416-aBDS</div>
+				<div class="btnSet">
+					<a href="javascript:;" class="btn" onclick="tesCopyRwd();">복사 버튼</a>
+				</div>
 				<script>
 					function tesCopyRwd() {
 						// 클립보드로 복사하는 기능을 생성
@@ -338,12 +357,18 @@
 				<span class="select db">
 					<select>
 						<option>선택</option>
+						<option>선택1</option>
+						<option>선택2</option>
+						<option>선택3</option>
 					</select>
 				</span>
 				<p class="gap"></p>
 				<span class="select db">
 					<select disabled>
-						<option>선택</option>
+						<option>선택 Disabled</option>
+						<option>선택1</option>
+						<option>선택2</option>
+						<option>선택3</option>
 					</select>
 				</span>
 				<p class="gap"></p>
@@ -436,6 +461,42 @@
 				</div>
 			</section>
 
+			<section class="sect" data-sid="ui-lnbs">
+				<h3 class="hdt">LNB 메뉴</h3>
+				<nav class="lnb">
+					<ul class="menu">
+						<li>
+							<a class="bt" href="javascript:;">메뉴-1</a>
+						</li>
+						<li>
+							<a class="bt" href="javascript:;">메뉴-2</a>
+							<ul>
+								<li><a class="bt" href="javascript:;">메뉴-2-1</a></li>
+								<li><a class="bt" href="javascript:;">메뉴-2-2</a></li>
+							</ul>
+						</li>
+						<li>
+							<a class="bt" href="javascript:;">메뉴-3</a>
+							<ul>
+								<li><a class="bt" href="javascript:;">메뉴-3-1</a></li>
+								<li><a class="bt" href="javascript:;">메뉴-3-2</a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+				<script>
+					$(document).ready(function(){
+						ui.lnb.act("메뉴-2","메뉴-2-2");  // LNB Active
+					});
+				</script>
+				<div class="codeBox">
+					<div class="code">
+						<pre class="brush: html">
+							ui.lnb.act("메뉴-2","메뉴-2-2");  // LNB Active</pre>
+					</div>
+				</div>
+			</section>
+
 			<section class="sect" data-sid="ui-loading">
 				<h3 class="hdt">로딩 - ui.loading</h3>
 				<section class="codeBox">
@@ -457,6 +518,7 @@
 					.sampleMscroll{display:flex; justify-content: space-between;}
 					.sampleMscroll .ui-mcscroll{width: calc(50% - 5px); border:1px solid #dddddd; padding: 10px;}
 				</style>
+				<script src="../../js/jquery.mousewheel.min.js"></script>
 				<script src="../../js/jquery.mCustomScrollbar.js"></script>
 				<section class="sampleMscroll">
 					<div class="ui-mcscroll" style="max-height:150px">
@@ -522,8 +584,6 @@
 
 			<section class="sect" data-sid="ui-pie">
 				<h3 class="hdt">Graph - Pie</h3>
-				<p class="gap"></p>
-				<p class="gap"></p>
 				<div class="uiCircle c1" 
 					data-value="0.9"
 					data-size="100"
@@ -548,7 +608,7 @@
 					data-arc-coef= "0.7"
 					data-start-angle = "1.6"
 					data-empty-fill="rgba(0, 0, 0, .5)"
-					data-fill = '{"image": "https://i.imgur.com/pT0i89v.png"}'
+					data-fill = '{"image": "../../img/common/pT0i89v.png"}'
 					data-thickness="20"
 					data-animation-start-value="0.0" >
 					<strong></strong>
@@ -582,10 +642,11 @@
 					}
 				});
 				</script>
-				<a href="javascript:;" class="btn" onclick="circleSmaple(1);">22%</a>
-				<a href="javascript:;" class="btn" onclick="circleSmaple(2);">93%</a>
-				<a href="javascript:;" class="btn" onclick="circleSmaple(3);">redraw</a>
-				<p class="gap"></p>
+				<div class="btnSet">
+					<a href="javascript:;" class="btn" onclick="circleSmaple(1);">22%</a>
+					<a href="javascript:;" class="btn" onclick="circleSmaple(2);">93%</a>
+					<a href="javascript:;" class="btn" onclick="circleSmaple(3);">redraw</a>
+				</div>
 			</section>
 
 			<section class="sect" data-sid="ui-spinners">
@@ -599,7 +660,7 @@
 				</div>
 			</section>
 
-			<section class="sect" data-sid="ui-startpoint">
+			<section class="sect" data-sid="ui-starpoint">
 				<h3 class="hdt">별점</h3>
 				<div class="uiStar" data-star="3.5">
 					<ul>
@@ -683,8 +744,8 @@
 
 				<p class="gap"></p>
 
-				<label class="radio"><input type="radio" name="radio2" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" checked><span>탭선택1</span></label>
-				<label class="radio"><input type="radio" name="radio2" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2"><span>탭선택2</span></label>
+				<label class="radio"><input type="radio" name="radio3" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" checked><span>탭선택1</span></label>
+				<label class="radio"><input type="radio" name="radio3" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2"><span>탭선택2</span></label>
 				<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_1" class="active">
 					탭내용1
 				</div>
@@ -1082,7 +1143,7 @@
 							$(window).on("scroll resize", function() { // 바닥 확인
 								var wHt = window.visualViewport.height ;
 								var docH = $(document).height();
-								var scr = $(window).scrollTop() + wHt + 30; 
+								var scr = $(window).scrollTop() + wHt + 0; 
 								// console.log(docH,scr);
 								if (docH <= scr  && _this.stat == true) {
 									console.log("바닥sss");
@@ -1152,6 +1213,8 @@
 				</div>
 				<div class="pct">
 					<main class="poptents">
+						<a class="btn" href="javascript:samplePopA();">팝레이어1</a>
+						<p>sdfsdfsfsd</p>
 						<a class="btn" href="javascript:ui.popLayer.open('popSample2');">팝레이어2</a>
 						<p>sdfsdfsfsd</p>
 						<a class="btn" href="javascript:ui.popLayer.open('popSample3');">팝레이어3</a>
@@ -1335,27 +1398,6 @@
 </div>
 
 
-<script>
-var html = document.documentElement;
-function showInfo() {
-	$('#cssStatus').html(html.className);
-	$('#browserStatus').html('Client Size : ' + html.clientWidth + 'x' + html.clientHeight + ', Orientation : ' + window.orientation +", visualViewport : "+ window.visualViewport.height);
-}
-// $(window).on("scroll resize", function() { // 바닥 확인
-// 	var wHt = window.visualViewport.height ;
-// 	var docH = $(document).height();
-// 	var scr = $(window).scrollTop() + wHt + 30; 
-// 	$('#debug').html('scr : '+ scr + 'doc : ' +docH + "visualViewport : "+ window.visualViewport.height);
-// });
-$(function() {
-	$('#userAgent').html(navigator.userAgent);
-	showInfo();
-	$(document.body).on('orientationchange', showInfo);
-	$(window).on('orientationchange', showInfo);
-	$(window).on('resize', showInfo);
-});
-</script>
-
 <script src="../../js/iscroll.js"></script>
 <script src="../../js/swiper.js"></script>
 <script src="../../js/moment.js"></script>
@@ -1363,8 +1405,30 @@ $(function() {
 <script src="../../js/pullToRefresh.js"></script>
 <script src="../../js/lib/jquery.hammer.js-master/hammer.js"></script>
 <script src="../../js/lib/jquery.hammer.js-master/jquery.hammer.js"></script>
-<script src="../../js/ui.js?v=16"></script>
 <script src="../guide/html.js"></script><!-- 개발페이지에서는 html.js 임포트 하지말아주세요. -->
+<script src="../../js/ui.js?v=20"></script>
 
+
+<script>
+var html = document.documentElement;
+function showInfo() {
+	$('#cssStatus').html(html.className);
+	$('#browserStatus').html('Client Size : ' + html.clientWidth + 'x' + html.clientHeight + ', Orientation : ' + window.orientation +", visualViewport : "+ window.visualViewport.height);
+	$('#iosSafe').html( "iosSafeArea "+JSON.stringify( ui.getSafe ) );
+}
+$(window).on("scroll resize", function() { // 바닥 확인
+	var wHt = window.visualViewport.height ;
+	var docH = $(document).height();
+	var scr = $(window).scrollTop() + wHt + 0; 
+	//$('#debug').html('SCR : '+ scr + ' , DOCH : ' +docH + " , visualViewport : "+ window.visualViewport.height);
+});
+$(document).ready(function(){
+	$('#userAgent').html(navigator.userAgent);
+	showInfo();
+	$(document.body).on('orientationchange', showInfo);
+	$(window).on('orientationchange', showInfo);
+	$(window).on('load resize', showInfo);
+});
+</script>
 </body>
 </html>

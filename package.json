@@ -21,12 +21,12 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "gulp-webserver": "^0.9.1",
-    "html-includes": "^4.2.0"
+    "html-includes": "^4.3.2"
   },
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/kimkee/ui.git"
+    "url": "git+https://github.com/kimkee/ui.git"
   },
   "keywords": [
     "Html",
@@ -35,7 +35,7 @@
     "UI"
   ],
   "bugs": {
-    "url": "https://gitlab.com/kimkee/ui/issues"
+    "url": "https://github.com/kimkee/ui/issues"
   },
-  "homepage": "https://gitlab.com/kimkee/ui/"
+  "homepage": "https://github.com/kimkee/ui"
 }
