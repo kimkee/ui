@@ -37,7 +37,7 @@ var ui = {
 				'<a href="#contain"><span>본문 바로가기</span></a>'+
 			'</div>',
 		using:function() {
-			$("#gnb").length || $("#contain").length && $("body").prepend(this.els);
+			if( $("#gnb").length || $("#contain").length ) $("body").prepend(this.els);
 		}
 	},
 	cm:{ // 공통
@@ -66,7 +66,7 @@ var ui = {
 	},
 	isUA:function(t){ // 디바이스 구분
 		t = t.split(" ");
-		for (let i = 0; i < t.length; i++) {
+		for (var i = 0; i < t.length; i++) {
 			result = navigator.userAgent.indexOf(t[i]) > -1 ? true : false ;
 			if (!result) {
 				return result ;
@@ -105,7 +105,7 @@ var ui = {
 			}else{
 				this.pullCallback = function(){};
 			}
-			$("#contain").length && this.using();
+			if( $("#contain").length )  this.using();
 			$("#contain").prepend( this.icon );
 		},
 		icon:
@@ -117,8 +117,7 @@ var ui = {
 				'<svg class="pull-to-refresh-material2__spinner" width="24" height="24" viewBox="25 25 50 50">'+
 					'<circle class="pull-to-refresh-material2__path" cx="50" cy="50" r="20" fill="none" stroke="#666666" stroke-width="4" stroke-miterlimit="10" />'+
 				'</svg>'+
-			'</div>'
-		,
+			'</div>',
 		using:function(){
 			var _this = this;
 			pullToRefresh({
@@ -126,13 +125,13 @@ var ui = {
 				animates: ptrAnimatesMaterial2,
 				refresh: function() {
 					return new Promise( function(resolve){
-						setTimeout(resolve, 1500)
+						setTimeout(resolve, 1500);
 						setTimeout(function(){
 							_this.pullCallback();
-						}, 1500)
-					})
+						}, 1500);
+					});
 				}
-			})
+			});
 		}
 	},
 	gnb: { // GNB 
@@ -232,7 +231,7 @@ var ui = {
 	},
 	lnb:{ // LNB
 		init:function(){
-			$("nav.lnb").length && this.using();
+			if( $("nav.lnb").length )  this.using();
 			$("nav.lnb .menu>li").each(function(){
 				if( !$(this).find(">.bt").next("ul").length  ){
 					$(this).find(">.bt").addClass("link");
@@ -242,9 +241,9 @@ var ui = {
 			});
 		},
 		act:function(dep1,dep2,dep3){ // LNB 활성화
-			var dep1 = dep1 || 0;
-			var dep2 = dep2 || 0;
-			var dep3 = dep3 || 0;
+			dep1 = dep1 || 0;
+			dep2 = dep2 || 0;
+			dep3 = dep3 || 0;
 			if (typeof dep1 ==  "string") { // 1뎁스
 				$("nav.lnb .menu>li").each(function(){
 					if( $(this).find(">.bt").text() == dep1 ){
@@ -305,7 +304,7 @@ var ui = {
 			};
 			
 			this.floating.init();
-			$("#menubar").length &&	this.botNav.init();
+			if( $("#menubar").length ) this.botNav.init();
 		},
 		floating:{
 			init:function(){
@@ -477,25 +476,25 @@ var ui = {
 			});
 			$(document).on("change", "[data-ui='attach'] .fileButton .fileInput", function() {
 				var els = $(this).closest("[data-ui='attach']");
+				var lcEls;
 				var fUrl = (this.value).split("\\"),
 					fName = fUrl[fUrl.length - 1];
 				var locVar = els.find(".file").length;
 				if (!locVar) {
 					// console.log("132132");
 					if( els.hasClass("ui-add-pic") ) {
-						var lcEls = 
+						lcEls = 
 						'<span class="file">'+
 						'    <img class="img" src="" alt="" onerror="this.src=\'../../img/common/blank.png\'" >'+
 						'    <button type="button" class="delete">삭제</button>'+
-						'</span>'
+						'</span>';
 					}else{
-						var lcEls = 
+						lcEls = 
 						'<span class="file">'+
 						'    <span class="loc"></span>'+
 						'    <button type="button" class="delete">삭제</button>'+
-						'</span>'
+						'</span>';
 					}
-
 					els.append( lcEls );
 				}
 				
@@ -538,8 +537,8 @@ var ui = {
 		},
 		spinner:{
 			init:function(){
-				$(".uiSpinner").length && this.using();
-				$(".uiSpinner").length && this.stat();
+				if( $(".uiSpinner").length ) this.using(); this.stat();
+
 			},
 			using:function(){
 				var _this = this;
@@ -586,7 +585,7 @@ var ui = {
 		star:{
 			init:function(){
 				var _this =  this;
-				$(".uiStar").length && this.using();
+				if( $(".uiStar").length ) this.using();
 				$(document).on("click",".uiStar ul>li>button.st",function(){
 					var myVar =  $(this).closest("li").index()+1;
 					//console.log(myVar);
@@ -636,7 +635,7 @@ var ui = {
 	},
 	mcscroll:{ // 커스텀 스크롤
 		init:function(){
-			$(".ui-mcscroll").length && this.using();
+			if ( $(".ui-mcscroll").length ) this.using();
 		},
 		opt:{
 			axis:"y" ,
@@ -735,7 +734,7 @@ var ui = {
 	},
 	datepick:{ // 달력피커 jQuery-ui
 		init:function(){
-			$("input.datepicker").length && this.using(); 
+			if( $("input.datepicker").length ) this.using(); 
 				
 			$("input.datepicker").on("click",function(){
 				$(this).next(".ui-datepicker-trigger").trigger("click");
@@ -743,7 +742,7 @@ var ui = {
 			$("input.datepicker").on("focus",function(){
 				$(this).blur();
 			});
-			$("input.datepicker_month").length && this.month(); 
+			if( $("input.datepicker_month").length ) this.month(); 
 		},
 		wkThis:function(){  // 일주일 단위선택 용 하이라이트
 			var idx = $(".ui-datepicker").find(".ui-datepicker-current-day").index();
@@ -817,7 +816,7 @@ var ui = {
 						var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 						$(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
 						
-						$('input.datepicker_month').focusout()//Added to remove focus from datepicker input box on selecting date
+						$('input.datepicker_month').focusout(); //Added to remove focus from datepicker input box on selecting date
 					}
 					
 					// console.log(date,els);
@@ -912,7 +911,7 @@ var ui = {
 		init: function() {
 			this.using();
 			// this.set();
-			ui.param.tog  && this.set( ui.param.tog );
+			if( ui.param.tog ) this.set( ui.param.tog );
 		},
 		set:function(id){
 			$("[data-ui-tog='ctn']").hide();
@@ -955,7 +954,7 @@ var ui = {
 	tab:{ // 탭 UI
 		init: function() {
 			this.evt();
-			ui.param.tab  && this.set( ui.param.tab );
+			if( ui.param.tab ) this.set( ui.param.tab );
 		},
 		set:function(id){
 			var tabid = id.split(",");
@@ -974,8 +973,8 @@ var ui = {
 			var btn = $(els).data("ui-tab-val");
 			var ctn = $(els).data("ui-tab-btn");
 			$("[data-ui-tab-btn="+ctn+"]").removeClass("active").closest("li").removeClass("active");
-			$(els).addClass("active").closest("li").addClass("active");;
-			$("[data-ui-tab-ctn="+ctn+"]").removeClass("active");;
+			$(els).addClass("active").closest("li").addClass("active");
+			$("[data-ui-tab-ctn="+ctn+"]").removeClass("active");
 			$("[data-ui-tab-ctn]#"+btn).addClass("active");
 			$("[data-ui-tab-ctn][data-ui-tab-val='"+btn+"']").addClass("active");
 		}
@@ -992,7 +991,7 @@ var ui = {
 				ui.lock.sct = $(window).scrollTop();
 				$("body , html").addClass("lock");
 				$("html").css({"top":""+(-ui.lock.sct)+"px"});
-				$(lockDiv).bind("touchmove scroll", function(e){ e.preventDefault() });
+				$(lockDiv).bind("touchmove scroll", function(e){ e.preventDefault(); });
 			}
 			if(opt === false){
 				this.stat = false;
@@ -1005,8 +1004,8 @@ var ui = {
 	},
 	slides:{ // 스와이프 슬라이드
 		init:function(){
-			$(this.sample1.els +" ul.slide" ).length && this.sample1.using();
-			$(this.sample2.els +" ul.slide" ).length && this.sample2.using();
+			if( $(this.sample1.els +" ul.slide" ).length ) this.sample1.using();
+			if( $(this.sample2.els +" ul.slide" ).length ) this.sample2.using();
 		},
 		sample1:{  //  static/html/mn/main.jsp
 			els: ".slideSample1 .swiper-container",
@@ -1148,7 +1147,7 @@ var ui = {
 			bot:20,
 		}, params);
 
-		if ( $(".popToast:visible").length ) { return }
+		if ( $(".popToast:visible").length ) { return; }
 
 		var lyToast =
 			'<article class="popToast ' + opt.cls + '">' +
@@ -1201,13 +1200,13 @@ var ui = {
 			visualViewport.onresize = function(){
 				_this.resize();
 				console.log("visualViewport.onresize");
-			}
+			};
 			$(window).on("hashchange",function(){
 				// _this.history(true);
 			});
 			window.onpopstate = history.onpushstate = function(e) {
 				_this.history(true);
-			}
+			};
 
 			// 레이어팝업내에서 입력시 스크롤 조정
 			var elsInput =  ".popLayer:visible input:not(input:radio, input:checkbox) ,"+
@@ -1231,7 +1230,7 @@ var ui = {
 			var _this = this;
 			var h_prev = _this.openPop ; 
 			_this.openPop = location.hash.replace("#pop=","").split(",");
-			if ( _this.openPop == "" ) { _this.openPop = []	}
+			if ( _this.openPop == "" ) { _this.openPop = [];	}
 			var h_now = _this.openPop ;		
 			// console.log( h_prev , h_now );
 			if( h_prev > h_now ){
@@ -1503,8 +1502,8 @@ var ui = {
 	},
 	dropDown:{	// 드롭다운 메뉴
 		init:function(){
-			$(".uiDropDown").length && this.using();
-			$(".uiDropDown").length && this.update();
+			if( $(".uiDropDown").length ) this.using();
+			if( $(".uiDropDown").length ) this.update();
 		},
 		set:function(id,val){ // ui.dropDown.set("아이디","value값");
 			$("#"+id).find("li button[value='"+val+"']").closest("li").addClass("active").siblings("li").removeClass().attr("title","");
@@ -1550,7 +1549,7 @@ var ui = {
 				if( !$(this).find(">a").length  &&  $(this).is("[data-ui='link-sel']")  ){
 					
 					$(this).prepend( actEl );
-					$(this).find(">a").addClass("bt").attr("href","javascript:;").attr("title","메뉴열기");
+					$(this).find(">a").addClass("bt").attr("title" , "메뉴열기");
 					
 				}
 
@@ -1743,7 +1742,7 @@ function css_browser_selector(u) {
 		window.jQuery.browser = v ? {msie: 1, version: v} : {};
 	}
 	return res;
-};
+}
 (function(d, w) {
 	var _c = css_browser_selector(navigator.userAgent);
 	var h = d.documentElement;
@@ -1801,7 +1800,7 @@ function css_browser_selector(u) {
 				$(w).on('resize orientationchange', CSSSelectorUpdateSize).trigger('resize');
 			}
 			$(w).on("load",function(){
-				CSSSelectorUpdateSize
+				CSSSelectorUpdateSize();
 			});
 		})(w.jQuery);
 	}
