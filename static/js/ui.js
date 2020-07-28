@@ -45,6 +45,54 @@ var ui = {
 			
 		}
 	},
+	html:{
+		incCallbacks:false,
+		load:function(paramCallback){
+			if (paramCallback) {
+				this.moreCallback = paramCallback;
+			}
+		},
+		include:function(){
+			console.log("html Load");
+			html_layers = false;
+			var _this = this;
+			var $inc_html = $("[data-include-html]");
+			var incAmt = 0;
+			if ($inc_html.length) {
+				$inc_html.each(function(idx){
+					var inc = $(this).data("include-html");
+					var incNums = $inc_html.length ;
+					$(this).parent().prepend('<!-- data-include-html="'+inc+'"-->');
+					$(this).load( inc ,function(response, status, xhr){
+						// console.log( inc, idx+1 , incNums,  status, xhr);
+						$(this).find(">*").unwrap();
+						incAmt ++;
+						if( status == "success"){
+							console.log(incAmt , inc , _this.incCallbacks);
+						}else if( status == "error"){
+							_this.incCallbacks = false ;
+							console.log("include 실패" , inc );
+						}
+						if (incAmt == incNums) {
+							_this.incCallbacks = true ;
+							if ( typeof _this.moreCallback == "function") {
+								ui.html.moreCallback();
+							}
+						}
+						// console.log( incAmt , incNums, inc, _this.incCallbacks);
+						//$(this).removeAttr("data-include-html");
+					});
+				});
+			}else{
+				_this.incCallbacks = true ;
+				if ( typeof _this.moreCallback == "function") {
+					ui.html.moreCallback();
+				}
+			}
+			//console.log("완료" + _this.incCallbacks);
+	
+		},
+	},
 	movePage:{ // 스와이프로 이동할 페이지
 		init:function(){
 			$("#contain").hammer().on("swipeleft swiperight", function(e) {
@@ -655,7 +703,7 @@ var ui = {
 			var _this = this;
 			$(".ui-mcscroll").each(function(){
 				_this.opt.axis = $(this).hasClass("x") ? "x" : "y" ;
-				console.log(_this.opt.axis);
+				// console.log(_this.opt.axis);
 				if( $(this).find(">*").length >= 1 ){
 					$(this).mCustomScrollbar(_this.opt);
 				}
@@ -1546,8 +1594,8 @@ var ui = {
 				var actEl = $(this).find(".list>ul>li:first-child").html();
 				var actTxt = $(this).find(".list>ul>li:first-child").text();
 				if ( $(this).is("[data-ui='link-sel']") ) {
-					console.log( $(this).find(".list>ul>li:first-child").text()  );
-					actEl = '<button type="button" class="bt" title="메뉴열기"><b>'+actTxt+'</b></button>'
+					// console.log( $(this).find(".list>ul>li:first-child").text()  );
+					actEl = '<button type="button" class="bt" title="메뉴열기"><b>'+actTxt+'</b></button>';
 				}
 
 				ui.dropDown.size(this);
@@ -1665,17 +1713,56 @@ var ui = {
 	}
 };
 
-// $(document).ready( ui.init() );
-if( uiHtml ){   //  HTML 페이지일 경우 헤더,푸터 로딩완료 후 ui.init();
-	var uiSet = setInterval(function(){ // console.log("uiHtml" ,  incNums , uiHtml.incCallbacks);
-		if (uiHtml.incCallbacks) {
-			ui.init();
-			clearInterval(uiSet);
+ui.html = {
+	incCom:false,
+	load:function(paramCallback){
+		if (paramCallback) {
+			this.loadCallback = paramCallback;
 		}
-	});
-}else{ 			// 개발페이지에서는 바로 ui.init();
-	ui.init();
-}
+	},
+	include:function(){
+		var _this = this;
+		var $inc_html = $("[data-include-html]");
+		var incAmt = 0;
+		if ($inc_html.length) {
+			$inc_html.each(function(idx){
+				var inc = $(this).data("include-html");
+				var incNums = $inc_html.length ;
+				$(this).before('<!-- data-include-html="'+inc+'"-->');
+				$(this).load( inc ,function(response, status, xhr){
+					// console.log( inc, idx+1 , incNums,  status, xhr);
+					$(this).find(">*").unwrap();
+					incAmt ++;
+					if( status == "success" ){
+						console.log(incAmt , inc , _this.incCom);
+					}else if( status == "error"){
+						_this.incCom = false ;
+						console.log("include 실패" , inc );
+					}
+					if( incAmt == incNums ) {
+						_this.incCom = true ;
+						if ( typeof _this.loadCallback == "function") _this.loadCallback();
+					}
+				});
+			});
+		}else{
+			_this.incCom = true ;
+			if ( typeof _this.loadCallback == "function") _this.loadCallback();
+		}
+		//console.log("완료" + _this.incCom);
+	}
+};
+ui.html.include();
+
+// ui.init(); 구동시점은 html include 완료시 
+ui.times = setInterval(function(){ // console.log("uiHtml" ,  incNums , uiHtml.incCom);
+	if (ui.html.incCom) {
+		ui.init();
+		clearInterval(ui.times);
+	}
+});
+
+
 
 
 function css_browser_selector(u) {

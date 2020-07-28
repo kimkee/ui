@@ -80,7 +80,7 @@ nav.gnb .menu .list>li{ border-top: #dddddd solid 1px; }
 nav.gnb .menu .list>li:first-child{border-top-width:0px;}
 nav.gnb .menu .list>li:last-child{ border-bottom: #dddddd solid 1px; }
 nav.gnb .menu .list>li>a{display:block;padding: 8px 15px 8px 25px;font-size: 12px;font-weight: 400;position: relative;}
-nav.gnb .menu .list>li>a::before{content:"🎲 ";position: absolute;left: 8px;top: 8px;}
+nav.gnb .menu .list>li>a::before{content:"-";position: absolute;left: 16px;top: 8px;}
 body.gnbOn nav.gnb{left: 0%;}
 body.gnbOn nav.gnb::after{/* left: 0%; */}
 body.gnbOn .bt.gnb{/* left: 57%; */}

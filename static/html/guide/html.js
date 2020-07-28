@@ -4,7 +4,6 @@
 		this.tit();
 		this.menu.init();
 		this.layout();
-		this.include();
 		$(window).on("load scroll",function(){
 			var winH = $(window).height();
 			var docH = $(document).height();
@@ -19,43 +18,6 @@
 		if ( !$("#contain").hasClass("ui") ) {
 			document.title = "/" + tit[tit.length - 2] + "/" + tit[tit.length - 1];
 		}
-	},
-	incCallbacks:false,
-	include:function(){
-		html_layers = false;
-		var _this = this;
-		var $inc_html = $("[data-include-html]");
-		var incAmt = 0;
-		if ($inc_html.length) {
-			$inc_html.each(function(idx){
-				var inc = $(this).data("include-html");
-				var incNums = $inc_html.length ;
-				$(this).load( inc ,function(response, status, xhr){
-					// console.log( inc, idx+1 , incNums,  status, xhr);
-					$(this).find(">*").unwrap();
-					// _this.incCallbacks ++ ;
-					// console.log(status);
-					if( status == "success"){
-						incAmt ++;
-						// console.log("include 성공" , inc , _this.incCallbacks);
-					}else if( status == "error"){
-						// incAmt --;
-						_this.incCallbacks = false ;
-						// console.log("include 실패" , inc , _this.incCallbacks);
-						// return false;
-					}
-					if (incAmt == incNums) {
-						_this.incCallbacks = true ;
-					}
-					console.log( incAmt , incNums, inc, _this.incCallbacks);
-					//$(this).removeAttr("data-include-html");
-				});
-			});
-		}else{
-			_this.incCallbacks = true ;
-		}
-		//console.log("완료" + _this.incCallbacks);
-
 	},
 	layout:function(){
 		
