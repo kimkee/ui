@@ -258,11 +258,11 @@
 			var tOrg = window.location.origin;
 			var tIp = window.location.hostname;
 			//console.log(tPort, tUrl);
-			if(tPort == "8082"){
+			if(tPort == "8083"){
 				location.href = tUrl.replace(tHost,"kimkee.github.io");
 			}
 			if(tOrg == "https://kimkee.gitlab.io" || tOrg == "https://kimkee.github.io"){
-				location.href = tUrl.replace(tOrg,"http://localhost:8082");
+				location.href = tUrl.replace(tOrg,"http://localhost:8083");
 			}
 
 		}
