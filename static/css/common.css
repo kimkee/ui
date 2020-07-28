@@ -661,36 +661,36 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .uiLoadMore.hide{display:none;}
 
 /* 드롭다운 UI*/
-.uiDropDown.on{ z-index:300; }
-.uiDropDown button{ font-size:13px; color:#666666;}
-.uiDropDown button b{ position:relative; font-weight:normal; }
-.uiDropDown{display:inline-block;vertical-align:middle;position:relative;height: 32px;z-index:10;zoom:1;}
-.uiDropDown>.bt{display:block;width:100%;box-sizing:border-box;text-align:left;border:#bbbbbb solid 1px;font-size:13px;padding: 4px 25px 5px 10px;height: 32px;/* line-height: 32px; */background:url(../img/common/select.png) no-repeat right top;background-size:30px auto;border-radius:0px;cursor:default;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-indent:0;}
+.uiDrop.on{ z-index:300; }
+.uiDrop button{ font-size:13px; color:#666666;}
+.uiDrop button b{ position:relative; font-weight:normal; }
+.uiDrop{display:inline-block;vertical-align:middle;position:relative;height: 32px;z-index:10;zoom:1;}
+.uiDrop>.bt{display:block;width:100%;box-sizing:border-box;text-align:left;border:#bbbbbb solid 1px;font-size:13px;padding: 4px 25px 5px 10px;height: 32px;/* line-height: 32px; */background:url(../img/common/select.png) no-repeat right top;background-size:30px auto;border-radius:0px;cursor:default;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-indent:0;}
 
-.uiDropDown>.bt.on{ /*background-position:right -50px;*/ }
-.uiDropDown.disabled .bt{ color:#999999; background-color:#fbfbfb; }
-.uiDropDown.up .list{top:auto;bottom: 31px;}
-.uiDropDown.up.sm .list{ top:auto; bottom:29px; }
-.uiDropDown .list{display:none;box-sizing:border-box;overflow-y:auto;overflow-x:hidden;max-height:176px;margin:0px 0 0 0;border:#d6d6d6 solid 1px;position:absolute;left:0px;top: 31px;}
-.uiDropDown .list.scroll ul li a{ padding-right:25px;  text-overflow:inherit; }
-.uiDropDown .list{}
-.uiDropDown .list ul{}
-.uiDropDown .list ul li{background:#FFF;  position:relative; border-top:#d6d6d6 solid 1px;}
-.uiDropDown .list ul li:first-child{ border-top:none;}
-.uiDropDown .list ul li button,
-.uiDropDown .list ul li a{display:block;text-align:left;width:100%;box-sizing:border-box;padding:0px 25px 0px 10px;font-size:13px;height: 30px;line-height: 30px;border:none;cursor:default;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.uiDropDown .list ul li.active { background:#f3f3f3}
-.uiDropDown .list ul li button:hover,
-.uiDropDown .list ul li button:focus{ background:#f8f8f8;}
-.uiDropDown button{}
+.uiDrop>.bt.on{ /*background-position:right -50px;*/ }
+.uiDrop.disabled .bt{ color:#999999; background-color:#fbfbfb; }
+.uiDrop.up .list{top:auto;bottom: 31px;}
+.uiDrop.up.sm .list{ top:auto; bottom:29px; }
+.uiDrop .list{display:none;box-sizing:border-box;overflow-y:auto;overflow-x:hidden;max-height:176px;margin:0px 0 0 0;border:#d6d6d6 solid 1px;position:absolute;left:0px;top: 31px;}
+.uiDrop .list.scroll ul li a{ padding-right:25px;  text-overflow:inherit; }
+.uiDrop .list{}
+.uiDrop .list ul{}
+.uiDrop .list ul li{background:#FFF;  position:relative; border-top:#d6d6d6 solid 1px;}
+.uiDrop .list ul li:first-child{ border-top:none;}
+.uiDrop .list ul li button,
+.uiDrop .list ul li a{display:block;text-align:left;width:100%;box-sizing:border-box;padding:0px 25px 0px 10px;font-size:13px;height: 30px;line-height: 30px;border:none;cursor:default;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.uiDrop .list ul li.active { background:#f3f3f3}
+.uiDrop .list ul li button:hover,
+.uiDrop .list ul li button:focus{ background:#f8f8f8;}
+.uiDrop button{}
 
-.uiDropDown[data-ui*='link'] .bt,
-.uiDropDown[data-ui*='link'] .list ul li a{ cursor:pointer;}
-.uiDropDown .list ul li a:hover,
-.uiDropDown .list ul li a:focus{ background:#f8f8f8;}
-.uiDropDown a{ text-decoration:none !important;}
+.uiDrop[data-ui*='link'] .bt,
+.uiDrop[data-ui*='link'] .list ul li a{ cursor:pointer;}
+.uiDrop .list ul li a:hover,
+.uiDrop .list ul li a:focus{ background:#f8f8f8;}
+.uiDrop a{ text-decoration:none !important;}
 
-.uiDropDown.noWidth>.bt{ padding-right:30px; }
+.uiDrop.noWidth>.bt{ padding-right:30px; }
 
 
 .uiTbList{}

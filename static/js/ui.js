@@ -137,15 +137,16 @@ var ui = {
 	gnb: { // GNB 
 		init: function() {
 			//ui.gnb.using("open");
+			var _this = this;
 			$(document).on("click", "a.bt.gnb", function() {
 				if ($("body").hasClass("gnbOn")) {
-					ui.gnb.using("close");
+					_this.using("close");
 				} else {
-					ui.gnb.using("open");
+					_this.using("open");
 				}
 			});
 			$(document).on("click", ".gnbScreen , nav.gnb>.close", function() {
-				ui.gnb.using("close");
+				_this.using("close");
 			});
 
 			$(document).on("click", "nav.gnb .cate .menu>li>a", function() { // 1Depth
@@ -347,7 +348,7 @@ var ui = {
 				$(".floatNav").addClass("hide");
 			},
 			init:function(){
-
+				var _this = this;
 				var prevPosition = 0;
 				var dnVar = 0;
 				var upVar = 0;
@@ -359,7 +360,7 @@ var ui = {
 					if(initPosition > prevPosition){
 						dnVar ++ ;
 						// console.log("dn");
-						ui.ly.botNav.hide();
+						_this.hide();
 						//스크롤다운중;
 						upVar = 0;
 						$(window).scrollStopped(function(){
@@ -368,7 +369,7 @@ var ui = {
 
 							clearTimeout(scrStopEvent);
 							scrStopEvent = window.setTimeout(function(){
-								ui.ly.botNav.show();
+								_this.show();
 								clearTimeout(scrStopEvent);
 							},800);
 						});
@@ -378,7 +379,7 @@ var ui = {
 						// console.log("up");
 						//스크롤 업중;
 						dnVar = 0;
-						ui.ly.botNav.show();
+						_this.show();
 					}
 					prevPosition = initPosition ;
 
@@ -392,10 +393,10 @@ var ui = {
 					// console.log(docH,scr);
 					if(docH <= scr + 0 ){				
 						// console.log("바닥");						
-						ui.ly.botNav.show();
+						_this.show();
 						// return false;
 					}else{
-						// ui.ly.botNav.hide();
+						// _this.hide();
 						// return false;
 					}
 				});
@@ -1502,17 +1503,17 @@ var ui = {
 	},
 	dropDown:{	// 드롭다운 메뉴
 		init:function(){
-			if( $(".uiDropDown").length ) this.using();
-			if( $(".uiDropDown").length ) this.update();
+			if( $(".uiDrop").length ) this.using();
+			if( $(".uiDrop").length ) this.update();
 		},
 		set:function(id,val){ // ui.dropDown.set("아이디","value값");
 			$("#"+id).find("li button[value='"+val+"']").closest("li").addClass("active").siblings("li").removeClass().attr("title","");
 			this.update();
 		},
 		update:function(id){
-			var $uiDropDown = $(".uiDropDown:not([data-ui*='link'])");
+			var $uiDrop = $(".uiDrop:not([data-ui*='link'])");
 
-			$uiDropDown.each(function(i){
+			$uiDrop.each(function(i){
 				
 
 				var actEl = $(this).find(".list>ul>li:first-child").html();
@@ -1541,15 +1542,20 @@ var ui = {
 				
 			});
 
-			$(".uiDropDown").each(function(){
+			$(".uiDrop").each(function(){
 				var actEl = $(this).find(".list>ul>li:first-child").html();
+				var actTxt = $(this).find(".list>ul>li:first-child").text();
+				if ( $(this).is("[data-ui='link-sel']") ) {
+					console.log( $(this).find(".list>ul>li:first-child").text()  );
+					actEl = '<button type="button" class="bt" title="메뉴열기"><b>'+actTxt+'</b></button>'
+				}
 
 				ui.dropDown.size(this);
 
 				if( !$(this).find(">a").length  &&  $(this).is("[data-ui='link-sel']")  ){
 					
 					$(this).prepend( actEl );
-					$(this).find(">a").addClass("bt").attr("title" , "메뉴열기");
+					$(this).find(">a").addClass("bt").attr("title","메뉴열기");
 					
 				}
 
@@ -1566,37 +1572,37 @@ var ui = {
 		show:function(els){
 			// console.log($(els));
 			//console.log( $(els).next(".list").is(":visible") );
-			var elsTop = $(els).closest(".uiDropDown").offset().top - $(window).scrollTop();
+			var elsTop = $(els).closest(".uiDrop").offset().top - $(window).scrollTop();
 			var winH = $(window).height()/2 ;
 			// console.log(  elsTop,winH );
-			$(".uiDropDown").removeClass("up");
+			$(".uiDrop").removeClass("up");
 			if( winH < elsTop ){
 				// console.log("up");
-				$(els).closest(".uiDropDown").addClass("up");
+				$(els).closest(".uiDrop").addClass("up");
 			}
 
 			if( $(els).next(".list").is(":visible") ){
 				$(els).next(".list:visible").hide();
 				$(els).removeClass("on");
-				$(els).parent(".uiDropDown").removeClass("on");
+				$(els).parent(".uiDrop").removeClass("on");
 			}else{
 				$(els).next(".list").show();
 				$(els).addClass("on");
-				$(els).parent(".uiDropDown").addClass("on");
+				$(els).parent(".uiDrop").addClass("on");
 			}		
 		},
 		hide:function(){
-			$(".uiDropDown .list").hide();
-			$(".uiDropDown").removeClass("on");
-			$(".uiDropDown .bt").removeClass("on");
+			$(".uiDrop .list").hide();
+			$(".uiDrop").removeClass("on");
+			$(".uiDrop .bt").removeClass("on");
 		},
 		sel:function(els){
-			$(els).closest(".uiDropDown").find(".bt")
+			$(els).closest(".uiDrop").find(".bt")
 				.text( $(els).text() )
 				.attr("value", $(els).attr("value") )
 				.wrapInner("<b></b>")
 				.focus();
-			$(els).closest(".uiDropDown").attr("value", $(els).attr("value") );
+			$(els).closest(".uiDrop").attr("value", $(els).attr("value") );
 			$(els).closest(".list").hide();
 			$(els).closest("li").addClass("active").siblings('li').removeClass("active");
 			$(els).closest(".list").find("button");
@@ -1604,31 +1610,31 @@ var ui = {
 		},
 		using:function(){
 			
-			$(document).on("click",".uiDropDown:not('.disabled') .bt",function(e){
+			$(document).on("click",".uiDrop:not('.disabled') .bt",function(e){
 				ui.dropDown.show(this);
 				e.stopPropagation();
 			});
 
-			$(document).on("click",".uiDropDown .list li button",function(){
+			$(document).on("click",".uiDrop .list li button",function(){
 				ui.dropDown.sel(this);
 			});
 
-			$(document).on("click",".uiDropDown[data-ui*='link'] .list li a",function(e){
+			$(document).on("click",".uiDrop[data-ui*='link'] .list li a",function(e){
 				ui.dropDown.hide(this);
 			});
 
 			$(document).on("click",function(e){
 				ui.dropDown.hide(this);
 			});
-			$(document).on("click",".uiDropDown",function(e){
+			$(document).on("click",".uiDrop",function(e){
 				e.stopPropagation();
 			});
 
-			$("*").not(".uiDropDown .list button , .uiDropDown .list a , .uiDropDown .list").on("focus",function(){
+			$("*").not(".uiDrop .list button , .uiDrop .list a , .uiDrop .list").on("focus",function(){
 				ui.dropDown.hide(this);
 			});
 
-			$(document).on("focus",".uiDropDown .bt",function(){
+			$(document).on("focus",".uiDrop .bt",function(){
 				ui.dropDown.hide(this);
 			});
 
