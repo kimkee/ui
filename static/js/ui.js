@@ -1753,12 +1753,12 @@ ui.html = {
 	}
 };
 ui.html.include();
-
 // ui.init(); 구동시점은 html include 완료시 
+
 ui.times = setInterval(function(){ // console.log("uiHtml" ,  incNums , uiHtml.incCom);
 	if (ui.html.incCom) {
-		ui.init();
 		clearInterval(ui.times);
+		ui.init();
 	}
 });
 
