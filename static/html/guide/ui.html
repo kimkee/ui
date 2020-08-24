@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
@@ -297,7 +297,97 @@
 				}
 				</script>
 			</section>
+			<section class="sect" data-sid="ui-select">
+				<h3 class="hdt">입력 - Select 팝업</h3>
 
+				<span class="select-pop">
+					<select class="sList" name="select_pop_1" title="선택제목">
+						<option value="value_0">전체 선택</option>
+						<option value="value_1">1번째 선택</option>
+						<option value="value_2">2번째 선택</option>
+						<option value="value_3">3번째 선택</option>
+					</select>
+				</span>
+				<p class="gap"></p>
+				<button type="button" class="btn sm" onclick="testSelect1();">옵션변경</button>
+				<button type="button" class="btn sm" onclick="testSelect2();">비활성화</button>
+				<button type="button" class="btn sm" onclick="testSelect3();">활성화</button>
+				<script>
+					var testSelect1 = function(){
+						$('[name="select_pop_1"] option[value="value_2"]').prop("selected",true);
+						ui.popSelect.set();
+					}
+					var testSelect2 = function(){
+						$('[name="select_pop_1"]').prop('disabled',true);
+						ui.popSelect.set();
+					}
+					var testSelect3 = function(){
+						$('[name="select_pop_1"]').prop('disabled',false);
+						ui.popSelect.set();
+					}
+				</script>
+				<p class="gap"></p>
+
+				<span class="select-one" data-select-name="radio_sel_1" data-select-title="단일옵션선택">
+					<ul class="sList">
+						<li><label class="lb"><input type="radio" name="radio_sel_1" value="value_0"><span class="txt">전체 샐렉트 옵션 선택 텍스트</span></label></li>
+						<li><label class="lb"><input type="radio" name="radio_sel_1" value="value_1"><span class="txt">1번째 샐렉트 옵션 선택 텍스트</span></label></li>
+						<li><label class="lb"><input type="radio" name="radio_sel_1" value="value_2"><span class="txt">2번째 샐렉트 옵션 선택 텍스트</span></label></li>
+						<li><label class="lb"><input type="radio" name="radio_sel_1" value="value_3"><span class="txt">3번째 샐렉트 옵션 선택 텍스트</span></label></li>
+					</ul>
+				</span>
+				<p class="gap"></p>
+				<button type="button" class="btn sm" onclick="testSelectOne1();">옵션변경</button>
+				<button type="button" class="btn sm" onclick="testSelectOne2();">비활성화</button>
+				<button type="button" class="btn sm" onclick="testSelectOne3();">활성화</button>
+				<script>
+					var testSelectOne1 = function(){
+						$('[name="radio_sel_1"][value="value_2"]').prop("checked", true);
+						ui.popSelOne.set();
+					}
+					var testSelectOne2 = function(){
+						$('[data-select-name="radio_sel_1"]').data('select-disabled',true);
+						ui.popSelOne.set();
+					}
+					var testSelectOne3 = function(){
+						$('[data-select-name="radio_sel_1"]').data('select-disabled',false);
+						ui.popSelOne.set();
+					}
+				</script>
+
+				<p class="gap"></p>
+
+				<span class="select-mul" data-select-name="check_sel_1" data-select-title="다중옵션선택">
+					<ul class="sList">
+						<li><label class="lb"><input type="checkbox" class="chkAll"><span class="txt">전체</span></label></li>
+						<li><label class="lb"><input type="checkbox"><span class="txt">1번째</span></label></li>
+						<li><label class="lb"><input type="checkbox"><span class="txt">2번째</span></label></li>
+						<li><label class="lb"><input type="checkbox"><span class="txt">3번째</span></label></li>
+					</ul>
+				</span>
+				
+				<p class="gap"></p>
+
+				<span class="select db">
+					<select title="선택">
+						<option>선택</option>
+						<option>선택1</option>
+						<option>선택2</option>
+						<option>선택3</option>
+					</select>
+				</span>
+
+				<p class="gap"></p>
+
+				<span class="select db jqui custom">
+					<select class="dd" title="선택">
+						<option>선택1</option>
+						<option>선택2</option>
+						<option>선택3</option>
+					</select>
+				</span>
+
+			</section>
 			<section class="sect" data-sid="ui-copy">
 				<h3 class="hdt">복사 COPY Text</h3>
 				<div class="nums" id="rwd_code">20200416-aBDS</div>
@@ -449,6 +539,12 @@
 				<p class="gap"></p>
 				<div class="uiChk"><input type="checkbox" checked="checked"><em></em></div>
 				<div class="uiChk"><input type="checkbox" checked="checked" disabled><em></em></div>
+				<p class="gap"></p>
+				<div class="radiobox">
+					<span class="radio"><input type="radio" name="radio4" id="radt_1" checked=""><label for="radt_1" class="txt">결제  </label></span>
+					<span class="radio"><input type="radio" name="radio4" id="radt_2"><label for="radt_2" class="txt">중단  </label></span>
+					<span class="radio"><input type="radio" name="radio4" id="radt_3"><label for="radt_3" class="txt">재검토</label></span>
+				</div>
 
 				<div class="codeBox">
 					<div class="code">
