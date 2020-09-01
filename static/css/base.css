@@ -117,6 +117,27 @@ input[type=number] { -moz-appearance: textfield; }
 
 
 
+/* picker.js 커스텀 */
+.picker-cell__header{display:none;}
+.picker-fixed .picker-header{height:55px;padding: 16px 10px;}
+.picker-title{font-size:18px;font-weight: normal;text-align: center;}
+.picker-close{width:30px;height:30px;background:url(../images/common/popLayerClose.png) no-repeat;background-size: 30px;font-size:0;left: 15px;right: auto;top: 11px;}
+.picker-cell + .picker-cell{border-left-width: 0px;}
+.picker-fixed > .picker-dialog{border-radius: 10px 10px 0px 0px;}
+.picker-cell__body{padding:0px 10px;}
+.picker-list{margin: -64px 0;}
+.picker-item{font-size: 24px;font-weight: 300;color: #aaaaaa;padding: 20px 10px;}
+.picker-picked{ color: #222222; }
+.picker-grid{padding: 0px 30px;}
+.picker-headers .picker-cell::before{display:none;}
+.picker-headers .picker-cell::after{display:none;}
+.picker-cell__body::before{background: #ececec;height: 1px;top: 87px;left: 10px;right: 10px;}
+.picker-cell__body::after{background: #ececec;height: 1px;top: 153px;left: 10px;right: 10px;}
+.picker-item[data-name='hour']::after{content:"시";font-size: 24px;}
+.picker-item[data-name='minute']::after{content:"분";font-size: 24px;}
+.picker-fixed .picker-footer{position:absolute;right: 20px;top: 8px;display: block;width: auto;z-index: 100;border-top: 0px;text-align: right;}
+.picker-confirm{background-color: #6b86ea !important;color: #ffffff;font-size: 14px;width: 50px;height: 36px;padding: 5px 0px 7px;border-radius: 6px;box-shadow: rgba(0,0,0,0.2) 2px 2px 4px;}
+.picker-cancel{display:none;}
 
 
 

@@ -10,6 +10,7 @@ var ui = {
 		this.skip.init();
 		this.gnb.init();
 		this.lnb.init();
+		this.tree.init();
 		this.ly.init();
 		this.form.init();
 		this.accd.init();
@@ -26,6 +27,7 @@ var ui = {
 		this.popWin.init();
 		this.slides.init();
 		this.datepick.init();
+		this.timepick.init();
 		this.listLoad.init();
 		this.getSafe.init();
 		this.movePage.init();
@@ -337,6 +339,37 @@ var ui = {
 			});
 		}
 	},
+	tree:{
+		init:function(){
+			this.evt();
+			this.set();
+		},
+		evt:function(){
+			$(document).on("click",".uiTree li>.tog",function(e){
+				var $li = $(this).closest("li");
+				if( $li.hasClass("open") ) {
+					$li.find(">ul").slideUp(100,function(){
+						$li.removeClass("open");
+					});
+				}else{
+					$li.find(">ul").slideDown(100,function(){
+						$li.addClass("open");
+					});
+				}
+			});
+		},
+		set:function(){
+			$(".uiTree li").each(function(){
+				var bt = '<button type="button" class="tog">+</button>';
+				if( $(this).find(">ul").length ){
+					$(this).addClass("dep");
+				}
+				if( !$(this).find(".tog").length ){
+					$(this).prepend(bt);
+				}
+			});
+		}
+	},
 	ly:{ // 레이아웃
 		init:function(){
 			if ( $("#contain").length ) {
@@ -517,6 +550,7 @@ var ui = {
 			$(document).on("click","span.input.del .btnDel",function(e){
 				var myInput = $(this);
 				myInput.closest(".input").find("input").val("").focus();
+				myInput.closest(".input").find("input").trigger('change');
 				myInput.remove();
 			});
 
@@ -903,6 +937,51 @@ var ui = {
 			});
 		   
 		}
+	},
+	timepick:{ // 타입 픽커
+		init:function () {
+			this.set();
+		},
+		set:function(){
+			var _this = this;
+			$('.uiTimePicker').each(function(i){
+				// console.log(i);
+				var id = "picker_id_"+i ;
+				if( $(this).attr("id") ){
+					id = $(this).attr("id");
+					els = document.getElementById(id);
+					// console.log(id);
+				}else{
+					els = this;
+					// console.log(els);
+				}
+				_this.pick[id] = new Picker( els , {
+					format: 'HH:mm',
+					rows:3,
+					headers: true,
+					increment: {
+						hour: 1,
+						minute: 10,
+					  },
+					text: {
+						title: '시간 선택',
+						confirm: '완료',
+						cancel: '취소',
+					},
+					shown:function(e){
+						// console.log("쇼 shown");
+					},
+					hidden:function(){
+						// console.log("히든 hidden");
+					},
+					pick:function(){
+						// console.log("픽 pick");
+						// console.log( _this.pick[id].date );
+					}
+				});	
+			});
+		},
+		pick:{}
 	},
 	tooltips:{ // 툴팁레이어
 		init:function(){

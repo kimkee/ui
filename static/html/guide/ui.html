@@ -11,6 +11,7 @@
 	<link href="../../img/common/favicon.png" rel="apple-touch-icon-precomposed">
 	<link rel="stylesheet" href="../../css/jquery-ui.css?v=20">
 	<link rel="stylesheet" href="../../css/mCustomScrollbar.css?v=20">
+	<link rel="stylesheet" href="../../css/picker.css?v=20">
 	<link rel="stylesheet" href="../../css/swiper.css?v=20">
 	<link rel="stylesheet" href="../../css/base.css?v=20">
 	<link rel="stylesheet" href="../../css/common.css?v=20">
@@ -480,6 +481,9 @@
 				
 				<p class="gap"></p>
 				<span class="input db uiDate"><input type="text" class="datepicker_month" placeholder="YYYY-MM-DD" value="2019-06" readonly></span>
+				<p class="gap"></p>
+				<script src="../../js/picker.js"></script>
+				<span class="uiTime"><input type="time" class="uiTimePicker" value="02:30" title="시간선택"></span>
 				
 				<script>
 				$(document).ready(function(){
@@ -590,6 +594,53 @@
 						<pre class="brush: html">
 							ui.lnb.act("메뉴-2","메뉴-2-2");  // LNB Active</pre>
 					</div>
+				</div>
+			</section>
+
+			<section class="sect" data-sid="ui-lnbs">
+				<div class="uiTree">
+					<ul class="menu">
+						<li><a class="bt" href="javascript:;">본청</a>
+							<ul>
+								<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
+								<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
+							</ul>
+						</li>
+						<li>
+							<a class="bt" href="javascript:;">서울특별시도시기반시설</a>
+							<ul>
+								<li><a class="bt" href="javascript:;">도시기반시설행정과</a></li>
+								<li>
+									<a class="bt" href="javascript:;">도시기반시설예방과</a>
+									<ul>
+										<li><a class="bt" href="javascript:;">시설점검반</a></li>
+										<li>
+											<a class="bt" href="javascript:;">사전관리반</a>
+											<ul>
+												<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
+												<li>
+													<a class="bt" href="javascript:;">메뉴메뉴</a>
+													<ul>
+														<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
+														<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
+													</ul>
+												</li>
+												<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li class="open">
+							<a class="bt" href="javascript:;">상수도사업본부</a>
+							<ul>
+								<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
+								<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
+							</ul>
+						</li>
+						<li><a class="bt" href="javascript:;">서울특별시한강사업본부</a></li>
+					</ul>
 				</div>
 			</section>
 

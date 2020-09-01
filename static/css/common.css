@@ -725,6 +725,20 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .uiTbList>.list>li:nth-child(10n+10){}
 
 
+/* 트리메뉴 */
+.uiTree{/* padding: 15px 20px 15px 20px; */}
+.uiTree .menu{ display: block; }
+.uiTree .menu .tog{width:24px;height:24px;background: url(../img/common/ui_tree_tog.png) no-repeat #f3f3f3;background-size: 100% auto;font-size: 0px;margin: 0px 4px 0px 0px;position: absolute;left: 0;top: 0px;border-radius: 6px;background-position-y: -80px;}
+.uiTree .menu .bt{display:inline-block;vertical-align:middle;height:24px;font-size: 16px;color: #222222;padding-bottom: 0px;line-height: 1.3;}
+.uiTree ul{padding-top: 6px;display:none;}
+.uiTree li{padding: 0px 0px 0px 30px;position: relative;margin-top: 10px;}
+.uiTree li.open>ul{display:block;}
+.uiTree li.dep{padding-left: 30px;}
+.uiTree li.dep>.tog{background-position-y: -33px;background-color: #5572e8;box-shadow: rgb(107 134 234 / 40%) 2px 2px 5px;}
+.uiTree li.open.dep>.tog{background-position-y: -80px;background-color: #f3f3f3;box-shadow: none;}
+.uiTree li.dep>.tog{background-position-y: -40px;}
+.uiTree ul.menu>li{border-bottom:1px solid #ececec;padding: 5px 0px 15px 30px;}
+.uiTree ul.menu>li>.tog{ top: 6px; }
 
 /* 팝업 알럿 */
 .popAlert{ white-space:nowrap; position:fixed; left:0px; right:0px; top:0px; bottom:0; text-align:center; overflow-y:auto; z-index:1500; background-color:rgba(0,0,0,0.6); outline:none; }

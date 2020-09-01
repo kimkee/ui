@@ -85,7 +85,6 @@
 			if ( !window.localStorage.getItem("linkMenu") ) {
 			}
 				
-			$(".linkHtml .cont>ul>li:not(.open)").addClass("open");
 
 		},
 		linkSet:function(my){
@@ -178,7 +177,7 @@
 				}
 				// console.log(linkTxtTop,linkScr);
 
-			});
+			},10);
 
 		},
 		keyBack: function () {
