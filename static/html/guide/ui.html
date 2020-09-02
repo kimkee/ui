@@ -474,7 +474,20 @@
 
 			<section class="sect" data-sid="ui-datepickers">
 				<h3 class="hdt">달력 - 일,주,월 선택</h3>
-				<span class="input db uiDate"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
+				<span class="input db uiDate"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" ></span>
+				<p class="gap"></p>
+				<span class="input db uiDate"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" id="datepick_1" ></span>
+				<script>
+					$(document).ready(function(){
+						ui.datepick.set({
+							id:"datepick_1",
+							dayNamesMin: [ "S", "M", "T", "W", "T", "F", "S" ],
+							onSelect :function(ddd){
+								console.log("datepick_1");
+							},
+						});
+					});
+				</script>
 				
 				<div class="weeks"><span id="START_DT"></span> ~ <span id="END_DT"></span></div>
 				<span class="uiDate input db week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly></span>

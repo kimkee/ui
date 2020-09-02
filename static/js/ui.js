@@ -50,53 +50,70 @@ var ui = {
 			
 		}
 	},
-	html:{
-		incCallbacks:false,
+	html:{ // Html 인클루드
+		incCom:false,
 		load:function(paramCallback){
 			if (paramCallback) {
-				this.moreCallback = paramCallback;
+				this.loadCallback = paramCallback;
 			}
 		},
 		include:function(){
-			console.log("html Load");
-			html_layers = false;
 			var _this = this;
 			var $inc_html = $("[data-include-html]");
 			var incAmt = 0;
 			if ($inc_html.length) {
 				$inc_html.each(function(idx){
 					var inc = $(this).data("include-html");
+					var head_title = $(this).data("ui-title");
+					var head_logo = $(this).data("ui-logo");
+					var head_alim = $(this).data("ui-alim");
+					var head_mems = $(this).data("ui-mems");
+					var head_docs = $(this).data("ui-docs");
 					var incNums = $inc_html.length ;
-					$(this).parent().prepend('<!-- data-include-html="'+inc+'"-->');
+					$(this).before('<!-- data-include-html="'+inc+'"-->');
 					$(this).load( inc ,function(response, status, xhr){
 						// console.log( inc, idx+1 , incNums,  status, xhr);
 						$(this).find(">*").unwrap();
 						incAmt ++;
-						if( status == "success"){
-							console.log(incAmt , inc , _this.incCallbacks);
+						if( status == "success" ){
+							console.log(incAmt , inc );
 						}else if( status == "error"){
-							_this.incCallbacks = false ;
+							_this.incCom = false ;
 							console.log("include 실패" , inc );
 						}
-						if (incAmt == incNums) {
-							_this.incCallbacks = true ;
-							if ( typeof _this.moreCallback == "function") {
-								ui.html.moreCallback();
-							}
+						if( incAmt == incNums ) {
+							_this.incCom = true ;
+							if ( typeof _this.loadCallback == "function") _this.loadCallback();
 						}
-						// console.log( incAmt , incNums, inc, _this.incCallbacks);
-						//$(this).removeAttr("data-include-html");
+	
+						if( head_title ){
+							// console.log("ttt");
+							$(".header .stitle").html(head_title).show();
+						}
+						// console.log(head_logo);
+						if (head_logo == true) {
+							$(".header .logo").show();
+						}
+						// console.log(head_alim);
+						if (head_alim == true) {
+							$(".header .tmenu>li.alim").show();
+						}
+						// console.log(head_mems);
+						if (head_mems == true) {
+							$(".header .tmenu>li.mems").show();
+						}
+						// console.log(head_docs);
+						if (head_docs == true) {
+							$(".header .tmenu>li.docs").show();
+						}
 					});
 				});
 			}else{
-				_this.incCallbacks = true ;
-				if ( typeof _this.moreCallback == "function") {
-					ui.html.moreCallback();
-				}
+				_this.incCom = true ;
+				if ( typeof _this.loadCallback == "function") _this.loadCallback();
 			}
-			//console.log("완료" + _this.incCallbacks);
-	
-		},
+			//console.log("완료" + _this.incCom);
+		}
 	},
 	movePage:{ // 스와이프로 이동할 페이지
 		init:function(){
@@ -520,7 +537,8 @@ var ui = {
 			this.attach();
 			this.select();
 			this.chkall();
-			this.intdel();
+			this.input.init();
+			this.intdel.init();
 			this.spinner.init();
 			this.star.init();
 		},
@@ -535,25 +553,72 @@ var ui = {
 				});
 			});
 		},
-		intdel:function(){ // input.del 박스에 글자 삭제
-			$(document).on("input","span.input.del>input",function(e){
-				var myInput = $(this);
-				if( myInput.val() != ""  && myInput.closest(".input").find(".btnDel").length == 0  ) {
-					myInput.closest(".input").append('<button type="button" class="btnDel">삭제</button>');
-				}
-			});
-
-			$("span.input.del>input").each(function(){
-				$(this).trigger("input");
-			});
-
-			$(document).on("click","span.input.del .btnDel",function(e){
-				var myInput = $(this);
-				myInput.closest(".input").find("input").val("").focus();
-				myInput.closest(".input").find("input").trigger('change');
-				myInput.remove();
-			});
-
+		input:{
+			init:function(){
+				this.evt();
+				this.set();
+			},
+			set:function(){
+				$("span.input input, span.textarea textarea").each(function(){
+					if( $(this).val() == "" ){
+						$(this).closest(".input , .textarea").removeClass("coms");
+					}else{
+						$(this).closest(".input , .textarea").addClass("coms");
+					}
+					if( $(this).attr("readonly") || $(this).attr("disabled") ){
+						// console.log(		$(this).val() );
+						$(this).closest(".input , .textarea").addClass("disabled");
+					}else{
+						// console.log(		$(this).val() );
+						$(this).closest(".input , .textarea").removeClass("disabled");
+					}
+				});
+			},
+			evt:function(){
+				$(document).on("click","span.input .label, span.textarea .label",function(e){
+					$(this).closest(".input , .textarea").find("input, textarea").focus();
+				});
+				$(document).on("focus","span.input input, span.textarea textarea",function(e){
+					$(this).closest(".input , .textarea").addClass("focus");
+				});
+				$(document).on("blur","span.input input, span.textarea textarea",function(e){
+					$(this).closest(".input , .textarea").removeClass("focus");
+					// console.log( $(this).val() );
+					if( $(this).val() == "" ){
+						$(this).closest(".input , .textarea").removeClass("coms");
+					}else{
+						$(this).closest(".input , .textarea").addClass("coms");
+					}
+				});
+			}
+		},
+		intdel:{ // input.del 박스에 글자 삭제
+			init:function(){
+				this.evt();
+				this.set();
+			},
+			set:function(){
+				$("span.input.del>input").each(function(){
+					$(this).trigger("input");
+				});
+			},
+			evt:function(){
+				$(document).on("input","span.input.del>input",function(e){
+					var myInput = $(this);
+					if( myInput.val() != ""  && myInput.closest(".input").find(".btnDel").length == 0  ) {
+						myInput.closest(".input input").after('<button type="button" class="btnDel">삭제</button>');
+					}
+					if( myInput.val() == "") {
+						myInput.closest(".input").find(".btnDel").remove();
+					}
+				});
+				$(document).on("click","span.input.del .btnDel",function(e){
+					var myInput = $(this);
+					myInput.closest(".input").find("input").val("").focus();
+					myInput.closest(".input").find("input").trigger('change');
+					myInput.remove();
+				});
+			}
 		},
 		attach:function(){
 
@@ -822,21 +887,92 @@ var ui = {
 	},
 	datepick:{ // 달력피커 jQuery-ui
 		init:function(){
-			if( $("input.datepicker").length ) this.using(); 
+			
 				
 			$("input.datepicker").on("click",function(){
 				$(this).next(".ui-datepicker-trigger").trigger("click");
 			});
 			$("input.datepicker").on("focus",function(){
-				$(this).blur();
+				// $(this).blur();
+				// $(this).attr("tabindex","-1");
+				// $(this).next(".ui-datepicker-trigger").focus();
 			});
-			if( $("input.datepicker_month").length ) this.month(); 
+			if( $("input.datepicker_month").length ) this.month();
+
+			$(document).on("click",".ui-datepicker-next",function(e){
+				e.preventDefault();
+				setTimeout(function(){			
+					$(".ui-datepicker-next").attr({"tabindex":"0","href":"#"}).focus();
+				});
+			});
+			$(document).on("click",".ui-datepicker-prev",function(e){
+				e.preventDefault();
+				setTimeout(function(){
+					$(".ui-datepicker-prev").attr({"tabindex":"0","href":"#"}).focus();
+				});
+			});
+			
+			this.set();
+		},
+		set:function(params){
+			this.opts = $.extend({
+				id:"",
+				// minDate: '-3M',
+	  			// maxDate: '+28D',
+				showOn: "button",
+				showButtonPanel: true,
+				changeYear:true ,
+				changeMonth:true,
+				buttonText: "달력",
+				showMonthAfterYear: true,
+				dateFormat:"yy.mm.dd",
+				yearRange: 'c-100:c+10',
+				dayNamesMin: [ "일", "월", "화", "수", "목", "금", "토" ],
+				monthNames : [ "1","2","3","4","5","6","7","8","9","10","11","12"],
+				monthNamesShort: [ "1","2","3","4","5","6","7","8","9","10","11","12"],
+				beforeShow: function(els) {
+						ui.lock.using(true);
+						$(".ui-datepicker").wrap('<div class="uiDatePickWrap"></div>');
+						setTimeout(function(){
+							$(".ui-datepicker-next , .ui-datepicker-prev").attr({"tabindex":"0","href":"#"});
+							$("#ui-datepicker-div").attr("tabindex","-1").focus();
+						});
+						var sted = $(els).closest(".uiDate").attr("class").replace(" ","").replace("uiDate","");
+						$("#ui-datepicker-div").removeClass("week").addClass(sted);
+						window.setTimeout(ui.datepick.wkThis);
+				},
+				onSelect :function(ddd){
+					// console.log("dfdsfs");
+				},
+				onChangeMonthYear  :function(ddd){
+					setTimeout(function(){
+						$(".ui-datepicker-header .ui-corner-all").attr({"tabindex":"0","href":"#"});
+					});
+					setTimeout(function(){
+						$("#ui-datepicker-div").attr("tabindex","-1").focus();
+					});
+					window.setTimeout(ui.datepick.wkThis);
+				},
+				onClose:function(date,els){
+					// console.log(date,els);
+					ui.lock.using(false);
+					$("#"+els.id).focus();
+					$(".ui-datepicker").unwrap(".uiDatePickWrap");
+				}
+			}, params); 
+			if (this.opts.id) {
+				// console.log("ddddd");
+				$("#"+this.opts.id).datepicker(this.opts);	
+			}else{
+				// console.log("eeeeeee");
+				$("input.datepicker").datepicker(this.opts);
+			}
 		},
 		wkThis:function(){  // 일주일 단위선택 용 하이라이트
 			var idx = $(".ui-datepicker").find(".ui-datepicker-current-day").index();
 			var $td = $(".ui-datepicker").find(".ui-datepicker-current-day");
 			if ( idx >= 1 ) { // 월화수목금토 선택시
-				// console.log(idx)
+				console.log(idx);
 				$td.closest("tr").find("td:not(:first-child)").addClass("activeDays");
 				$td.closest("tr").next("tr").find("td:first-child").addClass("activeDays");
 			}else{ // 일요일 선택시
@@ -844,43 +980,6 @@ var ui = {
 				$td.addClass("activeDays");
 				$td.closest("tr").prev("tr").find("td:not(:first-child)").addClass("activeDays");
 			}
-		},
-		using:function(){
-			$("input.datepicker").datepicker({
-				// minDate: '-3M',
-	  			// maxDate: '+28D',
-				showOn: "button",
-				changeYear:true ,
-				changeMonth:true,
-				buttonText: "달력",
-				showMonthAfterYear: true,
-				dateFormat:"yy-mm-dd",
-				yearRange: 'c-100:c+10',
-				dayNamesMin: [ "일", "월", "화", "수", "목", "금", "토" ],
-				monthNamesShort: [ "1","2","3","4","5","6","7","8","9","10","11","12"],
-				beforeShow: function(els) {
-					ui.lock.using(true);
-					$(".ui-datepicker").wrap('<div class="uiDatePickWrap"></div>');
-					var sted = $(els).closest(".uiDate").attr("class").replace(" ","").replace("uiDate","");
-					$("#ui-datepicker-div").removeClass("week").addClass(sted);
-					// console.log(sted);
-					window.setTimeout(ui.datepick.wkThis);
-				},
-				onChangeMonthYear:function(ddd){
-					// console.log("달,년  변경");
-					window.setTimeout(ui.datepick.wkThis);
-				},
-				onSelect :function(ddd){
-
-				},
-				onClose:function(date,els){
-					// console.log(date,els);
-					ui.lock.using(false);
-					// $("#"+els.id).focus();
-					$(".ui-datepicker").unwrap(".uiDatePickWrap");
-				}
-			});
-
 		},
 		month:function(){
 			
@@ -1459,7 +1558,7 @@ var ui = {
 				var txt = $(this).find("input:checked").next(".txt").text() || tit;
 				var dis = $(this).data("select-disabled");
 				
-				console.log(sel);
+				// console.log(sel);
 				$(this).find("input[value="+sel+"]").prop("checked", true);
 				
 				$(this).find(".btSel").text(txt).attr("value",sel);
@@ -2174,53 +2273,16 @@ var ui = {
 	}
 };
 
-ui.html = {
-	incCom:false,
-	load:function(paramCallback){
-		if (paramCallback) {
-			this.loadCallback = paramCallback;
-		}
-	},
-	include:function(){
-		var _this = this;
-		var $inc_html = $("[data-include-html]");
-		var incAmt = 0;
-		if ($inc_html.length) {
-			$inc_html.each(function(idx){
-				var inc = $(this).data("include-html");
-				var incNums = $inc_html.length ;
-				$(this).before('<!-- data-include-html="'+inc+'"-->');
-				$(this).load( inc ,function(response, status, xhr){
-					// console.log( inc, idx+1 , incNums,  status, xhr);
-					$(this).find(">*").unwrap();
-					incAmt ++;
-					if( status == "success" ){
-						console.log(incAmt , inc , _this.incCom);
-					}else if( status == "error"){
-						_this.incCom = false ;
-						console.log("include 실패" , inc );
-					}
-					if( incAmt == incNums ) {
-						_this.incCom = true ;
-						if ( typeof _this.loadCallback == "function") _this.loadCallback();
-					}
-				});
-			});
-		}else{
-			_this.incCom = true ;
-			if ( typeof _this.loadCallback == "function") _this.loadCallback();
-		}
-		//console.log("완료" + _this.incCom);
-	}
-};
-ui.html.include();
-// ui.init(); 구동시점은 html include 완료시 
 
-ui.times = setInterval(function(){ // console.log("uiHtml" ,  incNums , uiHtml.incCom);
-	if (ui.html.incCom) {
-		clearInterval(ui.times);
-		ui.init();
-	}
+// ui.init(); 구동시점은 html include 완료시 
+$(document).ready(function(){
+	ui.html.include();
+	ui.times = setInterval(function(){ // console.log("uiHtml" ,  incNums , uiHtml.incCom);
+		if (ui.html.incCom) {
+			clearInterval(ui.times);
+			ui.init();
+		}
+	});
 });
 
 
