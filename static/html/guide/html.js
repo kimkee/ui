@@ -3,7 +3,7 @@
 		
 		this.tit();
 		this.menu.init();
-		this.layout();
+		this.uimenu.init();
 		$(window).on("load scroll",function(){
 			var winH = $(window).height();
 			var docH = $(document).height();
@@ -19,10 +19,6 @@
 			document.title = "/" + tit[tit.length - 2] + "/" + tit[tit.length - 1];
 		}
 	},
-	layout:function(){
-		
-
-	},
 	param:(function(a) { // URL에서 파라미터 읽어오기
 		if (a == "") return {};
 		var b = {};
@@ -33,6 +29,70 @@
 		}
 		return b;
 	})(window.location.search.substr(1).split('&')),
+	uimenu: { // uimenu 
+		init: function() {
+			//ui.gnb.using("open");
+			this.evt();
+			this.list();
+		},
+		evt:function(){
+			var _this = this;
+			$(document).on("click", ".btnUi", function() {
+				if ($("body").hasClass("uimenuOn")) {
+					_this.using("close");
+				} else {
+					_this.using("open");
+				}
+			});
+			$(document).on("click", ".uiScreen , nav.uimenu>.close", function() {
+				_this.using("close");
+			});
+
+			$(document).on("click","nav.uimenu .menu .list>li>a",function(e){
+				var $this = $(this);
+				if ($("body").hasClass("lock")) {
+					_this.using("close");
+				}
+				setTimeout(function(){
+					var sc_msid = $this.data("btn-sid");
+					var sc_msid_top = $("[data-sid="+sc_msid+"]").offset().top - 10 - $("#header").outerHeight() || 0 ;
+					// console.log(sc_msid,sc_msid_top);
+
+					$("body,html").animate({ scrollTop: sc_msid_top }, 100, function() {
+						// els.removeClass("disabled");
+					});
+				},50);
+			});	
+		},
+		using: function(opt) {
+			if (opt === "open") {
+				ui.lock.using(true);
+				$("nav.uimenu").after('<div class="uiScreen" tabindex="-1"></div>');
+				$("nav.uimenu").show().animate({"left": 0}, 300,function(){
+					$("nav.uimenu").attr("tabindex","-1").focus();
+				});
+				$("body").addClass("uimenuOn");
+				$(".uiScreen").show();
+			}
+			if (opt === "close") {
+				$("body").removeClass("uimenuOn");
+				$("nav.uimenu").animate({"left": "-100%"}, 300,function(){
+					$(".uiScreen").hide().remove();
+					$(".header .gnb .btnGnb").attr("tabindex","0").focus();
+				});
+				ui.lock.using(false);
+			}
+		},
+		list:function(){
+			var _this = this;
+			$(".contain.ui .sect h3.hdt").each(function(idx){
+				// console.log( $(this).text() );
+				var mtxt = $(this).text();
+				var msid = $(this).closest(".sect").data("sid");
+				$("nav.uimenu .menu .list").append('<li><a data-btn-sid="'+msid+'" href="javascript:;">'+mtxt+'</a></li>');
+			});
+		}
+	},
 	menu: {
 		init: function () {
 			this.addEvent();
