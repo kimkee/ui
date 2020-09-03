@@ -64,7 +64,7 @@ button{cursor:pointer;background: none;border: none;}
 .bt.gnb::before{top: 8px;}
 .bt.gnb>b{top: 16px;}
 .bt.gnb::after{top: 24px;}
-nav.gnb{position:fixed;width: 70%;height: 100%;z-index: 800;top: 0px;left: 0px;left: -100%;transition: all 0.5s;/* background-color: rgba(0, 0, 0, 0.3); */max-width: 250px;/* margin-top: 49px; *//* margin-bottom: 30px; */}
+nav.gnb{position:fixed;width: 70%;height: 100%;z-index: 800;top: 0px;left: 0px;left: -100%;/* transition: all 0.5s; *//* background-color: rgba(0, 0, 0, 0.3); */max-width: 250px;/* margin-top: 49px; *//* margin-bottom: 30px; */display: none;}
 nav.gnb::before{content:"";display:block;position: absolute;top: 0;height:50px;z-index:50;background-color:#fff;left: 0;width: 100%;border-bottom: #ddd solid 1px;/* max-width: 300px; */}
 nav.gnb::after{left: -100%;width: 100%;height:100%;/* background-color: rgba(0, 0, 0, 0.3); */content:"";display:block;position: fixed;top: 0;/* left: 0px; */}
 nav.gnb .bt.close{display:block;position:absolute;left: 20px;top: 14px;z-index: 300;}

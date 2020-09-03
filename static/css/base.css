@@ -33,6 +33,7 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration{display: none; }
 /* clears the 'X' from Chrome */
 input[type="time"]::-webkit-clear-button { display: none; }
+input[type="time"]::-webkit-calendar-picker-indicator { display: none; }
 input[type=number]{-moz-appearance:textfield;}
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -121,7 +122,7 @@ input[type=number] { -moz-appearance: textfield; }
 .picker-cell__header{display:none;}
 .picker-fixed .picker-header{height:55px;padding: 16px 10px;}
 .picker-title{font-size:18px;font-weight: normal;text-align: center;}
-.picker-close{width:30px;height:30px;background:url(../images/common/popLayerClose.png) no-repeat;background-size: 30px;font-size:0;left: 15px;right: auto;top: 11px;}
+.picker-close{width:30px;height:30px;background:url(../img/common/popLayerClose.png) no-repeat;background-size: 30px;font-size:0;left: 15px;right: auto;top: 11px;}
 .picker-cell + .picker-cell{border-left-width: 0px;}
 .picker-fixed > .picker-dialog{border-radius: 10px 10px 0px 0px;}
 .picker-cell__body{padding:0px 10px;}
