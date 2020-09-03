@@ -177,7 +177,18 @@ body.uimenuOn .btnUi::before{transform: rotate(140deg);width: 12px;top: 12px;}
 body.uimenuOn .btnUi>b{width: 18px;transform: rotate(-180deg);left: 9px;}
 body.uimenuOn .btnUi::after{transform: rotate(-140deg);width: 12px;top: 20px;}
 .uiScreen {display: none;background-color: rgba(0,0,0,0.5);width: 100%;height: 100%;zoom: 1;position: fixed;left: 0px;z-index: 700;top: 0px;transition: all 0.4s ease 0.0s;}
-
+@media screen and ( min-width:768px )  {
+	.contain.ui{margin-left: 250px;user-select: initial !important;}
+	.header{z-index: 850;position: fixed;height: 0;}
+	.btnUi{display:none;}
+	.header>.inner{width:250px;z-index: 800;box-shadow: none;}
+	.menubar>.inner{left: 250px;z-index: 100;}
+	#barH{left: 0px;top: 0;height: 2px;z-index: 900;}
+	#barH>i{height: 2px;}
+	nav.uimenu .menu{/* padding-top: 0px; *//* border-bottom: 1px #ddd solid; */}
+	nav.uimenu{left:0px;}
+	nav.uimenu::before{display:none;}
+}
 
 
 

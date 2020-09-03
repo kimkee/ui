@@ -1065,17 +1065,3 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .slideSample2 .slide>li .item .info .prc{ font-size:12px; padding-top:8px;}
 
 
-@media screen and ( min-width:768px )  {
-	.contain.ui{margin-left: 250px;user-select: initial !important;}
-	.header{z-index: 850;position: fixed;height: 0;}
-	.bt.gnb{display:none;}
-	.header>.inner{width:250px;z-index: 800;box-shadow: none;}
-	.menubar>.inner{left: 250px;z-index: 100;}
-	#barH{left: 0px;top: 0;height: 2px;z-index: 900;}
-	#barH>i{height: 2px;}
-	nav.gnb .menu{/* padding-top: 0px; *//* border-bottom: 1px #ddd solid; */}
-	nav.gnb{left:0px;}
-	nav.gnb::before{display:none;}
-
-	.contain.ui .sect{/* width:50%; */}
-}
