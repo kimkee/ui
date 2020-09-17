@@ -22,6 +22,7 @@ img{vertical-align:middle; border:none;}
 table{border-collapse:collapse; border-spacing:0;}
 address,em,i{font-style:normal; }
 *,::before,::after{-webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box;}
+*{outline-color: rgb(0 114 255 / 20%);}
 ::-ms-clear{display: none; }
 /* clears the 'X' from Internet Explorer */
 input[type=search]::-ms-clear{display:none; width:0; height:0; }
@@ -41,7 +42,18 @@ input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 /* Firefox */
 input[type=number] { -moz-appearance: textfield; }
 
-
+input::-webkit-datetime-edit-ampm-field,
+input::-webkit-datetime-edit-day-field,
+input::-webkit-datetime-edit-hour-field,
+input::-webkit-datetime-edit-millisecond-field,
+input::-webkit-datetime-edit-minute-field,
+input::-webkit-datetime-edit-month-field,
+input::-webkit-datetime-edit-second-field,
+input::-webkit-datetime-edit-week-field,
+input::-webkit-datetime-edit-year-field,
+input::-webkit-datetime-edit-text {
+  /* color: transparent; */
+}
 
 /*  jquery-ui 커스텀 */
 .uiDatePickWrap{position:fixed;left:0px;right:0px;bottom:0px;top:0px;z-index: 1100;background-color:rgba(0,0,0,0.6);padding:10px;text-align: center;}
@@ -221,8 +233,7 @@ input[type=number] { -moz-appearance: textfield; }
 @media screen and ( max-width:1024px)  {
 	.linkHtml .cont>ul>li{float:left;width: calc(50% - 10px);padding: 0px;}
 	.linkHtml .cont>ul>li:nth-child(3n+1){clear: none;}
-	.linkHtml .cont>ul:after{ content:""; display:table; clear:both; }
-	.linkHtml .cont>ul>li>ul{ }
+	.linkHtml .cont>ul>li:nth-child(2n+1){clear: left;}
 }
 @media screen and ( max-width:640px)  {
 	.linkHtml .cont>ul{padding: 4px;padding-top: 0px;}
@@ -230,6 +241,7 @@ input[type=number] { -moz-appearance: textfield; }
 }
 @media screen and ( max-width:360px)  {
 }
+
 
 
 

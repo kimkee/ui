@@ -925,47 +925,7 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .popSelect .btnPopClose{position: absolute;right: 10px;top: 12px;background: url(../img/common/popLayerClose.png) no-repeat;background-size: 30px auto;font-size:0px;width: 30px;height: 30px;}
 
 
-
-/* 셀렉트 팝업 */
-.select-one{display: block;min-height: 60px;}
-.select-one .btSel{border:1px solid #cccccc;border-radius: 6px;display:block;padding: 5px 40px 5px 13px;font-size:16px;background: url(../img/common/select_one.png) no-repeat right 12px top 14px;background-size: 30px auto;width: 100%;height: 60px;text-align: left;/* outline: none; */text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
-.select-one .btSel:focus{/* border-color:#6b86ea */}
-.select-one .btSel .opt{}
-.select-one .btSel .tit{}
-.select-one .sList{position: absolute;left: -999em;display: none;}
-.select-one .sList>li{}
-.select-one .sList>li .lb{}
-.select-one .sList>li input{}
-.select-one .sList>li .txt{}
-.select-one .btSel.on .tit{display:none;}
-
-
-/* popSelectOne */
-.popSelectOne{display:none;position:fixed;left:0px;right:0px;top:0px;bottom:0;z-index:1000;background-color: rgba(0,0,0,0.52);outline:none;}
-.popSelectOne.on{display:block;}
-.popSelectOne{white-space:nowrap;text-align:center;font-size: 0px;padding: 10px 0px 0px 0px;}
-.popSelectOne::after{content: '';width:0;height:100%;display:inline-block;vertical-align:middle;}
-.popSelectOne .pbd{transform: translateY(110%);transition: transform 0.3s ease 0s;background:#ffffff;font-size:16px;bottom: 10px;display:inline-block;vertical-align: bottom;text-align:left;white-space:normal;/* max-width: 310px; */width: calc(100% - 0px);margin-bottom: 0px;overflow: initial;border-radius: 10px 10px 0px 0px;}
-.popSelectOne .phd{position: relative;height: 55px;border-bottom: #c6c6c6 solid 1px;}
-.popSelectOne .phd>.in{ position:relative;}
-.popSelectOne .phd .tit{font-size: 18px;text-align: center;padding: 13px 34px;}
-.popSelectOne .phd button.close{ background: url(../img/common/popLayerClose.png)}
-.popSelectOne .pct{/* max-height: 240px; *//* min-height: 70px; */background: #ffffff;overflow: hidden;/* border-radius: 5px; */}
-.popSelectOne .pct .poptents{ max-height: 260px; overflow: auto; }
-.popSelectOne .pbt{ min-height: auto;}
-.popSelectOne .pbt .bots{/* position:fixed; *//* width: auto; *//* right: 0; */}
-.popSelectOne .pbt .btn{font-size: 14px;/* width: 50%; */}
-.popSelectOne.on .pbd{transform: translateY(0%);}
-.popSelectOne .list{padding: 10px 30px 20px 30px;}
-.popSelectOne .list>li{text-align: center;border-bottom: #ececec solid 1px;color: #666666;font-weight: 400;}
-.popSelectOne .list>li:last-child{border-bottom-width: 0px;}
-.popSelectOne .list>li .lb{padding: 15px 0px 15px 0px;font-size: 16px;display:block;min-height: 55px;text-align: left;}
-.popSelectOne .list>li input{opacity:0;left:-999em;position: absolute;}
-.popSelectOne .list>li input:focus + .txt,
-.popSelectOne .list>li input:checked + .txt{color: #000000;}
-.popSelectOne .list>li .txt{}
-.popSelectOne .btnPopClose{position: absolute;right: 10px;top: 12px;background: url(../img/common/popLayerClose.png) no-repeat;background-size: 30px auto;font-size:0px;width: 30px;height: 30px;}
-
+/* popSelectMul */
 .select-mul{display: block;min-height: 60px;}
 .select-mul .btSel{border:1px solid #cccccc;border-radius: 6px;display:block;padding: 5px 40px 5px 13px;font-size:16px;background: url(../img/common/select_one.png) no-repeat right 12px top 14px;background-size: 30px auto;width: 100%;height: 60px;text-align: left;/* outline: none; */text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
 .select-mul .btSel:focus{/* border-color:#6b86ea */}
@@ -981,7 +941,6 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .select-mul .sList>li .txt{}
 .select-mul .btSel.on .tit{display:none;}
 
-/* popSelectMul */
 .popSelectMul{display:none;position:fixed;left:0px;right:0px;top:0px;bottom:0;z-index:1000;background-color: rgba(0,0,0,0.52);outline:none;}
 .popSelectMul.on{display:block;}
 .popSelectMul{white-space:nowrap;text-align:center;font-size: 0px;padding: 10px 0px 0px 0px;}
@@ -991,23 +950,25 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .popSelectMul .phd>.in{ position:relative;}
 .popSelectMul .phd .tit{font-size: 18px;text-align: center;padding: 13px 34px;}
 .popSelectMul .phd button.close{ background: url(../img/common/popLayerClose.png)}
-.popSelectMul .pct{/* max-height: 240px; *//* min-height: 70px; */background: #ffffff;overflow: hidden;/* border-radius: 5px; */}
+.popSelectMul .pct{background: #ffffff;overflow: hidden;}
 .popSelectMul .pct .poptents{ max-height: 260px; overflow: auto; }
 .popSelectMul .pbt{ min-height: auto;}
-.popSelectMul .pbt .bots{/* position:fixed; *//* width: auto; *//* right: 0; */}
-.popSelectMul .pbt .btn{font-size: 14px;/* width: 50%; */}
+.popSelectMul .pbt .bots{}
+.popSelectMul .pbt .btn{font-size: 14px;}
 .popSelectMul.on .pbd{transform: translateY(0%);}
 .popSelectMul .list{padding: 10px 30px 20px 30px;}
 .popSelectMul .list>li{text-align: center;border-bottom: #ececec solid 1px;color: #666666;font-weight: 400;}
 .popSelectMul .list>li:last-child{border-bottom-width: 0px;}
-.popSelectMul .list>li .lb{padding: 15px 0px 15px 0px;font-size: 16px;display:block;min-height: 55px;text-align: left;}
-.popSelectMul .list>li input{opacity:0;left:-999em;position: absolute;}
-.popSelectMul .list>li input:focus + .txt{/* color: #000000; */}
 .popSelectMul .list>li .txt{ position: relative; display: block;}
-.popSelectMul .list>li input + .txt::after{width:20px;height:20px;background:url(../img/common/check_mul_ico.png) no-repeat;background-size: 20px auto;content:"";display: block;position: absolute;right: 0px;top: 2px;}
-.popSelectMul .list>li input:checked + .txt::after{background-position-y: -20px;}
-.popSelectMul .btnPopClose{position: absolute;left: 10px;top: 12px;background: url(../img/common/popLayerClose.png) no-repeat;background-size: 30px auto;font-size:0px;width: 30px;height: 30px;}
+.popSelectMul .list>li button{padding: 15px 0px 15px 0px;font-size: 16px;display:block;min-height: 55px;text-align: left;color: #666666;width: 100%;position: relative;}
+.popSelectMul .list>li button::after{width:20px;height:20px;background:url(../img/common/check_mul_ico.png) no-repeat;background-size: 20px auto;content:"";display: block;position: absolute;right: 0px;top: 17px;}
+.popSelectMul .list>li.active button::after{background-position-y: -20px;}
+.popSelectMul .list>li button:focus,
+.popSelectMul .list>li button.active{color: #000000;}
+
+.popSelectMul .btnPopClose{position: absolute;left: 20px;top: 12px;background: url(../img/common/popLayerClose.png) no-repeat;background-size: 30px auto;font-size:0px;width: 30px;height: 30px;}
 .popSelectMul .btnCom{position:absolute;right: 20px;top: 9px;}
+
 
 
 

@@ -22,7 +22,6 @@ var ui = {
 		this.popLayer.init();
 		this.popFrame.init();
 		this.popSelect.init();
-		this.popSelOne.init();
 		this.popSelMul.init();
 		this.popWin.init();
 		this.slides.init();
@@ -31,7 +30,6 @@ var ui = {
 		this.listLoad.init();
 		this.getSafe.init();
 		this.movePage.init();
-		console.log("ui.init();");
 	},
 	skip:{ // 본문으로 스킵
 		init:function() {
@@ -1234,29 +1232,28 @@ var ui = {
 			ybt:"확인"
 		}, params);
 
-		if( !$(".popAlert").length ){
-			ui.lock.using(true);
+		if( $(".popAlert").length ) return;
 
-			var lyAlert =
-			'<section class="popAlert" tabindex="0">'+
-				'<div class="pbd">'+
-					'<div class="pct">'+opt.msg+'</div>'+
-					'<div class="pbt">'+						
-						'<button type="button" class="btn type a btnConfirm">'+ opt.ybt +'</button>'+
-					'</div>'+
-					'<button type="button" class="btnClose">닫기</button>'+
+		ui.lock.using(true);
+
+		var lyAlert =
+		'<section class="popAlert" tabindex="0">'+
+			'<div class="pbd">'+
+				'<div class="pct">'+opt.msg+'</div>'+
+				'<div class="pbt">'+						
+					'<button type="button" class="btn type a btnConfirm">'+ opt.ybt +'</button>'+
 				'</div>'+
-			'</section>';
+				'<button type="button" class="btnClose">닫기</button>'+
+			'</div>'+
+		'</section>';
 
-			$("body").append(lyAlert);
+		$("body").append(lyAlert);
 
 
-			$(".popAlert").find(".btnConfirm").on("click",function(){
-				window.setTimeout(opt.ycb);
-			});
-			$(".popAlert").find(".btnClose , .btnConfirm").on("click",alertClose);
-
-		}
+		$(".popAlert").find(".btnConfirm").on("click",function(){
+			window.setTimeout(opt.ycb);
+		});
+		$(".popAlert").find(".btnClose , .btnConfirm").on("click",alertClose);
 
 		function alertClose(){
 			$(".popAlert").remove();
@@ -1275,32 +1272,32 @@ var ui = {
 			nbt:"취소"
 		}, params);
 
-		if( !$(".popConfirm").length ){
-			ui.lock.using(true);
+		if( $(".popConfirm").length ) return;
+		
+		ui.lock.using(true);
 
-			var lyConfirm =
-			'<article class="popConfirm" tabindex="0">'+
-				'<div class="pbd">'+
-					'<div class="pct">'+opt.msg+'</div>'+
-					'<div class="pbt">'+						
-						'<button type="button" class="btn type e btnCancel">'+ opt.nbt +'</button>'+
-						'<button type="button" class="btn type a btnConfirm">'+ opt.ybt +'</button>'+
-					'</div>'+
-					'<button type="button" class="btnClose">닫기</button>'+
+		var lyConfirm =
+		'<article class="popConfirm" tabindex="0">'+
+			'<div class="pbd">'+
+				'<div class="pct">'+opt.msg+'</div>'+
+				'<div class="pbt">'+						
+					'<button type="button" class="btn type e btnCancel">'+ opt.nbt +'</button>'+
+					'<button type="button" class="btn type a btnConfirm">'+ opt.ybt +'</button>'+
 				'</div>'+
-			'</article>';
-			$("body").append(lyConfirm);
-			$(".popConfirm:visible").focus();
-			$(".popConfirm").find(".btnConfirm").on("click",function(){
-				window.setTimeout(opt.ycb);
-			});
+				'<button type="button" class="btnClose">닫기</button>'+
+			'</div>'+
+		'</article>';
+		$("body").append(lyConfirm);
+		$(".popConfirm:visible").focus();
+		$(".popConfirm").find(".btnConfirm").on("click",function(){
+			window.setTimeout(opt.ycb);
+		});
 
-			$(".popConfirm").find(".btnCancel").on("click",function(){
-				window.setTimeout(opt.ncb);
-			});
+		$(".popConfirm").find(".btnCancel").on("click",function(){
+			window.setTimeout(opt.ncb);
+		});
 
-			$(".popConfirm").find(".btnConfirm, .btnClose , .btnCancel").on("click",confirmClose);
-		}
+		$(".popConfirm").find(".btnConfirm, .btnClose , .btnCancel").on("click",confirmClose);
 
 		function confirmClose(){
 			$(".popConfirm").remove();
@@ -1342,7 +1339,7 @@ var ui = {
 		}, opt.sec);
 		
 	},
-	popSelect:{
+	popSelect:{ // 셀렉트 메뉴 팝업
 		init:function(){
 			this.evt();
 			this.set();
@@ -1358,11 +1355,12 @@ var ui = {
 
 
 			$(document).on("click",".select-pop .btSel",function(){
-				var name = $(this).closest(".select-pop").find(".sList").attr("name");
-				var tit =  $(this).closest(".select-pop").find(".sList").data("select-title") || "옵션선택";
-				var sel = $(this).closest(".select-pop").find(".sList").val();
+				var $pop = $(this).closest(".select-pop");
+				var name = $pop.find(".sList").attr("name");
+				var tit =  $pop.find(".sList").data("select-title") || "옵션선택";
+				var sel =  $pop.find(".sList").val();
 				var list = [];
-				$(this).closest(".select-pop").find(".sList option").each(function(){
+				$pop.find(".sList option").each(function(){
 					list.push( { v:$(this).val() ,t:$(this).text() } );
 				});
 				// console.log(name,tit,list,sel);
@@ -1374,10 +1372,11 @@ var ui = {
 				var sel = $(this).attr("value");
 				var txt = $(this).text();
 				var name =  $(this).closest(".popSelect").data("select-pop");
-				console.log(sel,name);
+				console.log(name,sel);
 				$("select[name='"+name+"']>option[value='"+sel+"']").prop("selected",true);
 				$("select[name='"+name+"']").val(sel).prop("selected",true);
 				$("select[name='"+name+"']").closest(".select-pop").find(".btSel").text(txt) ;
+				$("select[name='"+name+"']").trigger("change");
 				_this.close();
 			});
 
@@ -1387,9 +1386,10 @@ var ui = {
 		},
 		set:function(){
 			$(".select-pop").each(function(){
-				if ( !$(this).find(".btSel").length ) {
+				if( !$(this).find(".btSel").length ) {
 					$(this).prepend('<button class="btSel" type="button"></button>');
 				}
+				var $btSel = $(this).find(".btSel");
 				var tit = $(this).find(".sList").data("select-title") || "옵션선택";
 				var sel = $(this).find(".sList").val();
 				var txt = $(this).find(".sList option:selected").text() || tit;
@@ -1399,12 +1399,11 @@ var ui = {
 					list.push( { v:$(this).val() ,t:$(this).text() } );
 				});
 				// console.log(list ,sel ,txt ,dis);
-				
-				$(this).find(".btSel").text(txt);
-				if (dis==true) {
-					$(this).find(".btSel").prop("disabled",true);
+				$btSel.text(txt);
+				if( dis==true ) {
+					$btSel.prop("disabled",true);
 				}else{
-					$(this).find(".btSel").prop("disabled",false);
+					$btSel.prop("disabled",false);
 				}
 			});
 		},
@@ -1446,104 +1445,7 @@ var ui = {
 			$("select[name="+id+"]").closest(".select-pop").find(".btSel").attr("tabindex","0").focus();
 		}
 	},
-	popSelOne:{
-		init:function(){
-			this.evt();
-			this.set();
-		},
-		evt:function(){
-			var _this = this;
-
-			$(document).on("click", ".popSelectOne", function(e) {
-				$(this).find(".btnPopClose").trigger("click");
-			}).on("click", ".popSelectOne>.pbd", function(e) {
-				e.stopPropagation();
-			});
-
-			$(document).on("click",".select-one",function(){
-				var name = $(this).data("select-name");
-				// var tit =  $("[data-select-pop="+name+"]").find(".phd .tit").text();
-				var tit =  $(this).data("select-title") || "옵션선택";
-				var list = $(this).find(".sList").html();
-				var sel = $(this).find(".sList input:checked").val();
-				// console.log(sel);
-				_this.open(name,tit,list,sel);
-			});
-			
-			$(document).on("click",".popSelectOne .btnPopClose",function(){
-				var id =  $(this).closest(".popSelectOne").data("select-pop");
-				var sel = $(this).closest(".popSelectOne").find("input:checked").val();
-				var txt = $(this).closest(".popSelectOne").find("input:checked").next(".txt").text();
-				var tit = $(this).closest(".popSelectOne").find(".phd .tit").text();
-				_this.close(id,sel,txt,tit);
-
-			});
-			$(document).on("click",".popSelectOne .list>li input",function(){
-				var id = $(this).closest(".popSelectOne").data("select-pop");
-				var sel =  $(this).closest(".popSelectOne").find("input:checked").val();
-				var txt =  $(this).closest(".popSelectOne").find("input:checked").next(".txt").text();
-				_this.close(id,sel,txt);
-
-			});
-
-		},
-		set:function(){
-			$(".select-one").each(function(){
-				if ( !$(this).find(".btSel").length ) {
-					$(this).prepend('<button class="btSel" type="button"></button>');
-				}
-				var tit = $(this).data("select-title") || "옵션선택";
-				var sel = $(this).find("input:checked").val();
-				var txt = $(this).find("input:checked").next(".txt").text() || tit;
-				var dis = $(this).data("select-disabled");
-				
-				// console.log(sel);
-				$(this).find("input[value="+sel+"]").prop("checked", true);
-				
-				$(this).find(".btSel").text(txt).attr("value",sel);
-				if (dis==true) {
-					$(this).find(".btSel").prop("disabled",true);
-				}else{
-					$(this).find(".btSel").prop("disabled",false);
-				}
-			});
-		},
-		open:function(name,tit,list,sel){
-			if ( $(".popSelectOne:visible").length ) { return; }
-			var lyPop =
-			'<article class="popSelectOne" data-select-pop="'+name+'">' +
-				'<div class="pbd">' +
-					'<div class="phd"><h3 class="tit">'+tit+'</h3></div>' +
-					'<button type="button" class="btnPopClose">닫기</button>' +
-					'<div class="pct">' +
-						'<main class="poptents">' +
-							'<ul class="list">'+list+'</ul>' +
-						'</main>' +
-					'</div>' +
-				'</div>' +
-			'</article>';
-			$("body").append(lyPop);
-
-			$(".popSelectOne").fadeIn(100,function(){	
-				$(this).addClass("on");
-				// console.log(name, sel);
-				$("[data-select-pop="+name+"] input[value="+sel+"]").prop("checked", true);
-			}).attr("tabindex","0").focus();
-			ui.lock.using(true);
-		},
-		close:function(id,sel,txt) {
-			$(".popSelectOne").removeClass("on").fadeOut(100,function(){
-				$(".popSelectOne").remove();
-			});
-			console.log(id , sel);
-			if(txt) $("[data-select-name="+id+"] .btSel").text(txt);
-			$("[data-select-name="+id+"] .btSel").attr("value",sel).attr("tabindex","0").focus();
-			// $("[data-select-name="+id+"] input").prop("checked", false);
-			$("[data-select-name="+id+"] input[value="+sel+"]").prop("checked", true);
-			ui.lock.using(false);
-		}
-	},
-	popSelMul:{
+	popSelMul:{ // 다중선택 팝업
 		init:function(){
 			this.evt();
 			this.set();
@@ -1557,85 +1459,98 @@ var ui = {
 				e.stopPropagation();
 			});
 
-			$(document).on("click",".select-mul",function(){
-				var name = $(this).data("select-name");
-				// var tit =  $("[data-select-pop="+name+"]").find(".phd .tit").text();
-				var tit =  $(this).data("select-title") || "옵션선택";
-				var list = $(this).find(".sList").html();
-				// console.log(list);
+			$(document).on("click",".select-mul .btSel",function(){
+				var name = $(this).closest(".select-mul").data("select-name");
+				var tit =  $(this).closest(".select-mul").data("select-title") || "옵션선택";
+				var list = [];
+				$(this).closest(".select-mul").find(".sList input").each(function(){
+					list.push( { v:$(this).is(":checked") ,t:$(this).closest("li").find(".txt").text(), a:$(this).is(".chkAll") } );
+				});
+				console.log(list);
 				_this.open(name,tit,list);
 			});
 			
 			$(document).on("click",".popSelectMul .btnPopClose",function(){
-				var id =  $(this).closest(".popSelectMul").data("select-pop");
-				var sel = $(this).closest(".popSelectMul").find("input:checked").val();
-				var txt = $(this).closest(".popSelectMul").find("input:checked").next(".txt").text();
-				var tit = $(this).closest(".popSelectMul").find(".phd .tit").text();
+				var $pop = $(this).closest(".popSelectMul");
+				var id   = $pop.data("select-pop");
+				var sel  = $pop.find("input:checked").val();
+				var txt  = $pop.find("input:checked").next(".txt").text();
+				var tit  = $pop.find(".phd .tit").text();
 				_this.close(id,sel,txt,tit);
 			});
 			$(document).on("click",".popSelectMul .btnCom",function(){
-				var id = $(this).closest(".popSelectMul").data("select-pop");
-				var sel =  $(this).closest(".popSelectMul").find("input:checked").val();
-				var txt =  $(this).closest(".popSelectMul").find("input:checked").next(".txt").text();
+				var $pop = $(this).closest(".popSelectMul");
+				var id   = $pop.data("select-pop");
+				var sel  = $pop.find("input:checked").val();
+				var txt  = $pop.find("input:checked").next(".txt").text();
 				_this.com(id,sel,txt);
 			});
 
-			$(document).on("change",".popSelectMul input",function(){
-				var chkall = $(this).closest(".list").find("input[type='checkbox'].chkAll").length;
-				var chklis = $(this).closest(".list").find("input[type='checkbox']:not('.chkAll')").length;
-				var chkeds = $(this).closest(".list").find("input[type='checkbox']:checked:not('.chkAll')").length;
-				var chkeds2 = $(this).closest(".list").find("input[type='checkbox']:checked").length;
-				if ( chkall ) { // 전체선택 있는경우
-					
+			$(document).on("click",".popSelectMul .list button",function(){
 
-					console.log(chkeds , chklis);
-					if( $(this).is(".chkAll") ) {
-						if( $(this).is(":checked") ){
-							$(this).closest(".list").find("input[type='checkbox']:checked:not('.chkAll')").prop("checked",false);
-							$(this).closest(".popSelectMul").find(".btnCom").prop("disabled",false);
+				var $pop = $(this).closest(".popSelectMul");
+				var $lst = $(this).closest(".list");
+				var $li  = $(this).closest("li");
+
+				if( $li.is(".active") ) {
+					$li.removeClass("active");
+				}else{
+					$li.addClass("active");
+				}
+
+				var chkall = $lst.find("li.chkAll").length;
+				var chklis = $lst.find("li:not('.chkAll')").length;
+				var chkeds = $lst.find("li.active:not('.chkAll')").length;
+				// var chkeds2 = $lst.find("li.active").length;
+
+				if ( chkall ) { // 전체선택 있는경우
+					// console.log(chkeds , chklis);
+					if( $li.is(".chkAll") ) {
+						if( $li.is(".active") ){
+							$lst.find("li.active:not('.chkAll')").removeClass("active");
+							$pop.find(".btnCom").prop("disabled",false);
 							return;
 						}else{
-							$(this).closest(".list").find("input[type='checkbox']:checked:not('.chkAll')").prop("checked",true);
-							console.log("전체 비활");
-							$(this).closest(".popSelectMul").find(".btnCom").prop("disabled",true);
+							$lst.find("li.active:not('.chkAll')").addClass("active");
+							// console.log("전체 비활");
+							$pop.find(".btnCom").prop("disabled",true);
 						}
 					}else{
 						if( chkeds == 0 ) {
-							$(this).closest(".popSelectMul").find(".btnCom").prop("disabled",true);
+							$pop.find(".btnCom").prop("disabled",true);
 						}else{
-							$(this).closest(".popSelectMul").find(".btnCom").prop("disabled",false);
+							$pop.find(".btnCom").prop("disabled",false);
 						}
 					}
 
 					if (chkeds == chklis ) {
-						$(this).closest(".list").find("input[type='checkbox'].chkAll").prop("checked",true);
-						$(this).closest(".list").find("input[type='checkbox']:checked:not('.chkAll')").prop("checked",false);
+						$lst.find("li.chkAll").addClass("active");
+						$lst.find("li.active:not('.chkAll')").removeClass("active");
 					}else{
-						$(this).closest(".list").find("input[type='checkbox'].chkAll").prop("checked",false);
+						$lst.find("li.chkAll").removeClass("active");
 					}
 
 				}else{ // 전체선택 없는경우
-					console.log("일반" , chkeds);
-
+					// console.log("일반" , chkeds);
 					if( chkeds == 0 ) {
-						$(this).closest(".popSelectMul").find(".btnCom").prop("disabled",true);
+						$pop.find(".btnCom").prop("disabled",true);
 					}else{
-						$(this).closest(".popSelectMul").find(".btnCom").prop("disabled",false);
+						$pop.find(".btnCom").prop("disabled",false);
 					}
 				}
 				// console.log("dd" , chkeds);
-
 			});
 
 		},
 		set:function(){
 			$(".select-mul").each(function(){
-				var _this = this;
+				// var _this = this;
 				if( !$(this).find(".btSel").length ) {
 					$(this).prepend('<button class="btSel" type="button"></button>');
 				}
+				var $btSel = $(this).find(".btSel");
 				var tit = $(this).data("select-title") || "옵션선택";
-				var ttt="";
+				var ttt = "";
 				var dis = $(this).data("select-disabled");
 				$(this).find("input:checked").each(function(){
 					var tt = $(this).next(".txt").text();
@@ -1643,47 +1558,53 @@ var ui = {
 					ttt += '<span>'+tt+'</span>';
 				});
 				if( !$(this).find("input:checked").length ) {
-					$(_this).find(".btSel").html(tit);
+					$btSel.html(tit);
 				}else{
-					$(_this).find(".btSel").html(ttt);
+					$btSel.html(ttt);
 				}
 				if (dis==true) {
-					$(this).find(".btSel").prop("disabled",true);
+					$btSel.prop("disabled",true);
 				}else{
-					$(this).find(".btSel").prop("disabled",false);
+					$btSel.prop("disabled",false);
 				}
 			});
 		},
-
 		com:function(id){
-			var ttt="";
-			$("[data-select-pop="+id+"] .list input").each(function(i){
+			var ttt = "";
+			$("[data-select-pop="+id+"] .list li").each(function(i){
 				i++;
 				// console.log(	i,	$(this).prop("checked")  );
-				var chk = $(this).prop("checked");
+				var chk = $(this).is(".active");
 				$("[data-select-name="+id+"] .sList li:nth-child("+i+") input").prop("checked",chk);
 
-				
-				if( $(this).is(":checked") ){
-					var tt = $(this).next(".txt").text();
+				if( $(this).is(".active") ){
+					var tt = $(this).find("button").text();
 					// console.log(tt);
 					ttt += '<span>'+tt+'</span>';
 				}
+				console.log( $("[data-select-name="+id+"] .sList li:nth-child("+i+") input").attr("name") , $("[data-select-name="+id+"] .sList li:nth-child("+i+") input").prop("checked")  );
 			});
-			$("[data-select-name="+id+"]").find(".btSel").html(ttt);
-			$("[data-select-name="+id+"] .btSel").attr("tabindex","0").focus();
-			console.log(id);
+			$("[data-select-name="+id+"]").find(".btSel").html(ttt).attr("tabindex","0").focus();
+
+			$("[data-select-name="+id+"] .btSel").trigger("click");	
 			this.close(id);
 		},
 		open:function(name,tit,list){
 			if ( $(".popSelectMul:visible").length ) { return; }
+			var blist = "";
+			var cls,all;
+			for (var i = 0; i < list.length; i++) {
+				list[i].v ? cls = "active"  : cls = "";
+				list[i].a ? all = " chkAll" : all = "";
+				blist += '<li class="'+cls+all+'"><button type="button">'+list[i].t+'</button></li>';
+			}
 			var lyPop =
 			'<article class="popSelectMul" data-select-pop="'+name+'">' +
 				'<div class="pbd">' +
 					'<div class="phd"><h3 class="tit">'+tit+'</h3></div>' +
 					'<div class="pct">' +
 					'<main class="poptents">' +
-						'<ul class="list">'+list+'</ul>' +
+						'<ul class="list">'+blist+'</ul>' +
 					'</main>' +
 					'</div>' +
 					'<button type="button" class="btnPopClose">닫기</button>' +
@@ -1691,18 +1612,11 @@ var ui = {
 				'</div>' +
 			'</article>';
 			$("body").append(lyPop);
-			$("[data-select-name="+name+"] .sList input").each(function(i){
-				i++;
-				// console.log(	i,	$(this).prop("checked")  );
-				var chk = $(this).prop("checked");
-				$("[data-select-pop="+name+"] .list li:nth-child("+i+") input").prop("checked",chk);
-			});
 
-
-			$(".popSelectMul").fadeIn(100,function(){	
+			$(".popSelectMul").fadeIn(100,function(){																			
 				$(this).addClass("on");
-				console.log("오픈");
-				if( $("[data-select-pop="+name+"] .list input:checked").length == 0 ){
+				// console.log("오픈");
+				if( $("[data-select-pop="+name+"] .list li.active").length == 0 ){
 					$("[data-select-pop="+name+"] .btnCom").prop("disabled",true);
 				}
 			}).attr("tabindex","-1").focus();
@@ -1712,10 +1626,7 @@ var ui = {
 			$(".popSelectMul").removeClass("on").fadeOut(100,function(){
 				$(".popSelectMul").remove();
 			});
-			// if(txt) $("[data-select-name="+id+"] .btSel").text(txt);
 			$("[data-select-name="+id+"] .btSel").attr("tabindex","0").focus();
-			// $("[data-select-name="+id+"] input").attr("checked", false);
-			// $("[data-select-name="+id+"] input[value="+sel+"]").attr("checked", true);
 			ui.lock.using(false);
 		}
 	},
@@ -1733,12 +1644,16 @@ var ui = {
 			});
 
 			$(document).on("click", ".popLayer", function(e) {
-				$(this).find(".btnPopClose").trigger("click");
+				// $(this).find(".btnPopClose").trigger("click");
+				var id = $(this).closest(".popLayer").attr("id");
+				if ( $(e.target).is(".popLayer") ) {
+					_this.close(id);
+				}
 			});
 
-			$(document).on("click", ".popLayer>.pbd , .btnPopClose", function(e) {
-				e.stopPropagation();
-			});
+			// $(document).on("click", ".popLayer>.pbd , .btnPopClose", function(e) {
+			// 	e.stopPropagation();
+			// });
 
 			if( $(".popLayer.win").length ) {
 				var id = $(".popLayer.win").attr("id");
@@ -1802,7 +1717,7 @@ var ui = {
 			_this.opt = $.extend({
 				ocb: null ,
 				ccb: null,
-				zIndex: 1000,
+				zIndex: "",
 				hash: false, // true  //  뒤로가기 버튼으로 팝업닫기 옵션
 			}, params); 
 
@@ -1823,7 +1738,7 @@ var ui = {
 
 			ui.lock.using(true);
 
-			$("#" + id).css({ zIndex: _this.opt.zindex });
+			$("#" + id).css({ zIndex: _this.opt.zIndex });
 			$("#" + id).fadeIn(100,function(){
 				if(_this.callbacks[id].open)  _this.callbacks[id].open();			
 				$(this).addClass("on");
@@ -1920,7 +1835,7 @@ var ui = {
 			_this.opt = $.extend({
 				ocb: null ,
 				ccb: null,
-				zIndex: 1000,
+				zIndex: "",
 			}, params); 
 
 			_this.callbacks[id] = {} ;
@@ -1932,6 +1847,7 @@ var ui = {
 			$(window).scrollTop( 0 );
 			console.log(this.sct);
 			// ui.lock.using(true);
+			$("#" + id).css({ zIndex: _this.opt.zIndex });
 			$("#" + id).show(0,function(){
 				if(_this.callbacks[id].open)  _this.callbacks[id].open();			
 				$(this).addClass("on");
@@ -2215,13 +2131,19 @@ var ui = {
 
 // ui.init(); 구동시점은 html include 완료시 
 $(document).ready(function(){
-	ui.html.include();
-	ui.times = setInterval(function(){ // console.log("uiHtml" ,  incNums , uiHtml.incCom);
-		if (ui.html.incCom) {
-			clearInterval(ui.times);
-			ui.init();
-		}
-	});
+	if ( typeof uiHtml  == "undefined" ) {
+		ui.init();
+		console.log("ui.init();");
+	}else{
+		ui.html.include();
+		ui.times = setInterval(function(){ // console.log("uiHtml" ,  incNums , uiHtml.incCom);
+			if (ui.html.incCom) {
+				clearInterval(ui.times);
+				ui.init();
+				console.log("ui.init();");
+			}
+		});
+	}
 });
 
 

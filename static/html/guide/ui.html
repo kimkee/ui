@@ -329,46 +329,35 @@
 				</script>
 				<p class="gap"></p>
 
-				<span class="select-one" data-select-name="radio_sel_1" data-select-title="단일옵션선택">
-					<ul class="sList">
-						<li><label class="lb"><input type="radio" name="radio_sel_1" value="value_0"><span class="txt">전체 샐렉트 옵션 선택 텍스트</span></label></li>
-						<li><label class="lb"><input type="radio" name="radio_sel_1" value="value_1"><span class="txt">1번째 샐렉트 옵션 선택 텍스트</span></label></li>
-						<li><label class="lb"><input type="radio" name="radio_sel_1" value="value_2"><span class="txt">2번째 샐렉트 옵션 선택 텍스트</span></label></li>
-						<li><label class="lb"><input type="radio" name="radio_sel_1" value="value_3"><span class="txt">3번째 샐렉트 옵션 선택 텍스트</span></label></li>
-					</ul>
-				</span>
-				<p class="gap"></p>
-				<button type="button" class="btn sm" onclick="testSelectOne1();">옵션변경</button>
-				<button type="button" class="btn sm" onclick="testSelectOne2();">비활성화</button>
-				<button type="button" class="btn sm" onclick="testSelectOne3();">활성화</button>
-				<script>
-					var testSelectOne1 = function(){
-						$('[name="radio_sel_1"][value="value_2"]').prop("checked", true);
-						ui.popSelOne.set();
-					}
-					var testSelectOne2 = function(){
-						$('[data-select-name="radio_sel_1"]').data('select-disabled',true);
-						ui.popSelOne.set();
-					}
-					var testSelectOne3 = function(){
-						$('[data-select-name="radio_sel_1"]').data('select-disabled',false);
-						ui.popSelOne.set();
-					}
-				</script>
-
-				<p class="gap"></p>
-
 				<span class="select-mul" data-select-name="check_sel_1" data-select-title="다중옵션선택">
 					<ul class="sList">
-						<li><label class="lb"><input type="checkbox" class="chkAll"><span class="txt">전체</span></label></li>
-						<li><label class="lb"><input type="checkbox"><span class="txt">1번째</span></label></li>
-						<li><label class="lb"><input type="checkbox"><span class="txt">2번째</span></label></li>
-						<li><label class="lb"><input type="checkbox"><span class="txt">3번째</span></label></li>
+						<li><span class="lb"><input type="checkbox" name="check_sel_1_0" id="check_sel_1_0" class="chkAll" ><label for="check_sel_1_0" class="txt">전체 </label></span></li>
+						<li><span class="lb"><input type="checkbox" name="check_sel_1_1" id="check_sel_1_1"><label for="check_sel_1_1" class="txt">1번째</label></span></li>
+						<li><span class="lb"><input type="checkbox" name="check_sel_1_2" id="check_sel_1_2"><label for="check_sel_1_2" class="txt">2번째</label></span></li>
+						<li><span class="lb"><input type="checkbox" name="check_sel_1_3" id="check_sel_1_3"><label for="check_sel_1_3" class="txt">3번째</label></span></li>
 					</ul>
 				</span>
 				
 				<p class="gap"></p>
-
+				<button type="button" class="btn sm" onclick="testSelectMul1();">옵션변경</button>
+				<button type="button" class="btn sm" onclick="testSelectMul2();">비활성화</button>
+				<button type="button" class="btn sm" onclick="testSelectMul3();">활성화</button>
+				<script>
+					var testSelectMul1 = function(){
+						$('[name="check_sel_1_2"]').prop("checked", true);
+						$('[name="check_sel_1_3"]').prop("checked", true);
+						ui.popSelMul.set();
+					}
+					var testSelectMul2 = function(){
+						$('[data-select-name="check_sel_1"]').data('select-disabled',true);
+						ui.popSelMul.set();
+					}
+					var testSelectMul3 = function(){
+						$('[data-select-name="check_sel_1"]').data('select-disabled',false);
+						ui.popSelMul.set();
+					}
+				</script>
+				<p class="gap"></p>
 				<span class="select db">
 					<select title="선택">
 						<option>선택</option>
