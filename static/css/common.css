@@ -632,14 +632,21 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .floatNav.active .top{ transform: translateY(0px); }
 .floatNav.hide{transform: translateY(60%);}
 
-
-
-
-
 .btnList{text-align: center;padding: 15px 0px 0 0;}
 .btnList::after{ clear:both; content:""; display:table;}
 .btnList .fl{float:left;}
 .btnList .fr{float:right;}
+
+/* 5줄이상 더보기 */
+[data-ui='elips']{position:relative;padding-bottom: 0px;}
+[data-ui='elips'] .btnTog{position:absolute;right:0px;bottom: 0px;font-size: 14px;/* text-decoration: underline; */color: #666;display: none;padding: 0;}
+[data-ui='elips'].elips.open .btnTog::after{background-position-y: -14px;}
+[data-ui='elips'].elips{padding-bottom: 22px;}
+[data-ui='elips'].elips .btnTog{display:block;}
+[data-ui='elips'].elips .btnTog::after{width:14px;height:14px;background:url(../img/common/elips_ar.png) no-repeat;background-size: 100% auto;content:"";display:inline-block;vertical-align:middle;margin: -4px 0 0 4px;}
+[data-ui='elips'] .txt{max-height: 125px;text-overflow: ellipsis;overflow:hidden;-webkit-line-clamp: 5;-webkit-box-orient:vertical;display:-webkit-box;word-wrap:break-word;font-size: 16px;line-height: 1.6;}
+[data-ui='elips'].open  .txt{text-overflow:inherit; max-height:inherit; overflow:inherit; -webkit-line-clamp:inherit;-webkit-box-orient:inherit; display:block; }
+
 
 
 /* 페이지 로딩 */

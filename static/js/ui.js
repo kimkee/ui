@@ -30,6 +30,7 @@ var ui = {
 		this.listLoad.init();
 		this.getSafe.init();
 		this.movePage.init();
+		this.elip.init();
 	},
 	skip:{ // 본문으로 스킵
 		init:function() {
@@ -467,6 +468,34 @@ var ui = {
 			var navH = $(".wrap>.nav").outerHeight();
 			$contain.css("min-height", winH - headH - footH - navH);
 			*/
+		}
+	},
+	elip:{ // 5줄이상 내용더보기 
+		init:function(){
+			this.evt();
+			this.set();
+		},
+		evt:function(){
+			$(document).on("click", "[data-ui='elips'] .btnTog", function() {
+				if ($(this).closest("[data-ui='elips']").hasClass("open")) {
+					$(this).closest("[data-ui='elips']").removeClass("open");
+					$(this).text("내용더보기");
+				} else {
+					$(this).closest("[data-ui='elips']").addClass("open");
+					$(this).text("내용닫기");
+				}
+			});
+		},
+		set:function(){
+			$("[data-ui='elips']").each(function(){
+				var txtH = $(this).find(".txt");
+				// console.log(txtH.height());
+				if(txtH.height()>124){
+					txtH.closest("[data-ui='elips']").addClass("elips");
+				}else{
+					txtH.closest("[data-ui='elips']").removeClass("elips");
+				}
+			});
 		}
 	},
 	form:{  //  폼요소
