@@ -306,6 +306,7 @@ nav.uimenu .menu .list>li:first-child{border-top-width:0px;}
 nav.uimenu .menu .list>li:last-child{ border-bottom: #dddddd solid 1px; }
 nav.uimenu .menu .list>li>a{display:block;padding: 8px 15px 8px 25px;font-size: 12px;font-weight: 400;position: relative;}
 nav.uimenu .menu .list>li>a::before{content:"-";position: absolute;left: 16px;top: 8px;}
+body.uimenuOn #barH{ z-index:100;}
 body.uimenuOn nav.uimenu{left: 0%;}
 body.uimenuOn nav.uimenu::after{/* left: 0%; */}
 body.uimenuOn .btnUi{/* left: 57%; */}
