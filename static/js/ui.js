@@ -1792,6 +1792,7 @@ var ui = {
 			// console.log( _this.scroll[id] + " close end"); // 팝업 닫을때 스크롤객체 지움;
 
 			$("#"+id).removeClass("on").fadeOut(150,function(){
+				_this.resize();
 				if( !$(".popLayer:visible").length ) ui.lock.using(false);
 				try { 
 					_this.callbacks[id].close(); 
@@ -1799,13 +1800,31 @@ var ui = {
 			});
 		},
 		resize:function(id){
-			var pctnH =  $(".popLayer:visible").outerHeight() ;		
-			pctnH = pctnH - ( $(".popLayer:visible>.pbd>.phd").outerHeight() || 0 ) - (  $(".popLayer:visible>.pbd>.pbt").outerHeight() || 0 );
-			
-			$(".popLayer.a:visible>.pbd>.pct").css({"height": pctnH });
-			$(".popLayer.b:visible>.pbd>.pct").css({"max-height": pctnH - 70 });
-			$(".popLayer.c:visible>.pbd>.pct").css({"max-height": pctnH - 70 });
+			// var pctnH =  $(".popLayer:visible").outerHeight() ;		
+			// pctnH = pctnH - ( $(".popLayer:visible>.pbd>.phd").outerHeight() || 0 ) - (  $(".popLayer:visible>.pbd>.pbt").outerHeight() || 0 );
+			// 
+			// $(".popLayer.a:visible>.pbd>.pct").css({"height": pctnH });
+			// $(".popLayer.b:visible>.pbd>.pct").css({"max-height": pctnH - 70 });
+			// $(".popLayer.c:visible>.pbd>.pct").css({"max-height": pctnH - 70 });
 			// $("#popSample2 input").val( $(".popLayer.b:visible>.pbd>.pct").css("max-height")  )
+
+
+ 			$(".popLayer:visible").each(function(){
+				var pctnH =  $(this).outerHeight();
+				pctnH = pctnH - ( $(this).find(".phd").outerHeight() || 0 );
+
+				if( $(this).is(".a") ){
+					$(this).find(".pct").css({"height": pctnH - (  $(this).find(".pbt").outerHeight() || 0 )});
+				}
+				if( $(this).is(".b") ){
+					$(this).find(".pct").css({"max-height": pctnH - 70 });
+				}
+				if( $(this).is(".c") ){
+					$(this).find(".pct").css({"max-height": pctnH - 70 });
+				}
+			 });
+
+
 		},
 		scroll:{},
 		lyScroll: function(id) {
