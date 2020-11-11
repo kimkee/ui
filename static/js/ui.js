@@ -1724,13 +1724,13 @@ var ui = {
 			_this.openPop = location.hash.replace("#pop=","").split(",");
 			if ( _this.openPop == "" ) { _this.openPop = [];	}
 			var h_now = _this.openPop ;		
-			// console.log( h_prev , h_now );
+			console.log( h_prev , h_now );
 			if( h_prev > h_now ){
 				result = h_prev.filter(function (a) {
  					return h_now.indexOf(a) === -1;
 				});
 				// console.log("뒤로옴" , result[0] ,h_prev , h_now  );
-				_this.close(result[0],true);
+				_this.close(result[0],{set:true});
 			}else{
 				// console.log("앞으로");
 			}
@@ -1752,9 +1752,10 @@ var ui = {
 
 			_this.callbacks[id] = {} ;
 			_this.callbacks[id].open  = _this.opt.ocb ? _this.opt.ocb : null ;
-			_this.callbacks[id].close = _this.opt.ccb ? _this.opt.ccb : null ;		
-
-			if (_this.opt.hash) {
+			_this.callbacks[id].close = _this.opt.ccb ? _this.opt.ccb : null ;
+			_this.callbacks[id].hash = _this.opt.hash;
+			console.log(_this.callbacks[id].hash);
+			if (_this.callbacks[id].hash) {
 
 				if ( $(".popLayer:visible").length <= 0 &&  location.href.split("#")[1] != undefined && location.href.split("#pop=")[1] != undefined ) {  //
 					_this.openPop = [];
@@ -1780,11 +1781,16 @@ var ui = {
 			});
 
 		},
-		close: function(id,set) {
+		close: function(id,params) {
 			_this = this;
-
-			// console.log(_this.opt.hash , set);	
-			if( _this.opt.hash && set != true && $("#"+id+":visible").length  ) {  // 해쉬 
+			_this.opts = $.extend({
+				ccb: null,
+				set: null
+			}, params);
+			console.log(_this.callbacks[id].hash , _this.opt.set);	
+		
+			if( _this.callbacks[id].hash && _this.callbacks[id].hash != true && $("#"+id+":visible").length  ) {  // 해쉬 
+				console.log("back");
 				window.history.back();
 			}
 			
@@ -1797,6 +1803,12 @@ var ui = {
 				try { 
 					_this.callbacks[id].close(); 
 				} catch (error) { }
+				if( typeof _this.opts.ccb == "function") {
+					_this.opts.ccb();
+					if (_this.callbacks[id].hash && $("#"+id+":visible").length) {
+						window.history.back();
+					}
+				}
 			});
 		},
 		resize:function(id){
