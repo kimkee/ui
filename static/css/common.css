@@ -64,7 +64,7 @@ button{cursor:pointer;background: none;border: none;}
 .btnGnb::before{top: 8px;}
 .btnGnb>b{top: 16px;}
 .btnGnb::after{top: 24px;}
-nav.gnb{position:fixed;width: 100%;height: 100%;z-index: 900;top: 0px;left: 0px;left: -100%;/* transition: all 0.5s; *//* background-color: rgba(0, 0, 0, 0.3); *//* max-width: 250px; *//* margin-top: 49px; *//* margin-bottom: 30px; */display: none;}
+nav.gnb{position:fixed;width: 100%;height: 100%;z-index: 900;top: 0px;left: -100%;display: none;}
 
 nav.gnb::after{left: -100%;width: 100%;height:100%;/* background-color: rgba(0, 0, 0, 0.3); */content:"";display:block;position: fixed;top: 0;/* left: 0px; */}
 nav.gnb .bt.close{display:block;position:absolute;right: 10px;top: 7px;z-index: 300;width: 36px;height: 36px;font-size: 0;background:url(../img/common/popLayerClose.png) no-repeat center;background-size: 20px auto;}
@@ -619,7 +619,7 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .noData + .uiListMore .btnMore{border-top: #e0e0e0 solid 1px;}
 
 /* 플로팅 탑버튼 */
-.floatNav{position:fixed;right: 10px;bottom: 10px;z-index:100;transition:all 0.4s;}
+.floatNav{position:fixed;right: 10px;bottom: -90px;z-index:100;transition:all 0.4s;/* height: 0; */}
 .floatNav.active{bottom: 60px;}
 .floatNav .bt{font-size: 0px;width:32px;height:32px;display:block;background: no-repeat rgba(255, 255, 255, 0.8);border: solid rgba(0, 0, 0, 0.3) 0.5px;transform: translateY(100px);transition: all 0.4s;background-size: 100% auto;margin-top: 10px;}
 .floatNav .bt.refresh{background-image: url(../img/common/ico_load.png); transition-delay: 0.0s;}

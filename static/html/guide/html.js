@@ -78,6 +78,7 @@
 				$("body").removeClass("uimenuOn");
 				$("nav.uimenu").animate({"left": "-100%"}, 300,function(){
 					$(".uiScreen").hide().remove();
+					$("nav.uimenu").hide();
 					$(".header .gnb .btnGnb").attr("tabindex","0").focus();
 				});
 				ui.lock.using(false);

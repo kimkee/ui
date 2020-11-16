@@ -116,8 +116,8 @@ input::-webkit-datetime-edit-text {
 .ui-datepicker .ui-widget-content .ui-state-default, 
 .ui-datepicker .ui-widget-header .ui-state-default{background-image:none;background-color:none;background-color:#FFF;border-color:#fff;color:#666666;}
 .ui-datepicker .ui-state-default.ui-state-active,
-.ui-datepicker .ui-state-default.ui-state-active:hover{color:#ffffff;background-color: #0052bb;}
-.ui-datepicker .ui-datepicker-today .ui-state-highlight{color:#333333;border-color: #0052bb;}
+.ui-datepicker .ui-state-default.ui-state-active:hover{color: #ffffff !important;background-color: #0052bb;}
+.ui-datepicker .ui-datepicker-today .ui-state-highlight{color: #0052bb;border-color: #0052bb;}
 .ui-priority-secondary,
 .ui-widget-content .ui-priority-secondary,
 .ui-widget-header .ui-priority-secondary{opacity: 0.3;}
@@ -289,7 +289,7 @@ input::-webkit-datetime-edit-text {
 .btnUi::before{top: 8px;}
 .btnUi>b{top: 16px;}
 .btnUi::after{top: 24px;}
-nav.uimenu{position:fixed;width: 70%;height: 100%;z-index: 800;top: 0px;left: 0px;left: -100%;/* transition: all 0.5s; *//* background-color: rgba(0, 0, 0, 0.3); */max-width: 250px;/* margin-top: 49px; *//* margin-bottom: 30px; */}
+nav.uimenu{position:fixed;width: 70%;height: 100%;z-index: 800;top: 0px;left: -100%;max-width: 250px;display: none;}
 nav.uimenu::before{content:"";display:block;position: absolute;top: 0;height: 50px;z-index:50;background-color:#fff;left: 0;width: 100%;border-bottom: #ddd solid 1px;/* max-width: 300px; */}
 nav.uimenu::after{left: -100%;width: 100%;height:100%;/* background-color: rgba(0, 0, 0, 0.3); */content:"";display:block;position: fixed;top: 0;/* left: 0px; */}
 nav.uimenu .bt.close{display:block;position:absolute;left: 20px;top: 14px;z-index: 300;}
@@ -325,6 +325,6 @@ body.uimenuOn .btnUi::after{transform: rotate(-140deg);width: 12px;top: 20px;}
 	#barH{left: 0px;top: 0;height: 2px;z-index: 900;}
 	#barH>i{height: 2px;}
 	nav.uimenu .menu{/* padding-top: 0px; *//* border-bottom: 1px #ddd solid; */}
-	nav.uimenu{left: 0px !important;}
+	nav.uimenu{left: 0px !important;display: block !important;}
 	nav.uimenu::before{display:none;}
 }
