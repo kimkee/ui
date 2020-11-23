@@ -226,7 +226,7 @@ select::-ms-expand {display:none;}
 .uiDate input.datepicker,
 .uiDate input.datepicker:hover{padding-right: 30px;background: url(../img/common/datepicker.png) no-repeat right -1px top 50% #ffffff;background-size: 32px auto;-webkit-text-fill-color: #181818;cursor: pointer;}
 .uiDate input.datepicker + .ui-datepicker-trigger{width: 32px;height: 32px;font-size:0px;vertical-align:middle;/* margin-left: -35px; *//* outline:none; */position: absolute;right:0px;top:0px;border: none;background: none;padding: 0px;}
-.uiDate input.datepicker_month{border-radius: 0px;padding-right: 30px;background: url(../img/common/datepicker.png) no-repeat right 3px top 50% #ffffff;background-size: 32px auto;color: #181818;cursor: pointer;}
+.uiDate input.datepicker_month{border-radius: 0px;padding-right: 30px;background: url(../img/common/datepicker.png) no-repeat right -1px top 50% #ffffff;background-size: 32px auto;color: #181818;cursor: pointer;}
 
 
 

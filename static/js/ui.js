@@ -885,6 +885,116 @@ var ui = {
 			});
 		}
 	},
+	timepick:{ // 타입 픽커
+		init:function () {
+			this.set();
+		},
+		set:function(){
+			var _this = this;
+			$('.uiTimePicker').each(function(i){
+				// console.log(i);
+				var id = "picker_id_"+i ;
+				if( $(this).attr("id") ){
+					id = $(this).attr("id");
+					els = document.getElementById(id);
+					// console.log(id);
+				}else{
+					els = this;
+					// console.log(els);
+				}
+				if( _this.pick[id] ) {
+					_this.pick[id].destroy();
+					_this.pick[id] = undefined;
+					console.log(_this.pick[id]);
+				}
+				_this.pick[id] = new Picker( els , {
+					format: 'HH:mm',
+					rows:3,
+					headers: true,
+					increment: {
+						hour: 1,
+						minute: 10,
+					  },
+					text: {
+						title: '시간 선택',
+						confirm: '완료',
+						cancel: '취소',
+					},
+					shown:function(e){
+						// console.log("쇼 shown");
+					},
+					hidden:function(){
+						// console.log("히든 hidden");
+					},
+					pick:function(){
+						// console.log("픽 pick");
+						// console.log( _this.pick[id].date );
+					}
+				});	
+			});
+		},
+		pick:{}
+	},
+	daypick:{ // 날짜 픽커
+		init:function () {
+			this.set();
+			$(document).on("keydown mousedown",".uiDate .datepicker", function (event) {
+				if ( event.keyCode == 13 ) {
+					$(event.target).trigger("click");
+				}
+			});
+		},
+		set:function(){
+			var _this = this;
+			$(".uiDate .datepicker:not(:disabled)").each(function(i){
+				// console.log(i);
+				var id = "picker_id_"+i ;
+				if( $(this).attr("id") ){
+					id = $(this).attr("id");
+					els = document.getElementById(id);
+					// console.log(id);
+				}else{
+					els = this;
+					// console.log(els);
+				}
+				if( _this.pick[id] ) {
+					_this.pick[id].destroy();
+					_this.pick[id] = undefined;
+					console.log(_this.pick[id]);
+				}
+				_this.pick[id] = new Picker( els , {
+					format: 'YYYY.MM.DD',
+					rows:3,
+					headers: true,
+					increment: {
+						year: 1,
+						month: 1,
+						day: 1
+					},
+					text: {
+						title: '날짜 선택',
+						confirm: '완료',
+						cancel: '취소',
+					},
+					shown:function(e){
+						// console.log("쇼 shown");
+						$(".picker-opened .picker-dialog").attr("tabindex","-1").focus();
+						_this.pick[id].update();
+					},
+					hidden:function(){
+						// console.log("히든 hidden");
+						$(this).focus();
+					},
+					pick:function(els){
+						// $(this).trigger("change");
+						// console.log("픽 pick");
+						// console.log( _this.pick[id].date );
+					}
+				});	
+			});
+		},
+		pick:{}
+	},
 	datepick:{ // 달력피커 jQuery-ui
 		init:function(){
 			
@@ -894,6 +1004,7 @@ var ui = {
 			});
 			$("input.datepicker").on("focus",function(){
 				// $(this).blur();
+				$(this).prop("readonly",true);
 				// $(this).attr("tabindex","-1");
 				// $(this).next(".ui-datepicker-trigger").focus();
 			});
@@ -902,13 +1013,13 @@ var ui = {
 			$(document).on("click",".ui-datepicker-next",function(e){
 				e.preventDefault();
 				setTimeout(function(){			
-					$(".ui-datepicker-next").attr({"tabindex":"0","href":"#"}).focus();
+					$(".ui-datepicker-next").attr({"tabindex":"0","href":"javascript:;"}).focus();
 				});
 			});
 			$(document).on("click",".ui-datepicker-prev",function(e){
 				e.preventDefault();
 				setTimeout(function(){
-					$(".ui-datepicker-prev").attr({"tabindex":"0","href":"#"}).focus();
+					$(".ui-datepicker-prev").attr({"tabindex":"0","href":"javascript:;"}).focus();
 				});
 			});
 			
@@ -931,15 +1042,15 @@ var ui = {
 				monthNames : [ "1","2","3","4","5","6","7","8","9","10","11","12"],
 				monthNamesShort: [ "1","2","3","4","5","6","7","8","9","10","11","12"],
 				beforeShow: function(els) {
-						ui.lock.using(true);
-						$(".ui-datepicker").wrap('<div class="uiDatePickWrap"></div>');
-						setTimeout(function(){
-							$(".ui-datepicker-next , .ui-datepicker-prev").attr({"tabindex":"0","href":"#"});
-							$("#ui-datepicker-div").attr("tabindex","-1").focus();
-						});
-						var sted = $(els).closest(".uiDate").attr("class").replace(" ","").replace("uiDate","");
-						$("#ui-datepicker-div").removeClass("week").addClass(sted);
-						window.setTimeout(ui.datepick.wkThis);
+					ui.lock.using(true);
+					$(".ui-datepicker").wrap('<div class="uiDatePickWrap"></div>');
+					setTimeout(function(){
+						$(".ui-datepicker-next , .ui-datepicker-prev").attr({"tabindex":"0","href":"#"});
+						$("#ui-datepicker-div").attr("tabindex","-1").focus();
+					});
+					var sted = $(els).closest(".uiDate").attr("class").replace(" ","").replace("uiDate","");
+					$("#ui-datepicker-div").removeClass("week").addClass(sted);
+					window.setTimeout(ui.datepick.wkThis);
 				},
 				onSelect :function(date,els){
 					// console.log(date,els);
@@ -947,7 +1058,7 @@ var ui = {
 					$(this).focus();
 					var id = $(this).attr("id");
 					if( ui.daypick.pick[id] ) {
-						ui.daypick.pick[id].setDate(date);
+						ui.daypick.pick[id].update();
 					}
 				},
 				onChangeMonthYear  :function(ddd){
@@ -1042,105 +1153,6 @@ var ui = {
 			});
 		   
 		}
-	},
-	timepick:{ // 타입 픽커
-		init:function () {
-			this.set();
-		},
-		set:function(){
-			var _this = this;
-			$('.uiTimePicker').each(function(i){
-				// console.log(i);
-				var id = "picker_id_"+i ;
-				if( $(this).attr("id") ){
-					id = $(this).attr("id");
-					els = document.getElementById(id);
-					// console.log(id);
-				}else{
-					els = this;
-					// console.log(els);
-				}
-				_this.pick[id] = new Picker( els , {
-					format: 'HH:mm',
-					rows:3,
-					headers: true,
-					increment: {
-						hour: 1,
-						minute: 10,
-					  },
-					text: {
-						title: '시간 선택',
-						confirm: '완료',
-						cancel: '취소',
-					},
-					shown:function(e){
-						// console.log("쇼 shown");
-					},
-					hidden:function(){
-						// console.log("히든 hidden");
-					},
-					pick:function(){
-						// console.log("픽 pick");
-						// console.log( _this.pick[id].date );
-					}
-				});	
-			});
-		},
-		pick:{}
-	},
-	daypick:{ // 날짜 픽커
-		init:function () {
-			this.set();
-			$(document).on("keydown mousedown",".uiDate .datepicker", function (event) {
-				if ( event.keyCode == 13 ) {
-					$(event.target).trigger("click");
-				}
-			});
-		},
-		set:function(){
-			var _this = this;
-			$(".uiDate .datepicker:not(:disabled)").each(function(i){
-				// console.log(i);
-				var id = "picker_id_"+i ;
-				if( $(this).attr("id") ){
-					id = $(this).attr("id");
-					els = document.getElementById(id);
-					// console.log(id);
-				}else{
-					els = this;
-					// console.log(els);
-				}
-				_this.pick[id] = new Picker( els , {
-					format: 'YYYY.MM.DD',
-					rows:3,
-					headers: true,
-					increment: {
-						year: 1,
-						month: 1,
-						day: 1
-					},
-					text: {
-						title: '날짜 선택',
-						confirm: '완료',
-						cancel: '취소',
-					},
-					shown:function(e){
-						// console.log("쇼 shown");
-						$(".picker-opened .picker-dialog").attr("tabindex","-1").focus();
-					},
-					hidden:function(){
-						// console.log("히든 hidden");
-						$(this).focus();
-					},
-					pick:function(els){
-						// $(this).trigger("change");
-						// console.log("픽 pick");
-						// console.log( _this.pick[id].date );
-					}
-				});	
-			});
-		},
-		pick:{}
 	},
 	tooltips:{ // 툴팁레이어
 		init:function(){
@@ -1281,6 +1293,12 @@ var ui = {
 	lock:{ // 스크롤 막기,풀기
 		sct:0,
 		stat:false,
+		els:".popLayer:visible  , .popConfirm:visible , .popAlert:visible",
+		set:function(){
+			if(	$(this.els).length <= 0 ){
+				this.using(false);
+			}
+		},
 		using:function(opt){
 			
 			var lockDiv = ".popLayer  , .popConfirm , .popAlert" ;
@@ -1292,7 +1310,7 @@ var ui = {
 				$("html").css({"top":""+(-ui.lock.sct)+"px"});
 				$(lockDiv).bind("touchmove scroll", function(e){ e.preventDefault(); });
 			}
-			if(opt === false){
+			if( opt === false && $(this.els).length <= 0 ){
 				this.stat = false;
 				$("body , html").removeClass("lock");
 				$("html").css({"top":""});
