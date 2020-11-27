@@ -144,7 +144,7 @@
   var DATA_VALUE = 'value'; // Events
 
   var EVENT_CLICK = 'click';
-  var EVENT_FOCUS = 'focus';
+  var EVENT_FOCUS = 'click';
   var EVENT_HIDDEN = 'hidden';
   var EVENT_HIDE = 'hide';
   var EVENT_KEY_DOWN = 'keydown';

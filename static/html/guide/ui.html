@@ -29,7 +29,7 @@
 		
 	<include class="header" data-include-html="../inc/header.html"></include>
 	<include class="gnb" data-include-html="../inc/gnb.html"></include>
-	<a href="javascript:;" class="btnUi"><b>ui</b></a>
+	<button type="button" class="btnUi"><b>ui</b></button>
 	<nav class="uimenu">
 		<div class="menu ui-mcscroll">
 			<ul class="list"></ul>
@@ -187,6 +187,7 @@
 					var samplePopB = function(){
 						// 레이어팝업 열기 콜백
 						ui.popLayer.open('popSample2',{
+							hash:true,
 							ocb:function(){
 								console.log("popSample2 열림");
 							},
@@ -344,17 +345,18 @@
 				<button type="button" class="btn sm" onclick="testSelectMul3();">활성화</button>
 				<script>
 					var testSelectMul1 = function(){
-						$('[name="check_sel_1_2"]').prop("checked", true);
-						$('[name="check_sel_1_3"]').prop("checked", true);
-						ui.popSelMul.set();
+						$('[data-select-name="check_sel_1"] input').prop("checked", false);
+						$('input[name="check_sel_1_2"]').prop("checked", true);
+						$('input[name="check_sel_1_3"]').prop("checked", true);
+						ui.update();
 					}
 					var testSelectMul2 = function(){
 						$('[data-select-name="check_sel_1"]').data('select-disabled',true);
-						ui.popSelMul.set();
+						ui.update();
 					}
 					var testSelectMul3 = function(){
 						$('[data-select-name="check_sel_1"]').data('select-disabled',false);
-						ui.popSelMul.set();
+						ui.update();
 					}
 				</script>
 				<p class="gap"></p>
@@ -1422,7 +1424,8 @@
 				</div>
 				<div class="pct">
 					<main class="poptents">
-						<a class="btn" href="javascript:ui.popLayer.open('popSample2');">팝레이어2</a>
+						<p>sdfsdfsfsd</p>
+						<a class="btn" href="javascript:samplePopB();">팝레이어2</a>
 						<p>sdfsdfsfsd</p>
 						<a class="btn" href="javascript:ui.popLayer.open('popSample3');">팝레이어3</a>
 						<p>sdfsdfsfsd</p>
@@ -1558,7 +1561,7 @@
 	});
 	</script>
 
-	<include class="nav" data-include-html="../inc/nav.html"></include>
+	<include class="menubar" data-include-html="../inc/menubar.html"></include>
 
 </div>
 

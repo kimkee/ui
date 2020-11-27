@@ -28,21 +28,54 @@ var ui = {
 		this.slides.init();
 		this.datepick.init();
 		this.timepick.init();
+		this.daypick.init();
 		this.listLoad.init();
 		this.getSafe.init();
 		this.movePage.init();
 		this.elip.init();
 	},
+	update:function(){ // 페이지 동적으로 뿌린 후 업데이트 ui.update();
+		this.popSelect.set();
+		this.popSelMul.set();
+		this.datepick.set();
+		this.timepick.set();
+		this.daypick.set();
+		this.form.input.set();
+		this.form.intdel.set();
+		this.accd.set();
+		this.tab.set();
+		this.tree.set();
+		this.skip.set();
+		this.elip.set();
+	},
 	skip:{ // 본문으로 스킵
 		init:function() {
-			this.using();
+			this.set();
+			this.evt();
 		},
-		els:'<div id="skipNav">'+
-				'<a href="#gnb"><span>메뉴 바로가기</span></a>'+
-				'<a href="#contain"><span>본문 바로가기</span></a>'+
-			'</div>',
-		using:function() {
-			if( $("#gnb").length || $("#contain").length ) $("body").prepend(this.els);
+		els:'<div id="skipNav"></div>',
+		evt:function(){
+			$(document).on("click","#skipNav a[data-href='#gnb']",function(e){
+				ui.gnb.using("open");
+				$("#gnb").attr("tabindex","-1").focus();
+				e.preventDefault();
+			});
+			$(document).on("click","#skipNav a[data-href='#contain']",function(e){
+				$("#contain").attr("tabindex","-1").focus();
+				$(window).scrollTop(0);
+				e.preventDefault();
+			});
+		},
+		set:function(){
+			if(!$("#skipNav").length ) {
+				$(".body:not(.ui)").prepend(this.els);
+			}
+			if( $("#contain").length && !$("#skipNav a[data-href='#contain']").length ) {
+				$("#skipNav").append('<a href="javascript:;" data-href="#contain"><span>본문 바로가기</span></a>');
+			}
+			if( $("nav.gnb").length && !$("#skipNav a[data-href='#gnb']").length ) {
+				$("#skipNav").prepend('<a href="javascript:;" data-href="#gnb"><span>메뉴 바로가기</span></a>');
+			}
 		}
 	},
 	cm:{ // 공통
@@ -233,6 +266,7 @@ var ui = {
 				$("body").removeClass("gnbOn");
 				$("nav.gnb").animate({"left": "-100%"}, 300,function(){
 					$(".gnbScreen").hide().remove();
+					$("nav.gnb").hide();
 					$(".btnGnb").attr("tabindex","0").focus();
 				});
 				ui.lock.using(false);
@@ -852,15 +886,126 @@ var ui = {
 			});
 		}
 	},
+	timepick:{ // 타입 픽커
+		init:function () {
+			this.set();
+		},
+		set:function(){
+			var _this = this;
+			$('.uiTimePicker').each(function(i){
+				// console.log(i);
+				var id = "picker_id_"+i ;
+				if( $(this).attr("id") ){
+					id = $(this).attr("id");
+					els = document.getElementById(id);
+					// console.log(id);
+				}else{
+					els = this;
+					// console.log(els);
+				}
+				if( _this.pick[id] ) {
+					_this.pick[id].destroy();
+					_this.pick[id] = undefined;
+					console.log(_this.pick[id]);
+				}
+				_this.pick[id] = new Picker( els , {
+					format: 'HH:mm',
+					rows:3,
+					headers: true,
+					increment: {
+						hour: 1,
+						minute: 10,
+					  },
+					text: {
+						title: '시간 선택',
+						confirm: '완료',
+						cancel: '취소',
+					},
+					shown:function(e){
+						// console.log("쇼 shown");
+					},
+					hidden:function(){
+						// console.log("히든 hidden");
+					},
+					pick:function(){
+						// console.log("픽 pick");
+						// console.log( _this.pick[id].date );
+					}
+				});	
+			});
+		},
+		pick:{}
+	},
+	daypick:{ // 날짜 픽커
+		init:function () {
+			this.set();
+			$(document).on("keydown mousedown",".uiDate .datepicker", function (event) {
+				if ( event.keyCode == 13 ) {
+					$(event.target).trigger("click");
+				}
+			});
+		},
+		set:function(){
+			var _this = this;
+			$(".uiDate .datepicker:not(:disabled)").each(function(i){
+				// console.log(i);
+				var id = "picker_id_"+i ;
+				if( $(this).attr("id") ){
+					id = $(this).attr("id");
+					els = document.getElementById(id);
+					// console.log(id);
+				}else{
+					els = this;
+					// console.log(els);
+				}
+				if( _this.pick[id] ) {
+					_this.pick[id].destroy();
+					_this.pick[id] = undefined;
+					console.log(_this.pick[id]);
+				}
+				_this.pick[id] = new Picker( els , {
+					format: 'YYYY.MM.DD',
+					rows:3,
+					headers: true,
+					increment: {
+						year: 1,
+						month: 1,
+						day: 1
+					},
+					text: {
+						title: '날짜 선택',
+						confirm: '완료',
+						cancel: '취소',
+					},
+					shown:function(e){
+						// console.log("쇼 shown");
+						$(".picker-opened .picker-dialog").attr("tabindex","-1").focus();
+						_this.pick[id].update();
+					},
+					hidden:function(){
+						// console.log("히든 hidden");
+						$(this).focus();
+					},
+					pick:function(els){
+						// $(this).trigger("change");
+						// console.log("픽 pick");
+						// console.log( _this.pick[id].date );
+					}
+				});	
+			});
+		},
+		pick:{}
+	},
 	datepick:{ // 달력피커 jQuery-ui
 		init:function(){
 			
 				
 			$("input.datepicker").on("click",function(){
-				$(this).next(".ui-datepicker-trigger").trigger("click");
+				// $(this).next(".ui-datepicker-trigger").trigger("click");
 			});
 			$("input.datepicker").on("focus",function(){
 				// $(this).blur();
+				$(this).prop("readonly",true);
 				// $(this).attr("tabindex","-1");
 				// $(this).next(".ui-datepicker-trigger").focus();
 			});
@@ -869,13 +1014,13 @@ var ui = {
 			$(document).on("click",".ui-datepicker-next",function(e){
 				e.preventDefault();
 				setTimeout(function(){			
-					$(".ui-datepicker-next").attr({"tabindex":"0","href":"#"}).focus();
+					$(".ui-datepicker-next").attr({"tabindex":"0","href":"javascript:;"}).focus();
 				});
 			});
 			$(document).on("click",".ui-datepicker-prev",function(e){
 				e.preventDefault();
 				setTimeout(function(){
-					$(".ui-datepicker-prev").attr({"tabindex":"0","href":"#"}).focus();
+					$(".ui-datepicker-prev").attr({"tabindex":"0","href":"javascript:;"}).focus();
 				});
 			});
 			
@@ -898,18 +1043,24 @@ var ui = {
 				monthNames : [ "1","2","3","4","5","6","7","8","9","10","11","12"],
 				monthNamesShort: [ "1","2","3","4","5","6","7","8","9","10","11","12"],
 				beforeShow: function(els) {
-						ui.lock.using(true);
-						$(".ui-datepicker").wrap('<div class="uiDatePickWrap"></div>');
-						setTimeout(function(){
-							$(".ui-datepicker-next , .ui-datepicker-prev").attr({"tabindex":"0","href":"#"});
-							$("#ui-datepicker-div").attr("tabindex","-1").focus();
-						});
-						var sted = $(els).closest(".uiDate").attr("class").replace(" ","").replace("uiDate","");
-						$("#ui-datepicker-div").removeClass("week").addClass(sted);
-						window.setTimeout(ui.datepick.wkThis);
+					ui.lock.using(true);
+					$(".ui-datepicker").wrap('<div class="uiDatePickWrap"></div>');
+					setTimeout(function(){
+						$(".ui-datepicker-next , .ui-datepicker-prev").attr({"tabindex":"0","href":"#"});
+						$("#ui-datepicker-div").attr("tabindex","-1").focus();
+					});
+					var sted = $(els).closest(".uiDate").attr("class").replace(" ","").replace("uiDate","");
+					$("#ui-datepicker-div").removeClass("week").addClass(sted);
+					window.setTimeout(ui.datepick.wkThis);
 				},
-				onSelect :function(ddd){
-					// console.log("dfdsfs");
+				onSelect :function(date,els){
+					// console.log(date,els);
+					$(this).trigger("change");
+					$(this).focus();
+					var id = $(this).attr("id");
+					if( ui.daypick.pick[id] ) {
+						ui.daypick.pick[id].update();
+					}
 				},
 				onChangeMonthYear  :function(ddd){
 					setTimeout(function(){
@@ -927,12 +1078,12 @@ var ui = {
 					$(".ui-datepicker").unwrap(".uiDatePickWrap");
 				}
 			}, params); 
-			if (this.opts.id) {
+			if( this.opts.id ) {
 				// console.log("ddddd");
-				$("#"+this.opts.id).datepicker(this.opts);	
+				$("#"+this.opts.id+":not(:disabled)").datepicker(this.opts);
 			}else{
 				// console.log("eeeeeee");
-				$("input.datepicker").datepicker(this.opts);
+				$("input:not(:disabled).datepicker").datepicker(this.opts);
 			}
 		},
 		wkThis:function(){  // 일주일 단위선택 용 하이라이트
@@ -1003,51 +1154,6 @@ var ui = {
 			});
 		   
 		}
-	},
-	timepick:{ // 타입 픽커
-		init:function () {
-			this.set();
-		},
-		set:function(){
-			var _this = this;
-			$('.uiTimePicker').each(function(i){
-				// console.log(i);
-				var id = "picker_id_"+i ;
-				if( $(this).attr("id") ){
-					id = $(this).attr("id");
-					els = document.getElementById(id);
-					// console.log(id);
-				}else{
-					els = this;
-					// console.log(els);
-				}
-				_this.pick[id] = new Picker( els , {
-					format: 'HH:mm',
-					rows:3,
-					headers: true,
-					increment: {
-						hour: 1,
-						minute: 10,
-					  },
-					text: {
-						title: '시간 선택',
-						confirm: '완료',
-						cancel: '취소',
-					},
-					shown:function(e){
-						// console.log("쇼 shown");
-					},
-					hidden:function(){
-						// console.log("히든 hidden");
-					},
-					pick:function(){
-						// console.log("픽 pick");
-						// console.log( _this.pick[id].date );
-					}
-				});	
-			});
-		},
-		pick:{}
 	},
 	tooltips:{ // 툴팁레이어
 		init:function(){
@@ -1152,14 +1258,21 @@ var ui = {
 	},
 	tab:{ // 탭 UI
 		init: function() {
+			var _this = this;
 			this.evt();
 			if( ui.param.tab ) this.set( ui.param.tab );
+			$(window).on("pageshow",function(){
+				_this.set();
+			});
 		},
 		set:function(id){
-			var tabid = id.split(",");
+			if( id ) var tabid = id.split(",");
 			$("[data-ui-tab-btn][data-ui-tab-val]").each(function(idx){
-				// console.log(idx,tabid,tabid[idx] );
-				$("[data-ui-tab-btn][data-ui-tab-val='"+tabid[idx]+"']").trigger("click");
+				// console.log(idx,tabid );
+				if( tabid ) {
+					$("[data-ui-tab-btn][data-ui-tab-val='"+tabid[idx]+"']").prop("checked",true).trigger("click");
+				}
+				$("[data-ui-tab-btn][data-ui-tab-val]:checked").trigger("click");
 			});
 		},
 		evt:function(){
@@ -1181,6 +1294,12 @@ var ui = {
 	lock:{ // 스크롤 막기,풀기
 		sct:0,
 		stat:false,
+		els:".popLayer:visible  , .popConfirm:visible , .popAlert:visible",
+		set:function(){
+			if(	$(this.els).length <= 0 ){
+				this.using(false);
+			}
+		},
 		using:function(opt){
 			
 			var lockDiv = ".popLayer  , .popConfirm , .popAlert" ;
@@ -1192,7 +1311,7 @@ var ui = {
 				$("html").css({"top":""+(-ui.lock.sct)+"px"});
 				$(lockDiv).bind("touchmove scroll", function(e){ e.preventDefault(); });
 			}
-			if(opt === false){
+			if( opt === false && $(this.els).length <= 0 ){
 				this.stat = false;
 				$("body , html").removeClass("lock");
 				$("html").css({"top":""});
@@ -1496,7 +1615,7 @@ var ui = {
 				$(this).closest(".select-mul").find(".sList input").each(function(){
 					list.push( { v:$(this).is(":checked") ,t:$(this).closest("li").find(".txt").text(), a:$(this).is(".chkAll") } );
 				});
-				console.log(list);
+				// console.log(list);
 				_this.open(name,tit,list);
 			});
 			
@@ -1605,14 +1724,20 @@ var ui = {
 				i++;
 				// console.log(	i,	$(this).prop("checked")  );
 				var chk = $(this).is(".active");
-				$("[data-select-name="+id+"] .sList li:nth-child("+i+") input").prop("checked",chk);
+				var $ckbox = $("[data-select-name="+id+"] .sList li:nth-child("+i+") input");
+				$ckbox.prop("checked",chk);
+
+				if( $ckbox.prop("checked") ) {
+					$ckbox.trigger("click");
+					$ckbox.trigger("click");
+				}
 
 				if( $(this).is(".active") ){
 					var tt = $(this).find("button").text();
 					// console.log(tt);
 					ttt += '<span>'+tt+'</span>';
 				}
-				console.log( $("[data-select-name="+id+"] .sList li:nth-child("+i+") input").attr("name") , $("[data-select-name="+id+"] .sList li:nth-child("+i+") input").prop("checked")  );
+// 				console.log( $ckbox.attr("name") , $ckbox.prop("checked")  );
 			});
 			$("[data-select-name="+id+"]").find(".btSel").html(ttt).attr("tabindex","0").focus();
 
@@ -1620,10 +1745,10 @@ var ui = {
 			this.close(id);
 		},
 		open:function(name,tit,list){
-			if ( $(".popSelectMul:visible").length ) { return; }
+			if( $(".popSelectMul:visible").length ) { return; }
 			var blist = "";
 			var cls,all;
-			for (var i = 0; i < list.length; i++) {
+			for(var i = 0; i < list.length; i++) {
 				list[i].v ? cls = "active"  : cls = "";
 				list[i].a ? all = " chkAll" : all = "";
 				blist += '<li class="'+cls+all+'"><button type="button">'+list[i].t+'</button></li>';
@@ -1632,12 +1757,12 @@ var ui = {
 			'<article class="popSelectMul" data-select-pop="'+name+'">' +
 				'<div class="pbd">' +
 					'<div class="phd"><h3 class="tit">'+tit+'</h3></div>' +
+					'<button type="button" class="btnPopClose">닫기</button>' +
 					'<div class="pct">' +
 					'<main class="poptents">' +
 						'<ul class="list">'+blist+'</ul>' +
 					'</main>' +
 					'</div>' +
-					'<button type="button" class="btnPopClose">닫기</button>' +
 					'<button type="button" class="btn a sm btnCom">완료</button>' +
 				'</div>' +
 			'</article>';
@@ -1654,7 +1779,7 @@ var ui = {
 		},
 		close:function(id) {
 			$(".popSelectMul").removeClass("on").fadeOut(100,function(){
-				$(".popSelectMul").remove();
+				$(this).remove();
 			});
 			$("[data-select-name="+id+"] .btSel").attr("tabindex","0").focus();
 			ui.lock.using(false);
@@ -1667,10 +1792,10 @@ var ui = {
 				var id = $(this).closest(".popLayer").attr("id");
 				// console.log(id);
 				if (_this.opt.hash) {
-					window.history.back();
+					// window.history.back();
 				}else{
-					_this.close(id);
 				}
+				_this.close(id);
 			});
 
 			$(document).on("click", ".popLayer", function(e) {
@@ -1725,13 +1850,13 @@ var ui = {
 			_this.openPop = location.hash.replace("#pop=","").split(",");
 			if ( _this.openPop == "" ) { _this.openPop = [];	}
 			var h_now = _this.openPop ;		
-			// console.log( h_prev , h_now );
+			console.log( h_prev , h_now );
 			if( h_prev > h_now ){
 				result = h_prev.filter(function (a) {
  					return h_now.indexOf(a) === -1;
 				});
 				// console.log("뒤로옴" , result[0] ,h_prev , h_now  );
-				_this.close(result[0],true);
+				_this.close(result[0],{set:true});
 			}else{
 				// console.log("앞으로");
 			}
@@ -1740,7 +1865,7 @@ var ui = {
 		callbacks:{},
 		open: function(id,params) {
 			// console.log(id,params);
-			_this = this;
+			var _this = this;
 
 			if ( $("#" + id).length  <= 0  ) return ;   // id 호출팝업이 없으면 리턴
 
@@ -1753,9 +1878,10 @@ var ui = {
 
 			_this.callbacks[id] = {} ;
 			_this.callbacks[id].open  = _this.opt.ocb ? _this.opt.ocb : null ;
-			_this.callbacks[id].close = _this.opt.ccb ? _this.opt.ccb : null ;		
-
-			if (_this.opt.hash) {
+			_this.callbacks[id].close = _this.opt.ccb ? _this.opt.ccb : null ;
+			_this.callbacks[id].hash = _this.opt.hash;
+			console.log(_this.callbacks[id].hash);
+			if (_this.callbacks[id].hash) {
 
 				if ( $(".popLayer:visible").length <= 0 &&  location.href.split("#")[1] != undefined && location.href.split("#pop=")[1] != undefined ) {  //
 					_this.openPop = [];
@@ -1781,11 +1907,16 @@ var ui = {
 			});
 
 		},
-		close: function(id,set) {
-			_this = this;
-
-			// console.log(_this.opt.hash , set);	
-			if( _this.opt.hash && set != true && $("#"+id+":visible").length  ) {  // 해쉬 
+		close: function(id,params) {
+			var _this = this;
+			_this.opts = $.extend({
+				ccb: null,
+				set: null
+			}, params);
+			console.log(_this.callbacks[id].hash , _this.opt.set);	
+		
+			if( _this.callbacks[id].hash && _this.callbacks[id].hash != true && $("#"+id+":visible").length  ) {  // 해쉬 
+				console.log("back");
 				window.history.back();
 			}
 			
@@ -1793,20 +1924,45 @@ var ui = {
 			// console.log( _this.scroll[id] + " close end"); // 팝업 닫을때 스크롤객체 지움;
 
 			$("#"+id).removeClass("on").fadeOut(150,function(){
+				_this.resize();
 				if( !$(".popLayer:visible").length ) ui.lock.using(false);
 				try { 
 					_this.callbacks[id].close(); 
 				} catch (error) { }
+				if( typeof _this.opts.ccb == "function") {
+					_this.opts.ccb();
+					// if (_this.callbacks[id].hash && $("#"+id+":visible").length) {
+					// 	window.history.back();
+					// }
+				}
 			});
 		},
 		resize:function(id){
-			var pctnH =  $(".popLayer:visible").outerHeight() ;		
-			pctnH = pctnH - ( $(".popLayer:visible>.pbd>.phd").outerHeight() || 0 ) - (  $(".popLayer:visible>.pbd>.pbt").outerHeight() || 0 );
-			
-			$(".popLayer.a:visible>.pbd>.pct").css({"height": pctnH });
-			$(".popLayer.b:visible>.pbd>.pct").css({"max-height": pctnH - 70 });
-			$(".popLayer.c:visible>.pbd>.pct").css({"max-height": pctnH - 70 });
+			// var pctnH =  $(".popLayer:visible").outerHeight() ;		
+			// pctnH = pctnH - ( $(".popLayer:visible>.pbd>.phd").outerHeight() || 0 ) - (  $(".popLayer:visible>.pbd>.pbt").outerHeight() || 0 );
+			// 
+			// $(".popLayer.a:visible>.pbd>.pct").css({"height": pctnH });
+			// $(".popLayer.b:visible>.pbd>.pct").css({"max-height": pctnH - 70 });
+			// $(".popLayer.c:visible>.pbd>.pct").css({"max-height": pctnH - 70 });
 			// $("#popSample2 input").val( $(".popLayer.b:visible>.pbd>.pct").css("max-height")  )
+
+
+ 			$(".popLayer:visible").each(function(){
+				var pctnH =  $(this).outerHeight();
+				pctnH = pctnH - ( $(this).find(".phd").outerHeight() || 0 );
+
+				if( $(this).is(".a") ){
+					$(this).find(".pct").css({"height": pctnH - (  $(this).find(".pbt").outerHeight() || 0 )});
+				}
+				if( $(this).is(".b") ){
+					$(this).find(".pct").css({"max-height": pctnH - 70 });
+				}
+				if( $(this).is(".c") ){
+					$(this).find(".pct").css({"max-height": pctnH - 70 });
+				}
+			 });
+
+
 		},
 		scroll:{},
 		lyScroll: function(id) {
