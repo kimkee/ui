@@ -4,7 +4,7 @@
 // update : 2020-05-12
 //*******************************************//
 
-var ui = {
+var ui = { //
 	init:function(){ // 초기구동
 		this.cm.init();
 		this.skip.init();
