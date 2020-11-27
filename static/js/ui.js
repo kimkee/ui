@@ -1791,10 +1791,10 @@ var ui = {
 				var id = $(this).closest(".popLayer").attr("id");
 				// console.log(id);
 				if (_this.opt.hash) {
-					window.history.back();
+					// window.history.back();
 				}else{
-					_this.close(id);
 				}
+				_this.close(id);
 			});
 
 			$(document).on("click", ".popLayer", function(e) {
@@ -1864,7 +1864,7 @@ var ui = {
 		callbacks:{},
 		open: function(id,params) {
 			// console.log(id,params);
-			_this = this;
+			var _this = this;
 
 			if ( $("#" + id).length  <= 0  ) return ;   // id 호출팝업이 없으면 리턴
 
@@ -1907,7 +1907,7 @@ var ui = {
 
 		},
 		close: function(id,params) {
-			_this = this;
+			var _this = this;
 			_this.opts = $.extend({
 				ccb: null,
 				set: null
@@ -1930,9 +1930,9 @@ var ui = {
 				} catch (error) { }
 				if( typeof _this.opts.ccb == "function") {
 					_this.opts.ccb();
-					if (_this.callbacks[id].hash && $("#"+id+":visible").length) {
-						window.history.back();
-					}
+					// if (_this.callbacks[id].hash && $("#"+id+":visible").length) {
+					// 	window.history.back();
+					// }
 				}
 			});
 		},
