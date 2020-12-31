@@ -380,6 +380,110 @@ var ui = { //
 			
 			this.floating.init();
 			if( $("#menubar").length ) this.botNav.init();
+			this.kpad.init();
+			// this.kpad2.init();
+		},
+		kpad:{ // input textarea 에 포커스시  하단 버튼 컨트롤
+			init:function(){
+				this.evt();
+			},
+			els:".input input, .textarea textarea",
+			evt:function(){
+				var _this = this;
+				$(document).on("focusin click",this.els,function(e){
+					$("html.isKpad").removeClass("isKpad");
+					$("html").addClass("isKfocus");
+					setTimeout(function(){
+						_this.show();
+					},200);
+				});
+				$(document).on("blur",this.els,function(e){		
+					$("html").removeClass("isKfocus");	
+					setTimeout(function(){
+						if ($("html").is(".isKpad")) {
+							_this.hide();
+						}
+					},200);
+				});
+				$(window).on("resize",function(){
+					if( $("html").is(".isKpad") ) {
+						_this.hide();
+					}
+					if( $("html").is(".isKfocus") ) {
+						$("html").removeClass("isKfocus");
+					}
+				});
+
+			},
+			show:function(){
+				$("html").addClass("isKpad");
+				ui.popLayer.resize();
+			},
+			hide:function(){
+				$("html.isKpad").removeClass("isKpad");
+				$("html.isKfocus").removeClass("isKfocus");
+				ui.popLayer.resize();
+			}
+		},
+		kpad2:{ // input textarea 에 포커스시  하단 버튼 컨트롤  개선 버전...
+			init:function(){
+				this.evt();
+			},
+			els:".input input, .textarea textarea",
+			evt:function(){
+				var _this = this;
+
+				$(document).on("focus click",this.els,function(e){
+					$("html.isKpad").removeClass("isKpad");
+					$("html").addClass("isKfocus");
+					if ( _this.kset ){
+						clearInterval(_this.kset);
+					}
+					_this.kset = setInterval( function(){
+						if ( $(_this.els).is(":focus") ) {
+							// console.log("foucs");
+							_this.show();
+						}else{
+							_this.hide();
+						}
+					}, 200);
+				
+				});
+				$(document).on("blur",this.els,function(e){		
+					$("html").removeClass("isKfocus");	
+					setTimeout(function(){
+						if ($("html").is(".isKpad")) {
+							clearInterval(_this.kset);
+							_this.hide();
+						}
+					},200);
+				});
+
+				$(window).on("resize",function(){
+					if( $("html").is(".isKpad") ) {
+						clearInterval(_this.kset);
+						_this.hide();
+					}
+					if( $("html").is(".isKfocus") ) {
+						$("html").removeClass("isKfocus");
+					}					
+				});
+
+			},
+			show:function(){
+				$("html").addClass("isKpad");
+				ui.popLayer.resize();
+				ui.popLayer.refresh();
+			},
+			hide:function(){
+				$("html.isKpad").removeClass("isKpad");
+				$("html.isKfocus").removeClass("isKfocus");
+				setTimeout(() => {
+					ui.popLayer.resize();
+					ui.popLayer.refresh();
+					
+				}, 200);
+			}
 		},
 		floating:{
 			init:function(){
@@ -906,7 +1010,7 @@ var ui = { //
 				if( _this.pick[id] ) {
 					_this.pick[id].destroy();
 					_this.pick[id] = undefined;
-					console.log(_this.pick[id]);
+					// console.log(_this.pick[id]);
 				}
 				_this.pick[id] = new Picker( els , {
 					format: 'HH:mm',
@@ -961,7 +1065,7 @@ var ui = { //
 				if( _this.pick[id] ) {
 					_this.pick[id].destroy();
 					_this.pick[id] = undefined;
-					console.log(_this.pick[id]);
+					// console.log(_this.pick[id]);
 				}
 				_this.pick[id] = new Picker( els , {
 					format: 'YYYY.MM.DD',
@@ -1558,9 +1662,9 @@ var ui = { //
 		},
 		open:function(name,tit,list,sel){
 			console.log(name,tit,list,sel);
-			var blist="";
 			if ( $(".popSelect:visible").length ) { return; }
-			for (var i = 0; i < list.length; i++) {
+			var blist="";
+			for(var i in list) {
 				blist += '<li><button type="button" value="'+list[i].v+'">'+list[i].t+'</button></li>';
 			}
 			var lyPop =
@@ -1748,7 +1852,7 @@ var ui = { //
 			if( $(".popSelectMul:visible").length ) { return; }
 			var blist = "";
 			var cls,all;
-			for(var i = 0; i < list.length; i++) {
+			for(var i in list) {
 				list[i].v ? cls = "active"  : cls = "";
 				list[i].a ? all = " chkAll" : all = "";
 				blist += '<li class="'+cls+all+'"><button type="button">'+list[i].t+'</button></li>';
@@ -1838,9 +1942,10 @@ var ui = { //
 					var myMax = Math.abs( _this.scroll[id].maxScrollY );
 					console.log(myTop , myMax , _this.scroll[id].y , $("#"+id+" .phd").position().top );
 					if ( myTop >= myMax ) { myTop = myMax ; }
-					_this.scroll[id].scrollTo(0,-myTop,300);
+					_this.scroll[id].scrollTo(0,-myTop,10);
+					ui.popLayer.resize();
 					ui.popLayer.refresh();
-				},600);
+				},1);
 			});
 
 		},

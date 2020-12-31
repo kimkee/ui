@@ -37,7 +37,7 @@
 		},
 		evt:function(){
 			var _this = this;
-			$(document).on("click", ".btnUi", function() {
+			$(document).on("click", ".btnUi:not(.ing)", function() {
 				if ($("body").hasClass("uimenuOn")) {
 					_this.using("close");
 				} else {
@@ -67,19 +67,23 @@
 		using: function(opt) {
 			if (opt === "open") {
 				ui.lock.using(true);
+				$(".btnUi").addClass("ing");
 				$("nav.uimenu").after('<div class="uiScreen" tabindex="-1"></div>');
 				$("nav.uimenu").show().animate({"left": 0}, 300,function(){
-					$("nav.uimenu").attr("tabindex","-1").focus();
+					$(".btnUi").removeClass("ing");
+					//$("nav.uimenu").attr("tabindex","-1").focus();
 				});
 				$("body").addClass("uimenuOn");
 				$(".uiScreen").show();
 			}
 			if (opt === "close") {
+				$(".btnUi").addClass("ing");
 				$("body").removeClass("uimenuOn");
 				$("nav.uimenu").animate({"left": "-100%"}, 300,function(){
 					$(".uiScreen").hide().remove();
 					$("nav.uimenu").hide();
-					$(".header .gnb .btnGnb").attr("tabindex","0").focus();
+					$(".btnUi").removeClass("ing");
+					//$(".header .gnb .btnGnb").attr("tabindex","0").focus();
 				});
 				ui.lock.using(false);
 			}
