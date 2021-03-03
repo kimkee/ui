@@ -467,10 +467,6 @@
 				<span class="textarea db"><textarea placeholder="내용"></textarea></span>
 <!-- 				<p class="gap"></p>
 				<span class="textarea db"><textarea class="ment"  placeholder="댓글달기 자동높이" id="input_reply"></textarea></span>
-				<style>
-					span.textarea>textarea.ment{height: 48px;max-height: 98px;}
-					span.textarea>textarea.reply{min-height: 100px;max-height: 200px;/* border: none; */}
-				</style>
 				<script src="../../js/lib/autosize-master/dist/autosize.js"></script>
 				<script>
 					autosize( $('#input_reply') );
@@ -478,6 +474,10 @@
 						console.log('textarea height updated');
 					});
 				</script> -->
+				<style>
+					span.textarea>textarea.ment{height: 48px;max-height: 98px;}
+					span.textarea>textarea.reply{min-height: 100px;max-height: 200px;/* border: none; */}
+				</style>
 				<p class="gap"></p>
 				<span class="textarea db"><textarea class="reply" data-ui="autoheight" placeholder="댓글달기 자동높이"></textarea></span>
 				<p class="gap"></p>
