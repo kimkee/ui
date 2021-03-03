@@ -45,6 +45,9 @@ var ui = { //
 		this.daypick.set();
 		this.form.input.set();
 		this.form.intdel.set();
+		this.form.spinner.set();
+		this.form.spined.set();
+		this.form.autoheight.set();
 		this.accd.set();
 		this.tab.set();
 		this.tree.set();
@@ -803,6 +806,7 @@ var ui = { //
 			this.chkall();
 			this.input.init();
 			this.intdel.init();
+			this.inthgt.init();
 			this.spinner.init();
 			this.spined.init();
 			this.star.init();
@@ -882,6 +886,29 @@ var ui = { //
 					myInput.closest(".input").find("input").val("").focus();
 					myInput.closest(".input").find("input").trigger('change');
 					myInput.remove();
+				});
+			}
+		},
+		inthgt:{
+			init:function(){
+				this.evt();
+				this.set();
+			},
+			evt:function(){
+				var _this = this;
+				$(document).on("input","[data-ui='autoheight']",function(e){
+					_this.set();
+				});
+			},
+			set:function(els){
+				$("[data-ui='autoheight']").each(function(){
+					var $els = $(this);
+					var tboxH = $els.outerHeight();
+					var tboxS ;				
+					$els.css("height","1px");	
+					tboxS = $els.prop('scrollHeight') + parseInt( $els.css("border-bottom") ) + parseInt( $els.css("border-top") )   ;
+					// console.log( tboxH , tboxS);
+					$els.css({"height":tboxS});
 				});
 			}
 		},
