@@ -295,7 +295,7 @@ nav.location{display:none;margin-top: 42px;margin-bottom: 20px;position: relativ
 nav.location .loc{display:flex;}
 nav.location .loc>li{color: #9a9a9a;font-size: 12px;position: relative;padding: 0px 14px 0px 0px;}
 nav.location .loc>li + li{margin-left: 4px;}
-nav.location .loc>li::after{content:"";margin-left: 4px;background:url(../img/common/icon_arrow_10@2x.png) no-repeat center;width:9px;height:10px;display: block;background-size: 9px auto;position: absolute;right: 0;top: 7px;}
+nav.location .loc>li::after{content:"";margin-left: 4px;background: url(../img/common/icon_arrow_left.png) no-repeat center;width:9px;height:10px;display: block;background-size: 9px auto;position: absolute;right: 0;top: 7px;}
 nav.location .loc>li:last-child:after{display:none;}
 nav.location .loc>li>.bt{color: #9a9a9a;display: block;padding: 2px 13px 2px 0px;position:relative;}
 nav.location .loc>li>.bt::after{border-left: 4px solid transparent;width: 0px;height: 0px;border-bottom: 5px solid #9a9a9a;border-left: 3px solid transparent;border-right: 3px solid transparent;content:"";display:inline-block;transform: rotate(0deg);position: absolute;right: 0;top: 50%;margin-top: -2px;transform: rotate(180deg);}
