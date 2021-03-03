@@ -14,12 +14,15 @@ var ui = { //
 		this.tree.init();
 		this.ly.init();
 		this.form.init();
+		this.sort.init();
+		this.dropmenu.init();
+		this.location.init();
 		this.accd.init();
 		this.tog.init();
 		this.tab.init();
 		this.tooltips.init();
 		this.mcscroll.init();
-		this.dropDown.init();
+		// this.dropDown.init();
 		this.popLayer.init();
 		this.popFrame.init();
 		this.popSelect.init();
@@ -637,6 +640,162 @@ var ui = { //
 			});
 		}
 	},
+	sort:{ // 리스트 정렬 메뉴
+		init:function(){
+			this.evt();
+			this.set();
+		},
+		evt:function(){
+			var _this = this;
+			$(document).on("click","nav.uisort .bt.st",function(e){
+				_this.pos(this);
+			});
+			$(document).on("click", function(e) {
+				if(!$(e.target).closest("nav.uisort").length ) {
+					$("nav.uisort").removeClass("open");
+				}
+			});
+			$(document).on("click", "nav.uisort .menu>li>.bt", function(e) {
+				$(this).closest("nav.uisort").removeClass("open");
+			});
+
+
+			$(document).on("click",".uisort .menu>li>.bt",function(e){
+				$(this).closest("li").addClass("active").siblings("li").removeClass("active");
+				_this.set();
+			});
+		},
+		set:function(){
+			$("nav.uisort").each(function(){
+				var $li = $(this).find(".menu>li");
+				var txt = $li.filter(".active").find(".bt").text();
+				if( $(this).find(".menu>li.active").length == 0 ) {
+					txt = $(this).find(".menu>li:first-child").find(".bt").text();
+					$(this).find(".menu>li:first-child").addClass("active");
+				}
+				$li.closest(".uisort").find(".bt.st").html(txt);
+				var val = $(this).find(".menu>li.active .bt").attr("value");
+				$li.closest(".uisort").find(".bt.st").attr("value",val);				
+			});
+		},
+		pos:function(els){
+			var $myui = $(els).closest("nav.uisort");
+			if( $myui.is(".open") ) {
+				$myui.removeClass("open");
+			}else{
+				$("nav.uisort").removeClass("open");
+				$myui.addClass("open");
+			}
+			// 메뉴 포지션		
+			// console.log(els);
+			var isPop = $(els).closest(".poptents").length;
+			var ltp = $(els).offset().top;
+			var cht = $(".popLayer.a:visible .pct").height()*0.5 || $(window).height()*0.5 ;
+			var sct = $(".popLayer.a:visible .pct").scrollTop() || $(window).scrollTop() ;
+			if( isPop )  ltp = ltp + sct ; 
+			// console.log(ltp , sct ,cht , ltp - sct );
+			if( cht > ltp - sct + 30 ) {
+				$(els).closest("nav.uisort").removeClass("bot"); // console.log("상");
+			}else{
+				$(els).closest("nav.uisort").addClass("bot"); // console.log("하");
+			}
+		}
+	},
+	dropmenu:{
+		init:function(){
+			this.evt();
+			// this.set();
+		},
+		evt:function() {
+			var _this = this;
+			$(document).on("click",".uidropmu .bt.st",function(e){
+				_this.set(this);
+				_this.pos(this);
+			});
+
+			$(document).on("click", function(e) {
+				if(!$(e.target).closest(".uidropmu").length ) {
+					$(".uidropmu").removeClass("open");
+				}
+			});
+
+			$(document).on("click", ".uidropmu .menu>li>.bt", function(e) {
+				$(this).closest(".uidropmu").removeClass("open");
+			});
+
+		},
+		set:function(els) {
+			var $myui = $(els).closest(".uidropmu");
+			if( $myui.is(".open") ) {
+				$myui.removeClass("open");
+			}else{
+				$(".uidropmu").removeClass("open");
+				$myui.addClass("open");
+			}
+			
+		},
+		pos:function(els){
+			
+			// 메뉴 포지션		
+			// console.log(els);
+			var isPop = $(els).closest(".poptents").length;
+			var ltp = $(els).offset().top;
+			var cht = $(".popLayer.a:visible .pct").height()*0.5 || $(window).height()*0.5 ;
+			var sct = $(".popLayer.a:visible .pct").scrollTop() || $(window).scrollTop() ;
+			if( isPop )  ltp = ltp + sct ; 
+			// console.log(ltp , sct ,cht , ltp - sct );
+			if( cht > ltp - sct + 30 ) {
+				$(els).closest(".uidropmu").removeClass("bot"); // console.log("상");
+			}else{
+				$(els).closest(".uidropmu").addClass("bot"); // console.log("하");
+			}
+		}
+	},
+	location:{
+		init:function(){
+			this.evt();
+			this.set();
+		},
+		evt:function(){
+			var _this = this;
+			$(document).on("click","nav.location .loc>li>.bt.st",function(e){
+				var $myui = $(this).closest(".loc>li");
+				if( $myui.is(".open") ) {
+					$myui.removeClass("open");
+				}else{
+					$("nav.location .loc>li").removeClass("open");
+					$myui.addClass("open");
+				}
+			}).on("click", function(e) {
+				if(!$(e.target).closest(".loc>li").length ) {
+					$(".loc>li").removeClass("open");
+				}
+			}).on("click", "nav.location .menu>li>.bt", function(e) {
+				$(this).closest("nav.location .loc>li").removeClass("open");
+			});
+
+			$(document).on("click",".location .menu>li>.bt",function(e){
+				$(this).closest("li").addClass("active").siblings("li").removeClass("active");
+				_this.set();
+			});
+		},
+		set:function(){
+			$("nav.location .loc>li").each(function(){
+				var $li = $(this).find(".menu>li");
+				var txt = $li.filter(".active").find(".bt").text();
+				if( $(this).find(".menu>li.active").length == 0 ) {
+					txt = $(this).find(".menu>li:first-child").find(".bt").text();
+					$(this).find(".menu>li:first-child").addClass("active");
+				}
+				$li.closest(".loc>li").find(".bt.st").html(txt);
+				var val = $(this).find(".menu>li.active .bt").attr("value");
+				$li.closest(".loc>li").find(".bt.st").attr("value",val);
+				if( $(this).find(">ul").length == 0 ){
+					$(this).find(">.bt").addClass("tt").removeClass("bt");
+				}
+			});
+		}
+	},
 	form:{  //  폼요소
 		init:function(){
 			this.attach();
@@ -645,6 +804,7 @@ var ui = { //
 			this.input.init();
 			this.intdel.init();
 			this.spinner.init();
+			this.spined.init();
 			this.star.init();
 		},
 		select:function(){
@@ -793,48 +953,157 @@ var ui = { //
 		},
 		spinner:{
 			init:function(){
-				if( $(".uiSpinner").length ) this.using(); this.stat();
-
+				this.evt();
+				this.set();
 			},
-			using:function(){
+			evt:function(){
 				var _this = this;
-				$(".uiSpinner button").on("click",function(){
-					var els = $(this).closest(".uiSpinner");
-					var n = els.find("input");
-					var nv = parseInt( els.find("input").val() );
-					var bt = $(this).attr("class");
-					//console.log(mx , nv);
-					if( bt==="p" ){
+				$(document).on("click",".uispiner .bt",function(){
+					var els = $(this).closest(".uispiner");
+					var n = els.find(".amt");
+					var nv = parseInt( els.find(".amt").val() );
+					var bt = $(this);
+					// console.log( nv);
+					if( bt.hasClass("plus") ){
 						n.val( nv + 1 ) ;
 					}
-					if( bt==="m" ){
+					if( bt.hasClass("minus") ){
 						n.val( nv - 1 ) ;
 					}
-					_this.stat();
+					_this.set();
 				});
 			},
-			stat:function(){
-				$(".uiSpinner").each(function(){
-					var els = $(this).closest(".uiSpinner");
-					var nv 	= els.find(".n").val();
-					var max = parseInt(  els.data("max") );
-					//console.log(nv , max);
-					if( nv <= 1){
-						els.find(".m").attr("disabled",true);
+			set:function(){
+				$(".uispiner").each(function(){
+					var els = $(this).closest(".uispiner");
+					var nv 	= els.find(".amt").val();
+					var max = parseInt(  els.data("max") ) || 9999;
+					var min = parseInt(  els.data("min") ) || 1;
+					// console.log(nv , max);
+					// console.log(els.data("disabled"));
+					if( els.data("disabled") == true) {
+						els.find(".bt , .amt").attr("disabled",true);
+						return;
+					}else{
+						els.find(".bt , .amt").attr("disabled",false);
 					}
-					if( nv > 1){
-						els.find(".m").attr("disabled",false);
+					if( nv <= min){
+						els.find(".minus").attr("disabled",true);
+					}
+					if( nv > min){
+						els.find(".minus").attr("disabled",false);
 					}
 					if( nv >= max){
-						els.find(".p").attr("disabled",true);
+						els.find(".plus").attr("disabled",true);
 					}
 					if( nv < max){
-						els.find(".p").attr("disabled",false);
+						els.find(".plus").attr("disabled",false);
 					}
 					if(nv == 0){
-						els.find(".m").attr("disabled",true);
-						els.find(".p").attr("disabled",true);
+						els.find(".minus").attr("disabled",true);
+						els.find(".plus").attr("disabled",true);
 					}
+				});
+			}
+		},
+		spined:{ // 장바구니 수량 변경
+			init:function(){
+				this.evt();
+				this.set();
+			},
+			evt:function(){
+				var _this = this;
+				$(document).on("click",".uispined .bt.mod",function(e){
+					_this.using(this,"inp");
+				});
+				$(document).on("change",".uispined select.slt",function(e){
+					_this.using(this,"slt");
+				});
+				$(document).on("input",".uispined .amt",function(e){
+					// _this.using(this,"inp");
+				});
+				$(document).on("focus",".uispined .amt",function(e){
+					$(this).closest(".uispined").addClass("bt");
+				});
+				$(document).on("blur",".uispined .amt",function(e){
+					$(this).closest(".uispined").removeClass("bt");
+					_this.using(this,"inp");
+				});
+			},
+			using:function(els,mod){
+				var ubx = $(els).closest(".uispined");
+				var val ;
+				if( mod == "slt" ){
+					val = ubx.find(".slt").val();
+					ubx.find(".amt").val(val).attr("value",val);			
+					if( val > 9 ){
+						ubx.addClass("bt");
+						setTimeout(function(){
+							ubx.find(".amt").focus();
+						});
+					}
+				}
+				if( mod == "inp" ){
+					val = ubx.find(".amt").val();
+					if( ubx.find(".amt").val() < 1 ){
+						ubx.find(".amt").val(1);
+					}
+					var max = ubx.data("max");
+					ubx.find(".amt").val(val).attr("value",val);
+					ubx.find(".slt").val(val).prop("selected",true);				
+					if( ubx.find(".amt").val() > max ){
+						ubx.find(".amt").val(max);
+					}
+					ubx.removeClass("bt");
+				}
+				console.log(val);
+				this.set();
+			},
+			set:function(){
+				var html = 
+				'<div class="bx sel">'+
+				'	<select class="val slt" title="수량선택"></select>'+
+				'</div>'+
+				'<div class="bx num">'+
+				'	<button type="button" class="bt mod">변경</button>'+
+				'</div>';
+	
+				$(".uispined").each(function(){
+					var ubx = $(this);
+					var val = ubx.find(".amt").val();
+					var max = ubx.data("max") || 1;
+					var oplist = "";
+					var m = "";
+					for( var i = 1; i < max+1 ; i++ ){
+						if( i >= 10){
+							m = "+";
+						}
+						if( i <= 10){
+							oplist += '<option type="button" value="'+i+'">'+m+i+'</option>';
+						}
+					}
+					if( !$(this).is(".load") ) {
+						$(this).append(html);
+						ubx.find(".slt").append(oplist);
+						ubx.find(".slt").val(val).prop("selected",true);
+					}
+					if( val > 9) {
+						$(this).addClass("nm").removeClass("st");
+						$(this).find(".amt").val(val);
+					}else{
+						$(this).addClass("st").removeClass("nm");
+					}
+					if( $(this).find(".amt").val() < 1 ){
+						$(this).find(".amt").val(1);
+					}
+					if( $(this).find(".amt").is(":disabled") ) {
+						$(this).find(".slt").prop("disabled",true);
+					}else{
+						$(this).find(".slt").prop("disabled",false);
+					}
+					$(this).addClass("load");
+					ubx.find(".amt").attr("title","수량입력");
+					// console.log( $(this).find(".val:visible").val());
 				});
 			}
 		},
@@ -1477,31 +1746,36 @@ var ui = { //
 			}
 		}
 	},
-	alert:function(params){ // 커스텀 알럿
+	alert:function(msg,params){ // 커스텀 알럿
 
 		var opt = $.extend({
-			msg:"<p>알럿메시지</p>",
+			msg:msg,
+			tit:"",
 			ycb:"",
 			ybt:"확인"
 		}, params);
 
 		if( $(".popAlert").length ) return;
-
+		
 		ui.lock.using(true);
+		// console.log(opt.tit);
 
 		var lyAlert =
-		'<section class="popAlert" tabindex="0">'+
-			'<div class="pbd">'+
-				'<div class="pct">'+opt.msg+'</div>'+
-				'<div class="pbt">'+						
-					'<button type="button" class="btn type a btnConfirm">'+ opt.ybt +'</button>'+
-				'</div>'+
-				'<button type="button" class="btnClose">닫기</button>'+
-			'</div>'+
-		'</section>';
-
+		'<article class="popAlert" tabindex="0">'+
+		'	<div class="pbd">'+
+		'		<div class="phd"><span class="tit">'+opt.tit+'</span></div>'+
+		'		<div class="pct">'+opt.msg+'</div>'+
+		'		<div class="pbt">'+						
+		'			<button type="button" class="btn btnConfirm">'+ opt.ybt +'</button>'+
+		'		</div>'+
+		'		<button type="button" class="btnClose">닫기</button>'+
+		'	</div>'+
+		'</article>';
 		$("body").append(lyAlert);
-
+		if (opt.tit) {
+			$(".popAlert>.pbd>.phd").addClass("isTit");
+		}
+		$(".popAlert:visible").focus();
 
 		$(".popAlert").find(".btnConfirm").on("click",function(){
 			window.setTimeout(opt.ycb);
@@ -1515,10 +1789,11 @@ var ui = { //
 			}
 		}
 	},
-	confirm:function(params){ // 커스텀 컨펌
+	confirm:function(msg,params){ // 커스텀 컨펌
 
 		var opt = $.extend({
-			msg:"<p>컴펌메시지</p>",
+			msg:msg,
+			tit:"",
 			ycb:"",
 			ybt:"확인",
 			ncb:"",
@@ -1531,17 +1806,22 @@ var ui = { //
 
 		var lyConfirm =
 		'<article class="popConfirm" tabindex="0">'+
-			'<div class="pbd">'+
-				'<div class="pct">'+opt.msg+'</div>'+
-				'<div class="pbt">'+						
-					'<button type="button" class="btn type e btnCancel">'+ opt.nbt +'</button>'+
-					'<button type="button" class="btn type a btnConfirm">'+ opt.ybt +'</button>'+
-				'</div>'+
-				'<button type="button" class="btnClose">닫기</button>'+
-			'</div>'+
+		'	<div class="pbd">'+
+		'		<div class="phd"><span class="tit">'+opt.tit+'</span></div>'+
+		'		<div class="pct">'+opt.msg+'</div>'+
+		'		<div class="pbt">'+
+		'			<button type="button" class="btn btnCancel">'+ opt.nbt +'</button>'+
+		'			<button type="button" class="btn btnConfirm">'+ opt.ybt +'</button>'+
+		'		</div>'+
+		'		<button type="button" class="btnClose">닫기</button>'+
+		'	</div>'+
 		'</article>';
 		$("body").append(lyConfirm);
+		if (opt.tit) {
+			$(".popConfirm>.pbd>.phd").addClass("isTit");
+		}
 		$(".popConfirm:visible").focus();
+
 		$(".popConfirm").find(".btnConfirm").on("click",function(){
 			window.setTimeout(opt.ycb);
 		});
@@ -1559,37 +1839,36 @@ var ui = { //
 			}
 		}
 	},
-	toast:function(params){ // 토스트창 ui.toast();
+	toast:function(msg,params){ // 토스트창 
 
 		var opt = $.extend({
-			msg:"토스트메시지",
+			msg:msg,
 			cls:"",
-			sec:1500,
-			bot:20,
+			sec:2000,
+			bot:74
 		}, params);
 
 		if ( $(".popToast:visible").length ) { return; }
 
 		var lyToast =
-			'<article class="popToast ' + opt.cls + '">' +
-				'<div class="pbd">' +
-					'<div class="pct">' + opt.msg + '</div>' +
-				'</div>' +
-			'</article>';
+		'<article class="popToast ' + opt.cls + '">' +
+		'	<div class="pbd">' +
+		'		<div class="pct">' + opt.msg + '</div>' +
+		'	</div>' +
+		'</article>';
 
 		$("body").append(lyToast);
-
 		window.setTimeout(function() {
 			$(".popToast:visible").addClass("on").css({"padding-bottom" : opt.bot});
 		});
-		// console.log(this.toast.times);
-
+		
 		window.setTimeout(function() {
 			$(".popToast:visible").removeClass("on").on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd",function(){
 				// console.log("fsd");
 				$(".popToast").remove();
 			});
 		}, opt.sec);
+	
 		
 	},
 	popSelect:{ // 셀렉트 메뉴 팝업
@@ -2253,168 +2532,6 @@ var ui = { //
 		},
 		del:function(cname){
 			document.cookie = cname + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
-		}
-	},
-	dropDown:{	// 드롭다운 메뉴
-		init:function(){
-			if( $(".uiDrop").length ) this.using();
-			if( $(".uiDrop").length ) this.update();
-		},
-		set:function(id,val){ // ui.dropDown.set("아이디","value값");
-			$("#"+id).find("li button[value='"+val+"']").closest("li").addClass("active").siblings("li").removeClass().attr("title","");
-			this.update();
-		},
-		update:function(id){
-			var $uiDrop = $(".uiDrop:not([data-ui*='link'])");
-
-			$uiDrop.each(function(i){
-				
-
-				var actEl = $(this).find(".list>ul>li:first-child").html();
-				if( $(this).find(".list>ul>li").hasClass("active") ){
-					actEl = $(this).find(".list>ul>li.active").html();
-					$(this).find(".list>ul>li.active").siblings("li").attr("title","");
-				}
-
-				ui.dropDown.size(this);
-				
-				if($(this).find(".list li").hasClass("active")){
-					// $(this).find(".list li.active a");
-					//var actVal = $(this).find(".list li .active").index()+1;
-					$(this).find(">button").text(  $(this).find(".list li.active button").text()  );
-					$(this).find(">button").attr("value", $(this).find(".list li.active button").attr("value")   );
-					$(this).attr("value", $(this).find(".list li.active button").attr("value")   );
-				}
-
-				if( !$(this).find(">button").length  ){
-					$(this).prepend( actEl ).find(">button").wrapInner("<b></b>");
-				}
-				if( !$(this).find("button b").length ){
-					$(this).find("button").wrapInner("<b></b>");
-				}
-				$(this).find(">button").addClass("bt").attr("title","메뉴열기").attr("onclick","");
-				
-			});
-
-			$(".uiDrop").each(function(){
-				var actEl = $(this).find(".list>ul>li:first-child").html();
-				var actTxt = $(this).find(".list>ul>li:first-child").text();
-				if ( $(this).is("[data-ui='link-sel']") ) {
-					// console.log( $(this).find(".list>ul>li:first-child").text()  );
-					actEl = '<button type="button" class="bt" title="메뉴열기"><b>'+actTxt+'</b></button>';
-				}
-
-				ui.dropDown.size(this);
-
-				if( !$(this).find(">a").length  &&  $(this).is("[data-ui='link-sel']")  ){
-					
-					$(this).prepend( actEl );
-					$(this).find(">a").addClass("bt").attr("title","메뉴열기");
-					
-				}
-
-
-				if( $(this).find(".list li").hasClass("active") ){
-					$(this).find(".list li.active").attr("title","현재선택항목");
-					$(this).find(">a").text(  $(this).find(".list li.active a").text()  );
-				}
-			
-
-			});
-
-		},
-		show:function(els){
-			// console.log($(els));
-			//console.log( $(els).next(".list").is(":visible") );
-			var elsTop = $(els).closest(".uiDrop").offset().top - $(window).scrollTop();
-			var winH = $(window).height()/2 ;
-			// console.log(  elsTop,winH );
-			$(".uiDrop").removeClass("up");
-			if( winH < elsTop ){
-				// console.log("up");
-				$(els).closest(".uiDrop").addClass("up");
-			}
-
-			if( $(els).next(".list").is(":visible") ){
-				$(els).next(".list:visible").hide();
-				$(els).removeClass("on");
-				$(els).parent(".uiDrop").removeClass("on");
-			}else{
-				$(els).next(".list").show();
-				$(els).addClass("on");
-				$(els).parent(".uiDrop").addClass("on");
-			}		
-		},
-		hide:function(){
-			$(".uiDrop .list").hide();
-			$(".uiDrop").removeClass("on");
-			$(".uiDrop .bt").removeClass("on");
-		},
-		sel:function(els){
-			$(els).closest(".uiDrop").find(".bt")
-				.text( $(els).text() )
-				.attr("value", $(els).attr("value") )
-				.wrapInner("<b></b>")
-				.focus();
-			$(els).closest(".uiDrop").attr("value", $(els).attr("value") );
-			$(els).closest(".list").hide();
-			$(els).closest("li").addClass("active").siblings('li').removeClass("active");
-			$(els).closest(".list").find("button");
-			$(els).closest("li");
-		},
-		using:function(){
-			
-			$(document).on("click",".uiDrop:not('.disabled') .bt",function(e){
-				ui.dropDown.show(this);
-				e.stopPropagation();
-			});
-
-			$(document).on("click",".uiDrop .list li button",function(){
-				ui.dropDown.sel(this);
-			});
-
-			$(document).on("click",".uiDrop[data-ui*='link'] .list li a",function(e){
-				ui.dropDown.hide(this);
-			});
-
-			$(document).on("click",function(e){
-				ui.dropDown.hide(this);
-			});
-			$(document).on("click",".uiDrop",function(e){
-				e.stopPropagation();
-			});
-
-			$("*").not(".uiDrop .list button , .uiDrop .list a , .uiDrop .list").on("focus",function(){
-				ui.dropDown.hide(this);
-			});
-
-			$(document).on("focus",".uiDrop .bt",function(){
-				ui.dropDown.hide(this);
-			});
-
-			
-
-		},
-		size:function(els){
-
-			$(els).css("width","");
-			$(els).find(".list").css("width","");
-
-			if( !$(els).hasClass("noWidth") ){
-
-				var aWid = $(els).find(">.bt").outerWidth()+5;
-				var lsWid = $(els).find(".list").outerWidth()+5;
-				// console.log(aWid,lsWid);
-
-				if( aWid < lsWid){
-					$(els).find(".list").css("width",lsWid);
-					$(els).css("min-width", lsWid); 
-				}else{
-					$(els).css("min-width", aWid); 
-					$(els).find(".list").css("width",aWid );
-				}
-			}
-
 		}
 	}
 };

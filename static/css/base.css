@@ -108,7 +108,7 @@ input::-webkit-datetime-edit-text {
 .ui-datepicker th:first-child{color:#ec151e}
 .ui-datepicker-trigger{ cursor:pointer;}
 .ui-datepicker .ui-datepicker-title{text-align: left;}
-.ui-datepicker .ui-datepicker-title select{margin: 0 6px 0 0;height: 40px;border-color: #c7c7c7;width: 100px;padding: 0 45px 0 10px;background: url(../img/common/select.png) no-repeat right 2px top 5px transparent;background-size: 28px auto;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;font-size: 15px;}
+.ui-datepicker .ui-datepicker-title select{margin: 0 6px 0 0;height: 40px;border-color: #c7c7c7;width: 100px;padding: 0 45px 0 10px;background: url(../img/common/select.png) no-repeat right 8px top 13px transparent;background-size: 13px auto;-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;appearance:none;font-size: 15px;}
 .ui-datepicker .ui-datepicker-title select.ui-datepicker-month{width: 80px;}
 
 
@@ -134,7 +134,7 @@ input::-webkit-datetime-edit-text {
 .picker-cell__header{display:none;}
 .picker-fixed .picker-header{height:55px;padding: 16px 10px;}
 .picker-title{font-size:18px;font-weight: normal;text-align: center;}
-.picker-close{width:30px;height:30px;background:url(../img/common/popLayerClose.png) no-repeat;background-size: 30px;font-size:0;left: 15px;right: auto;top: 11px;}
+.picker-close{width:30px;height:30px;background: url(../img/common/popSelectClose.png) no-repeat center;background-size: 18px;font-size:0;left: 15px;right: auto;top: 11px;}
 .picker-cell + .picker-cell{border-left-width: 0px;}
 .picker-fixed > .picker-dialog{border-radius: 10px 10px 0px 0px;}
 .picker-cell__body{padding:0px 10px;}

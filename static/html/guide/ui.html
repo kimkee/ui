@@ -52,21 +52,33 @@
 
 			<section class="sect" data-sid="ui-button">
 				<h3 class="hdt">버튼 - 높이,색상</h3>
-				<a href="javascript:;" class="btn xs">버튼</a>
-				<a href="javascript:;" class="btn sm">버튼</a>
-				<a href="javascript:;" class="btn md">버튼</a>
-				<a href="javascript:;" class="btn lg">버튼</a>
-				<a href="javascript:;" class="btn xl">버튼</a>
-				<a href="javascript:;" class="btn" disabled>버튼</a>
-				<button type="button" class="btn" disabled>버튼</button>
+				<a href="javascript:;" class="btn xs">버튼xs</a>
+				<a href="javascript:;" class="btn sm">버튼sm</a>
+				<a href="javascript:;" class="btn md">버튼md</a>
+				<a href="javascript:;" class="btn lg">버튼lg</a>
+				<a href="javascript:;" class="btn xl">버튼xl</a>
 				<p class="gap"></p>
-				<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
-				<a href="javascript:;" class="btn a">버튼</a>
-				<a href="javascript:;" class="btn b">버튼</a>
-				<a href="javascript:;" class="btn c">버튼</a>
-				<a href="javascript:;" class="btn d">버튼</a>
-				<a href="javascript:;" class="btn e">버튼</a>
-				<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
+				<button type="button" class="btn a">버튼.a</button>
+				<button type="button" class="btn b">버튼.b</button>
+				<button type="button" class="btn c">버튼.c</button>
+				<button type="button" class="btn d">버튼.d</button>
+				<p class="gap"></p>
+				<button type="button" class="btn a" disabled>버튼.a</button>
+				<button type="button" class="btn b" disabled>버튼.b</button>
+				<button type="button" class="btn c" disabled>버튼.c</button>
+				<button type="button" class="btn d" disabled>버튼.d</button>
+				<span>button:disabled</span>
+				<p class="gap"></p>
+				<a href="javascript:;" class="btn a disabled">버튼.a</a>
+				<a href="javascript:;" class="btn b disabled">버튼.b</a>
+				<a href="javascript:;" class="btn c disabled">버튼.c</a>
+				<a href="javascript:;" class="btn d disabled">버튼.d</a>
+				<span>a.disabled</span>
+				<p class="gap"></p>
+				<div class="btnSet">
+					<a href="javascript:;" class="btn lg a">예방접종 기록</a>
+					<a href="javascript:;" class="btn lg d">투약 기록</a>
+				</div>
 
 				<p class="gap"></p>
 				<div class="btnSet">
@@ -90,13 +102,13 @@
 							tapped = setTimeout(function(){			
 								tapped = null;
 								console.log("싱글터치");
-								ui.toast({msg:"싱글터치",cls:'c'})
+								ui.toast("싱글터치");
 							},300); //wait 300ms
 						}else{  // double_tap
 							clearTimeout(tapped);
 							tapped = null;
 							console.log("더블터치");
-							ui.toast({msg:"더블터치",cls:'b'})
+							ui.toast("더블터치");
 						}
 					}
 				</script>
@@ -109,7 +121,7 @@
 							<a href="javascript:;" class="btn lg">버튼</a>
 							<a href="javascript:;" class="btn xl">버튼</a>
 							<a href="javascript:;" class="btn" disabled>버튼</a>
-							<button class="btn" disabled>버튼</button></pre>
+							<button type="button" class="btn" disabled>버튼</button></pre>
 					</div>
 				</div>
 
@@ -209,96 +221,126 @@
 
 			<section class="sect" data-sid="ui-alert">
 				<h3 class="hdt">알럿,컨펌 - Alert,Confirm</h3>
-				<section class="codeBox">
+				<div class="codeBox">
 					<div class="code">
 						<div class="bts">
-							<a class="btn" href="javascript:alert_sample();">알럿</a>
-							<a class="btn" href="javascript:confirm_sample();">컨펌</a>
+							<a class="btn" href="javascript:alert_sample_1();">알럿1</a>
+							<a class="btn" href="javascript:alert_sample_2();">알럿2</a>
+							<a class="btn" href="javascript:confirm_sample_1();">컨펌1</a>
+							<a class="btn" href="javascript:confirm_sample_2();">컨펌2</a>
 						</div>
 						<pre class="brush: js">
-						ui.alert({  // 알럿창 띄우기
-							msg:'<p>알럿 메시지<br> 입니다.</p>' ,
+						ui.alert('공통 알럿창입니다.'); // 옵션없이 메시지만..
+						ui.alert('공통 알럿창입니다.',{ // 알럿 옵션들
+							tit:"알럿타이틀",
 							ycb:function(){
 								console.log('알럿확인결과');
 							},
-							ybt:'확인'	
-						});	
+							ybt:"확인" // 기본값 "확인"
+						});
 
-						ui.confirm({ // 컨펌 창 띄우기
-							msg:'<p>공통 컨펌창 샘플  <br><u>kimkee@naver.com</u> 님은</p>' +
-								'<p>이미 <b>네이버</b> 인증을 통해 회원<br> 가입되었습니다.</p>'+
-								'<p>(회원가입 : 2017-08-08)</p>',
+						ui.confirm('공통 컨펌창 입니다.',{ // 컨펌 창 옵션들
+							tit:"컨펌타이틀",
 							ycb:function(){
 								console.log('컨펌확인결과');
 							},
 							ncb:function(){
 								console.log('컨펌취소결과');
 							},
-							ybt:'로그인하기',
-							nbt:'닫기'	
+							ybt:"확인", // 기본값 "확인"
+							nbt:"취소"  // 기본값 "취소"
 						});</pre>
 					</div>	
-				</section>
+				</div>
+
+				<script>
+					var confirm_sample_1 = function(){
+						ui.confirm('기본타이틀 높이입니다. 2줄을 기본 높이<br>로 합니다. 기본타이틀 높이입니다.',{ // 컨펌 창 띄우기
+							ycb:function(){
+								console.log('컨펌확인결과');
+							},
+							ncb:function(){
+								console.log('컨펌취소결과');
+							},
+							ybt:'확인',
+							nbt:'취소'	
+						});
+					}
+					var confirm_sample_2 = function(){
+						ui.confirm('기본타이틀 높이입니다. 2줄을 기본 높이<br>로 합니다. 기본타이틀 높이입니다.',{ // 컨펌 창 띄우기
+							tit:"컨펌타이틀",
+							ycb:function(){
+								console.log('컨펌확인결과');
+							},
+							ncb:function(){
+								console.log('컨펌취소결과');
+							},
+							ybt:'확인',
+							nbt:'취소'	
+						});
+					}
+					var alert_sample_1 = function(){
+						// 알럿창 띄우기
+						ui.alert('기본타이틀 높이입니다. 2줄을 기본 높이<br>로 합니다. 기본타이틀 높이입니다.',{
+							ycb:function(){
+								console.log('알럿확인결과');
+							},
+							ybt:'확인'	
+						});
+					}
+					var alert_sample_2 = function(){
+						// 알럿창 띄우기
+						ui.alert('기본타이틀 높이입니다. 2줄을 기본 높이<br>로 합니다. 기본타이틀 높이입니다.',{
+							tit:"알럿타이틀",
+							ycb:function(){
+								console.log('알럿확인결과');
+							},
+							ybt:'확인'	
+						});
+					}
+				</script>
+
 			</section>
 
 			<section class="sect" data-sid="ui-toast">
 				<h3 class="hdt">토스트UI - ui.toast</h3>
-				<section class="codeBox">
+				<div class="codeBox">
 					<div class="code">
 						<div class="bts">
-							<a class="btn" href="javascript:toast_sample1();">토스트1</a>
-							<a class="btn" href="javascript:toast_sample2();">토스트2</a>
+							<a class="btn" href="javascript:toast_sample1();">토스트</a>
+							<a class="btn" href="javascript:toast_sample2();">토스트 링크</a>
 						</div>
 						<pre class="brush: js">
-							ui.toast({  // 토스트 창띄우기
-								msg:'<p>토스트메시지입니다.</p>', // 메시지(HTML)
-								cls:'wish', // null, 'wish' , 'cart'
-								sec:1500 // 사라질 시간
+							// 토스트 창띄우기
+							ui.toast('토스트메시지입니다.');
+							ui.toast('토스트메시지입니다.',{
+								cls:'abcd', // null , string
+								bot:74,  // 바닥에서 띄울 간격
+								sec:3000 // 사라질 시간 number
+							});
+							ui.toast('<div class="link"><p class="tt">토스트 토스트 토스트 메세지입니다.</p><a href="javascript:;" class="lk">바로가기</a></div>',{
+								cls:'abcd', // null , string
+								bot:74,  // 바닥에서 띄울 간격
+								sec:3000 // 사라질 시간 number
 							});</pre>
 					</div>
-				</section>
+				</div>
 				<script>
-				var confirm_sample = function(){
-					ui.confirm({ // 컨펌 창 띄우기
-						msg:'<p>공통 컨펌창 샘플  <br><u>kimkee@naver.com</u> 님은</p>' +
-							'<p>이미 <b>네이버</b> 인증을 통해 회원<br> 가입되었습니다.</p>'+
-							'<p>(회원가입 : 2017-08-08)</p>',
-						ycb:function(){
-							console.log('컨펌확인결과');
-						},
-						ncb:function(){
-							console.log('컨펌취소결과');
-						},
-						ybt:'로그인하기',
-						nbt:'닫기'	
-					});
-				}
-				var alert_sample = function(){
-					ui.alert({  // 알럿창 띄우기
-						msg:'<p><b>알럿</b> <u>메시지</u><br> 입니다.</p>' ,
-						ycb:function(){
-							console.log('알럿확인결과');
-						},
-						ybt:'확인'	
-					});
-				}
-				var toast_sample1 = function(){
-					ui.toast({   // 토스트 창띄우기
-						msg:'<p>토스트메시지입니다.</p>',
-						cls:'a',
-						sec:1500
-					});
-				}
-				var toast_sample2 = function(){
-					ui.toast({   // 토스트 창띄우기
-						msg:'<p>토222스트메시지입니다.</p>',
-						cls:'b',
-						sec:1500,
-						bot:50
-					});
-				}
+					var toast_sample1 = function(){
+						ui.toast('삭제 되었습니다.',{   // 토스트 창띄우기
+							bot:70
+						});
+					}
+					var toast_sample2 = function(){
+						ui.toast('<div class="link"><p class="tt">토스트 토스트 토스트 메세지입니다.</p><a href="javascript:;" class="lk">바로가기</a></div>',{   // 토스트 창띄우기
+							// sec:1500000,
+							bot:77
+						});
+					}
 				</script>
 			</section>
+
+
 			<section class="sect" data-sid="ui-select">
 				<h3 class="hdt">입력 - Select 팝업</h3>
 
@@ -408,7 +450,7 @@
 				<p class="gap"></p>
 				<span class="input db del"><input type="text" placeholder="삭제버튼" value="텍스트"></span>
 				<p class="gap"></p>
-				<span class="input sch"><input type="text" placeholder="검색어 입력"><a href="javascript:;" class="btnSch">검색</a></span>
+				<span class="input sch"><input type="text" placeholder="검색어 입력"><button type="button" class="btnSch">검색</button></span>
 				<p class="gap"></p>
 				<span class="input db"><input type="text" class="valid" placeholder="텍스트"></span>
 				<p class="gap"></p>
@@ -528,30 +570,30 @@
 
 			<section class="sect" data-sid="ui-checkradio">
 				<h3 class="hdt">첵크박스,라디오버튼</h3>
-				<label class="checkbox"><input type="checkbox"><span>선택</span></label>
-
-				<label class="checkbox"><input type="checkbox" checked="checked"><span></span></label>
-				<label class="checkbox"><input type="checkbox" checked="checked" disabled><span></span></label>
-				<label class="checkbox"><input type="checkbox" disabled><span></span></label>
-
-				<label class="radio"><input type="radio" name="radio1"><span>선택</span></label>
-				<label class="radio"><input type="radio" name="radio1" checked="checked"><span>선택</span></label>
-				<label class="radio"><input type="radio" name="radio2" checked="checked" disabled><span>선택</span></label>
-				<label class="radio"><input type="radio" name="radio2" disabled><span>선택</span></label>
+				<label class="checkbox"><input type="checkbox"><span class="txt">선택</span></label>
+				<label class="checkbox"><input type="checkbox" checked><span class="txt"></span></label>
+				<label class="checkbox"><input type="checkbox" checked disabled><span class="txt"></span></label>
+				<label class="checkbox"><input type="checkbox" disabled><span class="txt"></span></label>
+				<p class="gap"></p>
+				<label class="radio"><input type="radio" name="radio1"><span class="txt">선택</span></label>
+				<label class="radio"><input type="radio" name="radio1" checked><span class="txt">선택</span></label>
+				<label class="radio"><input type="radio" name="radio2" checked disabled><span class="txt">선택</span></label>
+				<label class="radio"><input type="radio" name="radio2" disabled><span class="txt">선택</span></label>
 
 				<p class="gap"></p>
-				<label class="checkbox"><input type="checkbox" data-check="all" data-check-id="checkTest1"><span>전체선택</span></label>
-				<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택1</span></label>
-				<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택2</span></label>
-				<label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택3</span></label>
+				<label class="checkbox"><input type="checkbox"><span class="txt">전체선택</span></label>
+				<label class="checkbox"><input type="checkbox"><span class="txt">선택1</span></label>
+				<label class="checkbox"><input type="checkbox"><span class="txt">선택2</span></label>
+				<label class="checkbox"><input type="checkbox"><span class="txt">선택3</span></label>
 				<p class="gap"></p>
-				<div class="uiChk"><input type="checkbox" checked="checked"><em></em></div>
-				<div class="uiChk"><input type="checkbox" checked="checked" disabled><em></em></div>
+				<div class="uiChk"><input type="checkbox" title="텍스트" checked><em></em></div>
+				<div class="uiChk"><input type="checkbox" title="텍스트" checked disabled><em></em></div>
 				<p class="gap"></p>
 				<div class="radiobox">
-					<span class="radio"><input type="radio" name="radio4" id="radt_1" checked=""><label for="radt_1" class="txt">결제  </label></span>
-					<span class="radio"><input type="radio" name="radio4" id="radt_2"><label for="radt_2" class="txt">중단  </label></span>
-					<span class="radio"><input type="radio" name="radio4" id="radt_3"><label for="radt_3" class="txt">재검토</label></span>
+					<span class="radio"><input type="radio" name="radio_a" id="radt_1" checked><label for="radt_1" class="txt">코로나장염</label></span>
+					<span class="radio"><input type="radio" name="radio_a" id="radt_2"><label for="radt_2" class="txt">켄넬코프</label></span>
+					<span class="radio"><input type="radio" name="radio_a" id="radt_3"><label for="radt_3" class="txt">일플루엔자</label></span>
+					<span class="radio"><input type="radio" name="radio_a" id="radt_4"><label for="radt_4" class="txt">광견병</label></span>
 				</div>
 
 				<div class="codeBox">
@@ -800,15 +842,109 @@
 				</div>
 			</section>
 
-			<section class="sect" data-sid="ui-spinners">
-				<h3 class="hdt">jQui Spinner 스피너</h3>
-				<div class="uiSpinner" data-max="5">
-					<input class="n" type="number" value="1"> <button type="button" class="m">-</button> <button type="button" class="p">+</button>
+			<section class="sect" data-sid="ui-uispiner">
+				<h3 class="hdt">수량 변경</h3>
+				<div class="uispiner" data-min="1" data-max="5"><!-- 기본값은 1 ~ 9999 -->
+					<input type="text" value="1" class="amt" title="수량선택">
+					<button type="button" class="bt minus">수량더하기</button>
+					<button type="button" class="bt plus">수량빼기</button>
+				</div>
+				<div class="uispiner" data-min="1" data-max="5" data-disabled="true"><!-- 기본값은 1 ~ 9999 -->
+					<input type="text" value="1" class="amt" title="수량선택">
+					<button type="button" class="bt minus">수량더하기</button>
+					<button type="button" class="bt plus">수량빼기</button>
+				</div>
+				<p class="gap"></p>
+				<span class="uispined"><input class="amt" value="0" type="number" disabled></span>
+				<span class="uispined" data-max="5"><input class="amt" value="3" type="number"></span>
+				<span class="uispined" data-max="12"><input class="amt" value="5" type="number"></span>
+				<span class="uispined" data-max="20"><input class="amt" value="15" type="number"></span>
+			</section>
+
+
+			<section class="sect" data-sid="ui-dropdown">
+						
+				<h3 class="hdt">드롭다운,소팅</h3>
+
+				<style>
+					nav.location{display:block; margin: 10px 0;}
+				</style>
+				<nav class="location">
+					<ul class="loc">
+						<li>
+							<a href="javascript:;" class="bt st">강아지</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="bt st">메뉴1</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="bt st">메뉴2</a>
+						</li>
+					</ul>
+				</nav>
+				<nav class="location">
+					<ul class="loc">
+						<li>
+							<a href="javascript:;" class="bt st">강아지</a>
+							<ul class="menu">
+								<li><a class="bt" href="javascript:;">강아지</a></li>
+								<li class="active"><a class="bt" href="javascript:;">고양이</a></li>
+								<li><a class="bt" href="javascript:;">관상어</a></li>
+								<li><a class="bt" href="javascript:;">소동물</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="javascript:;" class="bt st">메뉴1</a>
+							<ul class="menu">
+								<li><a class="bt" href="javascript:;">메뉴1</a></li>
+								<li><a class="bt" href="javascript:;">메뉴2</a></li>
+								<li class="active"><a class="bt" href="javascript:;">메뉴3</a></li>
+								<li><a class="bt" href="javascript:;">메뉴4</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="javascript:;" class="bt st">메뉴1</a>
+							<ul class="menu">
+								<li><a class="bt" href="javascript:;">메뉴1</a></li>
+								<li><a class="bt" href="javascript:;">메뉴2</a></li>
+								<li><a class="bt" href="javascript:;">메뉴3</a></li>
+								<li class="active"><a class="bt" href="javascript:;">메뉴4</a></li>
+							</ul>
+						</li>
+					</ul>
+					<!-- ui.gnb.location.set(); -->
+				</nav>
+				<p class="gap"></p>
+				<div style="text-align: right;">
+					<nav class="uidropmu dmenu">
+						<button type="button" class="bt st">메뉴열기</button>
+						<div class="list">
+							<ul class="menu">
+								<li><button type="button" class="bt">수정</button></li>
+								<li><button type="button" class="bt">삭제</button></li>
+							</ul>
+						</div>
+					</nav>
+
+					<nav class="uisort">
+						<button type="button" class="bt st"></button>
+						<div class="list">
+							<ul class="menu">
+								<li><button type="button" class="bt" value="v_1">등록일순</button></li>
+								<li><button type="button" class="bt" value="v_2">판매인기순</button></li>
+								<li><button type="button" class="bt" value="v_3">낮은가격순</button></li>
+								<li><button type="button" class="bt" value="v_4">높은가격순</button></li>
+								<li><button type="button" class="bt" value="v_5">상품평순</button></li>
+								<li><button type="button" class="bt" value="v_6">추천순</button></li>
+							</ul>
+						</div>
+					</nav>
+
+
 				</div>
 
-				<div class="uiSpinner" data-max="3">
-					<input class="n" type="number" value="1"> <button type="button" class="m">-</button> <button type="button" class="p">+</button>
-				</div>
+				<p class="gap"></p>
+
 			</section>
 
 			<section class="sect" data-sid="ui-starpoint">
@@ -1075,103 +1211,6 @@
 						</tr>
 					</tbody>
 				</table>
-			</section>
-
-			<section class="sect" data-sid="ui-dropdown">
-				<h3 class="hdt">드롭다운</h3>
-
-				<section class="dromDownSample">
-					
-					<div class="uiDrop" data-ui="val" id="kkk">
-						<div class="list">
-							<ul>
-								<li><button type="button" value="1">선택메뉴1</button></li>
-								<li><button type="button" value="2">선택메뉴2</button></li>
-								<li><button type="button" value="3">선택메뉴3선택메뉴1선택메뉴1</button></li>
-								<li><button type="button" value="4">선택메뉴4</button></li>
-								<li><button type="button" value="5">선택메뉴5</button></li>
-								<li><button type="button" value="6">선택메뉴6</button></li>
-								<li><button type="button" value="7">선택메뉴7</button></li>
-								<li><button type="button" value="8">선택메뉴8</button></li>
-								<li><button type="button" value="9">선택메뉴9</button></li>
-							</ul>
-						</div>
-					</div>
-
-
-
-					<div class="uiDrop sm" data-ui="val">
-						<div class="list">
-							<ul>
-								<li><button type="button" value="1">남</button></li>
-								<li class="active"><button type="button" value="2">여</button></li>
-							</ul>
-						</div>
-					</div>
-					<div class="uiDrop" data-ui="val">
-						<div class="list">
-							<ul>
-								<li><button type="button" value="1">02</button></li>
-								<li><button type="button" value="2">1</button></li>
-							</ul>
-						</div>
-					</div>
-				
-					<div class="uiDrop disabled" data-ui="val">
-						<div class="list">
-							<ul>
-								<li><button type="button" value="1">선택메뉴1</button></li>
-								<li><button type="button" value="2">선택메뉴2</button></li>
-								<li><button type="button" value="3">선택메뉴3</button></li>
-							</ul>
-						</div>
-					</div>
-
-					<div class="uiDrop" data-ui="val">
-						<div class="list">
-							<ul>
-								<li><button type="button" value="1">선택메뉴1</button></li>
-								<li><button type="button" value="2">선택메뉴2</button></li>
-								<li><button type="button" value="3">선택메뉴3</button></li>
-								<li><button type="button" value="4">선택메뉴444444444444444444</button></li>
-							</ul>
-						</div>
-					</div>
-
-
-					<div class="uiDrop noWidth" data-ui="val">
-						<div class="list">
-							<ul>
-								<li><button type="button" value="1">선택메뉴1</button></li>
-								<li><button type="button" value="2">선택메뉴2222222</button></li>
-								<li><button type="button" value="3">선택메뉴3333333333333</button></li>
-								<li><button type="button" value="4">선택메뉴444444444444444444</button></li>
-							</ul>
-						</div>
-					</div>
-
-					<div class="uiDrop" data-ui="link-sel" id="aaa">
-						<div class="list">
-							<ul>
-								<li><a href="/html/">네이버</a></li>
-								<li class="active"><a href="/html/">다음</a></li>
-								<li><a href="/html/">구글</a></li>
-							</ul>
-						</div>
-					</div>
-
-					<div class="uiDrop" data-ui="link">
-						<a class="bt" href="javascript:;">링크</a>
-						<div class="list">
-							<ul>
-								<li><a href="javascript:;">네이버eeeeeeeeee</a></li>
-								<li><a href="javascript:;">다음</a></li>
-								<li><a href="javascript:;">구글</a></li>
-							</ul>
-						</div>
-					</div>
-
-				</section>
 			</section>
 
 			<section class="sect" data-sid="ui-swipers">
