@@ -9,38 +9,39 @@ HTML,CSS,JS UI
 ### ui.alert();
   > 커스텀 알럿창 Alert UI
   ```
-  ui.alert({  // 알럿창 띄우기
-     msg:'<p>알럿 메시지<br> 입니다.</p>' ,
-     ycb:function(){
-         console.log('알럿확인결과');
-     },
-     ybt:'확인'   
- }); 
+  ui.alert('공통 알럿창입니다.'); // 옵션없이 메시지만..
+  ui.alert('공통 알럿창입니다.',{ // 알럿 옵션들
+    tit:"알럿타이틀",
+    ycb:function(){
+      console.log('알럿확인결과');
+    },
+    ybt:"확인" // 기본값 "확인"
+  });
   ```
 ### ui.confirm();
   > 커스텀 컨펌창 Confirm UI
   ```
-  ui.confirm({ // 컨펌 창 띄우기
-      msg:'<p>공통 컨펌창 샘플  <br><u>kimkee@naver.com</u> 님은</p>' +
-          '<p>이미 <b>네이버</b> 인증을 통해 회원<br> 가입되었습니다.</p>'+
-          '<p>(회원가입 : 2017-08-08)</p>',
-      ycb:function(){
-          console.log('컨펌확인결과');
-      },
-      ncb:function(){
-          console.log('컨펌취소결과');
-      },
-      ybt:'로그인하기',
-      nbt:'닫기'   
+  ui.confirm('공통 컨펌창 입니다.',{ // 컨펌 창 옵션들
+    tit:"컨펌타이틀",
+    ycb:function(){
+      console.log('컨펌확인결과');
+    },
+    ncb:function(){
+      console.log('컨펌취소결과');
+    },
+    ybt:"확인", // 기본값 "확인"
+    nbt:"취소"  // 기본값 "취소"
   });
   ```
 ### ui.toast();
   > 토스트창 하단에서 올라오는 알림메시지 UI
   ```
-  ui.toast({  // 토스트 창띄우기
-      msg:'<p>토스트메시지입니다.</p>', // 메시지(HTML)
-      cls:'wish', // null, 'wish' , 'cart'
-      sec:1500 // 사라질 시간
+  // 토스트 창띄우기
+  ui.toast('토스트메시지입니다.');
+  ui.toast('토스트메시지입니다.',{
+    cls:'abcd', // null , string
+    bot:74,  // 바닥에서 띄울 간격
+    sec:3000 // 사라질 시간 number
   });
   ```
 ### ui.popLayer
@@ -111,13 +112,20 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
 ### ui.form.spinner();
   > 수량입력 최고수량 data-max="5"
   ```
-<div class="uiSpinner" data-max="5">
-    <input class="n" type="number" value="1">
-    <button type="button" class="m">-</button>
-    <button type="button" class="p">+</button>
-</div>
+  <div class="uispiner" data-min="1" data-max="5">
+    <input type="text" value="1" class="amt" title="수량선택">
+    <button type="button" class="bt minus">수량더하기</button>
+    <button type="button" class="bt plus">수량빼기</button>
+  </div>
   ```
-![image](https://user-images.githubusercontent.com/6386956/81260714-8a0e7c80-9075-11ea-8435-642a4a7dc9db.png)
+### ui.form.spined();
+> 수량선택
+```
+<span class="uispined" data-max="5"><input class="amt" value="3" type="number"></span>
+<span class="uispined" data-max="12"><input class="amt" value="5" type="number"></span>
+<span class="uispined" data-max="20"><input class="amt" value="15" type="number"></span>
+```
+![image](https://user-images.githubusercontent.com/6386956/109746477-cc163980-7c18-11eb-83d1-514bb6e7ec6f.png)
 ### ui.loading;
   > 로딩중...  ui.loading.show(); ui.loading.hide();
   ```
@@ -169,14 +177,14 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
 <a href="javascript:;" class="btn" disabled>버튼</a>
 <button class="btn" disabled="">버튼</button>
 ```
-![image](https://user-images.githubusercontent.com/6386956/81248582-a3a0cb80-9057-11ea-95a8-b7c92fdfcc75.png)
+![image](https://user-images.githubusercontent.com/6386956/109746618-05e74000-7c19-11eb-9be1-756c527b6496.png)
 ### 폼요소
 ```
-<label class="checkbox"><input type="checkbox"><span>선택</span></label>
-<label class="radio"><input type="radio" name="radio1"><span>선택</span></label>
-<div class="uiChk"><input type="checkbox" checked="checked"><em></em></div>
+<label class="checkbox"><input type="checkbox"><span class="txt">선택</span></label>
+<label class="radio"><input type="radio" name="radio1"><span class="txt">선택</span></label>
+<div class="uiChk"><input type="checkbox" title="텍스트" checked><em></em></div>
 ```
-![image](https://user-images.githubusercontent.com/6386956/81248230-da2a1680-9056-11ea-93cd-531aa590910d.png)
+![image](https://user-images.githubusercontent.com/6386956/109746757-434bcd80-7c19-11eb-8c86-f58cd3f04a40.png)
 ### 입력
 ```
 <span class="input"><input type="text" placeholder="텍스트"></span>
@@ -184,6 +192,7 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
 <span class="input sch"><input type="text" placeholder="검색어 입력"><a href="javascript:;" class="btnSch">검색</a></span>
 <span class="textarea"><textarea placeholder="내용"></textarea></span>
 ```
+![image](https://user-images.githubusercontent.com/6386956/109746945-9de52980-7c19-11eb-8f92-b4092070be93.png)
 ### Select
   ```
   <span class="select"> //기본UI
