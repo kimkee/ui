@@ -256,7 +256,7 @@ input::-webkit-datetime-edit-text {
 .contain.ui .sect{}
 .contain.ui .codeBox{ position:relative; margin:10px 0; overflow:hidden; }
 .contain.ui .codeBox .bts{padding:5px 0px 0px 0px;/* position:absolute; right:10px; top:10px;*/margin-bottom: 5px;}
-.contain.ui .codeBox .bts .btn{border-color:#bbbbbb;color:#555555;border-radius:3px;height:24px;line-height: 19px;padding: 3px 7px 3px;background-color: #fff;}
+.contain.ui .codeBox .bts .btn{border-color:#bbbbbb;color:#555555;border-radius:3px;height:24px;line-height: 1;padding: 4px 7px;background-color: #fff;}
 .contain.ui .codeBox .code{ line-height:20px; color:#541717; font-size:11px; background-color:#fbfbfb; border:#dddddd solid 1px; border-radius:3px; padding:0 5px; margin:0px; font-family:"Consolas"; }
 .contain.ui .codeBox pre{/* display:none; */ line-height: 1.54; padding:5px 10px;}
 .contain.ui .codeBox pre *{display:none;}
@@ -271,7 +271,7 @@ input::-webkit-datetime-edit-text {
 .contain.ui h3.hdt{/* text-align: center; */margin-bottom: 10px;font-size: 13px;background: #545454;padding: 6px 13px 7px 11px;border-radius: 3px;/* border: 1px solid #eaecef; */margin-top: 20px;/* color: #ffffff; */font-weight: 400;background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);border: 0.7px solid #d1d5da;}
 .contain.ui p.gap{ height:10px; overflow:hidden; }
 .contain.ui h4{ font-size:13px; font-weight:bold; margin:5px 0 5px 0;}
-.contain.ui .weeks{text-align:center;font-size: 12px;/* font-weight:bold; */margin: 10px 0 0px 0;border: #c7c7c7 solid 1px;border-radius: 4px 4px 0px 0px;padding: 5px 4px;border-width: 1px 1px 0px 1px;}
+.contain.ui .weeks{text-align:center;font-size: 12px;/* font-weight:bold; */margin: 10px 0 10px 0;border: #dddddd solid 1px;border-radius: 4px 4px 4px 4px;padding: 5px 4px;border-width: 1px 1px 1px 1px;}
 .contain.ui [data-ui-tog='ctn']{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;margin-top: 10px;}
 .contain.ui [data-ui-tab-ctn]{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;border-top-width: 0;}
 #barH{height: 1px;background-color: #d4d4d4;position:fixed;left:0px;top: 49px;z-index: 900;transition: width .4s ease-out;width: 100%;}

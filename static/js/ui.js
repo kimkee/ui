@@ -1292,7 +1292,7 @@ var ui = { //
 		},
 		set:function(){
 			var _this = this;
-			$('.uiTimePicker').each(function(i){
+			$(".uiTimePicker").each(function(i){
 				// console.log(i);
 				var id = "picker_id_"+i ;
 				if( $(this).attr("id") ){
@@ -1308,6 +1308,7 @@ var ui = { //
 					_this.pick[id] = undefined;
 					// console.log(_this.pick[id]);
 				}
+				$(els).prop("readonly",true);
 				_this.pick[id] = new Picker( els , {
 					format: 'HH:mm',
 					rows:3,

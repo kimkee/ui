@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>UI GUIDE</title>
+	<title>UI</title>
 	<meta name="format-detection" content="telephone=no">
 	<meta name="theme-color" content="#333333">
 	<link href="../../img/common/favicon.ico" rel="shrtcut icon">
@@ -230,22 +230,22 @@
 							<a class="btn" href="javascript:confirm_sample_2();">컨펌2</a>
 						</div>
 						<pre class="brush: js">
-						ui.alert('공통 알럿창입니다.'); // 옵션없이 메시지만..
-						ui.alert('공통 알럿창입니다.',{ // 알럿 옵션들
+						ui.alert("공통 알럿창입니다."); // 옵션없이 메시지만..
+						ui.alert("공통 알럿창입니다.",{ // 알럿 옵션들
 							tit:"알럿타이틀",
 							ycb:function(){
-								console.log('알럿확인결과');
+								console.log("알럿확인결과");
 							},
 							ybt:"확인" // 기본값 "확인"
 						});
 
-						ui.confirm('공통 컨펌창 입니다.',{ // 컨펌 창 옵션들
-							tit:"컨펌타이틀",
+						ui.confirm("공통 컨펌창 입니다.",{ // 컨펌 창 옵션들
+							tit:"타이틀",
 							ycb:function(){
-								console.log('컨펌확인결과');
+								console.log("컨펌확인결과");
 							},
 							ncb:function(){
-								console.log('컨펌취소결과');
+								console.log("컨펌취소결과");
 							},
 							ybt:"확인", // 기본값 "확인"
 							nbt:"취소"  // 기본값 "취소"
@@ -255,47 +255,47 @@
 
 				<script>
 					var confirm_sample_1 = function(){
-						ui.confirm('기본타이틀 높이입니다. 2줄을 기본 높이<br>로 합니다. 기본타이틀 높이입니다.',{ // 컨펌 창 띄우기
+						ui.confirm("컨펌 창 입니다.",{ // 컨펌 창 띄우기
 							ycb:function(){
-								console.log('컨펌확인결과');
+								console.log("컨펌확인결과");
 							},
 							ncb:function(){
-								console.log('컨펌취소결과');
+								console.log("컨펌취소결과");
 							},
-							ybt:'확인',
-							nbt:'취소'	
+							ybt:"확인",
+							nbt:"취소"	
 						});
 					}
 					var confirm_sample_2 = function(){
-						ui.confirm('기본타이틀 높이입니다. 2줄을 기본 높이<br>로 합니다. 기본타이틀 높이입니다.',{ // 컨펌 창 띄우기
-							tit:"컨펌타이틀",
+						ui.confirm("컨펌 창 입니다.",{ // 컨펌 창 띄우기
+							tit:"타이틀",
 							ycb:function(){
-								console.log('컨펌확인결과');
+								console.log("컨펌확인결과");
 							},
 							ncb:function(){
-								console.log('컨펌취소결과');
+								console.log("컨펌취소결과");
 							},
-							ybt:'확인',
-							nbt:'취소'	
+							ybt:"확인",
+							nbt:"취소"	
 						});
 					}
 					var alert_sample_1 = function(){
 						// 알럿창 띄우기
-						ui.alert('기본타이틀 높이입니다. 2줄을 기본 높이<br>로 합니다. 기본타이틀 높이입니다.',{
+						ui.alert("알럿 메시지 입니다.",{
 							ycb:function(){
-								console.log('알럿확인결과');
+								console.log("알럿확인결과");
 							},
-							ybt:'확인'	
+							ybt:"확인"	
 						});
 					}
 					var alert_sample_2 = function(){
 						// 알럿창 띄우기
-						ui.alert('기본타이틀 높이입니다. 2줄을 기본 높이<br>로 합니다. 기본타이틀 높이입니다.',{
-							tit:"알럿타이틀",
+						ui.alert("알럿 메시지 입니다.",{
+							tit:"타이틀",
 							ycb:function(){
 								console.log('알럿확인결과');
 							},
-							ybt:'확인'	
+							ybt:"확인"	
 						});
 					}
 				</script>
@@ -312,14 +312,14 @@
 						</div>
 						<pre class="brush: js">
 							// 토스트 창띄우기
-							ui.toast('토스트메시지입니다.');
-							ui.toast('토스트메시지입니다.',{
-								cls:'abcd', // null , string
+							ui.toast("토스트메시지입니다.");
+							ui.toast("토스트메시지입니다.",{
+								cls:"abcd", // null , string
 								bot:74,  // 바닥에서 띄울 간격
 								sec:3000 // 사라질 시간 number
 							});
 							ui.toast('<div class="link"><p class="tt">토스트 토스트 토스트 메세지입니다.</p><a href="javascript:;" class="lk">바로가기</a></div>',{
-								cls:'abcd', // null , string
+								cls:"abcd", // null , string
 								bot:74,  // 바닥에서 띄울 간격
 								sec:3000 // 사라질 시간 number
 							});</pre>
@@ -327,7 +327,7 @@
 				</div>
 				<script>
 					var toast_sample1 = function(){
-						ui.toast('삭제 되었습니다.',{   // 토스트 창띄우기
+						ui.toast("삭제 되었습니다.",{   // 토스트 창띄우기
 							bot:70
 						});
 					}
