@@ -1,4 +1,4 @@
-﻿//*******************************************//
+//*******************************************//
 // 김기현 : kimkee@naver.com    
 // url : http://kimkee.github.io/
 // update : 2020-05-12sss
@@ -1079,10 +1079,11 @@ var ui = { //
 					ubx.find(".amt").val(val).attr("value",val);
 					ubx.find(".slt").val(val).prop("selected",true);				
 					if( ubx.find(".amt").val() > max ){
-						ubx.find(".amt").val(max);
+						ubx.find(".amt").val(max).attr("value",max);
 					}
 					ubx.removeClass("bt");
 				}
+				val = ubx.find(".amt").val();
 				console.log(val);
 				this.set();
 			},
