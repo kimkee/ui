@@ -1110,26 +1110,26 @@ var ui = { //
 							oplist += '<option type="button" value="'+i+'">'+m+i+'</option>';
 						}
 					}
-					if( !$(this).is(".load") ) {
-						$(this).append(html);
+					if(!ubx.is(".load") ) {
+						ubx.append(html);
 						ubx.find(".slt").append(oplist);
 						ubx.find(".slt").val(val).prop("selected",true);
 					}
 					if( val > 9) {
-						$(this).addClass("nm").removeClass("st");
-						$(this).find(".amt").val(val);
+						ubx.addClass("nm").removeClass("st");
+						ubx.find(".amt").val(val);
 					}else{
-						$(this).addClass("st").removeClass("nm");
+						ubx.addClass("st").removeClass("nm");
 					}
-					if( $(this).find(".amt").val() < 1 ){
-						$(this).find(".amt").val(1);
+					if( ubx.find(".amt").val() < 1 ){
+						ubx.find(".amt").val(1);
 					}
-					if( $(this).find(".amt").is(":disabled") ) {
-						$(this).find(".slt").prop("disabled",true);
+					if( ubx.find(".amt").is(":disabled") ) {
+						ubx.find(".slt").prop("disabled",true);
 					}else{
-						$(this).find(".slt").prop("disabled",false);
+						ubx.find(".slt").prop("disabled",false);
 					}
-					$(this).addClass("load");
+					ubx.addClass("load");
 					ubx.find(".amt").attr("title","수량입력");
 					// console.log( $(this).find(".val:visible").val());
 				});
