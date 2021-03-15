@@ -252,7 +252,7 @@ input::-webkit-datetime-edit-text {
 .contain.ui .device #userAgent{ color:#7d51da; }
 .contain.ui .device #cssStatus{ color:#000000; }
 .contain.ui .device #browserStatus{ color:#e84e4e; }
-.contain.ui{padding: 15px 10px 10px 10px;}
+.contain.ui{padding: 20px 20px 20px 20px;}
 .contain.ui .sect{}
 .contain.ui .codeBox{ position:relative; margin:10px 0; overflow:hidden; }
 .contain.ui .codeBox .bts{padding:5px 0px 0px 0px;/* position:absolute; right:10px; top:10px;*/margin-bottom: 5px;}
