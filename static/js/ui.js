@@ -827,7 +827,7 @@ var ui = { //
 				this.set();
 			},
 			set:function(){
-				$("span.input input, span.textarea textarea").each(function(){
+				$(".input input, .textarea textarea").each(function(){
 					if( $(this).val() == "" ){
 						$(this).closest(".input , .textarea").removeClass("coms");
 					}else{
@@ -843,13 +843,13 @@ var ui = { //
 				});
 			},
 			evt:function(){
-				$(document).on("click","span.input .label, span.textarea .label",function(e){
+				$(document).on("click",".input .label, .textarea .label",function(e){
 					$(this).closest(".input , .textarea").find("input, textarea").focus();
 				});
-				$(document).on("focus","span.input input, span.textarea textarea",function(e){
+				$(document).on("focus",".input input, .textarea textarea",function(e){
 					$(this).closest(".input , .textarea").addClass("focus");
 				});
-				$(document).on("blur","span.input input, span.textarea textarea",function(e){
+				$(document).on("blur input",".input input, .textarea textarea",function(e){
 					$(this).closest(".input , .textarea").removeClass("focus");
 					// console.log( $(this).val() );
 					if( $(this).val() == "" ){
@@ -866,12 +866,12 @@ var ui = { //
 				this.set();
 			},
 			set:function(){
-				$("span.input.del>input").each(function(){
+				$(".input.del>input").each(function(){
 					$(this).trigger("input");
 				});
 			},
 			evt:function(){
-				$(document).on("input","span.input.del>input",function(e){
+				$(document).on("input",".input.del>input",function(e){
 					var myInput = $(this);
 					if( myInput.val() != ""  && myInput.closest(".input").find(".btnDel").length == 0  ) {
 						myInput.closest(".input input").after('<button type="button" class="btnDel">삭제</button>');
@@ -880,7 +880,7 @@ var ui = { //
 						myInput.closest(".input").find(".btnDel").remove();
 					}
 				});
-				$(document).on("click","span.input.del .btnDel",function(e){
+				$(document).on("click",".input.del .btnDel",function(e){
 					var myInput = $(this);
 					myInput.closest(".input").find("input").val("").focus();
 					myInput.closest(".input").find("input").trigger('change');
