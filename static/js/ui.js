@@ -896,6 +896,13 @@ var ui = { //
 			evt:function(){
 				var _this = this;
 				$(document).on("input","[data-ui='autoheight']",function(e){
+					// console.log( $(this).val().indexOf("\n")  );
+					if( $(this).val().indexOf("\n") > -1 && $(this).is(".inline") ) {
+						var newval = $(this).val().replace(/\n/gi, '');
+						console.log("엔터치지마");
+						$(this).val(newval);
+						return false;
+					}
 					_this.set();
 				});
 			},
@@ -903,8 +910,8 @@ var ui = { //
 				$("[data-ui='autoheight']").each(function(){
 					var $els = $(this);
 					var tboxH = $els.outerHeight();
-					var tboxS ;				
-					$els.css("height","1px");	
+					var tboxS;
+					$els.css("height","1px");
 					tboxS = $els.prop('scrollHeight') + parseInt( $els.css("border-bottom") ) + parseInt( $els.css("border-top") )   ;
 					// console.log( tboxH , tboxS);
 					$els.css({"height":tboxS});
