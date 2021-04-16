@@ -24,6 +24,7 @@ var ui = { //
 		// this.dropDown.init();
 		this.popLayer.init();
 		this.popFrame.init();
+		this.popsel.init();
 		this.popSelect.init();
 		this.popSelMul.init();
 		this.popWin.init();
@@ -37,6 +38,7 @@ var ui = { //
 		this.elip.init();
 	},
 	update:function(){ // 페이지 동적으로 뿌린 후 업데이트 ui.update();
+		this.popsel.set();
 		this.popSelect.set();
 		this.popSelMul.set();
 		this.datepick.set();
@@ -1906,6 +1908,186 @@ var ui = { //
 	
 		
 	},
+	popsel:{ // 셀렉트 스와이프
+		init:function(){
+			this.evt();
+			this.set();
+		},
+		evt:function(){
+			var _this = this;
+
+			$(document).on("click",".pop-select",function(e) {
+				// console.log(e.target);
+				if ( !$(e.target).closest(".pop-select .pbd").length ) {
+					_this.close();
+				}
+			});
+
+			$(document).on("click",".select-pop .btsel:not(.open)",function(){
+				var $pop = $(this).closest(".select-pop");
+				var name = $pop.find(".slist").attr("name");
+				var tit =  $pop.find(".slist").data("select-title") || "선택해주세요.";
+				var sel =  $pop.find(".slist").val();
+				var list = [];
+				
+				// console.log(name,tit,list,sel);
+				_this.open(name,tit,list,sel);
+				$(".uisort").removeClass("open");
+			});
+
+			$(document).on("click",".pop-select .btsbot .btcom",function(e){
+				var sel = $(this).closest(".pop-select").find(".swiper-slide-active button").attr("value");
+				var txt = $(this).closest(".pop-select").find(".swiper-slide-active button").text();
+				var name =  $(this).closest(".pop-select").data("selt-pop");
+				var tit = $("select[name='"+name+"']").data("select-title");
+				// console.log(name,sel);
+				$("select[name='"+name+"']>option[value='"+sel+"']").prop("selected",true);
+				$("select[name='"+name+"']").val(sel).prop("selected",true);
+				$("select[name='"+name+"']").closest(".select-pop").find(".btsel").html('<i class="txt">'+txt+'</i>').removeClass("is-tit");
+				$("select[name='"+name+"']").trigger("change");
+				_this.close();
+			});
+
+
+
+
+			$(document).on("click",".pop-select .btn-sel-Close",function(){
+				_this.close();
+			});
+		},
+		sld:{ // 추천상품 슬라이드 공통
+			els: ".pop-select .swiper-container",
+			opt: {
+				freeMode: true,
+				freeModeSticky:true,
+				centeredSlides:true,
+				direction:"vertical",
+				slidesPerView: 3,
+				// mousewheel: {
+				// 	invert: false,
+				// 	sensitivity: 0.2,
+				// },
+				speed: 100,  // 300
+				freeModeMomentumRatio: 0.2,  // 1
+				observer: true,
+				observeParents: true,
+				spaceBetween:0,
+				watchOverflow:true,
+				loop: false
+			},
+			using: function() {
+				if ( $(this.els).find(".swiper-slide").length <= 1 ) {
+					this.opt.loop = false;
+				}
+				this.slide = new Swiper(this.els, this.opt);
+			}
+		},
+		set:function(update){
+			$(".select-pop").each(function(){
+				if( !$(this).find(".btsel").length ) {
+					$(this).prepend('<button class="btsel" type="button"></button>');
+				}
+				if( !$(this).is(".set").length ) {
+					$(this).addClass("set");
+				}
+				var $btsel = $(this).find(".btsel");
+				$btsel.addClass("is-tit");			
+				var txt = $(this).find(".slist option:selected").text() ;
+				var dis = $(this).find(".slist").prop("disabled");
+				var list = [];
+				$(this).find(".slist option").each(function(){
+					var isDis = $(this).prop("disabled");
+					list.push( { v:$(this).val() ,t:$(this).text() ,d:isDis } );
+				});
+				// console.log(list ,txt ,dis);
+				if (update == "update") {
+					tit = $(this).find(".slist>option:selected").text();
+				}else{
+					tit = $(this).find(".slist").data("select-title")|| $(this).find(".slist>option:selected").text();
+				}
+				$btsel.html('<i class="txt">'+txt+'</i>');
+
+				if( dis == true ) {
+					$btsel.prop("disabled",true);
+				}else{
+					$btsel.prop("disabled",false);
+				}
+			});
+		},
+		open:function(name,tit,list,sel){
+			// console.log(name,tit,list,sel);
+			$(".pop-select.on").remove();
+			if ( $(".pop-select:visible").length ) { return; }
+
+			$("[name='"+name+"']").find("option").each(function(){
+				var isDis = $(this).prop("disabled");
+				list.push( { v:$(this).val() ,t:$(this).text() ,d:isDis } );
+			});
+			// console.log(list);
+
+			var blist="";
+			for(var i in list) {
+				// console.log(list[i].d);
+				var dis;
+				if (list[i].d == true) {
+					dis = "disabled";
+				}else{
+					dis = "";
+				}
+				blist += '<li class="swiper-slide '+ dis +'"><button type="button" '+ dis +' value="'+list[i].v+'">'+list[i].t+'</button></li>';
+			}
+			var lyPop =
+			'<article class="pop-select" data-selt-pop="'+name+'">' +
+			'	<div class="pbd">' +
+			//'		<div class="phd"><h3 class="ptit">'+tit+'</h3></div>' +
+			'		<button type="button" class="btn-sel-Close">닫기</button>' +
+			'		<div class="pct">' +
+			'			<main class="poptents">' +
+			'				<div class="swiper-container slide">' +
+			'					<ul class="swiper-wrapper list">'+blist+'</ul>' +
+			'				</div>' +
+			'				<div class="btsbot btn-set">' +
+			'					<button type="button" class="btn a lg btcom">완료</button>' +
+			'				</div>' +
+			'			</main>' +
+			'		</div>' +
+			'	</div>' +
+			'</article>';
+			$("body").append(lyPop);
+			this.sld.using();
+			$("[name='"+name+"']").closest(".select-pop").find(".btsel").addClass("open");
+			var _this = this;
+			$(".pop-select").fadeIn(100,function(){	
+				$(this).addClass("on").attr("tabindex","0").focus();
+				 // console.log(name, sel);
+				$("[data-selt-pop='"+name+"'] .list button[value='"+sel+"']").addClass("active").closest("li").addClass("active");
+				var activeIdx = $("[data-selt-pop='"+name+"'] .list>li.active").index();
+				// console.log(   activeIdx  );
+				_this.sld.slide.slideTo(activeIdx);
+			});
+			_this.sld.slide.on("init slideChangeTransitionEnd",function(){
+				var isActDis = $("[data-selt-pop='"+name+"'] .list>li.swiper-slide-active").is(".disabled");
+				// console.log("END" , isActDis);
+				if (isActDis == true) {
+					$("[data-selt-pop='"+name+"'] .btcom").prop("disabled",true);
+				}else{
+					$("[data-selt-pop='"+name+"'] .btcom").prop("disabled",false);
+				}
+			});
+			ui.lock.using(true);
+			$("body").addClass("is-popselt");
+		},
+		close:function(){
+			var id = $(".pop-select:visible").data("selt-pop");
+			$(".pop-select").removeClass("on").fadeOut(100,function(){
+				$(this).remove();
+				ui.lock.using(false);
+			});
+			$("select[name="+id+"]").closest(".select-pop").find(".btsel").removeClass("open");
+			$("body").removeClass("is-popselt");
+			console.log( "select[name="+id+"] 값 = " ,  $("select[name="+id+"]").val() );
+		}
+	},
 	popSelect:{ // 셀렉트 메뉴 팝업
 		init:function(){
 			this.evt();
@@ -1921,8 +2103,8 @@ var ui = { //
 			});
 
 
-			$(document).on("click",".select-pop .btSel",function(){
-				var $pop = $(this).closest(".select-pop");
+			$(document).on("click",".selectPop .btSel",function(){
+				var $pop = $(this).closest(".selectPop");
 				var name = $pop.find(".sList").attr("name");
 				var tit =  $pop.find(".sList").data("select-title") || "옵션선택";
 				var sel =  $pop.find(".sList").val();
@@ -1942,7 +2124,7 @@ var ui = { //
 				console.log(name,sel);
 				$("select[name='"+name+"']>option[value='"+sel+"']").prop("selected",true);
 				$("select[name='"+name+"']").val(sel).prop("selected",true);
-				$("select[name='"+name+"']").closest(".select-pop").find(".btSel").text(txt) ;
+				$("select[name='"+name+"']").closest(".selectPop").find(".btSel").text(txt) ;
 				$("select[name='"+name+"']").trigger("change");
 				_this.close();
 			});
@@ -1952,7 +2134,7 @@ var ui = { //
 			});
 		},
 		set:function(){
-			$(".select-pop").each(function(){
+			$(".selectPop").each(function(){
 				if( !$(this).find(".btSel").length ) {
 					$(this).prepend('<button class="btSel" type="button"></button>');
 				}
@@ -2009,7 +2191,7 @@ var ui = { //
 				$(".popSelect").remove();
 				ui.lock.using(false);
 			});
-			$("select[name="+id+"]").closest(".select-pop").find(".btSel").attr("tabindex","0").focus();
+			$("select[name="+id+"]").closest(".selectPop").find(".btSel").attr("tabindex","0").focus();
 		}
 	},
 	popSelMul:{ // 다중선택 팝업
@@ -2155,7 +2337,7 @@ var ui = { //
 					// console.log(tt);
 					ttt += '<span>'+tt+'</span>';
 				}
-// 				console.log( $ckbox.attr("name") , $ckbox.prop("checked")  );
+				// console.log( $ckbox.attr("name") , $ckbox.prop("checked")  );
 			});
 			$("[data-select-name="+id+"]").find(".btSel").html(ttt).attr("tabindex","0").focus();
 
