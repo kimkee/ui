@@ -175,7 +175,7 @@
 					var samplePopFrameA = function(){
 						// 팝프레임 열기 콜백
 						ui.popFrame.open('popFrame1',{
-							hash:true,
+							// hash:true,
 							ocb:function(){
 								console.log("popFrame1 열림");
 							},
@@ -188,6 +188,7 @@
 						// 레이어팝업 열기 콜백
 						ui.popLayer.open('popSample1',{
 							hash:true,
+							direct:"right",
 							ocb:function(){
 								console.log("popSample1 열림");
 							},
@@ -200,6 +201,7 @@
 						// 레이어팝업 열기 콜백
 						ui.popLayer.open('popSample2',{
 							hash:true,
+							// direct:"bottom",
 							ocb:function(){
 								console.log("popSample2 열림");
 							},
@@ -480,6 +482,11 @@
 				<span class="input db"><input type="text" disabled value="disabled"></span>
 				<p class="gap"></p>
 				<span class="textarea db"><textarea placeholder="내용"></textarea></span>
+				<p class="gap"></p>
+				<div class="input ui-priceset">
+					<input type="tel" class="amt" placeholder="희망가격 입력(원)" value="">
+					<i class="w">원</i>
+				</div>
 <!-- 				<p class="gap"></p>
 				<span class="textarea db"><textarea class="ment"  placeholder="댓글달기 자동높이" id="input_reply"></textarea></span>
 				<script src="../../js/lib/autosize-master/dist/autosize.js"></script>
@@ -1477,7 +1484,7 @@
 			<div class="pbd">
 				<div class="phd">
 					<div class="in">
-						<h1 class="tit">타이틀111</h1>
+						<h1 class="ptit">타이틀111</h1>
 						<button type="button" class="btnPopClose">닫기</button>
 					</div>
 				</div>
@@ -1633,7 +1640,7 @@
 <script src="../../js/lib/jquery.hammer.js-master/hammer.js"></script>
 <script src="../../js/lib/jquery.hammer.js-master/jquery.hammer.js"></script>
 <script src="../guide/html.js"></script><!-- 개발페이지에서는 html.js 임포트 하지말아주세요. -->
-<script src="../../js/ui.js?v=20"></script>
+<script src="../../js/ui.js"></script>
 
 
 <script>
