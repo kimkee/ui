@@ -52,7 +52,7 @@ button{cursor:pointer;background: none;border: none;}
 
 .header{height: 50px;text-align:center;display:block;z-index: 500;position: relative;}
 .header>.inner{/* color: #545454; */display:flex;height: 50px;align-items: center;justify-content: center;position: fixed;left: 0;right: 0;z-index: 500;top: 0px;background: #ffffff;border-bottom: rgba(0,0,0,0.2) solid 1px;box-shadow:rgba(0,0,0,0.1) 2px 2px 3px;transition: left 0.5s;}
-.header .title{/* font-family: "Verdana"; */font-weight: 600;font-size: 15px;}
+.header .title{/* font-family: "Verdana"; */font-weight: 600;font-size: 17px;background: linear-gradient(94.23deg,#5374fa 12.41%,#fd9179 52.55%,#ff6969 89.95%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
 .footer{height: 50px;background: #86a941;text-align:center;display:block;}
 .footer>.inner{color: #ffffff;display:flex;height:50px;align-items: center;justify-content: center;}
 

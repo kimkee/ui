@@ -456,7 +456,7 @@
 						document.execCommand("copy"); 
 						document.body.removeChild(aux); 
 						console.log(aux.value);		
-						ui.toast({msg:'<p>Link copied to clipboard</p>'});
+						ui.toast('<p>Link copied to clipboard</p>');
 					}
 				</script>
 			</section>
@@ -1058,8 +1058,8 @@
 
 				<p class="gap"></p>
 
-				<label class="radio"><input type="radio" name="radio3" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" checked><span>탭선택1</span></label>
-				<label class="radio"><input type="radio" name="radio3" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2"><span>탭선택2</span></label>
+				<label class="radio"><input type="radio" name="radio3" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" checked><span class="txt">탭선택1</span></label>
+				<label class="radio"><input type="radio" name="radio3" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2"><span class="txt">탭선택2</span></label>
 				<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_1" class="active">
 					탭내용1
 				</div>
