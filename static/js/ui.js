@@ -521,7 +521,7 @@ var ui = { //
 			},
 			top:function(){
 				var scr = $(window).scrollTop();
-				if( $("html").is(".lock") ) {
+				if( $("html").is(".is-lock") ) {
 					return false;
 				}
 				if (scr > 200) {
@@ -551,7 +551,7 @@ var ui = { //
 				var scrStopEvent = null;
 			
 				$(window).on("pageshow scroll", function(e){  // 스크롤 내리는 중 OR 올리는중 
-					if( $("html").is(".lock") ) {
+					if( $("html").is(".is-lock") ) {
 						return false;
 					}
 					var initPosition = $(this).scrollTop();
@@ -586,7 +586,7 @@ var ui = { //
 				});
 
 				$(window).on("pageshow scroll", function(e){ // 스크롤 맨 밑에 일때
-					if( $("html").is(".lock") ) {
+					if( $("html").is(".is-lock") ) {
 						return false;
 					}
 					var docH = $(document).height();
@@ -606,20 +606,31 @@ var ui = { //
 			}
 		},
 		resize:function(){
-			/*
-			var fixBot = $(".wrap>nav.nav").outerHeight();
-			var pageHd = $(".contain .pageHd").outerHeight();
-			if( fixBot){
-				$("body").addClass("isBotNav");
+			var menubar = $(".wrap nav.menubar:visible").length;
+			var header = $(".wrap .header>.inr:visible").length;
+			var floatbt = $(".wrap .floatbots>.inr:visible").length;
+			var footer = $(".wrap .footer:visible").length;
+
+			if( menubar ){
+				$("body").addClass("is-menubar");
 			}else{
-				$("body").removeClass("isBotNav");
+				$("body").removeClass("is-menubar");
 			}
-			if( pageHd){
-				$("body").addClass("isPageHd");
+			if( header ){
+				$("body").addClass("is-header");
 			}else{
-				$("body").removeClass("isPageHd");
+				$("body").removeClass("is-header");
 			}
-			*/
+			if( floatbt ){
+				$("body").addClass("is-floatbots");
+			}else{
+				$("body").removeClass("is-floatbots");
+			}
+			if( footer ){
+				$("body").addClass("is-footer");
+			}else{
+				$("body").removeClass("is-footer");
+			}
 		},
 		contHeight:function(){
 			/*
@@ -1831,32 +1842,62 @@ var ui = { //
 			$("[data-ui-tab-ctn][data-ui-tab-val='"+btn+"']").addClass("active");
 		}
 	},
+	// lock:{ // 스크롤 막기,풀기
+		// sct:0,
+		// stat:false,
+		// els:".popLayer:visible  , .popConfirm:visible , .popAlert:visible",
+		// set:function(){
+			// if(	$(this.els).length <= 0 ){
+				// this.using(false);
+			// }
+		// },
+		// using:function(opt){
+			// 
+			// var lockDiv = ".popLayer  , .popConfirm , .popAlert" ;
+			// 
+			// if(opt === true && this.stat === false ){
+				// this.stat = true;
+				// ui.lock.sct = $(window).scrollTop();
+				// $("body , html").addClass("lock");
+				// $("html").css({"top":""+(-ui.lock.sct)+"px"});
+				// $(lockDiv).bind("touchmove scroll", function(e){ e.preventDefault(); });
+			// }
+			// if( opt === false && $(this.els).length <= 0 ){
+				// this.stat = false;
+				// $("body , html").removeClass("lock");
+				// $("html").css({"top":""});
+				// $(window).scrollTop( ui.lock.sct );
+				// $(lockDiv).unbind("touchmove scroll");
+			// }
+		// }
+	// },
 	lock:{ // 스크롤 막기,풀기
 		sct:0,
 		stat:false,
-		els:".popLayer:visible  , .popConfirm:visible , .popAlert:visible",
+		els:".pop-layer:visible  , .ui-confrim:visible , .ui-alert:visible",
 		set:function(){
 			if(	$(this.els).length <= 0 ){
 				this.using(false);
 			}
 		},
 		using:function(opt){
-			
-			var lockDiv = ".popLayer  , .popConfirm , .popAlert" ;
 
-			if(opt === true && this.stat === false ){
+			if( opt === true && this.stat === false ){
 				this.stat = true;
 				ui.lock.sct = $(window).scrollTop();
-				$("body , html").addClass("lock");
+				$("body , html").addClass("is-lock is-lock-end");
 				$("html").css({"top":""+(-ui.lock.sct)+"px"});
-				$(lockDiv).bind("touchmove scroll", function(e){ e.preventDefault(); });
+				$(this.els).bind("touchmove scroll", function(e){ e.preventDefault(); });
 			}
-			if( opt === false && $(this.els).length <= 0 ){
+			if( opt === false && $(this.els).length <= 0 && $("body").is(".is-lock") ){
 				this.stat = false;
-				$("body , html").removeClass("lock");
+				$("body , html").removeClass("is-lock");
 				$("html").css({"top":""});
 				$(window).scrollTop( ui.lock.sct );
-				$(lockDiv).unbind("touchmove scroll");
+				$(this.els).unbind("touchmove scroll");
+				setTimeout(function(){
+					$("body , html").removeClass("is-lock-end");
+				},50);
 			}
 		}
 	},
@@ -1918,40 +1959,41 @@ var ui = { //
 		var opt = $.extend({
 			msg:msg,
 			tit:"",
+			cls:"",
 			ycb:"",
 			ybt:"확인"
 		}, params);
 
-		if( $(".popAlert").length ) return;
+		if( $(".ui-alert").length ) return;
 		
 		ui.lock.using(true);
 		// console.log(opt.tit);
 
 		var lyAlert =
-		'<article class="popAlert" tabindex="0">'+
+		'<article class="ui-alert ' + opt.cls + '" tabindex="0">' +
 		'	<div class="pbd">'+
 		'		<div class="phd"><span class="tit">'+opt.tit+'</span></div>'+
-		'		<div class="pct">'+opt.msg+'</div>'+
+		'		<div class="pct"><div class="msg">'+opt.msg+'</div></div>'+
 		'		<div class="pbt">'+						
-		'			<button type="button" class="btn btnConfirm">'+ opt.ybt +'</button>'+
+		'			<button type="button" class="btn btn-confirm">'+ opt.ybt +'</button>'+
 		'		</div>'+
-		'		<button type="button" class="btnClose">닫기</button>'+
+		'		<button type="button" class="btn-close">닫기</button>'+
 		'	</div>'+
 		'</article>';
 		$("body").append(lyAlert);
 		if (opt.tit) {
-			$(".popAlert>.pbd>.phd").addClass("isTit");
+			$(".ui-alert>.pbd>.phd").addClass("is-tit");
 		}
-		$(".popAlert:visible").focus();
+		$(".ui-alert:visible").focus();
 
-		$(".popAlert").find(".btnConfirm").on("click",function(){
+		$(".ui-alert").find(".btn-confirm").on("click",function(){
 			window.setTimeout(opt.ycb);
 		});
-		$(".popAlert").find(".btnClose , .btnConfirm").on("click",alertClose);
+		$(".ui-alert").find(".btn-close , .btn-confirm").on("click",alertClose);
 
 		function alertClose(){
-			$(".popAlert").remove();
-			if( $(".popLayer:visible").length < 1 ){
+			$(".ui-alert").remove();
+			if( $(".pop-layer:visible").length < 1 ){
 				ui.lock.using(false);
 			}
 		}
@@ -1961,47 +2003,48 @@ var ui = { //
 		var opt = $.extend({
 			msg:msg,
 			tit:"",
+			cls:"",
 			ycb:"",
 			ybt:"확인",
 			ncb:"",
 			nbt:"취소"
 		}, params);
 
-		if( $(".popConfirm").length ) return;
+		if( $(".ui-confrim").length ) return;
 		
 		ui.lock.using(true);
 
 		var lyConfirm =
-		'<article class="popConfirm" tabindex="0">'+
+		'<article class="ui-confrim ' + opt.cls + '" tabindex="0">' +
 		'	<div class="pbd">'+
 		'		<div class="phd"><span class="tit">'+opt.tit+'</span></div>'+
-		'		<div class="pct">'+opt.msg+'</div>'+
+		'		<div class="pct"><div class="msg">'+opt.msg+'</div></div>'+
 		'		<div class="pbt">'+
-		'			<button type="button" class="btn btnCancel">'+ opt.nbt +'</button>'+
-		'			<button type="button" class="btn btnConfirm">'+ opt.ybt +'</button>'+
+		'			<button type="button" class="btn btn-cancel">'+ opt.nbt +'</button>'+
+		'			<button type="button" class="btn btn-confirm">'+ opt.ybt +'</button>'+
 		'		</div>'+
-		'		<button type="button" class="btnClose">닫기</button>'+
+		'		<button type="button" class="btn-close">닫기</button>'+
 		'	</div>'+
 		'</article>';
 		$("body").append(lyConfirm);
 		if (opt.tit) {
-			$(".popConfirm>.pbd>.phd").addClass("isTit");
+			$(".ui-confrim>.pbd>.phd").addClass("is-tit");
 		}
-		$(".popConfirm:visible").focus();
+		$(".ui-confrim:visible").focus();
 
-		$(".popConfirm").find(".btnConfirm").on("click",function(){
+		$(".ui-confrim").find(".btn-confirm").on("click",function(){
 			window.setTimeout(opt.ycb);
 		});
 
-		$(".popConfirm").find(".btnCancel").on("click",function(){
+		$(".ui-confrim").find(".btn-cancel").on("click",function(){
 			window.setTimeout(opt.ncb);
 		});
 
-		$(".popConfirm").find(".btnConfirm, .btnClose , .btnCancel").on("click",confirmClose);
+		$(".ui-confrim").find(".btn-confirm, .btn-close , .btn-cancel").on("click",confirmClose);
 
 		function confirmClose(){
-			$(".popConfirm").remove();
-			if( $(".popLayer:visible").length < 1 ){
+			$(".ui-confrim").remove();
+			if( $(".pop-layer:visible").length < 1 ){
 				ui.lock.using(false);
 			}
 		}
@@ -2011,14 +2054,14 @@ var ui = { //
 		var opt = $.extend({
 			msg:msg,
 			cls:"",
-			sec:2000,
-			bot:74
+			sec:1000,
+			bot:""
 		}, params);
 
-		if ( $(".popToast:visible").length ) { return; }
+		if ( $(".pop-toast:visible").length ) { return; }
 
 		var lyToast =
-		'<article class="popToast ' + opt.cls + '">' +
+		'<article class="pop-toast ' + opt.cls + '">' +
 		'	<div class="pbd">' +
 		'		<div class="pct">' + opt.msg + '</div>' +
 		'	</div>' +
@@ -2026,13 +2069,13 @@ var ui = { //
 
 		$("body").append(lyToast);
 		window.setTimeout(function() {
-			$(".popToast:visible").addClass("on").css({"padding-bottom" : opt.bot});
+			$(".pop-toast:visible").addClass("on").css({"padding-bottom" : opt.bot});
 		});
 		
 		window.setTimeout(function() {
-			$(".popToast:visible").removeClass("on").on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd",function(){
+			$(".pop-toast:visible").removeClass("on").on(ui.transitionend,function(){
 				// console.log("fsd");
-				$(".popToast").remove();
+				$(".pop-toast").remove();
 			});
 		}, opt.sec);
 	
