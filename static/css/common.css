@@ -978,6 +978,11 @@ table.listA tbody tr:first-child td{ border-top-width:0; }
 .isKfocus .popLayer.a .pbt{  opacity:0;display:none; height:0;}
 .isKpad .menubar:not(.hide)>.inner { transform: translateY(100%); transition: none; display:none; opacity:0; }
 
+.body.ui .keystat{position:fixed;left: 20px;top: 77px;z-index:1000;}
+.body.ui .keystat b{background:#ffffff;border: #dddddd solid 1px;font-size: 12px;padding: 4px 4px;}
+
+
+
 /* 팝업 레이어 */
 
 

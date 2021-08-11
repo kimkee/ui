@@ -13,6 +13,7 @@ var ui = { //
 		this.tree.init();
 		this.ly.init();
 		this.form.init();
+		this.keypad.init();
 		this.sort.init();
 		this.dropmenu.init();
 		this.location.init();
@@ -21,8 +22,8 @@ var ui = { //
 		this.tab.init();
 		this.tooltips.init();
 		this.mcscroll.init();
-		// this.dropDown.init();
 		this.popLayer.init();
+		this.popup.init();
 		this.popFrame.init();
 		this.popsel.init();
 		this.popSelect.init();
@@ -86,6 +87,41 @@ var ui = { //
 			if( $("nav.gnb").length && !$("#skipNav a[data-href='#gnb']").length ) {
 				$("#skipNav").prepend('<a href="javascript:;" data-href="#gnb"><span>메뉴 바로가기</span></a>');
 			}
+		}
+	},
+	debug:{
+		init:function(){
+			this.evt();
+			this.set();
+		},
+		evt:function(){
+			var _this = this;
+			$(window).on("scroll resize load", function() {
+				_this.set();
+			});
+		},
+		set:function(){
+			var dhtml = '<div id="debug"></div>';
+			!$('#debug').length && $("body").prepend(dhtml);
+			var wHt = ui.viewport.height();
+			var docH= ui.viewport.docHeight();
+			var scr = ui.viewport.scrollTop() + wHt + 0; 
+			var sct = ui.viewport.scrollTop(); 
+			$('#debug').html('SCT : '+ sct + ' ,SCR : '+ scr + ' , DOCH : ' +docH + " , visualViewport : "+ wHt+"  , iosX :  "+JSON.stringify( ui.getSafe ) );
+		}
+	},
+	viewport:{
+		height:function(){
+			return parseInt( window.visualViewport ? visualViewport.height : window.innerHeight );
+		},
+		width:function(){
+			return parseInt( window.visualViewport ? visualViewport.width : window.innerWidth );
+		},
+		docHeight:function(){
+			return parseInt( document.documentElement.scrollHeight || document.body.clientHeight );
+		},
+		scrollTop:function(){
+			return parseInt( document.documentElement.scrollTop );
 		}
 	},
 	cm:{ // 공통
@@ -186,6 +222,56 @@ var ui = { //
 			}
 		}
 		return result ;
+	},
+	keypad:{ // 키패드 올라왔는지 내려갔는지 추측해보자
+		init:function(){
+			this.set();
+			this.evt();
+		},
+		viewh:null,
+		set:function(){
+			this.viewh = ui.viewport.height();
+			// console.log( this.viewh );
+			var testElement = document.createElement('p');
+			testElement.style.position = 'fixed';
+
+			function isKeyboardVisible() {
+				testElement.style.top = 0;
+				return !!testElement.offsetTop;
+			}
+
+			setTimeout(function() {
+				// console.log(  isKeyboardVisible() ? 'Keyboard is visible' : 'Keyboard is not visisble');
+				if( isKeyboardVisible() ){
+					$("body").addClass("is-keypad");
+					$("body.ui .keystat").html('<b>KeyShow</b>');
+				}else{
+					$("body").removeClass("is-keypad");
+					$("body.ui .keystat").html('');
+				}
+			}, 500);
+		},
+		evt:function(){
+			var _this = this;
+			$(document).on({
+				"focus":function(e){
+					//$("body").addClass("is-keypad");
+				},
+				"blur":function(e){
+					//$("body").removeClass("is-keypad");
+				}
+			},"input:not([type=radio] , [type=checkbox] , [type=file]),textarea");
+			$(window).on("resize", function(){
+				var viewh_now = ui.viewport.height();
+				if (viewh_now < _this.viewh - 100 ) {
+					$("body").addClass("is-keypad");
+					$("body.ui .keystat").html('<b>KeyShow</b>');
+				}else{
+					$("body").removeClass("is-keypad");
+					$("body.ui .keystat").html('');
+				}
+			});
+		}
 	},
 	getSafe:{ // 아이폰X 여백값
 		init:function(){
@@ -2080,6 +2166,117 @@ var ui = { //
 		}, opt.sec);
 	
 		
+	},
+	popup:{ // 레이어팝업
+		init: function() {
+			var _this = this;
+			$(document).on("click", ".pop-layer .btn-pop-close:not('.non')", function() {
+				var id = $(this).closest(".pop-layer").attr("id");
+				_this.close(id);
+			});
+
+			$(document).on("click", ".pop-layer", function(e) {
+				var id = $(this).closest(".pop-layer").attr("id");
+				// console.log(e.target);
+				if ( $(e.target).is(".pop-layer") ) {
+					// _this.close(id);
+				}
+			});
+			_this.resize();
+			$(window).on("load resize",function(){
+				_this.resize();
+			});
+			// 레이어팝업내에서 입력시 스크롤 조정
+			// var elsInput =  ".pop-layer:visible .input input ,"+
+			// 				".pop-layer:visible .textarea textarea";
+			// $(document).on("click focus", elsInput  , function(e) {
+			// 	var els = $(this).closest(".input , .textarea") ;
+			// 	var id = $(this).closest(".pop-layer").attr("id");
+			// 	window.setTimeout(function(){
+			// 		var myTop = els.offset().top + $("#"+id+" .pct").scrollTop() - $(window).scrollTop() - $("#"+id+">.pbd").position().top  ;
+			// 		var myMax = $("#"+id+" .poptents").outerHeight() * 0.5  ;
+			// 		var phdH = $("#"+id+" .phd:visible").outerHeight() + 20 || 0 ;
+			// 		//console.log(myTop , $("#"+id+" .phd").position().top );
+			// 		$("#"+id+" .pct").scrollTop(myTop - phdH);
+			// 		if ( myTop >= myMax ) {
+			// 			//console.log("fsd");
+			// 		}
+			// 		//console.log( $("#"+id+" .pct").scrollTop() ,  $("#"+id+" .pbt:visible").outerHeight() || 0 );
+			// 		_this.resize();
+			// 	},600);
+			// });
+
+
+		},
+		callbacks:{},
+		open: function(id,params) {
+			// console.log(id,params);
+			var _this = this;
+
+			if ( $("#" + id).length  <= 0  ) return ;   // id 호출팝업이 없으면 리턴
+
+			_this.opt = $.extend({
+				ocb: null ,
+				ccb: null,
+				direct: "none",
+				zIndex: "",
+			}, params);
+
+			_this.callbacks[id] = {} ;
+			_this.callbacks[id].open  = _this.opt.ocb ? _this.opt.ocb : null ;
+			_this.callbacks[id].close = _this.opt.ccb ? _this.opt.ccb : null ;
+
+			ui.lock.using(true);
+
+			$("body").addClass("is-pop "+ "is-"+id);
+			if( $("#" + id).find(".pbt").length ) {
+				$("body").addClass("is-pop-pbt");
+			}
+		
+			$("#" + id).addClass(_this.opt.direct).css({ zIndex: _this.opt.zIndex }).fadeIn(10,function(){
+				if(_this.callbacks[id].open)  _this.callbacks[id].open();
+				$(this).addClass("on").attr("tabindex","0").focus(); 
+				_this.resize();
+			});
+			
+			window.setTimeout(function(){
+				_this.resize();
+			});
+		},
+		close: function(id,params) {
+			var _this = this;
+			_this.closOpt = $.extend({
+				ccb: null,
+			}, params);
+
+			$("#"+id).removeClass("on").on(ui.transitionend,function(){
+				_this.resize();
+				$(this).hide().removeClass(_this.opt.direct);
+				// if( typeof _this.callbacks[id].close == "function" ){ _this.callbacks[id].close(); }
+				try{ _this.callbacks[id].close(); }catch(error){}
+				// if( typeof _this.closOpt.ccb == "function") { _this.closOpt.ccb(); }
+				try{ _this.closOpt.ccb(); }catch(error){}
+
+				if( !$(".pop-layer:visible").length ){ 
+					ui.lock.using(false);
+					$("body").removeClass("is-pop").removeClass("is-"+id);
+					$("body").removeClass("is-pop-pbt");
+				}
+				$(this).off(ui.transitionend);
+			}).css({"z-index":""});
+		},
+		resize:function(){
+ 			$(".pop-layer:visible").each(function(){
+				var $pop = $(this);
+				var pctnH =  $pop.outerHeight();
+				var pbtnH =  $pop.find(".pbt:visible").outerHeight() || 0 ;
+				pctnH = pctnH - ( $pop.find(".phd").outerHeight() || 0 );
+				if( $pop.is(".a") ){ $pop.find(".pbd>div.pct").css({"height": pctnH - pbtnH  }); }
+				if( $pop.is(".b") ){ $pop.find(".pbd>div.pct").css({"max-height": pctnH - pbtnH - 40 });}
+				if( $pop.is(".c") ){ $pop.find(".pbd>div.pct").css({"max-height": pctnH - 20 });}
+			 });
+		},
+		scroll:{}
 	},
 	popsel:{ // 셀렉트 스와이프
 		init:function(){
