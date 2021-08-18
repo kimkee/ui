@@ -50,7 +50,7 @@
 
 			$(document).on("click","nav.uimenu .menu .list>li>a",function(e){
 				var $this = $(this);
-				if ($("body").hasClass("lock")) {
+				if ($("body").hasClass("is-lock")) {
 					_this.using("close");
 				}
 				setTimeout(function(){
@@ -90,7 +90,7 @@
 		},
 		list:function(){
 			var _this = this;
-			$(".contain.ui .sect h3.hdt").each(function(idx){
+			$(".page.ui .sect h3.hdt").each(function(idx){
 				// console.log( $(this).text() );
 				var mtxt = $(this).text();
 				var msid = $(this).closest(".sect").data("sid");

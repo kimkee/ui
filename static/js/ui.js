@@ -37,6 +37,8 @@ var ui = { //
 		this.getSafe.init();
 		this.movePage.init();
 		this.elip.init();
+		this.htgrade.init();				// 하트그래프 circle-progress.js  미사용
+		this.htgage.init();					// 하트지수
 	},
 	update:function(){ // 페이지 동적으로 뿌린 후 업데이트 ui.update();
 		this.popsel.set();
@@ -458,8 +460,8 @@ var ui = { //
 	},
 	ly:{ // 레이아웃
 		init:function(){
-			if ( $("#contain").length ) {
-				var cls = $("#contain").attr("class").replace("contain","");
+			if ( $("#container").length ) {
+				var cls = $("#container").attr("class").replace("container","").replace("page","");
 				$("body").addClass(cls);
 			}
 			$(window).on("load resize scroll", this.resize );
@@ -478,6 +480,7 @@ var ui = { //
 			if( $("#menubar").length ) this.botNav.init();
 			this.kpad.init();
 			// this.kpad2.init();
+			this.contHeight();
 		},
 		kpad:{ // input textarea 에 포커스시  하단 버튼 컨트롤
 			init:function(){
@@ -719,14 +722,18 @@ var ui = { //
 			}
 		},
 		contHeight:function(){
-			/*
-			var $contain = $(".wrap>.contain");
+			
+			var $container = $(".wrap .container:visible");
 			var winH = $(window).height();
-			var headH = $(".wrap>.head").outerHeight();
-			var footH = $(".wrap>.foot").outerHeight();
-			var navH = $(".wrap>.nav").outerHeight();
-			$contain.css("min-height", winH - headH - footH - navH);
-			*/
+			var menebarH = $(".wrap .menubar>.inr:visible").outerHeight() || 0;
+			var headH = $(".wrap .header>.inr:visible").outerHeight() || 0;
+			var pageH = $(".wrap .pagehead:not(.hauto)>.inr:visible").outerHeight() || 0;
+			var floatbotsH = $(".wrap .floatbots>.inr:visible").outerHeight() || 0;
+			var footH = $(".wrap .footer>.inr:visible").outerHeight() || 0;
+			//console.log(winH , headH , footH );
+			$container.css("min-height", parseInt( winH - headH - footH - menebarH - pageH - floatbotsH) );
+			$container.find(".contents.h100p").css("height", parseInt( winH - headH - footH - menebarH - pageH - floatbotsH) );
+			
 		}
 	},
 	elip:{ // 5줄이상 내용더보기 
@@ -749,7 +756,7 @@ var ui = { //
 			$("[data-ui='elips']").each(function(){
 				var txtH = $(this).find(".txt");
 				// console.log(txtH.height());
-				if(txtH.height()>124){
+				if(txtH.height()>105){
 					txtH.closest("[data-ui='elips']").addClass("elips");
 				}else{
 					txtH.closest("[data-ui='elips']").removeClass("elips");
@@ -866,6 +873,121 @@ var ui = { //
 			}else{
 				$(els).closest(".uidropmu").addClass("bot"); // console.log("하");
 			}
+		}
+	},
+	htgrade:{ // 하트지수(Old version) 지금 안씀...
+		init:function(){
+			$(".ui-htgrade").length && this.set();
+		},
+		set:function(){
+			
+			var gcolor = [
+				'{"color":"#aeb0be"}',
+				'{"color":"#ffd800"}',
+				'{"color":"#ffb100"}',
+				'{"color":"#ff8900"}',
+				'{"color":"#ff6652"}',
+				'{"color":"#f1344d"}'
+			];
+			$(".ui-htgrade").each(function(){
+				var level = $(this).data("level");
+				var point = $(this).data("point");
+ 				$(this).attr("data-fill", gcolor[level] );
+				// console.log( level, gcolor[0] );
+				var value = ( point - 100 * ( level-1) ) * 0.01 ;
+				if( level <= 0 ) {
+					value = 0;
+				}
+				// value <= 0 ? value = 1 : null ;
+				// console.log(value);
+				$(this).attr("data-value",value);
+				$(this).find('.pnt .s').remove();
+			});
+
+
+			$(".ui-htgrade").circleProgress({
+				arcCoef: 0.7,
+				size:"45",
+				animationStartValue:"0.0",
+				startAngle : 1.61 ,// * Math.PI,
+				// fill: { "color": "#f1344d" } ,
+				thickness:"3.5",
+				emptyFill:"rgba(174, 174, 174,1.0)",
+				// value: 0.5,
+				// fill: {"image": "http://i.imgur.com/pT0i89v.png"},
+				// fill: {gradient: [['#000', .1], ['#444', .8]], gradientAngle: Math.PI / 4},
+			}).on("circle-animation-progress", function(event, progress, stepValue) {
+				// $(this).find('strong').text(stepValue.toFixed(2).substr(1));				
+				
+				var level = $(this).data("level");
+				var point = $(this).data("point");
+				var lv = ( level * 100 ) - 100;
+				var mmm;
+				// stepValue == 1 ? mmm = 1 : mmm = 0;
+				var htpont;
+				var minus = $(this).data("minus");
+				// console.log(datagaps);
+				if( level == 0 ) {
+					$(this).find(".pnt .s").hide();
+					// console.log(progress);
+					htpont = 0 ;
+				}else{
+					// htpont = Math.floor( 100 * stepValue );
+					htpont = Math.floor( 100 * stepValue + ( lv )   ) ;
+				}
+				if( level < 0 ) {
+					$(this).find(".pnt .s").hide();
+					htpont = Math.floor( 100 * stepValue + point   ) ;
+				}
+				// console.log(stepValue);
+				
+				$(this).find(".pnt .p").html(  htpont );
+				
+				if (point >= 500 && stepValue >= 1) {
+					$(this).addClass("crown");
+				}
+				if (point >= 1000 && stepValue >= 1) {
+					$(this).find(".pnt").html('<i class="p">999</i><i class="s">+</i>');
+					// $(this).find('.pnt .p').html("999");
+				}
+
+			}).on("circle-animation-end", function (event, progress) {
+				// var lv = $(this).data("level");
+				// console.log("완료",lv);
+				// $(this).find("canvas").css({"opacity":"0"});
+			});
+		}
+	},
+	htgage:{ // 하트지수
+		init:function(){
+			$(".ui-htgage").length && this.set();
+		},
+		set:function(){
+			$(".ui-htgage").each(function(){
+				var level = $(this).data("level");
+				var point = $(this).data("point");
+				var value = ( point - 100 * ( level-1) ) ;
+				if( level <= 0 ) {
+					// value = 0;
+				}
+				if( level == 0 ) {
+					value = -value + 100;
+				}
+				if( point < -50 ) {
+					$(this).addClass("lvZ");
+				}
+				if (point >= 500 ) {
+					$(this).addClass("crown");
+				}
+				if( value > 100 ) {
+					value = 100;	
+				}
+				// value <= 0 ? value = 1 : null ;
+				// console.log(value);
+				$(this).attr("data-value",value);
+				$(this).find(".pnt .p").css("width",value+"%");
+				$(this).find(".pnt .s").remove();
+			});
 		}
 	},
 	location:{
@@ -1928,35 +2050,6 @@ var ui = { //
 			$("[data-ui-tab-ctn][data-ui-tab-val='"+btn+"']").addClass("active");
 		}
 	},
-	// lock:{ // 스크롤 막기,풀기
-		// sct:0,
-		// stat:false,
-		// els:".popLayer:visible  , .popConfirm:visible , .popAlert:visible",
-		// set:function(){
-			// if(	$(this.els).length <= 0 ){
-				// this.using(false);
-			// }
-		// },
-		// using:function(opt){
-			// 
-			// var lockDiv = ".popLayer  , .popConfirm , .popAlert" ;
-			// 
-			// if(opt === true && this.stat === false ){
-				// this.stat = true;
-				// ui.lock.sct = $(window).scrollTop();
-				// $("body , html").addClass("lock");
-				// $("html").css({"top":""+(-ui.lock.sct)+"px"});
-				// $(lockDiv).bind("touchmove scroll", function(e){ e.preventDefault(); });
-			// }
-			// if( opt === false && $(this.els).length <= 0 ){
-				// this.stat = false;
-				// $("body , html").removeClass("lock");
-				// $("html").css({"top":""});
-				// $(window).scrollTop( ui.lock.sct );
-				// $(lockDiv).unbind("touchmove scroll");
-			// }
-		// }
-	// },
 	lock:{ // 스크롤 막기,풀기
 		sct:0,
 		stat:false,
@@ -3137,142 +3230,3 @@ $(document).ready(function(){
 
 
 
-
-// function css_browser_selector(u) {
-// 	var ua = u.toLowerCase(),
-// 		is = function(t) {
-// 			return ua.indexOf(t) > -1;
-// 		},
-// 		g = 'gecko',
-// 		w = 'webkit',
-// 		s = 'safari',
-// 		c = 'chrome',
-// 		o = 'opr',
-// 		m = 'mobile',
-// 		v = 0,
-// 		r = window.devicePixelRatio ? (window.devicePixelRatio + '').replace('.', '_') : '1';
-// 	var res = [
-// 		/* IE */
-// 		(!(/opera|webtv/.test(ua)) && /msie\s(\d+)/.test(ua) && (v = RegExp.$1 * 1)) ?
-// 			('ie ie' + v + ((v == 6 || v == 7) ?
-// 				' ie67 ie678 ie6789' : (v == 8) ?
-// 				' ie678 ie6789' : (v == 9) ?
-// 				' ie6789 ie9m' : (v > 9 ) ?
-// 				' ie9m' : '')) :
-// 			/* EDGE */
-// 			(/edge\/(\d+)\.(\d+)/.test(ua) && (v = [RegExp.$1, RegExp.$2])) ?
-// 			'ie ie' + v[0] + ' ie' + v[0] + '_' + v[1] + ' ie9m edge' :
-// 				/* IE 11 */
-// 				(/trident\/\d+.*?;\s*rv:(\d+)\.(\d+)\)/.test(ua) && (v = [RegExp.$1, RegExp.$2])) ?
-// 					'ie ie' + v[0] + ' ie' + v[0] + '_' + v[1] + ' ie9m' :
-// 					/* FF */
-// 					(/firefox\/(\d+)\.(\d+)/.test(ua) && (re = RegExp)) ?
-// 						g + ' ff ff' + re.$1 + ' ff' + re.$1 + '_' + re.$2 :
-// 						is('gecko/') ? g :
-// 							/* Opera */
-// 							is(o) ? o + (/version\/(\d+)/.test(ua) ? ' ' + o + RegExp.$1 :
-// 								(/opera(\s|\/)(\d+)/.test(ua) ? ' ' + o + RegExp.$2 : '')) :
-// 								/* K */
-// 								is('konqueror') ? 'konqueror' :
-// 									/* Black Berry */
-// 									is('blackberry') ? m + ' blackberry' :
-// 										/* Chrome */
-// 										(is(c) || is('crios')) ? w + ' ' + c :
-// 											/* Iron */
-// 											is('iron') ? w + ' iron' :
-// 												/* Safari */
-// 												!is('cpu os') && is('applewebkit/') ? w + ' ' + s :
-// 													/* Mozilla */
-// 													is('mozilla/') ? g : '',
-// 		/* Android */
-// 		is('android') ? m + ' android' : '',
-// 		/* Tablet */
-// 		is('tablet') ? 'tablet' : '',
-// 		/* Machine */
-// 		is('j2me') ? m + ' j2me' :
-// 			is('ipad; u; cpu os') ? m + ' chrome android tablet' :
-// 				is('ipad;u;cpu os') ? m + ' chromedef android tablet' :
-// 					is('iphone') ? m + ' ios iphone' :
-// 						is('ipod') ? m + ' ios ipod' :
-// 							is('ipad') ? m + ' ios ipad tablet' :
-// 								is('mac') ? 'mac' :
-// 									is('darwin') ? 'mac' :
-// 										is('webtv') ? 'webtv' :
-// 											is('win') ? 'win' + (is('windows nt 6.0') ? ' vista' : '') :
-// 												is('freebsd') ? 'freebsd' :
-// 													(is('x11') || is('linux')) ? 'linux' : '',
-// 		/* Ratio (Retina) */
-// 		(r != '1') ? ' retina ratio' + r : '',
-// 		'js portrait'].join(' ');
-// 	if(window.jQuery && !window.jQuery.browser) {
-// 		window.jQuery.browser = v ? {msie: 1, version: v} : {};
-// 	}
-// 	return res;
-// }
-// (function(d, w) {
-// 	var _c = css_browser_selector(navigator.userAgent);
-// 	var h = d.documentElement;
-// 	h.className += ' ' + _c;
-// 	var _d = _c.replace(/^\s*|\s*$/g, '').split(/ +/);
-// 	w.CSSBS = 1;
-// 	for(var i = 0; i < _d.length; i++) {
-// 		w['CSSBS_' + _d[i]] = 1;
-// 	}
-// 	var _de = function(v) {
-// 		return d.documentElement[v] || d.body[v];
-// 	};
-// 	if(w.jQuery) {
-// 		(function($) {
-// 			var p = 'portrait', l = 'landscape';
-// 			var m = 'smartnarrow', mw = 'smartwide', t = 'tabletnarrow', tw = 'tabletwide', ac = m + ' ' + mw + ' ' + t + ' ' + tw + ' pc';
-// 			var $h = $(h);
-// 			var to = 0, cw = 0;
-
-// 			/* ie7 cpu 100% fix */
-// 			function CSSSelectorUpdateSize() {
-// 				if(to != 0) return;
-// 				try {
-// 					var _cw = _de('clientWidth'), _ch = _de('clientHeight');
-// 					if(_cw > _ch) {
-// 						$h.removeClass(p).addClass(l);
-// 					} else {
-// 						$h.removeClass(l).addClass(p);
-// 					}
-// 					if(_cw == cw) return;
-// 					cw = _cw;
-// 					//clearTimeout(to);
-// 				} catch(e) {
-// 				}
-// 				to = setTimeout(CSSSelectorUpdateSize_, 100);
-// 			}
-
-// 			function CSSSelectorUpdateSize_() {
-// 				try {
-// 					$h.removeClass(ac);
-// 					$h.addClass(
-// 						(cw <= 360) ? m :
-// 							(cw <= 640) ? mw :
-// 								(cw <= 768) ? t :
-// 									(cw <= 1024) ? tw : 'pc'
-// 					);
-// 				} catch(e) {
-// 				}
-// 				to = 0;
-// 			}
-
-// 			if(w.CSSBS_ie) {
-// 				setInterval(CSSSelectorUpdateSize, 1000);
-// 			} else {
-// 				$(w).on('resize orientationchange', CSSSelectorUpdateSize).trigger('resize');
-// 			}
-// 			$(w).on("load",function(){
-// 				CSSSelectorUpdateSize();
-// 			});
-// 		})(w.jQuery);
-// 	}
-// })(document, window);
-
-
-// if(window.CSSBS_ios) {
-// 	//console.log(window.CSSBS_ios);
-// }

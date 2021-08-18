@@ -38,17 +38,21 @@
 	<!-- 컨텐츠 시작 -->
 	<div id="barH"><i></i></div>
 
-	<div class="contain ui" id="contain">
+	<main class="container page ui" id="container">
 
-		<main class="contents" id="contents">
+		<div class="contents" id="contents">
 
-			<div class="device">
-				<h3>User Agent</h3>
-				<div id="userAgent"></div>
-				<div id="cssStatus"></div>
-				<div id="browserStatus"></div>
-				<div id="iosSafe"></div>
-			</div>
+			<div class="uisect">
+
+			<section class="sect" data-sid="ui-agent">
+				<h3 class="hdt">User Agent</h3>
+				<div class="device">
+					<div id="userAgent"></div>
+					<div id="cssStatus"></div>
+					<div id="browserStatus"></div>
+					<div id="iosSafe"></div>
+				</div>
+			</section>
 
 			<section class="sect" data-sid="ui-button">
 				<h3 class="hdt">버튼 - 높이,색상</h3>
@@ -342,7 +346,6 @@
 				</script>
 			</section>
 
-
 			<section class="sect" data-sid="ui-select">
 				<h3 class="hdt">입력 - Select 팝업</h3>
 
@@ -439,6 +442,7 @@
 				</span>
 
 			</section>
+
 			<section class="sect" data-sid="ui-copy">
 				<h3 class="hdt">복사 COPY Text</h3>
 				<div class="nums" id="rwd_code">20200416-aBDS</div>
@@ -487,15 +491,7 @@
 					<input type="tel" class="amt" placeholder="희망가격 입력(원)" value="">
 					<i class="w">원</i>
 				</div>
-<!-- 				<p class="gap"></p>
-				<span class="textarea db"><textarea class="ment"  placeholder="댓글달기 자동높이" id="input_reply"></textarea></span>
-				<script src="../../js/lib/autosize-master/dist/autosize.js"></script>
-				<script>
-					autosize( $('#input_reply') );
-					$('#input_reply').on('autosize:resized', function(){
-						console.log('textarea height updated');
-					});
-				</script> -->
+
 				<style>
 					span.textarea>textarea.ment{height: 48px;max-height: 98px;}
 					span.textarea>textarea.reply{min-height: 100px;max-height: 200px;/* border: none; */}
@@ -716,6 +712,10 @@
 					</ul>
 				</div>
 			</section>
+			
+			</div>
+			
+			<div class="uisect">
 
 			<section class="sect" data-sid="ui-loading">
 				<h3 class="hdt">로딩 - ui.loading</h3>
@@ -869,6 +869,96 @@
 				</div>
 			</section>
 
+			<section class="sect" data-sid="ui-pie">
+				<h3 class="hdt">Graph - Pie</h3>
+				
+				<div class="ui-htgrade lv0" data-level="-1" data-point="-84">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+
+				<div class="ui-htgrade lv0" data-level="0" data-point="0">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+				<div class="ui-htgrade lv1" data-level="1" data-point="38">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+				
+				<div class="ui-htgrade lv2" data-level="2" data-point="145">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+				
+				<div class="ui-htgrade lv3" data-level="3" data-point="299">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+				
+				<div class="ui-htgrade lv4" data-level="4" data-point="350">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+				
+				<div class="ui-htgrade lv5" data-level="5" data-point="499">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+				
+				<div class="ui-htgrade lv5" data-level="5" data-point="1100">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+				<script src="../../js/circle-progress.js"></script>
+				<script>// ui.htgage.set();</script>
+
+			</section>
+
+			<section class="sect" data-sid="ui-hartgage">
+				<h3 class="hdt">하트지수</h3>
+				
+				<div class="ui-htgage lv0" data-level="-1" data-point="-84">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+
+				<div class="ui-htgage lv0" data-level="0" data-point="-30">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+				<div class="ui-htgage lv1" data-level="1" data-point="38">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+				
+				<div class="ui-htgage lv2" data-level="2" data-point="145">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+				
+				<div class="ui-htgage lv3" data-level="3" data-point="299">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+				
+				<div class="ui-htgage lv4" data-level="4" data-point="350">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+				
+				<div class="ui-htgage lv5" data-level="5" data-point="401">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+				
+				<div class="ui-htgage lv5" data-level="5" data-point="1100">
+					<em class="ico"></em>
+					<b class="pnt"><i class="p"></i></b>
+				</div>
+
+			</section>
+
 			<section class="sect" data-sid="ui-uispiner">
 				<h3 class="hdt">수량 변경</h3>
 				<div class="uispiner" data-min="1" data-max="5"><!-- 기본값은 1 ~ 9999 -->
@@ -887,7 +977,6 @@
 				<span class="uispined" data-max="12"><input class="amt" value="5" type="number"></span>
 				<span class="uispined" data-max="20"><input class="amt" value="15" type="number"></span>
 			</section>
-
 
 			<section class="sect" data-sid="ui-dropdown">
 						
@@ -1337,8 +1426,8 @@
 				</div>
 			</section>
 
-			<section class="sect" data-sid="ui-bullets">
-				<h3 class="hdt">불릿 리스트</h3>
+			<section class="sect" data-sid="ui-elips">
+				<h3 class="hdt">말줄임</h3>
 
 				<div data-ui="elips">
 					<span class="txt">
@@ -1426,9 +1515,10 @@
 				</script>
 			</section>
 
-		</main>
+			</div>
+		</div>
 
-	</div>
+	</main>
 
 	<div id="layers">
 
