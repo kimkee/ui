@@ -335,7 +335,7 @@
 			</section>
 			<p class="gap"></p><p class="gap"></p><p class="gap"></p><p class="gap"></p>
 
-			<div class="uiSlider" id="slider">
+			<div class="ut-slider" id="slider">
 				<div class="ui-slider-handle"><span id="custom-handle"></span></div>
 			</div>
 			<script>
@@ -363,7 +363,7 @@
 
 			<div id="amount"></div>
 			<p class="gap"></p>
-			<div class="uiSlider" id="slider-range"></div>
+			<div class="ut-slider" id="slider-range"></div>
 			
 			<script>
 			$(document).ready(function(){
@@ -456,7 +456,7 @@
 			</div>
 
 			<p class="gap"></p>
-			<div class="uiStar" data-star="3.5">
+			<div class="ui-star" data-star="3.5">
 				<ul>
 					<li><em class="st">별</em></li>
 					<li><em class="st">별</em></li>
@@ -468,7 +468,7 @@
 			</div>
 			
 			<p class="gap"></p>
-			<div class="uiStar">
+			<div class="ui-star">
 				<ul>
 					<li><button type="button" class="st">별</button></li>
 					<li><button type="button" class="st">별</button></li>
@@ -872,9 +872,9 @@
 
 			<p class="gap"></p>
 
-			<section class="uiTbList">
+			<section class="ut-tblist">
 				<ul class="list" id="dp_list"></ul>
-				<div class="uiLoadMore">
+				<div class="ui-loadmore">
 					<em></em>
 					<button type="button" class="btnLoad" onclick="itemListAdd()" id="btnListMore">불러오기</button>
 				</div>
@@ -885,7 +885,7 @@
 	
 	</div>
 
-	<div class="floatNav">
+	<div class="floatnav">
 		<button type="button" class="bt refresh">Refresh</button>
 		<button type="button" class="bt top">TOP</button>
 	</div>

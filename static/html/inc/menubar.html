@@ -1,14 +1,35 @@
-﻿<div class="floatNav">
-	<button type="button" class="bt refresh">Refresh</button>
-	<button type="button" class="bt top">TOP</button>
+﻿<div class="floatnav"><!-- is-btnreg 게시글등록보임  is-btnwrt 글쓰기보임 -->
+	<button type="button" class="bt top">위로</button>
+	<button type="button" class="bt reg">게시글동록</button>
+
+	<!-- ui.ly.floating.ptreg.open(); -->
+	<!-- ui.ly.floating.ptreg.close(); -->
+	<div class="rgbox">
+		<ul class="menu">
+			<li class="simp">
+				<em class="txt">빠르고 간편하게<br> 상품을 등록하고 거래하세요</em>
+				<a class="btd" href="../../html/pd/P03000000.html">
+					<i class="tt">간편등록</i>
+				</a>
+			</li>
+			<li class="safe">
+				<em class="txt">하트마켓만의 서비스를 통해<br> 안전하게 거래하세요</em>
+				<a class="btd" href="../../html/pd/P03000000.html">
+					<i class="tt">안전등록</i>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+
 </div>
 <nav id="menubar" class="menubar">
-	<div class="inner">
+	<div class="inr">
 		<ul class="menu">
-			<li class="home"><a href="javascript:;">HOME</a></li>
-			<li class="adds"><a href="javascript:;" onclick="samplePopA();">MENU1</a></li>
-			<li class="look"><a href="javascript:;" onclick="samplePopB();">MENU2</a></li>
-			<li class="look"><a href="javascript:;" onclick="samplePopC();">MENU3</a></li>
+			<li class="home"><a href="javascript:;" onclick="ui.debug.init();">HOME</a></li>
+			<li class="adds"><a href="javascript:;" onclick="popsample_A();">MENU1</a></li>
+			<li class="look"><a href="javascript:;" onclick="popsample_B();">MENU2</a></li>
+			<li class="look"><a href="javascript:;" onclick="popsample_C();">MENU3</a></li>
 		</ul>
 	</div>
 </nav>

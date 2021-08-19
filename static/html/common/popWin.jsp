@@ -10,12 +10,12 @@
 	
 	<!-- 컨텐츠 시작 -->
 
-	<article class="popLayer win type a popSample1" id="popSample1">
+	<article class="pop-layer win a pop-sample1" id="pop-sample1">
 		<div class="pbd">
 			<div class="phd">
 				<div class="in">
 					<h1 class="tit">타이틀</h1>
-					<button type="button" class="btnPopClose" onclick="window.self.close();">닫기</button>
+					<button type="button" class="btn-pop-close" onclick="window.self.close();">닫기</button>
 				</div>
 			</div>
 			<div class="pct">

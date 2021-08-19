@@ -105,12 +105,12 @@
 	";popLayer.a": {
 		"prefix": ";pop",
 		"body": [
-			"<article class=\"popLayer a\" id=\"${1:popSample2}\">",
+			"<article class=\"pop-layer a\" id=\"${1:popSample2}\">",
 			"    <div class=\"pbd\">",
 			"        <div class=\"phd\">",
 			"            <div class=\"in\">",
-			"                <h1 class=\"tit\">${2:팝업레이어 타이틀} <em class=\"num\">(<i>12</i>건)</em></h1>",
-			"                <button type=\"button\" class=\"btnPopClose\">닫기</button>",
+			"                <h1 class=\"ptit\">${2:팝업레이어 타이틀} <em class=\"num\">(<i>12</i>건)</em></h1>",
+			"                <button type=\"button\" class=\"btn-pop-close\">닫기</button>",
 			"            </div>",
 			"        </div>",
 			"        <div class=\"pct\">",
@@ -122,20 +122,20 @@
 			"</article>",
 
 			"<script>",
-			"    ui.popLayer.open('${1:popSample2}');",
+			"    ui.popup.open('${1:popSample2}');",
 			"</script>"
 		],
-		"description": "팝업레이어.popLayer.a "
+		"description": "팝업레이어.pop-layer.a "
 	},
 	";popLayer.win": {
 		"prefix": ";pop",
 		"body": [
-			"<article class=\"popLayer win\">",
+			"<article class=\"pop-layer win\">",
 			"    <div class=\"pbd\">",
 			"        <div class=\"phd\">",
 			"            <div class=\"in\">",
-			"                <h1 class=\"tit\">${2:팝업윈도우 타이틀}</h1>",
-			"                <button type=\"button\" class=\"btnPopClose\">닫기</button>",
+			"                <h1 class=\"ptit\">${2:팝업윈도우 타이틀}</h1>",
+			"                <button type=\"button\" class=\"btn-pop-close\">닫기</button>",
 			"            </div>",
 			"        </div>",
 			"        <div class=\"pct\">",
@@ -146,6 +146,6 @@
 			"    </div>",
 			"</article>"
 		],
-		"description": "팝업윈도우.popLayer.win "
+		"description": "팝업윈도우.pop-layer.win "
 	}
 }

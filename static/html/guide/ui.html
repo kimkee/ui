@@ -96,8 +96,8 @@
 				</div>
 				<p class="gap"></p>
 				<div class="btn-set fit">
-					<a href="javascript:;" class="btn type a">버튼</a>
-					<a href="javascript:;" class="btn type d">버튼</a>
+					<a href="javascript:;" class="btn a">버튼</a>
+					<a href="javascript:;" class="btn d">버튼</a>
 				</div>
 				<script>
 					var tapped = false;
@@ -158,67 +158,67 @@
 			</section>
 
 			<section class="sect" data-sid="ui-layerpop">
-				<h3 class="hdt">레이어팝업 - ui.popLayer</h3>
+				<h3 class="hdt">레이어팝업 - ui.popup</h3>
 				<section class="codeBox"> 
 					<div class="code">
 						<div class="bts">
-							<a class="btn" href="javascript:samplePopA();">팝레이어A</a>
-							<a class="btn" href="javascript:samplePopB();">팝레이어B</a>
-							<a class="btn" href="javascript:samplePopC();">팝레이어C</a>
-							<a class="btn" href="javascript:samplePopFrameA();">팝프레임A</a>
+							<a class="btn" href="javascript:popsample_A();">팝레이어A</a>
+							<a class="btn" href="javascript:popsample_B();">팝레이어B</a>
+							<a class="btn" href="javascript:popsample_C();">팝레이어C</a>
+							<a class="btn" href="javascript:popsample_frame_A();">팝프레임A</a>
 						</div>
 						<pre class="brush: js">
-							ui.popLayer.open('popSample1'); // 팝레이어열기
-							ui.popLayer.close('popSample1'); // 팝레이어닫기
-							ui.popLayer.refresh('popSample1'); // 팝스크롤새로고침
-							ui.popFrame.open('popFrame1'); // 팝프레임열기</pre>
+							ui.popup.open('pop-sample1'); // 팝레이어열기
+							ui.popup.close('pop-sample1'); // 팝레이어닫기
+							ui.popup.refresh('pop-sample1'); // 팝스크롤새로고침
+							ui.popframe.open('pop-frame1'); // 팝프레임열기</pre>
 					</div>	
 				</section>
 				<script>
 					
-					var samplePopFrameA = function(){
+					var popsample_frame_A = function(){
 						// 팝프레임 열기 콜백
-						ui.popFrame.open('popFrame1',{
+						ui.popframe.open('pop-frame1',{
 							// hash:true,
 							ocb:function(){
-								console.log("popFrame1 열림");
+								console.log("pop-frame1 열림");
 							},
 							ccb:function(){
-								console.log("popFrame1 닫힘");
+								console.log("pop-frame1 닫힘");
 							}
 						});
 					}
-					var samplePopA = function(){
+					var popsample_A = function(){
 						// 레이어팝업 열기 콜백
-						ui.popLayer.open('popSample1',{
+						ui.popup.open('pop-sample1',{
 							hash:true,
-							direct:"right",
+							direct:"left",
 							ocb:function(){
-								console.log("popSample1 열림");
+								console.log("pop-sample1 열림");
 							},
 							ccb:function(){
-								console.log("popSample1 닫힘");
+								console.log("pop-sample1 닫힘");
 							}
 						});
 					}
-					var samplePopB = function(){
+					var popsample_B = function(){
 						// 레이어팝업 열기 콜백
-						ui.popLayer.open('popSample2',{
+						ui.popup.open('pop-sample2',{
 							hash:true,
 							// direct:"bottom",
 							ocb:function(){
-								console.log("popSample2 열림");
+								console.log("pop-sample2 열림");
 							},
 							ccb:function(){
-								console.log("popSample2 닫힘");
+								console.log("pop-sample2 닫힘");
 							}
 						});
 					}
-					var samplePopC = function(){
+					var popsample_C = function(){
 						// 레이어팝업 열기 콜백
-						ui.popLayer.open('popSample3',{
+						ui.popup.open('pop-sample3',{
 							ccb:function(){
-								console.log("popSample3 닫힘");
+								console.log("pop-sample3 닫힘");
 							}
 						});
 					}
@@ -349,9 +349,9 @@
 			<section class="sect" data-sid="ui-select">
 				<h3 class="hdt">입력 - Select 팝업</h3>
 
-				<span class="selectPop">
-					<select class="sList" name="select_pop_1" title="선택제목">
-						<option value="value_0">전체 선택</option>
+				<span class="select-popd">
+					<select class="slist" name="select_pop_1" title="선택제목">
+						<option value="value_0">옵션 선택 일반</option>
 						<option value="value_1">1번째 선택</option>
 						<option value="value_2">2번째 선택</option>
 						<option value="value_3">3번째 선택</option>
@@ -359,8 +359,8 @@
 				</span>
 				<p class="gap"></p>
 				<span class="select-pop a">
-					<select class="slist" name="select_pop_1">
-						<option value="value_0">옵션 선택</option>
+					<select class="slist" name="select_pop_2">
+						<option value="value_0">옵션 선택 스와이프</option>
 						<option value="value_1">1번째 선택</option>
 						<option value="value_2" disabled>2번째 비활성</option>
 						<option value="value_3">3번째 선택</option>
@@ -373,27 +373,27 @@
 				</span>
 				<p class="gap"></p>
 				<p class="gap"></p>
-				<button type="button" class="btn sm" onclick="testSelect1();">옵션변경</button>
-				<button type="button" class="btn sm" onclick="testSelect2();">비활성화</button>
-				<button type="button" class="btn sm" onclick="testSelect3();">활성화</button>
+				<button type="button" class="btn sm" onclick="test_select_1();">옵션변경</button>
+				<button type="button" class="btn sm" onclick="test_select_2();">비활성화</button>
+				<button type="button" class="btn sm" onclick="test_select_3();">활성화</button>
 				<script>
-					var testSelect1 = function(){
-						$('[name="select_pop_1"] option[value="value_2"]').prop("selected",true);
-						ui.popSelect.set();
+					var test_select_1 = function(){
+						$('[name="select_pop_2"] option[value="value_3"]').prop("selected",true);
+						ui.popsel.set();
 					}
-					var testSelect2 = function(){
-						$('[name="select_pop_1"]').prop('disabled',true);
-						ui.popSelect.set();
+					var test_select_2 = function(){
+						$('[name="select_pop_2"]').prop('disabled',true);
+						ui.popsel.set();
 					}
-					var testSelect3 = function(){
-						$('[name="select_pop_1"]').prop('disabled',false);
-						ui.popSelect.set();
+					var test_select_3 = function(){
+						$('[name="select_pop_2"]').prop('disabled',false);
+						ui.popsel.set();
 					}
 				</script>
 				<p class="gap"></p>
 
 				<span class="select-mul" data-select-name="check_sel_1" data-select-title="다중옵션선택">
-					<ul class="sList">
+					<ul class="slist">
 						<li><span class="lb"><input type="checkbox" name="check_sel_1_0" id="check_sel_1_0" class="chkAll" ><label for="check_sel_1_0" class="txt">전체 </label></span></li>
 						<li><span class="lb"><input type="checkbox" name="check_sel_1_1" id="check_sel_1_1"><label for="check_sel_1_1" class="txt">1번째</label></span></li>
 						<li><span class="lb"><input type="checkbox" name="check_sel_1_2" id="check_sel_1_2"><label for="check_sel_1_2" class="txt">2번째</label></span></li>
@@ -402,21 +402,21 @@
 				</span>
 				
 				<p class="gap"></p>
-				<button type="button" class="btn sm" onclick="testSelectMul1();">옵션변경</button>
-				<button type="button" class="btn sm" onclick="testSelectMul2();">비활성화</button>
-				<button type="button" class="btn sm" onclick="testSelectMul3();">활성화</button>
+				<button type="button" class="btn sm" onclick="test_select_mul_1();">옵션변경</button>
+				<button type="button" class="btn sm" onclick="test_select_mul_2();">비활성화</button>
+				<button type="button" class="btn sm" onclick="test_select_mul_3();">활성화</button>
 				<script>
-					var testSelectMul1 = function(){
+					var test_select_mul_1 = function(){
 						$('[data-select-name="check_sel_1"] input').prop("checked", false);
 						$('input[name="check_sel_1_2"]').prop("checked", true);
 						$('input[name="check_sel_1_3"]').prop("checked", true);
 						ui.update();
 					}
-					var testSelectMul2 = function(){
+					var test_select_mul_2 = function(){
 						$('[data-select-name="check_sel_1"]').data('select-disabled',true);
 						ui.update();
 					}
-					var testSelectMul3 = function(){
+					var test_select_mul_3 = function(){
 						$('[data-select-name="check_sel_1"]').data('select-disabled',false);
 						ui.update();
 					}
@@ -667,7 +667,7 @@
 			</section>
 
 			<section class="sect" data-sid="ui-lnbs">
-				<div class="uiTree">
+				<div class="ui-tree">
 					<ul class="menu">
 						<li><a class="bt" href="javascript:;">본청</a>
 							<ul>
@@ -753,7 +753,7 @@
 			<section class="sect" data-sid="ui-sliders">
 				<h3 class="hdt">jQui슬라이더</h3>
 				<p class="gap"></p><p class="gap"></p><p class="gap"></p>
-				<div class="uiSlider" id="slider">
+				<div class="ut-slider" id="slider">
 					<div class="ui-slider-handle"><span id="custom-handle"></span></div>
 				</div>
 				<script>
@@ -783,7 +783,7 @@
 
 				<div id="amount"></div>
 				<p class="gap"></p>
-				<div class="uiSlider" id="slider-range"></div>
+				<div class="ut-slider" id="slider-range"></div>
 				
 				<script>
 				$(document).ready(function(){
@@ -1065,7 +1065,8 @@
 
 			<section class="sect" data-sid="ui-starpoint">
 				<h3 class="hdt">별점</h3>
-				<div class="uiStar" data-star="3.5">
+				<div class="ui-star" data-star="3.5">
+					<input type="hidden" class="amt" value="3.5">
 					<ul>
 						<li><em class="st">별</em></li>
 						<li><em class="st">별</em></li>
@@ -1077,7 +1078,8 @@
 				</div>
 				
 				<p class="gap"></p>
-				<div class="uiStar">
+				<div class="ui-star">
+					<input type="hidden" class="amt" value="0">
 					<ul>
 						<li><button type="button" class="st">별</button></li>
 						<li><button type="button" class="st">별</button></li>
@@ -1444,9 +1446,9 @@
 			<section class="sect" data-sid="ui-loadlist">
 				<h3 class="hdt">리스트 Load</h3>
 
-				<div class="uiTbList">
+				<div class="ut-tblist">
 					<ul class="list" id="dp_list"></ul>
-					<div class="uiLoadMore">
+					<div class="ui-loadmore">
 						<em></em>
 						<button type="button" class="btnLoad" onclick="addItem.using()" id="btnListMore">불러오기</button>
 					</div>
@@ -1454,7 +1456,7 @@
 				<script>
 					var addItem = {
 						init:function(){
-							this.using();
+							//this.using();
 							this.evt();
 						},
 						stat:true,
@@ -1462,7 +1464,7 @@
 						evt:function(){
 							var _this = this;
 							$(window).on("scroll resize", function() { // 바닥 확인
-								var wHt = window.visualViewport.height ;
+								var wHt = ui.viewport.height() ;
 								var docH = $(document).height();
 								var scr = $(window).scrollTop() + wHt + 10; 
 								// console.log(docH,scr);
@@ -1476,7 +1478,7 @@
 						using:function(){
 							var _this = this;
 							_this.stat = false ;
-							$(".uiLoadMore").addClass("active");
+							$(".ui-loadmore").addClass("active");
 							
 							$.ajax({
 								type: "get",
@@ -1490,10 +1492,10 @@
 										_this.stat = true ;
 										if (_this.page >= 3) {
 											console.log("끝");
-											$(".uiLoadMore").addClass("hide");
+											$(".ui-loadmore").addClass("hide");
 											_this.stat = false ;
 										}
-										$(".uiLoadMore").removeClass("active").removeClass("error");
+										$(".ui-loadmore").removeClass("active").removeClass("error");
 										$("#btnListMore").prop("disabled",true);
 										_this.evt();
 										
@@ -1502,7 +1504,7 @@
 								error:function(error){
 									// _this.page --;
 									console.log("페이징 = " + _this.page + "에러 = " + error.readyState);
-									$(".uiLoadMore").removeClass("active").addClass("error");
+									$(".ui-loadmore").removeClass("active").addClass("error");
 									$(window).off("scroll");
 									$("#btnListMore").prop("disabled",false);
 								}
@@ -1520,26 +1522,26 @@
 
 	</main>
 
-	<div id="layers">
+	
 
 
 
 		<!-- 팝프레임 A 전체 덮는 크기 -->
-		<article class="popFrame a popFrame1" id="popFrame1">
+		<article class="pop-frame a pop-frame1" id="pop-frame1">
 			<div class="pbd">
 				<div class="phd">
 					<div class="in">
 						<h1 class="tit">팝 프레임 111</h1>
-						<button type="button" class="btnPopClose">닫기</button>
+						<button type="button" class="btn-pop-close">닫기</button>
 					</div>
 				</div>
 				<div class="pct">
 					<main class="poptents">
-						<a class="btn" href="javascript:samplePopA();">팝레이어1</a>
+						<a class="btn" href="javascript:popsample_a();">팝레이어1</a>
 						<p>sdfsdfsfsd</p>
-						<a class="btn" href="javascript:ui.popLayer.open('popSample2');">팝레이어2</a>
+						<a class="btn" href="javascript:ui.popup.open('pop-sample2');">팝레이어2</a>
 						<p>sdfsdfsfsd</p>
-						<a class="btn" href="javascript:ui.popLayer.open('popSample3');">팝레이어3</a>
+						<a class="btn" href="javascript:ui.popup.open('pop-sample3');">팝레이어3</a>
 						<p>sdfsdfsfsd</p>
 						<label class="checkbox"><input type="checkbox" checked="checked"><span></span></label>
 						<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
@@ -1561,8 +1563,8 @@
 				</div>
 				<div class="pbt">
 					<div class="bts">
-						<a href="javascript:;" class="btn type e" onclick="ui.popFrame.close('popFrame1');">닫기</a>
-						<a href="javascript:;" class="btn type a">버튼</a>
+						<a href="javascript:;" class="btn e" onclick="ui.popframe.close('pop-frame1');">닫기</a>
+						<a href="javascript:;" class="btn a">버튼</a>
 					</div>
 				</div>
 			</div>
@@ -1570,20 +1572,20 @@
 
 
 		<!-- 팝레이어 A 전체 덮는 크기 -->
-		<article class="popLayer a popSample1" id="popSample1">
+		<article class="pop-layer a pop-sample1" id="pop-sample1">
 			<div class="pbd">
 				<div class="phd">
 					<div class="in">
 						<h1 class="ptit">타이틀111</h1>
-						<button type="button" class="btnPopClose">닫기</button>
+						<button type="button" class="btn-pop-close">닫기</button>
 					</div>
 				</div>
 				<div class="pct">
 					<main class="poptents">
 						<p>sdfsdfsfsd</p>
-						<a class="btn" href="javascript:samplePopB();">팝레이어2</a>
+						<a class="btn" href="javascript:popsample_B();">팝레이어2</a>
 						<p>sdfsdfsfsd</p>
-						<a class="btn" href="javascript:ui.popLayer.open('popSample3');">팝레이어3</a>
+						<a class="btn" href="javascript:ui.popup.open('pop-sample3');">팝레이어3</a>
 						<p>sdfsdfsfsd</p>
 						<label class="checkbox"><input type="checkbox" checked="checked"><span></span></label>
 						<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
@@ -1605,8 +1607,8 @@
 				</div>
 				<div class="pbt">
 					<div class="bts">
-						<a href="javascript:;" class="btn type e" onclick="ui.popLayer.close('popSample1');">닫기</a>
-						<a href="javascript:;" class="btn type a">버튼</a>
+						<a href="javascript:;" class="btn e" onclick="ui.popup.close('pop-sample1');">닫기</a>
+						<a href="javascript:;" class="btn a">버튼</a>
 					</div>
 				</div>
 			</div>
@@ -1614,12 +1616,12 @@
 
 
 		<!-- 팝레이어 B 가운데 뜨는 크기 -->
-		<article class="popLayer b popSample2" id="popSample2">
+		<article class="pop-layer b pop-sample2" id="pop-sample2">
 			<div class="pbd">
 				<div class="phd">
 					<div class="in">
-						<h1 class="tit">타이틀222</h1>
-						<button type="button" class="btnPopClose">닫기</button>
+						<h1 class="ptit">타이틀222</h1>
+						<button type="button" class="btn-pop-close">닫기</button>
 					</div>
 				</div>
 				<div class="pct">
@@ -1627,20 +1629,7 @@
 						
 						<p>sdfsdfsfsd</p>
 						<p>sdfsdfsfsd</p>
-						<a class="btn" href="javascript:ui.popLayer.open('popSample3');">팝레이어3</a>
-						<p>sdfsdfsfsd</p>
-						<p>sdfsdfsfsd</p>
-						<p>sdfsdfsfsd</p>
-						<p>sdfsdfsfsd</p>
-						<p>sdfsdfsfsd</p>
-						<p>sdfsdfsfsd</p>
-						<p>sdfsdfsfsd</p>
-						<p>sdfsdfsfsd</p>
-						<p>sdfsdfsfsd</p>
-						<p>sdfsdfsfsd</p>
-						<p>sdfsdfsfsd</p>
-						<p>sdfsdfsfsd</p>
-						<p>sdfsdfsfsd</p>
+						<a class="btn" href="javascript:ui.popup.open('pop-sample3');">팝레이어3</a>
 						<p>sdfsdfsfsd</p>
 						<span class="input db"><input type="text"></span>
 						<p>sdfsdfsfsd</p>
@@ -1653,8 +1642,8 @@
 				</div>
 				<div class="pbt">
 					<div class="bts">
-						<a href="javascript:;" class="btn type e" onclick="ui.popLayer.close('popSample2');">닫기</a>
-						<a href="javascript:;" class="btn type a">확인</a>
+						<a href="javascript:;" class="btn xl e" onclick="ui.popup.close('pop-sample2');">닫기</a>
+						<a href="javascript:;" class="btn xl a">확인</a>
 					</div>
 				</div>
 			</div>
@@ -1662,22 +1651,101 @@
 
 
 		<!-- 팝레이어 C  아래에서 올라오는 -->
-		<article class="popLayer c popSample3" id="popSample3">
+		<article class="pop-layer c pop-sample3" id="pop-sample3">
 			<div class="pbd">
-				<button type="button" class="btnPopClose">닫기</button>
+				<button type="button" class="btn-pop-close">닫기</button>
+				<div class="phd">
+					<div class="in">
+						<h1 class="ptit">하단팝업</h1>
+						<button type="button" class="btn-pop-close">닫기</button>
+					</div>
+				</div>
 				<div class="pct">
 					<main class="poptents">
-						<ul class="list">
-							<li class="twitter"><a href="javascript:;" class="bt">TYPE c</a></li>
-							<li class="twitter"><a href="javascript:;" class="bt">TWITTER</a></li>
-							<li class="katalk"><a href="javascript:;" class="bt">KAKAOTALK</a></li>
-							<li class="facebook"><a href="javascript:;" class="bt">FACEBOOK</a></li>
-							<li class="kastory"><a href="javascript:;" class="bt">KAKAOSTORY</a></li>
-						</ul>
+						<div class="btn-set">
+							<button type="button" class="btn lg d">버튼</button>
+							<button type="button" class="btn lg a">버튼</button>
+						</div>
 					</main>
 				</div>
 			</div>
 		</article>
+
+		<script>
+			$(document).ready(function(){
+				ui.popup.move = {
+				init:function(){
+					this.evt();
+					this.set();
+				},
+				evt:function(){
+
+				},
+				set:function(){
+					$(document).on({
+						"touchstart":function(e){
+							console.log("touchstart");
+							s(e,this);
+						},
+						"touchmove":function(e){
+							// console.log("touchmove");
+							m(e,this);
+						},
+						"touchend":function(e){
+							console.log("touchend");
+							ee(e,this);
+						},
+						"mousedown":function(e){
+							// console.log("mousedown");
+						},
+						"click":function(e){
+							e.stopPropagation();
+						}
+					},".pop-layer.c .pbd");
+					function s(e,el){
+						var y = (e.pageY !== undefined)?e.pageY:e.originalEvent.touches[0].screenY;
+						var ph = ( $(el).closest(".pbd").find(".pct").height()  );
+						$(el).data({"data-h":ph,"data-sy":y});
+						console.log( y);
+					}
+					function m(e,el){
+						e.stopPropagation();
+						e.preventDefault();
+						var y = (e.pageY !== undefined)?e.pageY:e.originalEvent.touches[0].screenY;
+						
+						var diff = $(el).data("data-sy") - y;
+						var wih = window.innerHeight;
+						var wsh = window.screen.availHeight;
+						var sh = window.screen.height;
+						var hDiff = ((wsh - wih) == 63)?63:0;
+						var p = parseInt(diff - hDiff) / ($(window).height() );
+						var ah = parseInt($(el).data("data-h") + p);
+						console.log(y,hDiff,diff,$(el));
+						$(el).closest(".pbd").find(".pct").css("height",diff+ah);
+						console.log(  $(el).data() );
+					}
+					function ee(e,el){
+						// var y = (e.pageY !== undefined)?e.pageY:e.originalEvent.touches[0].screenY;
+						
+						var diff = $(el).data("data-sy") - $(el).data("ah");
+						var wih = window.innerHeight;
+						var wsh = window.screen.availHeight;
+						var sh = window.screen.height;
+						var hDiff = ((wsh - wih) == 63)?63:0;
+
+						var p = (diff - hDiff) / ($(window).height() );
+						console.log( $(el).data("data-h")   );
+						$(el).removeData("data-h");
+						$(el).removeData("ah");
+					}
+				},
+			};
+			
+			
+			ui.popup.move.init();
+		});
+		</script>
+
 		
 		<!-- 툴팁 레이어 -->
 		<article class="ui-tooltips" data-tooltip-cont="tooltip-email">
@@ -1685,7 +1753,7 @@
 				<div class="phd">
 					<div class="in">
 						<h1 class="tit">안내</h1>
-						<button type="button" class="btnPopClose">닫기</button>
+						<button type="button" class="btn-pop-close">닫기</button>
 					</div>
 				</div>
 				<div class="pct">
@@ -1698,9 +1766,8 @@
 			</div>
 		</article>
 
-	</div>
+	
 
-	<div id="debug"></div>
 	<em class="keystat"></em>
 	<!--// 컨텐츠 끝 -->
 
@@ -1710,7 +1777,7 @@
 		ui.html.load(function() {
 			console.log("html-include 로드 완료");
 		});
-		ui.refresh.init(function(){
+		ui.refresh.set(function(){
 			location.reload();
 			console.log("댕겨서 새로고침");
 		});
@@ -1737,14 +1804,14 @@
 var html = document.documentElement;
 function showInfo() {
 	$('#cssStatus').html(html.className);
-	$('#browserStatus').html('Client Size : ' + html.clientWidth + 'x' + html.clientHeight + ', Orientation : ' + window.orientation +", visualViewport : "+ window.visualViewport.height);
+	$('#browserStatus').html('Client Size : ' + html.clientWidth + 'x' + html.clientHeight + ', Orientation : ' + window.orientation +", visualViewport.height : "+ ui.viewport.height());
 	$('#iosSafe').html( "iosSafeArea "+JSON.stringify( ui.getSafe ) );
 }
 $(window).on("scroll resize", function() { // 바닥 확인
-	var wHt = window.visualViewport.height ;
+	var wHt = ui.viewport.height() ;
 	var docH = $(document).height();
 	var scr = $(window).scrollTop() + wHt + 0; 
-	//$('#debug').html('SCR : '+ scr + ' , DOCH : ' +docH + " , visualViewport : "+ window.visualViewport.height);
+	//$('#debug').html('SCR : '+ scr + ' , DOCH : ' +docH + " , visualViewport : "+ ui.viewport.height());
 });
 $(document).ready(function(){
 	$('#userAgent').html(navigator.userAgent);

@@ -44,25 +44,25 @@ HTML,CSS,JS UI
     sec:3000 // 사라질 시간 number
   });
   ```
-### ui.popLayer
+### ui.popup
   > 레이어팝업 뛰우기 (전체,가운데,하단에 띄우기)  히스토리백 historyback 레이어팝업 닫기 지원
 ```
-ui.popLayer.open('popSample1'); // 팝레이어열기
-ui.popLayer.close('popSample1'); // 팝레이어닫기
-ui.popLayer.refresh('popSample1'); // 팝스크롤새로고침
-ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
+ui.popup.open('pop-sample1'); // 팝레이어열기
+ui.popup.close('pop-sample1'); // 팝레이어닫기
+ui.popup.refresh('pop-sample1'); // 팝스크롤새로고침
+ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
     ocb:function(){
-        console.log("popSample1 열림");
+        console.log("pop-sample1 열림");
     },
     ccb:function(){
-        console.log("popSample1 닫힘");
+        console.log("pop-sample1 닫힘");
     }
 });
-<article class="popLayer a popSample1" id="popSample1">
+<article class="pop-layer a pop-sample1" id="pop-sample1">
     <div class="pbd">
         <div class="phd">
             <div class="in">
-                <h1 class="tit">타이틀</h1>
+                <h1 class="ptit">타이틀</h1>
                 <button type="button" class="btnPopClose">닫기</button>
             </div>
         </div>
@@ -210,7 +210,8 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
   ```
 ### 별점
 ```
-<div class="uiStar" data-star="3.5">  // 별점 보기
+<div class="ui-star">  // 별점 보기
+    <input type="hidden" class="amt" value="3.5">
     <ul>
         <li><em class="st">별</em></li>
         <li><em class="st">별</em></li>
@@ -220,7 +221,8 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
     </ul>
     <i class="p">3.5</i>
 </div>
-<div class="uiStar"> // 별점 주기 버튼
+<div class="ui-star"> // 별점 주기 버튼
+    <input type="hidden" class="amt" value="0">
     <ul>
         <li><button type="button" class="st">별</button></li>
         <li><button type="button" class="st">별</button></li>
@@ -234,7 +236,7 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
 ![image](https://user-images.githubusercontent.com/6386956/81248311-02b21080-9057-11ea-8174-fa4922a978d0.png)
 ### 탭UI
   ```
-  <ul class="uiTab a">
+  <ul class="ui-tab a">
       <li class="active"><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" href="javascript:;">탭메뉴1</a></li>
       <li><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2" href="javascript:;">탭메뉴2</a></li>
   </ul>
@@ -290,9 +292,9 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
 
 ### 리스트 More Load
 ```
-<section class="uiTbList">
+<section class="ut-tblist">
     <ul class="list" id="dp_list"></ul>
-    <div class="uiLoadMore">
+    <div class="ui-loadmore">
         <em></em>
         <button type="button" class="btnLoad" onclick="addItem.using()" id="btnListMore">불러오기</button>
     </div>
@@ -322,7 +324,7 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
         using: function () {
             var _this = this;
             _this.stat = false;
-            $(".uiLoadMore").addClass("active");
+            $(".ui-loadmore").addClass("active");
 
             $.ajax({
                 type: "get",
@@ -336,10 +338,10 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
                         _this.stat = true;
                         if (_this.page >= 3) {
                             console.log("끝");
-                            $(".uiLoadMore").addClass("hide");
+                            $(".ui-loadmore").addClass("hide");
                             _this.stat = false;
                         }
-                        $(".uiLoadMore").removeClass("active").removeClass("error");
+                        $(".ui-loadmore").removeClass("active").removeClass("error");
                         $("#btnListMore").prop("disabled", true);
                         _this.evt();
 
@@ -348,7 +350,7 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
                 error: function (error) {
                     // _this.page --;
                     console.log("페이징 = " + _this.page + "에러 = " + error.readyState);
-                    $(".uiLoadMore").removeClass("active").addClass("error");
+                    $(".ui-loadmore").removeClass("active").addClass("error");
                     $(window).off("scroll");
                     $("#btnListMore").prop("disabled", false);
                 }
