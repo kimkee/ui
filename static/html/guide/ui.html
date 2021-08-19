@@ -79,23 +79,23 @@
 				<a href="javascript:;" class="btn d disabled">버튼.d</a>
 				<span>a.disabled</span>
 				<p class="gap"></p>
-				<div class="btnSet">
+				<div class="btn-set">
 					<a href="javascript:;" class="btn lg a">버튼</a>
 					<a href="javascript:;" class="btn lg d">버튼</a>
 				</div>
 
 				<p class="gap"></p>
-				<div class="btnSet">
+				<div class="btn-set">
 					<a href="javascript:;" class="btn" onclick="dubleClick();">더블클릭</a>
 				</div>
 				<p class="gap"></p>
-				<div class="btnSet">
+				<div class="btn-set">
 					<a class="btn" href="../guide/ui.html" data-ui="pop-window" data-width="360" data-height="600">팝업윈도우1</a>
 					<a href="javascript:;" class="btn">버튼</a>
 					<a href="javascript:;" class="btn">버튼</a>
 				</div>
 				<p class="gap"></p>
-				<div class="btnSet fit">
+				<div class="btn-set fit">
 					<a href="javascript:;" class="btn type a">버튼</a>
 					<a href="javascript:;" class="btn type d">버튼</a>
 				</div>
@@ -446,7 +446,7 @@
 			<section class="sect" data-sid="ui-copy">
 				<h3 class="hdt">복사 COPY Text</h3>
 				<div class="nums" id="rwd_code">20200416-aBDS</div>
-				<div class="btnSet">
+				<div class="btn-set">
 					<a href="javascript:;" class="btn" onclick="tesCopyRwd();">복사 버튼</a>
 				</div>
 				<script>
@@ -862,7 +862,7 @@
 					}
 				});
 				</script>
-				<div class="btnSet">
+				<div class="btn-set">
 					<a href="javascript:;" class="btn" onclick="circleSmaple(1);">22%</a>
 					<a href="javascript:;" class="btn" onclick="circleSmaple(2);">93%</a>
 					<a href="javascript:;" class="btn" onclick="circleSmaple(3);">redraw</a>
@@ -1126,16 +1126,16 @@
 			<section class="sect" data-sid="ui-tabs">
 				<h3 class="hdt">탭메뉴</h3>
 				
-				<ul class="uiTab type a">
-					<li class="active"><a data-ui-tab-btn="tab_a" data-ui-tab-val="tab_a_1" href="javascript:;">탭메뉴1</a></li>
-					<li><a data-ui-tab-btn="tab_a" data-ui-tab-val="tab_a_2" href="javascript:;">탭메뉴2</a></li>
+				<ul class="ui-tab a">
+					<li class="active"><a class="bt" data-ui-tab-btn="tab_a" data-ui-tab-val="tab_a_1" href="javascript:;">탭메뉴1</a></li>
+					<li><a class="bt" data-ui-tab-btn="tab_a" data-ui-tab-val="tab_a_2" href="javascript:;">탭메뉴2</a></li>
 				</ul>
 				
 				<p class="gap"></p>
 
-				<ul class="uiTab type a">
-					<li class="active"><a data-ui-tab-btn="tab_b" data-ui-tab-val="tab_b_1" href="javascript:;">탭메뉴1</a></li>
-					<li><a data-ui-tab-btn="tab_b" data-ui-tab-val="tab_b_2" href="javascript:;">탭메뉴2</a></li>
+				<ul class="ui-tab a">
+					<li class="active"><a class="bt" data-ui-tab-btn="tab_b" data-ui-tab-val="tab_b_1" href="javascript:;">탭메뉴1</a></li>
+					<li><a class="bt" data-ui-tab-btn="tab_b" data-ui-tab-val="tab_b_2" href="javascript:;">탭메뉴2</a></li>
 				</ul>
 				
 				<div data-ui-tab-ctn="tab_b" data-ui-tab-val="tab_b_1" class="active">
@@ -1159,9 +1159,9 @@
 				<div class="codeBox">
 					<div class="code">
 						<pre class="brush: html">
-							<ul class="uiTab a">
-								<li class="active"><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" href="javascript:;">탭메뉴1</a></li>
-								<li><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2" href="javascript:;">탭메뉴2</a></li>
+							<ul class="ui-tab a">
+								<li class="active"><a class="bt" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" href="javascript:;">탭메뉴1</a></li>
+								<li><a class="bt" data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2" href="javascript:;">탭메뉴2</a></li>
 							</ul>
 							<div data-ui-tab-ctn="tab_c" data-ui-tab-val="tab_c_1" class="active">
 								탭내용1
@@ -1197,51 +1197,51 @@
 			<section class="sect" data-sid="ui-accodion">
 				<h3 class="hdt">아코디언UI</h3>
 				<!-- 아코디언형 -->
-				<ul class="uiAccd" data-accd="accd">
+				<ul class="ui-accd" data-accd="accd">
 					<li class="open">
-						<div class="hBox"> 아코디언 UI Accd <button type="button" class="btnTog">버튼</button></div>
-						<div class="cBox">내용 내용 내용 <br> 내용</div>
+						<div class="hbox"> 아코디언 UI Accd <button type="button" class="btn-tog">버튼</button></div>
+						<div class="cbox">내용 내용 내용 <br> 내용</div>
 					</li>
 					<li>
-						<div class="hBox"> 아코디언 UI Accd <button type="button" class="btnTog">버튼</button></div>
-						<div class="cBox">내용 내용 내용 <br> 내용</div>
+						<div class="hbox"> 아코디언 UI Accd <button type="button" class="btn-tog">버튼</button></div>
+						<div class="cbox">내용 내용 내용 <br> 내용</div>
 					</li>
 					<li class="except">
-						<div class="hBox"> 아코디언 UI Accd 제외 <button type="button" class="btnTog">버튼</button></div>
-						<div class="cBox">내용 내용 내용 <br> 내용</div>
+						<div class="hbox"> 아코디언 UI Accd 제외 <button type="button" class="btn-tog">버튼</button></div>
+						<div class="cbox">내용 내용 내용 <br> 내용</div>
 					</li>
 				</ul>
 				<p class="gap"></p>
 				<!-- 토글형 -->
-				<ul class="uiAccd" data-accd="tog">
+				<ul class="ui-accd" data-accd="tog">
 					<li class="open">
-						<div class="hBox"> 아코디언 UI Tog <a class="btnTog" href="javascript:;">버튼</a></div>
-						<div class="cBox">내용 내용 내용 <br> 내용</div>
+						<div class="hbox"> 아코디언 UI Tog <a class="btn-tog" href="javascript:;">버튼</a></div>
+						<div class="cbox">내용 내용 내용 <br> 내용</div>
 					</li>
 					<li>
-						<div class="hBox"> 아코디언 UI Tog <a class="btnTog" href="javascript:;">버튼</a></div>
-						<div class="cBox">내용 내용 내용 <br> 내용</div>
+						<div class="hbox"> 아코디언 UI Tog <a class="btn-tog" href="javascript:;">버튼</a></div>
+						<div class="cbox">내용 내용 내용 <br> 내용</div>
 					</li>
 					<li class="except">
-						<div class="hBox"> 아코디언 UI Tog 제외 <div class="btnTog" href="javascript:;">버튼</div></div>
-						<div class="cBox">내용 내용 내용 <br> 내용</div>
+						<div class="hbox"> 아코디언 UI Tog 제외 <div class="btn-tog" href="javascript:;">버튼</div></div>
+						<div class="cbox">내용 내용 내용 <br> 내용</div>
 					</li>
 				</ul>
 				<div class="codeBox">
 					<div class="code">
 						<pre class="brush: html">
-							<ul class="uiAccd" data-accd="accd">
+							<ul class="ui-accd" data-accd="accd">
 								<li class="open">
-									<div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
-									<div class="cBox">내용</div>
+									<div class="hbox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
+									<div class="cbox">내용</div>
 								</li>
 								<li>
-									<div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
-									<div class="cBox">내용</div>
+									<div class="hbox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
+									<div class="cbox">내용</div>
 								</li>
 								<li class="except">
-									<div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
-									<div class="cBox">내용</div>
+									<div class="hbox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
+									<div class="cbox">내용</div>
 								</li>
 							</ul></pre>
 					</div>

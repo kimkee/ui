@@ -1573,72 +1573,38 @@ var ui = { //
 	accd:{ // 아코디언 UI
 		init: function() {
 			this.using();
-			this.tbl();
 			this.set();
 		},
 		set:function(){
-			$(".uiAccd>li>.cBox").hide();
-			$(".uiAccd>li.open>.cBox").show();
-			$(".uiAccd>li.except>.cBox").show();
-
-			$(".uiAccdTbl>.cBox").hide();
-			$(".uiAccdTbl>.cBox.open").show();
+			$(".ui-accd>li>.cbox").hide();
+			$(".ui-accd>li.open>.cbox").show();
+			$(".ui-accd>li.except>.cbox").show();
 		},
 		using: function() {
-			$(document).on("click", ".uiAccd>li:not(.except)>.hBox>.btnTog", function() {
-				var type = $(this).closest(".uiAccd").attr("data-accd");
-				var $pnt = $(this).closest("li");
-				//console.log(type);
-				if( type === "tog") {
-					if( $pnt.find(">.cBox").is(":hidden") ) {
-						$pnt.find(">.cBox").slideDown(200,function(){
-							$pnt.addClass("open");
+			$(document).on("click", ".ui-accd>li:not(.except)>.hbox>.btn-tog", function() {
+				var type =  $(this).closest(".ui-accd").attr("data-accd");
+				var $li =   $(this).closest("li");
+				var $cbox = $li.find(">.cbox");
+				// console.log(type);
+				if( type == "tog" ){
+					if( $cbox.is(":hidden") ){
+						$cbox.slideDown(100,function(){
+							$li.addClass("open");
 						});
 					}else{
-						$pnt.find(">.cBox").slideUp(200,function(){
-							$pnt.removeClass("open");
+						$cbox.slideUp(100,function(){
+							$li.removeClass("open");
 						});
 					}
 				}
-				if( type === "accd") {
-					$(this).closest(".uiAccd").find(">li.open").not("li.except").find(">.cBox").slideUp(200,function(){
-						$(this).closest(".uiAccd").find(">li.open").removeClass("open");
+				if( type == "accd" ){
+					$(this).closest(".ui-accd").find(">li.open").not("li.except").find(">.cbox").slideUp(100,function(){
+						$(this).closest(".ui-accd").find(">li.open").removeClass("open");
 					});
-					if( $pnt.find(">.cBox").is(":hidden")) {
-						$pnt.find(">.cBox").slideDown(200,function(){
-							$pnt.addClass("open");
+					if( $cbox.is(":hidden") ){
+						$cbox.slideDown(100,function(){
+							$li.addClass("open");
 						});
-					}
-				}
-
-			});
-		},
-		tbl: function() {
-			$(".uiAccdTbl>.cBox.open").prev(".hBox").addClass("open");
-
-			$(document).on("click", ".uiAccdTbl>.hBox .btnTog", function() {
-				// console.log("d");
-				var type = $(this).closest(".uiAccdTbl").attr("data-accd");
-				var $hBox = $(this).closest(".hBox");
-				var $cBox = $(this).closest(".hBox").next(".cBox");
-				// console.log(type);
-				if (type === "tog") {
-					if ($cBox.is(":visible")) {
-						$cBox.hide();
-						$hBox.removeClass("open");
-						$cBox.removeClass("open");
-					} else {
-						$hBox.addClass("open");
-						$cBox.addClass("open").show();
-					}
-				}
-				if (type === "accd") {
-					if ($cBox.is(":hidden")) {
-						$cBox.prev(".hBox").addClass("open").siblings(".hBox").removeClass("open");
-						$cBox.addClass("open").show().siblings(".cBox").removeClass("open").hide();
-					} else {
-						$cBox.prev(".hBox").removeClass("open");
-						$cBox.removeClass("open").hide();
 					}
 				}
 			});

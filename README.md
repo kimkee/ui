@@ -248,7 +248,7 @@ ui.popLayer.open('popSample1',{  // 레이어팝업 콜백
 ![image](https://user-images.githubusercontent.com/6386956/81248519-748a5a00-9057-11ea-9c37-a7ba4f965ca6.png)
 ### 아코디언
   ```
-  <ul class="uiAccd" data-accd="accd">
+  <ul class="ui-accd" data-accd="accd">
       <li class="open">
           <div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
           <div class="cBox">내용</div>

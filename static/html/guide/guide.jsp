@@ -139,16 +139,16 @@
 			<a href="javascript:;" class="btn type e">버튼</a>
 
 			<p class="gap"></p>
-			<div class="btnSet">
+			<div class="btn-set">
 				<a href="javascript:;" class="btn">버튼</a>
 			</div>
 			<p class="gap"></p>
-			<div class="btnSet">
+			<div class="btn-set">
 				<a href="javascript:;" class="btn">버튼</a>
 				<a href="javascript:;" class="btn">버튼</a>
 			</div>
 			<p class="gap"></p>
-			<div class="btnSet fit">
+			<div class="btn-set fit">
 				<a href="javascript:;" class="btn type a">버튼</a>
 				<a href="javascript:;" class="btn type d">버튼</a>
 			</div>
@@ -677,7 +677,7 @@
 
 			<p class="gap"></p>
 			<!-- 아코디언형 -->
-			<ul class="uiAccd" data-accd="accd">
+			<ul class="ui-accd" data-accd="accd">
 				<li class="open">
 					<div class="hBox"> 아코디언 UI Accd <button type="button" class="btnTog">버튼</button></div>
 					<div class="cBox">내용 내용 내용 <br> 내용</div>
@@ -693,7 +693,7 @@
 			</ul>
 			<p class="gap"></p>
 			<!-- 토글형 -->
-			<ul class="uiAccd" data-accd="tog">
+			<ul class="ui-accd" data-accd="tog">
 				<li class="open">
 					<div class="hBox"> 아코디언 UI Tog <a class="btnTog" href="javascript:;">버튼</a></div>
 					<div class="cBox">내용 내용 내용 <br> 내용</div>
@@ -710,7 +710,7 @@
 			<div class="codeBox">
 				<div class="code">
 					<pre class="brush: html">
-						<ul class="uiAccd" data-accd="accd">
+						<ul class="ui-accd" data-accd="accd">
 							<li class="open">
 								<div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
 								<div class="cBox">내용</div>
