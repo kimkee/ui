@@ -56,14 +56,14 @@
 	";date": {
 		"prefix": ";date",
 		"body": [
-			"<span class=\"input uiDate\"><input type=\"text\" class=\"datepicker\" placeholder=\"YYYY-MM-DD\" value=\"2019-06-07\" readonly></span>"
+			"<span class=\"input ui-date\"><input type=\"text\" class=\"datepicker\" placeholder=\"YYYY-MM-DD\" value=\"2019-06-07\" readonly></span>"
 		],
 		"description": "ui-date-input 날짜입력칸"
 	},
 	";date_month": {
 		"prefix": ";date_month",
 		"body": [
-			"<span class=\"input uiDate\"><input type=\"text\" class=\"datepicker_month\" placeholder=\"YYYY-MM-DD\" value=\"2019-06\" readonly></span>"
+			"<span class=\"input ui-date\"><input type=\"text\" class=\"datepicker_month\" placeholder=\"YYYY-MM-DD\" value=\"2019-06\" readonly></span>"
 		],
 		"description": "ui-date-input 날짜입력칸"
 	},

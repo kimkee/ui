@@ -19,16 +19,30 @@
 	<script src="../../js/jquery-3.4.1.js"></script>
 	<script src="../../js/jquery-ui.js"></script>
 	<script src="../../js/jquery.ui.touch-punch.js"></script>
+
+
+	<script src="../../js/iscroll.js"></script>
+	<script src="../../js/swiper.js"></script>
+	<script src="../../js/moment.js"></script>
+	<script src="../../js/circle-progress.js"></script>
+	<script src="../../js/pullToRefresh.js"></script>
+	<script src="../../js/lib/jquery.hammer.js-master/hammer.js"></script>
+	<script src="../../js/lib/jquery.hammer.js-master/jquery.hammer.js"></script>
+
+	<script src="../guide/html.js"></script><!-- 개발페이지에서는 html.js 임포트 하지말아주세요. -->
+	<script src="../../js/ui.js"></script>
+
+
+
 	<link href="../guide/shCore.css" rel="stylesheet">
 	<script src="../guide/shCore.js"></script>
-
 </head>
 <body class="body">
 <div class="wrap" id="wrap">
 	
 		
-	<include class="header" data-include-html="../inc/header.html"></include>
-	<include class="gnb" data-include-html="../inc/gnb.html"></include>
+	<include class="header" src="../inc/header.html"></include>
+	<include class="gnb" src="../inc/gnb.html"></include>
 	<button type="button" class="btnUi"><b>ui</b></button>
 	<nav class="uimenu">
 		<div class="menu ui-mcscroll">
@@ -129,11 +143,11 @@
 					</div>
 				</div>
 
-				<div class="btnList">
+				<div class="btn-list">
 					<a href="javascript:;" class="btn">가운데</a>
 				</div>
 
-				<div class="btnList">
+				<div class="btn-list">
 					<div class="fl"><a href="javascript:;" class="btn">왼쪽</a></div>
 					<div class="fr"><a href="javascript:;" class="btn">오른쪽</a></div>
 				</div>
@@ -142,7 +156,7 @@
 
 			<section class="sect" data-sid="ui-tooltips">
 				<h3 class="hdt">툴팁레이어</h3>
-				<div class="btnList">
+				<div class="btn-list">
 					<div class="fl">
 						<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
 					</div>
@@ -154,7 +168,7 @@
 
 			<section class="sect" data-sid="ui-paging">
 				<h3 class="hdt">페이징</h3>
-				<include class="paging" data-include-html="../inc/paging.html"></include>
+				<include class="paging" src="../inc/paging.html"></include>
 			</section>
 
 			<section class="sect" data-sid="ui-layerpop">
@@ -467,39 +481,36 @@
 
 			<section class="sect" data-sid="ui-inputs">
 				<h3 class="hdt">입력 - input,textarea,select</h3>
-				<span class="input db"><input type="text" placeholder="텍스트"></span>
+				<span class="input"><input type="text" placeholder="텍스트"></span>
 				<p class="gap"></p>
-				<span class="input db del"><input type="text" placeholder="삭제버튼" value="텍스트"></span>
+				<span class="input del"><input type="text" placeholder="삭제버튼" value="텍스트"></span>
 				<p class="gap"></p>
-				<span class="input sch"><input type="text" placeholder="검색어 입력"><button type="button" class="btnSch">검색</button></span>
+				<span class="input sch"><input type="text" placeholder="검색어 입력"><button type="button" class="btsch">검색</button></span>
 				<p class="gap"></p>
-				<span class="input db"><input type="text" class="valid" placeholder="텍스트"></span>
+				<span class="input valid"><input type="text" class="" placeholder="텍스트"></span>
 				<p class="gap"></p>
-				<span class="input db"><input type="text" class="valid ok" placeholder="텍스트"></span>
+				<span class="input valid"><input type="text" class="ok" placeholder="텍스트"></span>
 				<p class="gap"></p>
-				<span class="input db"><input type="text" class="valid no" placeholder="텍스트"></span>
+				<span class="input valid"><input type="text" class="no" placeholder="텍스트"></span>
 				<p class="gap"></p>
-				<span class="input db"><input type="password" class="valid" placeholder="비밀번호"></span>
+				<span class="input valid"><input type="password" class="" placeholder="비밀번호"></span>
 				<p class="gap"></p>
-				<span class="input db"><input type="text" readonly value="readonly"></span>
+				<span class="input"><input type="text" readonly value="readonly"></span>
 				<p class="gap"></p>
-				<span class="input db"><input type="text" disabled value="disabled"></span>
-				<p class="gap"></p>
-				<span class="textarea db"><textarea placeholder="내용"></textarea></span>
+				<span class="input"><input type="text" disabled value="disabled"></span>
 				<p class="gap"></p>
 				<div class="input ui-priceset">
 					<input type="tel" class="amt" placeholder="희망가격 입력(원)" value="">
 					<i class="w">원</i>
 				</div>
 
-				<style>
-					span.textarea>textarea.ment{height: 48px;max-height: 98px;}
-					span.textarea>textarea.reply{min-height: 100px;max-height: 200px;/* border: none; */}
-				</style>
 				<p class="gap"></p>
-				<span class="textarea db"><textarea class="reply" data-ui="autoheight" placeholder="댓글달기 자동높이"></textarea></span>
+				<span class="textarea">
+					<textarea class="reply" data-ui="autoheight" placeholder="댓글달기 자동높이"></textarea>
+					<span class="num"><i class="i">102</i>/<b class="n">3,000</b></span>
+				</span>
 				<p class="gap"></p>
-				<span class="textarea db"><textarea class="inline" data-ui="autoheight" placeholder="자동높이"></textarea></span>
+				<span class="texthgt input"><textarea class="inline" data-ui="autoheight" placeholder="자동높이"></textarea></span>
 				<p class="gap"></p>
 				<span class="select db">
 					<select>
@@ -530,9 +541,9 @@
 
 			<section class="sect" data-sid="ui-datepickers">
 				<h3 class="hdt">달력 - 일,주,월 선택</h3>
-				<span class="input db uiDate"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" ></span>
+				<span class="input ui-date"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" ></span>
 				<p class="gap"></p>
-				<span class="input db uiDate"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" id="datepick_1" ></span>
+				<span class="input ui-date"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" id="datepick_1" ></span>
 				<script>
 					$(document).ready(function(){
 						ui.datepick.set({
@@ -546,13 +557,13 @@
 				</script>
 				
 				<div class="weeks"><span id="START_DT"></span> ~ <span id="END_DT"></span></div>
-				<span class="uiDate input db week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
+				<span class="ui-date input week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
 				
 				<p class="gap"></p>
-				<span class="input db uiDate"><input type="text" class="datepicker_month" placeholder="YYYY-MM-DD" value="2019-06" readonly></span>
+				<span class="input ui-date"><input type="text" class="datepicker_month" placeholder="YYYY-MM-DD" value="2019-06" readonly></span>
 				<p class="gap"></p>
 				<script src="../../js/picker.js"></script>
-				<span class="uiTime"><input type="time" class="uiTimePicker" value="02:30" title="시간선택"></span>
+				<span class="ui-time"><input type="time" class="timepicker" value="02:30" title="시간선택"></span>
 				
 				<script>
 				$(document).ready(function(){
@@ -669,32 +680,32 @@
 			<section class="sect" data-sid="ui-lnbs">
 				<div class="ui-tree">
 					<ul class="menu">
-						<li><a class="bt" href="javascript:;">본청</a>
+						<li><button type="button" class="bt">메뉴메뉴1</button>
 							<ul>
-								<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
-								<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
+								<li><button type="button" class="bt">메뉴메뉴2</button></li>
+								<li><button type="button" class="bt">메뉴메뉴2</button></li>
 							</ul>
 						</li>
 						<li>
-							<a class="bt" href="javascript:;">서울특별시도시기반시설</a>
+							<button type="button" class="bt">메뉴메뉴1</button>
 							<ul>
-								<li><a class="bt" href="javascript:;">도시기반시설행정과</a></li>
+								<li><button type="button" class="bt">메뉴메뉴2</button></li>
 								<li>
-									<a class="bt" href="javascript:;">도시기반시설예방과</a>
+									<button type="button" class="bt">메뉴메뉴2</button>
 									<ul>
-										<li><a class="bt" href="javascript:;">시설점검반</a></li>
+										<li><button type="button" class="bt">메뉴메뉴3</button></li>
 										<li>
-											<a class="bt" href="javascript:;">사전관리반</a>
+											<button type="button" class="bt">메뉴메뉴3</button>
 											<ul>
-												<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
+												<li><button type="button" class="bt">메뉴메뉴4</button></li>
 												<li>
-													<a class="bt" href="javascript:;">메뉴메뉴</a>
+													<button type="button" class="bt">메뉴메뉴4</button>
 													<ul>
-														<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
-														<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
+														<li><button type="button" class="bt">메뉴메뉴5</button></li>
+														<li><button type="button" class="bt">메뉴메뉴5</button></li>
 													</ul>
 												</li>
-												<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
+												<li><button type="button" class="bt">메뉴메뉴4</button></li>
 											</ul>
 										</li>
 									</ul>
@@ -702,13 +713,13 @@
 							</ul>
 						</li>
 						<li class="open">
-							<a class="bt" href="javascript:;">상수도사업본부</a>
+							<button type="button" class="bt">메뉴메뉴1</button>
 							<ul>
-								<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
-								<li><a class="bt" href="javascript:;">메뉴메뉴</a></li>
+								<li><button type="button" class="bt">메뉴메뉴2</button></li>
+								<li><button type="button" class="bt">메뉴메뉴2</button></li>
 							</ul>
 						</li>
-						<li><a class="bt" href="javascript:;">서울특별시한강사업본부</a></li>
+						<li><button type="button" class="bt">메뉴메뉴1</button></li>
 					</ul>
 				</div>
 			</section>
@@ -804,27 +815,27 @@
 
 			<section class="sect" data-sid="ui-pie">
 				<h3 class="hdt">Graph - Pie</h3>
-				<div class="uiCircle c1" 
+				<div class="ui-circle c1" 
 					data-value="0.9"
-					data-size="100"
+					data-size="90"
 					data-fill= '{ "color": "#000000" }' 
 					data-empty-fill="#ddd"
 					data-thickness="5"
 					data-animation-start-value="0.0" >
 					<strong></strong>
 				</div>
-				<div class="uiCircle c2" 
+				<div class="ui-circle c2" 
 					data-value="0.45"
-					data-size="100"
+					data-size="90"
 					data-fill= '{ "color": "#000000" }' 
 					data-empty-fill="rgba(0, 0, 0, .5)"
-					data-thickness="50"
+					data-thickness="45"
 					data-animation-start-value="0.0" >
 					<strong style="color: #ffffff"></strong>
 				</div>
-				<div class="uiCircle c3" 
+				<div class="ui-circle c3" 
 					data-value="0.75"
-					data-size="100"
+					data-size="90"
 					data-arc-coef= "0.7"
 					data-start-angle = "1.6"
 					data-empty-fill="rgba(0, 0, 0, .5)"
@@ -836,7 +847,7 @@
 				<script>
 				$(document).ready(function(){
 
-					$('.uiCircle').circleProgress({
+					$('.ui-circle').circleProgress({
 						// value: 0.75,
 						// arcCoef: 1.0,
 						// startAngle : 1.5 * Math.PI,
@@ -851,13 +862,13 @@
 					});
 					circleSmaple = function(c){
 						if( c == 1 ) {
-							$('.uiCircle').circleProgress('value', 0.22);
+							$('.ui-circle').circleProgress('value', 0.22);
 						}
 						if( c == 2 ) {
-							$('.uiCircle').circleProgress('value', 0.93);
+							$('.ui-circle').circleProgress('value', 0.93);
 						}
 						if( c == 3 ) {
-							$('.uiCircle').circleProgress('redraw');
+							$('.ui-circle').circleProgress('redraw');
 						}
 					}
 				});
@@ -867,11 +878,11 @@
 					<a href="javascript:;" class="btn" onclick="circleSmaple(2);">93%</a>
 					<a href="javascript:;" class="btn" onclick="circleSmaple(3);">redraw</a>
 				</div>
+
 			</section>
 
-			<section class="sect" data-sid="ui-pie">
+			<section class="sect" data-sid="ui-hartgage" style="display: none;">
 				<h3 class="hdt">Graph - Pie</h3>
-				
 				<div class="ui-htgrade lv0" data-level="-1" data-point="-84">
 					<em class="ico"></em>
 					<b class="pnt"><i class="p"></i></b>
@@ -914,9 +925,9 @@
 				<script>// ui.htgage.set();</script>
 
 			</section>
-
-			<section class="sect" data-sid="ui-hartgage">
-				<h3 class="hdt">하트지수</h3>
+				
+			<section class="sect" data-sid="ui-hartgage" style="display: none;">
+				<h3 class="hdt">Graph - Pie</h3>
 				
 				<div class="ui-htgage lv0" data-level="-1" data-point="-84">
 					<em class="ico"></em>
@@ -976,6 +987,68 @@
 				<span class="uispined" data-max="5"><input class="amt" value="3" type="number"></span>
 				<span class="uispined" data-max="12"><input class="amt" value="5" type="number"></span>
 				<span class="uispined" data-max="20"><input class="amt" value="15" type="number"></span>
+
+
+				<script>
+					$.fn.setCursorPosition = function( pos ){
+						this.each( function( index, elem ) {
+							if( elem.setSelectionRange ) {
+								elem.setSelectionRange(pos, pos);
+							} else if( elem.createTextRange ) {
+								var range = elem.createTextRange();
+								range.collapse(true);
+								range.moveEnd('character', pos);
+								range.moveStart('character', pos);
+								range.select();
+							}
+						});
+						
+						return this;
+					};
+
+					$(function(){
+						$("button[name=cur_focus]").click(function(){
+							$("input[name=cur]").focus();
+						});
+						$("button[name=cur_position1]").click(function(){
+							$("input[name=cur1]").focus().setCursorPosition(1);
+						});
+						$("button[name=cur_position2]").click(function(){
+							$("input[name=cur2]").focus().setCursorPosition(2);
+						});
+						$("button[name=cur_position3]").click(function(){
+							$("input[name=cur3]").focus().setCursorPosition(3);
+						});
+						$("button[name=cur_position4]").click(function(){
+							$("input[name=cur4]").focus().setCursorPosition($("input[name=cur4]").val().length);
+						});
+					});
+					var inputFouseSet = function(){
+						$('input[name=testspd]').focus().setCursorPosition(2);
+					};
+				</script>
+
+				<div>
+					<input type="text" name="cur" value="test">
+					<button name="cur_focus">focus()</button>
+				</div>
+				<div>
+					<input type="text" name="cur1" value="test">
+					<button name="cur_position1">setCursorPosition(1)</button>
+				</div>
+				<div>
+					<input type="text" name="cur2" value="test">
+					<button name="cur_position2">setCursorPosition(2)</button>
+				</div>
+				<div>
+					<input type="text" name="cur3" value="test">
+					<button name="cur_position3">setCursorPosition(3)</button>
+				</div>
+				<div>
+					<input type="text" name="cur4" value="test_last">
+					<button name="cur_position4">setCursorPosition(last)</button>
+				</div>
+
 			</section>
 
 			<section class="sect" data-sid="ui-dropdown">
@@ -987,15 +1060,9 @@
 				</style>
 				<nav class="location">
 					<ul class="loc">
-						<li>
-							<a href="javascript:;" class="bt st">강아지</a>
-						</li>
-						<li>
-							<a href="javascript:;" class="bt st">메뉴1</a>
-						</li>
-						<li>
-							<a href="javascript:;" class="bt st">메뉴2</a>
-						</li>
+						<li><a href="javascript:;" class="bt st">강아지</a></li>
+						<li><a href="javascript:;" class="bt st">메뉴1</a></li>
+						<li><a href="javascript:;" class="bt st">메뉴2</a></li>
 					</ul>
 				</nav>
 				<nav class="location">
@@ -1334,7 +1401,7 @@
 			<section class="sect" data-sid="ui-swipers">
 				<h3 class="hdt">Swiper 슬라이드</h3>
 
-				<div class="slideSample1">
+				<div class="slide-sample1">
 					<div class="swiper-container">
 						<ul class="swiper-wrapper slide">
 							<li class="swiper-slide">
@@ -1358,7 +1425,7 @@
 
 				<p class="gap"></p>
 
-				<div class="slideSample2">
+				<div class="slide-sample2">
 					<div class="swiper-container">
 						<ul class="swiper-wrapper slide">
 							<li class="swiper-slide">
@@ -1450,69 +1517,73 @@
 					<ul class="list" id="dp_list"></ul>
 					<div class="ui-loadmore">
 						<em></em>
-						<button type="button" class="btnLoad" onclick="addItem.using()" id="btnListMore">불러오기</button>
+						<button type="button" class="btn-load" onclick="addItem.using()" id="btn_list_more">불러오기</button>
 					</div>
 				</div>
 				<script>
-					var addItem = {
-						init:function(){
-							//this.using();
-							this.evt();
-						},
-						stat:true,
-						page:0,
-						evt:function(){
-							var _this = this;
-							$(window).on("scroll resize", function() { // 바닥 확인
-								var wHt = ui.viewport.height() ;
-								var docH = $(document).height();
-								var scr = $(window).scrollTop() + wHt + 10; 
-								// console.log(docH,scr);
-								if (docH <= scr  && _this.stat == true) {
-									console.log("바닥sss");
-									_this.using();
-									_this.stat = false;
-								}
-							});
-						},
-						using:function(){
-							var _this = this;
-							_this.stat = false ;
-							$(".ui-loadmore").addClass("active");
-							
-							$.ajax({
-								type: "get",
-								url: "../inc/list_more.html",
-								dataType: "html",
-								success: function(html) {
-									window.setTimeout(function(){
-										_this.page ++ ;
-										$("#dp_list").append(html).addClass("load");
-										console.log("페이징 = " + _this.page);
-										_this.stat = true ;
-										if (_this.page >= 3) {
-											console.log("끝");
-											$(".ui-loadmore").addClass("hide");
-											_this.stat = false ;
-										}
-										$(".ui-loadmore").removeClass("active").removeClass("error");
-										$("#btnListMore").prop("disabled",true);
-										_this.evt();
-										
-									},500);
-								},
-								error:function(error){
-									// _this.page --;
-									console.log("페이징 = " + _this.page + "에러 = " + error.readyState);
-									$(".ui-loadmore").removeClass("active").addClass("error");
-									$(window).off("scroll");
-									$("#btnListMore").prop("disabled",false);
-								}
-							});
-						}
-					};
+					$(document).ready(function(){
+						
+						var addItem = {
+							init:function(){
+								//this.using();
+								this.evt();
+							},
+							stat:true,
+							page:0,
+							evt:function(){
+								var _this = this;
+								$(window).on("scroll resize", function() { // 바닥 확인
+									var wHt = ui.viewport.height() ;
+									var docH = $(document).height();
+									var scr = $(window).scrollTop() + wHt + 10; 
+									// console.log(docH,scr);
+									if (docH <= scr  && _this.stat == true) {
+										console.log("바닥sss");
+										_this.using();
+										_this.stat = false;
+									}
+								});
+							},
+							using:function(){
+								var _this = this;
+								_this.stat = false ;
+								$(".ui-loadmore").addClass("active");
+								
+								$.ajax({
+									type: "get",
+									url: "../inc/list_more.html",
+									dataType: "html",
+									success: function(html) {
+										window.setTimeout(function(){
+											_this.page ++ ;
+											$("#dp_list").append(html).addClass("load");
+											console.log("페이징 = " + _this.page);
+											_this.stat = true ;
+											if (_this.page >= 3) {
+												console.log("끝");
+												$(".ui-loadmore").addClass("hide");
+												_this.stat = false ;
+											}
+											$(".ui-loadmore").removeClass("active").removeClass("error");
+											$("#btn_list_more").prop("disabled",true);
+											_this.evt();
+											
+										},500);
+									},
+									error:function(error){
+										// _this.page --;
+										console.log("페이징 = " + _this.page + "에러 = " + error.readyState);
+										$(".ui-loadmore").removeClass("active").addClass("error");
+										$(window).off("scroll");
+										$("#btn_list_more").prop("disabled",false);
+									}
+								});
+							}
+						};
 
-					addItem.init();
+						addItem.init();
+						
+					});
 			
 				</script>
 			</section>
@@ -1545,11 +1616,11 @@
 						<p>sdfsdfsfsd</p>
 						<label class="checkbox"><input type="checkbox" checked="checked"><span></span></label>
 						<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
-						<span class="input db"><input type="text"></span>
+						<span class="input"><input type="text"></span>
 						<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
 						<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
 						<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
-						<span class="input db"><input type="text"></span>
+						<span class="input"><input type="text"></span>
 						<p>sdfsdfsfsd</p>
 						<p>sdfsdfsfsd</p>
 						<label class="checkbox"><input type="checkbox"><span></span></label>
@@ -1558,7 +1629,7 @@
 						<p>sdfsdfsfsd</p>
 						<p>sdfsdfsfsd</p>
 						<p>sdfsdfsfsd</p>
-						<span class="input db"><input type="text"></span>
+						<span class="input"><input type="text"></span>
 					</main>
 				</div>
 				<div class="pbt">
@@ -1589,11 +1660,11 @@
 						<p>sdfsdfsfsd</p>
 						<label class="checkbox"><input type="checkbox" checked="checked"><span></span></label>
 						<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
-						<span class="input db"><input type="text"></span>
+						<span class="input"><input type="text"></span>
 						<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
 						<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
 						<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
-						<span class="input db"><input type="text"></span>
+						<span class="input"><input type="text"></span>
 						<p>sdfsdfsfsd</p>
 						<p>sdfsdfsfsd</p>
 						<label class="checkbox"><input type="checkbox"><span></span></label>
@@ -1602,7 +1673,7 @@
 						<p>sdfsdfsfsd</p>
 						<p>sdfsdfsfsd</p>
 						<p>sdfsdfsfsd</p>
-						<span class="input db"><input type="text"></span>
+						<span class="input"><input type="text"></span>
 					</main>
 				</div>
 				<div class="pbt">
@@ -1631,9 +1702,9 @@
 						<p>sdfsdfsfsd</p>
 						<a class="btn" href="javascript:ui.popup.open('pop-sample3');">팝레이어3</a>
 						<p>sdfsdfsfsd</p>
-						<span class="input db"><input type="text"></span>
+						<span class="input"><input type="text"></span>
 						<p>sdfsdfsfsd</p>
-						<span class="textarea db"><textarea></textarea></span>
+						<span class="textarea"><textarea></textarea></span>
 						<p>sdfsdfsfsd</p>
 						<p>sdfsdfsfsd</p>
 						<p>sdfsdfsfsd</p>
@@ -1734,7 +1805,8 @@
 						var hDiff = ((wsh - wih) == 63)?63:0;
 
 						var p = (diff - hDiff) / ($(window).height() );
-						console.log( $(el).data("data-h")   );
+						var pctH = $(el).closest(".pbd").find(".pct").outerHeight();
+						console.log( $(el).data("data-h") , pctH );
 						$(el).removeData("data-h");
 						$(el).removeData("ah");
 					}
@@ -1784,21 +1856,9 @@
 	});
 	</script>
 
-	<include class="menubar" data-include-html="../inc/menubar.html"></include>
+	<include class="menubar" src="../inc/menubar.html"></include>
 
 </div>
-
-
-<script src="../../js/iscroll.js"></script>
-<script src="../../js/swiper.js"></script>
-<script src="../../js/moment.js"></script>
-<script src="../../js/circle-progress.js"></script>
-<script src="../../js/pullToRefresh.js"></script>
-<script src="../../js/lib/jquery.hammer.js-master/hammer.js"></script>
-<script src="../../js/lib/jquery.hammer.js-master/jquery.hammer.js"></script>
-<script src="../guide/html.js"></script><!-- 개발페이지에서는 html.js 임포트 하지말아주세요. -->
-<script src="../../js/ui.js"></script>
-
 
 <script>
 var html = document.documentElement;

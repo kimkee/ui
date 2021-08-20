@@ -135,10 +135,10 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
 ### ui.datePick
   > 달력 날짜 선택 - 일선택,주선택,월선택
   ```
-<span class="input db uiDate"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
+<span class="input db ui-date"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
 <div class="weeks"><span id="START_DT"></span> ~ <span id="END_DT"></span></div>
-<span class="uiDate input db week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
-<span class="input db uiDate"><input type="text" class="datepicker_month" placeholder="YYYY-MM-DD" value="2019-06" readonly></span>
+<span class="ui-date input db week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
+<span class="input db ui-date"><input type="text" class="datepicker_month" placeholder="YYYY-MM-DD" value="2019-06" readonly></span>
   ```
 ![image](https://user-images.githubusercontent.com/6386956/81260888-ee314080-9075-11ea-85a2-1f8c50e17c6e.png)
 ![image](https://user-images.githubusercontent.com/6386956/81261321-d4442d80-9076-11ea-86b7-b194139a6164.png)
@@ -296,7 +296,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
     <ul class="list" id="dp_list"></ul>
     <div class="ui-loadmore">
         <em></em>
-        <button type="button" class="btnLoad" onclick="addItem.using()" id="btnListMore">불러오기</button>
+        <button type="button" class="btn-load" onclick="addItem.using()" id="btn_list_more">불러오기</button>
     </div>
 </section>
 <script>
@@ -342,7 +342,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
                             _this.stat = false;
                         }
                         $(".ui-loadmore").removeClass("active").removeClass("error");
-                        $("#btnListMore").prop("disabled", true);
+                        $("#btn_list_more").prop("disabled", true);
                         _this.evt();
 
                     }, 500);
@@ -352,7 +352,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
                     console.log("페이징 = " + _this.page + "에러 = " + error.readyState);
                     $(".ui-loadmore").removeClass("active").addClass("error");
                     $(window).off("scroll");
-                    $("#btnListMore").prop("disabled", false);
+                    $("#btn_list_more").prop("disabled", false);
                 }
             });
         }

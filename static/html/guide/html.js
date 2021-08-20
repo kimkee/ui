@@ -4,7 +4,11 @@
 		this.tit();
 		this.menu.init();
 		this.uimenu.init();
-		$(window).on("load scroll",function(){
+		$(window).on("load scroll",function(e){
+			if( $("html").is(".is-lock") ) {
+				e.preventDefault();
+				return false;
+			}
 			var winH = $(window).height();
 			var docH = $(document).height();
 			var scrT = $(window).scrollTop();
@@ -295,7 +299,7 @@
 	}
 };
 
-
-uiHtml.init();
-
+$(document).ready(function(){
+	uiHtml.init();
+});
 

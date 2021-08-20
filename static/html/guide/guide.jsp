@@ -384,7 +384,7 @@
 			
 			<p class="gap"></p>
 			<p class="gap"></p>
-			<div class="uiCircle c1" 
+			<div class="ui-circle c1" 
 				data-value="0.9"
 				data-size="100"
 				data-fill= "{ 'color': '#000000' }" 
@@ -393,7 +393,7 @@
 				data-animation-start-value="0.0" >
 				<strong></strong>
 			</div>
-			<div class="uiCircle c2" 
+			<div class="ui-circle c2" 
 				data-value="0.45"
 				data-size="100"
 				data-fill= '{ "color": "#000000" }' 
@@ -402,7 +402,7 @@
 				data-animation-start-value="0.0" >
 				<strong style="color: #ffffff"></strong>
 			</div>
-			<div class="uiCircle c3" 
+			<div class="ui-circle c3" 
 				data-value="0.75"
 				data-size="100"
 				data-arc-coef= "0.7"
@@ -416,7 +416,7 @@
 			<script>
 			$(document).ready(function(){
 
-				$('.uiCircle').circleProgress({
+				$('.ui-circle').circleProgress({
 					// value: 0.75,
 					// arcCoef: 1.0,
 					// startAngle : 1.5 * Math.PI,
@@ -431,13 +431,13 @@
 				});
 				circleSmaple = function(c){
 					if( c == 1 ) {
-						$('.uiCircle').circleProgress('value', 0.22);
+						$('.ui-circle').circleProgress('value', 0.22);
 					}
 					if( c == 2 ) {
-						$('.uiCircle').circleProgress('value', 0.93);
+						$('.ui-circle').circleProgress('value', 0.93);
 					}
 					if( c == 3 ) {
-						$('.uiCircle').circleProgress('redraw');
+						$('.ui-circle').circleProgress('redraw');
 					}
 				}
 			});
@@ -541,12 +541,12 @@
 
 			<p class="gap"></p>
 
-			<div class="uiDate"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" readonly="readonly"></div>
+			<div class="ui-date"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" readonly="readonly"></div>
 			<p class="gap"></p>
 
 			<div class="date">
 				<span class="weeks"><span id="START_DT"></span> ~ <span id="END_DT"></span></span>
-				<div class="uiDate week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly="readonly"></div>
+				<div class="ui-date week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly="readonly"></div>
 			</div>
 			<p class="gap"></p>
 			<style>
@@ -591,11 +591,11 @@
 
 			<!--
 			<p class="gap"></p>
-			<div class="btnList">
+			<div class="btn-list">
 				<a href="javascript:;" class="btn">가운데</a>
 			</div>
 
-			<div class="btnList">
+			<div class="btn-list">
 				<div class="fl"><a href="javascript:;" class="btn">왼쪽</a></div>
 				<div class="fr"><a href="javascript:;" class="btn">오른쪽</a></div>
 			</div>
@@ -780,7 +780,7 @@
 
 			<p class="gap"></p>
 
-			<div class="slideSample1">
+			<div class="slide-sample1">
 				<div class="swiper-container">
 					<ul class="swiper-wrapper slide">
 						<li class="swiper-slide">
@@ -804,7 +804,7 @@
 
 			<p class="gap"></p>
 
-			<div class="slideSample2">
+			<div class="slide-sample2">
 				<div class="swiper-container">
 					<ul class="swiper-wrapper slide">
 						<li class="swiper-slide">
@@ -876,7 +876,7 @@
 				<ul class="list" id="dp_list"></ul>
 				<div class="ui-loadmore">
 					<em></em>
-					<button type="button" class="btnLoad" onclick="itemListAdd()" id="btnListMore">불러오기</button>
+					<button type="button" class="btn-load" onclick="itemListAdd()" id="btn_list_more">불러오기</button>
 				</div>
 			</section>
 			
@@ -904,7 +904,7 @@
 	var page = 0;
 	var itemListAdd = function(){
 		ui.listLoad.attach(); // 로딩이미지 Show
-		$("#btnListMore").prop("disabled",true);
+		$("#btn_list_more").prop("disabled",true);
 		if( ui.listMore.active ){
 			ui.listMore.active = false;
 			ui.listMore.using();
@@ -916,7 +916,7 @@
 					dataType: "html",
 					success: function(html) {
 						$("#dp_list").append(html).addClass("load");
-						$("#btnListMore").prop("disabled",false);
+						$("#btn_list_more").prop("disabled",false);
 						ui.listLoad.detach();
 						ui.listMore.active = true;
 						// console.log("페이징 = " + page);
@@ -931,7 +931,7 @@
 						console.log("페이징 = " + page);
 						console.log("에러 = " + error.readyState);
 						ui.listLoad.error();
-						$("#btnListMore").prop("disabled",false);
+						$("#btn_list_more").prop("disabled",false);
 					}
 				});
 			},1000);

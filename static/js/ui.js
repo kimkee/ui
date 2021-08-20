@@ -32,7 +32,7 @@ var ui = { //
 		this.slides.init();
 		this.datepick.init();
 		this.timepick.init();
-		this.daypick.init();
+		// this.daypick.init();
 		this.listLoad.init();
 		this.getSafe.init();
 		this.movePage.init();
@@ -46,7 +46,7 @@ var ui = { //
 		this.popseltm.set();
 		this.datepick.set();
 		this.timepick.set();
-		this.daypick.set();
+		// this.daypick.set();
 		this.form.input.set();
 		this.form.intdel.set();
 		this.form.commas.set();
@@ -54,6 +54,7 @@ var ui = { //
 		this.form.spinner.set();
 		this.form.spined.set();
 		this.form.inthgt.set();
+		this.form.star.set();
 		this.accd.set();
 		this.tab.set();
 		this.tree.set();
@@ -190,58 +191,44 @@ var ui = { //
 		},
 		include:function(){
 			var _this = this;
-			var $inc_html = $("[data-include-html]");
+			var $inchtml = $("include");
 			var incAmt = 0;
-			if ($inc_html.length) {
-				$inc_html.each(function(idx){
-					var inc = $(this).data("include-html");
-					var head_title = $(this).data("ui-title");
-					var head_logo = $(this).data("ui-logo");
-					var head_alim = $(this).data("ui-alim");
-					var head_mems = $(this).data("ui-mems");
-					var head_docs = $(this).data("ui-docs");
-					var incNums = $inc_html.length ;
-					$(this).before('<!-- data-include-html="'+inc+'"-->');
+			
+			if ($inchtml.length) {
+				$inchtml.each(function(idx){
+					var inc = $(this).attr("src");
+					console.log(inc);
+					var incopt = $(this).data("include-opt");				
+					var incNums = $inchtml.length ;
 					$(this).load( inc ,function(response, status, xhr){
 						// console.log( inc, idx+1 , incNums,  status, xhr);
+						// console.log(incopt);
+						if( incopt && incopt.class ){
+							// console.log(inc ,incopt);
+							$(this).find(">*").addClass(incopt.class);
+						}
 						$(this).find(">*").unwrap();
 						incAmt ++;
 						if( status == "success" ){
-							console.log(incAmt , inc );
+							
+
 						}else if( status == "error"){
 							_this.incCom = false ;
 							console.log("include 실패" , inc );
-						}
+						}						
 						if( incAmt == incNums ) {
 							_this.incCom = true ;
-							if ( typeof _this.loadCallback == "function") _this.loadCallback();
+							if( typeof _this.loadCallback == "function") _this.loadCallback();
+
 						}
-	
-						if( head_title ){
-							// console.log("ttt");
-							$(".header .stitle").html(head_title).show();
-						}
-						// console.log(head_logo);
-						if (head_logo == true) {
-							$(".header .logo").show();
-						}
-						// console.log(head_alim);
-						if (head_alim == true) {
-							$(".header .tmenu>li.alim").show();
-						}
-						// console.log(head_mems);
-						if (head_mems == true) {
-							$(".header .tmenu>li.mems").show();
-						}
-						// console.log(head_docs);
-						if (head_docs == true) {
-							$(".header .tmenu>li.docs").show();
-						}
+					
 					});
 				});
 			}else{
 				_this.incCom = true ;
 				if ( typeof _this.loadCallback == "function") _this.loadCallback();
+				
+
 			}
 			//console.log("완료" + _this.incCom);
 		}
@@ -1402,10 +1389,36 @@ var ui = { //
 			},
 			evt:function(){
 				var _this =  this;
-				$(document).on("click",".ui-star ul>li>button.st",function(){
+				$(document).on("click",".ui-star ul>li>button.st",function(e){
 					var myVar =  $(this).closest("li").index()+1;
+					let $star = $(this).closest("ul").children();
+					let half = ($(this).innerWidth() / 2) + $(this).position().left;
+					let ind = $(this).parent().index();
+					//console.log(myVar);
+					$(this).closest(".uiStar").data("star",myVar);
+					$(this).closest(".uiStar").attr("data-star",myVar);
+					var v;
+					if(half <= e.pageX){
+						v = myVar+0;
+						console.log(v);
+						$(this).parent().addClass("f").removeClass("h");
+					}else{
+						v = myVar-0.5;
+						console.log(v);
+						$(this).parent().addClass("h").removeClass("f");
+					}
+					$star.each(function(i,n){
+						if(i == ind){
+							return;
+						}else if(i < ind){
+							$(n).addClass("f");
+						}else{
+							$(n).removeClass("f h");
+						}
+					});
 					$(this).closest(".ui-star").find(".amt").val(myVar);
-					_this.set();
+					$(this).closest(".ui-star").find(".p").html(v);
+					
 				});
 			},
 			set:function(){
@@ -1422,19 +1435,16 @@ var ui = { //
 					//console.log(v,vt,vp);
 					for (var i = 0; i <= vt; i++) {
 						$(this).find("ul>li:nth-child("+i+")").addClass("f");
-						
 						if(vp){
 							if(vt == 0 ){
 								$(this).find("ul>li:nth-child(1)").addClass("h");
 								//return false;
 							}
 							$(this).find("ul>li:nth-child("+vt+")").next("li").addClass("h");
-							
 						}
 					}
 					if( $(this).is(".ht") ) {
-						var stdata = $(this).data("satis");
-						
+						var stdata = $(this).data("satis");						
 						$(this).find(".p").removeClass("dis");
 						if (v == 0) {
 							$(this).find(".p").addClass("dis");
@@ -1534,7 +1544,7 @@ var ui = { //
 		},
 		set:function(){
 			var _this = this;
-			$(".uiTimePicker").each(function(i){
+			$(".timepicker").each(function(i){
 				// console.log(i);
 				var id = "picker_id_"+i ;
 				if( $(this).attr("id") ){
@@ -1545,6 +1555,7 @@ var ui = { //
 					els = this;
 					// console.log(els);
 				}
+				var ptit = $(els).attr("title") || "시간선택";
 				if( _this.pick[id] ) {
 					_this.pick[id].destroy();
 					_this.pick[id] = undefined;
@@ -1560,9 +1571,19 @@ var ui = { //
 						minute: 10,
 					  },
 					text: {
-						title: '시간 선택',
+						title: ptit,
 						confirm: '완료',
 						cancel: '취소',
+					},
+					translate:function(type, text) {
+						var suffixes = {
+							year: '년',
+							month: '월',
+							day: '일',
+							hour: '시',
+							minute: '분',
+						};
+						return Number(text) + suffixes[type];
 					},
 					shown:function(e){
 						// console.log("쇼 shown");
@@ -1579,72 +1600,12 @@ var ui = { //
 		},
 		pick:{}
 	},
-	daypick:{ // 날짜 픽커
-		init:function () {
-			this.set();
-			$(document).on("keydown mousedown",".uiDate .datepicker", function (event) {
-				if ( event.keyCode == 13 ) {
-					$(event.target).trigger("click");
-				}
-			});
-		},
-		set:function(){
-			var _this = this;
-			$(".uiDate .datepicker:not(:disabled)").each(function(i){
-				// console.log(i);
-				var id = "picker_id_"+i ;
-				if( $(this).attr("id") ){
-					id = $(this).attr("id");
-					els = document.getElementById(id);
-					// console.log(id);
-				}else{
-					els = this;
-					// console.log(els);
-				}
-				if( _this.pick[id] ) {
-					_this.pick[id].destroy();
-					_this.pick[id] = undefined;
-					// console.log(_this.pick[id]);
-				}
-				_this.pick[id] = new Picker( els , {
-					format: 'YYYY.MM.DD',
-					rows:3,
-					headers: true,
-					increment: {
-						year: 1,
-						month: 1,
-						day: 1
-					},
-					text: {
-						title: '날짜 선택',
-						confirm: '완료',
-						cancel: '취소',
-					},
-					shown:function(e){
-						// console.log("쇼 shown");
-						$(".picker-opened .picker-dialog").attr("tabindex","-1").focus();
-						_this.pick[id].update();
-					},
-					hidden:function(){
-						// console.log("히든 hidden");
-						$(this).focus();
-					},
-					pick:function(els){
-						// $(this).trigger("change");
-						// console.log("픽 pick");
-						// console.log( _this.pick[id].date );
-					}
-				});	
-			});
-		},
-		pick:{}
-	},
 	datepick:{ // 달력피커 jQuery-ui
 		init:function(){
 			
 				
 			$("input.datepicker").on("click",function(){
-				// $(this).next(".ui-datepicker-trigger").trigger("click");
+				$(this).next(".ui-datepicker-trigger").trigger("click");
 			});
 			$("input.datepicker").on("focus",function(){
 				// $(this).blur();
@@ -1652,7 +1613,6 @@ var ui = { //
 				// $(this).attr("tabindex","-1");
 				// $(this).next(".ui-datepicker-trigger").focus();
 			});
-			if( $("input.datepicker_month").length ) this.month();
 
 			$(document).on("click",".ui-datepicker-next",function(e){
 				e.preventDefault();
@@ -1666,68 +1626,107 @@ var ui = { //
 					$(".ui-datepicker-prev").attr({"tabindex":"0","href":"javascript:;"}).focus();
 				});
 			});
+
+			$(document).on("click",".ui-datepicker-header .btsy .bt.prev",function(e){
+				e.preventDefault();
+				for (var i = 0; i < 12; i++) {
+					$(".ui-datepicker-prev").trigger("click");
+				}
+				setTimeout(function(){
+					$(".ui-datepicker-header .btsy .bt.prev").focus();
+				});
+			});
+			$(document).on("click",".ui-datepicker-header .btsy .bt.next",function(e){
+				e.preventDefault();
+				for (var i = 0; i < 12; i++) {
+					$(".ui-datepicker-next").trigger("click");
+				}
+				setTimeout(function(){
+					$(".ui-datepicker-header .btsy .bt.next").focus();
+				});
+			});
 			
 			this.set();
 		},
 		set:function(params){
+			var _this = this;
 			this.opts = $.extend({
 				id:"",
 				// minDate: '-3M',
 	  			// maxDate: '+28D',
 				showOn: "button",
 				showButtonPanel: true,
-				changeYear:true ,
-				changeMonth:true,
+				// changeYear:true ,
+				// changeMonth:true,
 				buttonText: "달력",
 				showMonthAfterYear: true,
-				dateFormat:"yy.mm.dd",
+				dateFormat:"yy-mm-dd",
 				yearRange: 'c-100:c+10',
+				yearSuffix: "년",
 				dayNamesMin: [ "일", "월", "화", "수", "목", "금", "토" ],
 				monthNames : [ "1","2","3","4","5","6","7","8","9","10","11","12"],
 				monthNamesShort: [ "1","2","3","4","5","6","7","8","9","10","11","12"],
-				beforeShow: function(els) {
-					ui.lock.using(true);
-					$(".ui-datepicker").wrap('<div class="uiDatePickWrap"></div>');
+				beforeShow: function(els,id) {
+					// ui.lock.using(true);
+
+					console.log($(this).attr("id"));
+					$(".ui-datepicker").wrap('<div class="ui-datepickwrap"></div>');
 					setTimeout(function(){
-						$(".ui-datepicker-next , .ui-datepicker-prev").attr({"tabindex":"0","href":"#"});
-						$("#ui-datepicker-div").attr("tabindex","-1").focus();
+						$(".ui-datepicker-header .ui-corner-all").attr({"tabindex":"0","href":"javascript:;"});
+						// $("#ui-datepicker-div").attr("tabindex","-1").focus();
+						$("#ui-datepicker-div .ui-state-active").attr({"title":"선택됨"});
+						$("#ui-datepicker-div .ui-state-highlight").attr({"title":"오늘날짜"});
+						
+
+						_this.setYY(els,id);
+
+
+						$(".ui-datepickwrap").addClass("open");
+						ui.lock.using(true);
 					});
-					var sted = $(els).closest(".uiDate").attr("class").replace(" ","").replace("uiDate","");
-					$("#ui-datepicker-div").removeClass("week").addClass(sted);
-					window.setTimeout(ui.datepick.wkThis);
 				},
 				onSelect :function(date,els){
 					// console.log(date,els);
 					$(this).trigger("change");
-					$(this).focus();
-					var id = $(this).attr("id");
-					if( ui.daypick.pick[id] ) {
-						ui.daypick.pick[id].update();
-					}
+					// $(this).focus();
+					$(this).removeClass("init");
 				},
-				onChangeMonthYear  :function(ddd){
+				onChangeMonthYear  :function(els,id){
+
 					setTimeout(function(){
 						$(".ui-datepicker-header .ui-corner-all").attr({"tabindex":"0","href":"#"});
-					});
-					setTimeout(function(){
 						$("#ui-datepicker-div").attr("tabindex","-1").focus();
+						_this.setYY(els,id);
 					});
 					window.setTimeout(ui.datepick.wkThis);
 				},
 				onClose:function(date,els){
 					// console.log(date,els);
-					ui.lock.using(false);
-					$("#"+els.id).focus();
-					$(".ui-datepicker").unwrap(".uiDatePickWrap");
+					// ui.lock.using(false);
+					// $("#"+els.id).focus();
+					$(".ui-datepickwrap").removeClass("open");
+					setTimeout(function(){
+						$(".ui-datepicker").unwrap(".ui-datepickwrap");
+						ui.lock.using(false);
+					},200);
 				}
 			}, params); 
 			if( this.opts.id ) {
-				// console.log("ddddd");
-				$("#"+this.opts.id+":not(:disabled)").datepicker(this.opts);
+				$("#"+this.opts.id+":not(:disabled)").datepicker(this.opts).addClass("datepicker");
 			}else{
-				// console.log("eeeeeee");
 				$("input:not(:disabled).datepicker").datepicker(this.opts);
 			}
+			$("input:not(:disabled).datepicker").prop("readonly",true);
+		},
+		setYY:function(els,id){
+			var dtit = $(els).attr("title") || "날짜선택";
+			// console.log(dtit);
+			if( !$(".ui-datepicker .dtit").length ) $(".ui-datepicker").prepend('<h4 class="dtit">'+dtit+'</h4>');
+			var btsy = '<div class="btsy">'+
+							'<button class="bt prev" type="button">이전</button>'+
+							'<button class="bt next" type="button">다음</button>'+
+						'</div>';
+			if( !$(".ui-datepicker-header .btsy").length ) $(".ui-datepicker-header").prepend(btsy);
 		},
 		wkThis:function(){  // 일주일 단위선택 용 하이라이트
 			var idx = $(".ui-datepicker").find(".ui-datepicker-current-day").index();
@@ -1742,61 +1741,6 @@ var ui = { //
 				$td.closest("tr").prev("tr").find("td:not(:first-child)").addClass("activeDays");
 			}
 		},
-		month:function(){
-			
-			$('input.datepicker_month').datepicker({
-				showMonthAfterYear: true,
-				dateFormat: "yy-mm",
-				monthNamesShort: [ "1","2","3","4","5","6","7","8","9","10","11","12"],
-				changeMonth: true,
-				changeYear: true,
-				showButtonPanel: true,
-				closeText: "선택",
-				currentText: "이달",
-				onClose: function(dateText, inst) {
-					inst.dpDiv.hide();
-					inst.dpDiv.removeClass('month_year_datepicker');
-					function isDonePressed(){
-						return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
-					}
-					if (isDonePressed()){
-						var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-						var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-						$(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
-						
-						$('input.datepicker_month').focusout(); //Added to remove focus from datepicker input box on selecting date
-					}
-					
-					// console.log(date,els);
-					ui.lock.using(false);
-					// $("#"+els.id).focus();
-					$(".ui-datepicker").unwrap(".uiDatePickWrap");
-					
-				},
-				beforeShow : function(datestr, inst) {
-					ui.lock.using(true);
-					$(".ui-datepicker").wrap('<div class="uiDatePickWrap"></div>');
-					var sted = $(datestr).closest(".uiDate").attr("class").replace(" ","").replace("uiDate","");
-					inst.dpDiv.addClass('month_year_datepicker');
-
-					if ((datestr = $(this).val()).length > 0) {
-						// console.log(datestr);
-						// console.log(datestr.substring(0, 4));
-						// console.log(datestr.substring(5, 7) );
-						year = datestr.substring(0, 4);
-						month = datestr.substring(5, 7);
-						$(this).datepicker('option', 'defaultDate', new Date(year,month-1,  1));
-						$(this).datepicker('setDate', new Date(year, month-1, 1));
-						$(".ui-datepicker-calendar").hide();
-					}
-					
-				},
-				onChangeMonthYear:function(ddd){
-					
-				}
-			});
-		   
-		}
 	},
 	tooltips:{ // 툴팁레이어
 		init:function(){
@@ -1966,11 +1910,11 @@ var ui = { //
 	},
 	slides:{ // 스와이프 슬라이드
 		init:function(){
-			if( $(this.sample1.els +" ul.slide" ).length ) this.sample1.using();
-			if( $(this.sample2.els +" ul.slide" ).length ) this.sample2.using();
+			$(this.sample1.els +" ul.slide" ).length && this.sample1.using();
+			$(this.sample2.els +" ul.slide" ).length && this.sample2.using();
 		},
 		sample1:{  //  static/html/mn/main.jsp
-			els: ".slideSample1 .swiper-container",
+			els: ".slide-sample1 .swiper-container",
 			opt: {
 				slidesPerView: 1,
 				observer: true,
@@ -1999,13 +1943,13 @@ var ui = { //
 			}
 		},
 		sample2:{ // 추천상품 슬라이드 공통
-			els: ".slideSample2 .swiper-container",
+			els: ".slide-sample2 .swiper-container",
 			opt: {
 				slidesPerView: 2.2,
 				freeMode: true,
 				observer: true,
 				observeParents: true,
-				spaceBetween:2,
+				spaceBetween:10,
 				watchOverflow:true,
 				loop: false
 			},
@@ -2266,7 +2210,7 @@ var ui = { //
 			$(document).on("click",".pop-select",function(e) {
 				// console.log(e.target);
 				if ( !$(e.target).closest(".pop-select .pbd").length ) {
-					// _this.close();
+					_this.close();
 				}
 			});
 
@@ -2485,6 +2429,9 @@ var ui = { //
 				if( !$(this).find(".btsel").length ) {
 					$(this).prepend('<button class="btsel" type="button"></button>');
 				}
+				if( !$(this).is(".set").length ) {
+					$(this).addClass("set");
+				}
 				var $btSel = $(this).find(".btsel");
 				var tit = $(this).find(".slist").data("select-title") || "옵션선택";
 				var sel = $(this).find(".slist").val();
@@ -2643,6 +2590,9 @@ var ui = { //
 				// var _this = this;
 				if( !$(this).find(".btsel").length ) {
 					$(this).prepend('<button class="btsel" type="button"></button>');
+				}
+				if( !$(this).is(".set").length ) {
+					$(this).addClass("set");
 				}
 				var $btSel = $(this).find(".btsel");
 				var tit = $(this).data("select-title") || "옵션선택";
