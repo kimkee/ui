@@ -252,15 +252,15 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
   ```
   <ul class="ui-accd" data-accd="accd">
       <li class="open">
-          <div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
+          <div class="hBox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
           <div class="cBox">내용</div>
       </li>
       <li>
-          <div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
+          <div class="hBox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
           <div class="cBox">내용</div>
       </li>
       <li class="except">
-          <div class="hBox">타이틀 <button type="button" class="btnTog">버튼</button></div>
+          <div class="hBox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
           <div class="cBox">내용</div>
       </li>
   </ul>

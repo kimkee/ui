@@ -67,28 +67,28 @@ var ui = { //
 			this.set();
 			this.evt();
 		},
-		els:'<div id="skipNav"></div>',
+		els:'<div id="skip-nav"></div>',
 		evt:function(){
-			$(document).on("click","#skipNav a[data-href='#gnb']",function(e){
+			$(document).on("click","#skip-nav a[data-href='#gnb']",function(e){
 				ui.gnb.using("open");
 				$("#gnb").attr("tabindex","-1").focus();
 				e.preventDefault();
 			});
-			$(document).on("click","#skipNav a[data-href='#contain']",function(e){
+			$(document).on("click","#skip-nav a[data-href='#contain']",function(e){
 				$("#contain").attr("tabindex","-1").focus();
 				$(window).scrollTop(0);
 				e.preventDefault();
 			});
 		},
 		set:function(){
-			if(!$("#skipNav").length ) {
+			if(!$("#skip-nav").length ) {
 				$(".body:not(.ui)").prepend(this.els);
 			}
-			if( $("#contain").length && !$("#skipNav a[data-href='#contain']").length ) {
-				$("#skipNav").append('<a href="javascript:;" data-href="#contain"><span>본문 바로가기</span></a>');
+			if( $("#contain").length && !$("#skip-nav a[data-href='#contain']").length ) {
+				$("#skip-nav").append('<a href="javascript:;" data-href="#contain"><span>본문 바로가기</span></a>');
 			}
-			if( $("nav.gnb").length && !$("#skipNav a[data-href='#gnb']").length ) {
-				$("#skipNav").prepend('<a href="javascript:;" data-href="#gnb"><span>메뉴 바로가기</span></a>');
+			if( $("nav.gnb").length && !$("#skip-nav a[data-href='#gnb']").length ) {
+				$("#skip-nav").prepend('<a href="javascript:;" data-href="#gnb"><span>메뉴 바로가기</span></a>');
 			}
 		}
 	},
@@ -334,7 +334,7 @@ var ui = { //
 		init: function() {
 			//ui.gnb.using("open");
 			var _this = this;
-			$(document).on("click", ".btnGnb", function() {
+			$(document).on("click", ".btn-gnb", function() {
 				if ($("body").hasClass("gnbOn")) {
 					_this.using("close");
 				} else {
@@ -360,7 +360,7 @@ var ui = { //
 				$("nav.gnb").animate({"left": "-100%"}, 300,function(){
 					$(".gnbScreen").hide().remove();
 					$("nav.gnb").hide();
-					$(".btnGnb").attr("tabindex","0").focus();
+					$(".btn-gnb").attr("tabindex","0").focus();
 				});
 				ui.lock.using(false);
 			}
@@ -638,7 +638,7 @@ var ui = { //
 			this.set();
 		},
 		evt:function(){
-			$(document).on("click", "[data-ui='elips'] .btnTog", function() {
+			$(document).on("click", "[data-ui='elips'] .btn-tog", function() {
 				if ($(this).closest("[data-ui='elips']").hasClass("open")) {
 					$(this).closest("[data-ui='elips']").removeClass("open");
 					$(this).text("내용더보기");
