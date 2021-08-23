@@ -478,6 +478,7 @@ var ui = { //
 		floating:{
 			init:function(){
 				this.evt();
+				this.ptreg.init();
 			},
 			evt:function(){
 				var _this = this;
@@ -492,6 +493,71 @@ var ui = { //
 					}
 					_this.istop();
 				});
+			},
+			ptreg:{ // + 등록버튼
+				init:function(){
+					this.evt();
+				},
+				btreg:".floatnav .bt.reg",
+				btbox:".floatnav .rgbox",
+				evt:function(){
+					var _this = this;
+					$(document).on("click", _this.btreg+":not(.ing)", function(){
+						if( $("body").is(".is-regopen") ) {
+							_this.close();
+						}else{
+							$(_this.btreg).addClass("ing");
+							_this.open();
+						}
+					});
+					$(document).on("click", _this.btbox+" .menu>li .btd", function(){
+						_this.close();
+					});
+					
+					$(window).on("pageshow", function(event) { 
+						if( event.persisted || (window.performance && window.performance.navigation.type == 2) ){ 
+							_this.close();
+							console.log("PAGESHOW");
+							setTimeout(function(){
+								_this.close();
+							}, 500);
+							$(_this.btbox).hide();
+							$(_this.btbox).removeClass("show");
+							$(_this.btbox).removeClass("anim");
+							$(_this.btreg).removeClass("anim");
+							$(_this.btreg).removeClass("ing");
+							$("body").removeClass("is-regopen");
+							
+							$("#deb").append("뒤로옴..");
+						} 
+					});
+					// console.log(document.referrer);
+				},
+				open:function(){
+					var _this = this;
+					$("body").addClass("is-regopen");
+					$(_this.btreg).addClass("anim");
+					$(_this.btbox).off(ui.transitionend);
+					$(_this.btbox).addClass("show").show(0,function(){
+						$(_this.btbox).addClass("anim");
+					});
+					$(_this.btbox).on(ui.transitionend,function(){
+						$(_this.btreg).removeClass("ing");
+					});
+					ui.lock.using(true);
+				},
+				close:function(){
+					var _this = this;
+					ui.lock.using(false);
+					$(_this.btreg).removeClass("anim");
+					$(_this.btbox).off(ui.transitionend);
+					$(_this.btbox).removeClass("anim").on(ui.transitionend,function(){
+						$(_this.btbox).off(ui.transitionend);
+						$(_this.btbox).hide().removeClass("show");
+						$("body").removeClass("is-regopen");
+						$(_this.btreg).removeClass("ing");	
+					});
+				}
 			},
 			gotop:function(){  // 탑버튼 누르면  페이지 위로 스르륵
 				var els = $(this);
@@ -2238,9 +2304,6 @@ var ui = { //
 				_this.close();
 			});
 
-
-
-
 			$(document).on("click",".pop-select .btn-sel-close",function(){
 				_this.close();
 			});
@@ -2324,7 +2387,7 @@ var ui = { //
 				}else{
 					dis = "";
 				}
-				blist += '<li class="swiper-slide '+ dis +'"><span class="bt" '+ dis +' value="'+list[i].v+'">'+list[i].t+'</span></li>';
+				blist += '<li class="swiper-slide '+ dis +'"><span class="bt '+ dis +'" '+ dis +' value="'+list[i].v+'">'+list[i].t+'</span></li>';
 			}
 			var lyPop =
 			'<article class="pop-select" data-selt-pop="'+name+'">' +
@@ -2355,7 +2418,7 @@ var ui = { //
 				// console.log(   activeIdx  );
 				_this.sld.slide.slideTo(activeIdx);
 			});
-			_this.sld.slide.on("init slideChangeTransitionEnd",function(){
+			_this.sld.slide.on("init slideChangeTransitionEnd sliderMove",function(){
 				var isActDis = $("[data-selt-pop='"+name+"'] .list>li.swiper-slide-active").is(".disabled");
 				// console.log("END" , isActDis);
 				if (isActDis == true) {
@@ -2375,7 +2438,7 @@ var ui = { //
 			});
 			$("select[name="+id+"]").closest(".select-pop").find(".btsel").removeClass("open").focus();
 			$("body").removeClass("is-pop-select");
-			// console.log( "select[name="+id+"] 값 = " ,  $("select[name="+id+"]").val() );
+			console.log( "select[name="+id+"] 값 = " ,  $("select[name="+id+"]").val() );
 		}
 	},
 	popselt:{ // 셀렉트 메뉴 팝업
