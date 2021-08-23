@@ -303,7 +303,7 @@ input::-webkit-datetime-edit-text { /* color: transparent; */ }
 .page.ui .codebox .code{ line-height:20px; color:#541717; font-size:11px; background-color:#fbfbfb; border:#dddddd solid 1px; border-radius:3px; padding:0 5px; margin:0px; font-family:"Consolas"; }
 .page.ui .codebox pre{line-height: 14px; padding:7px 10px 7px 10px;}
 .page.ui .codebox pre *{display:none;}
-.page.ui .btn.loadingClose{position:relative;z-index: 2500;}
+.is-loading .page.ui .btn.btn-loading-close{position:relative;z-index: 2500;}
 .page.ui div.syntaxhighlighter{margin: 5px 0px !important;}
 .page.ui div.syntaxhighlighter table td.gutter .line{ min-width:14px;}
 .page.ui div.syntaxhighlighter table td.gutter .line,

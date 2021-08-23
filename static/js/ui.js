@@ -533,41 +533,41 @@ var ui = { //
 			
 				$(window).on("load pageshow scroll", function(e){  // 스크롤 내리는 중 OR 올리는중 
 					if( $("html").is(".is-lock") ) {
+						e.preventDefault();
 						return false;
 					}
 					var initPosition = $(this).scrollTop();
+					// console.log(initPosition , prevPosition);
+					// console.log(dnVar - upVar);
 					if(initPosition > prevPosition){
 						dnVar ++ ;
 						// console.log("dn");
 						//스크롤다운중;
 						upVar = 0;
 						$("body").addClass("is-scroll-down").removeClass("is-scroll-up");
+						// console.log(dnVar,upVar , upVar-dnVar);
 						if ( upVar-dnVar < -10) {
 							$(".menubar:visible").length && _this.hide();
 						}
 						$(window).scrollStopped(function(){
 							// console.log("scroll 스톱");
-							// console.log(scrStopEvent);
-
 							clearTimeout(scrStopEvent);
 							scrStopEvent = window.setTimeout(function(){
 								// _this.show();
 								clearTimeout(scrStopEvent);
 							},800);
 						});
-
 					}else {
 						upVar ++ ;
 						// console.log("up");
 						//스크롤 업중;
 						$("body").addClass("is-scroll-up").removeClass("is-scroll-down");
 						dnVar = 0;
-						_this.show();
+						if ( dnVar-upVar < -5) {
+							$(".menubar:visible").length && _this.show();
+						}
 					}
 					prevPosition = initPosition ;
-
-					
-
 				});
 
 				$(window).on("pageshow scroll", function(e){ // 스크롤 맨 밑에 일때
@@ -580,10 +580,8 @@ var ui = { //
 					if(docH <= scr + 0 ){				
 						// console.log("바닥");						
 						_this.show();
-						// return false;
 					}else{
 						// _this.hide();
-						// return false;
 					}
 				});
 
@@ -1458,13 +1456,14 @@ var ui = { //
 	},
 	loading:{ // 로딩중..
 		show: function () {
-			if( !$(".loadingPage").length ) {
-				var els = '<div class="loadingPage"><em></em></div>';
-				$("body").prepend(els);
+			if( !$(".ui-loading").length ) {
+				var els = '<div class="ui-loading"><em></em></div>';
+				$("body").prepend(els).addClass("is-loading");
 			}
 		},
 		hide: function () {
-			$(".loadingPage").remove();
+			$(".ui-loading").remove();
+			$("body").removeClass("is-loading");
 		}
 	},
 	mcscroll:{ // 커스텀 스크롤

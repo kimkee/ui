@@ -827,10 +827,10 @@ a.btn.disabled{ pointer-events: none; }
 
 
 /* 페이지 로딩 */
-.loadingPage{position:fixed;left:0;right:0;top:0;bottom:0;z-index: 2000;background-color: rgba(255, 255, 255, 0.3);}
-.loadingPage>em{ position:absolute; top:50%; left:50%; margin-left:-16px; margin-top:-16px; width:32px; height:32px; padding:0px; overflow:hidden; display:block; box-sizing:border-box;  }
-.loadingPage>em:after{content:"";display:inline-block;background: url(../img/common/loading.png) no-repeat;width: 30px;height: 30px;background-size:100% auto;}
-.loadingPage>em:after{	animation:loading 1s infinite steps(30);}
+.ui-loading{position:fixed;left:0;right:0;top:0;bottom:0;z-index: 2000;background-color: rgba(255, 255, 255, 0.3);}
+.ui-loading>em{ position:absolute; top:50%; left:50%; margin-left:-16px; margin-top:-16px; width:32px; height:32px; padding:0px; overflow:hidden; display:block; box-sizing:border-box;  }
+.ui-loading>em:after{content:"";display:inline-block;background: url(../img/common/loading.png) no-repeat;width: 30px;height: 30px;background-size:100% auto;}
+.ui-loading>em:after{	animation:loading 1s infinite steps(30);}
 @keyframes loading {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
