@@ -319,7 +319,7 @@ input::-webkit-datetime-edit-text { /* color: transparent; */ }
 #bar-ht{height: 1px;background-color: #d4d4d4;position:fixed;left:0px;top: 49px;z-index: 900;transition: width .4s ease-out;width: 100%;}
 #bar-ht>i{content:"";height: 1px;background-color: #0365d5;display: block;transition: width .4s ease-out;width: 1px;}
 .body.ui #debug{position: fixed;left: 0px;right: 0;top: 50px;background: rgba(0, 0, 0, 0.7);z-index: 600;color: #ffffff;padding: 2px 7px;font-size: 10rem;text-align: center;}
-
+.is-regopen #bar-ht{z-index:0;}
 
 
 

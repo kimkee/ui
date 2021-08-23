@@ -102,7 +102,7 @@
 		"description": ";gap"
 	},
 
-	";popLayer.a": {
+	";popup.a": {
 		"prefix": ";pop",
 		"body": [
 			"<article class=\"pop-layer a\" id=\"${1:popSample2}\">",
@@ -127,7 +127,7 @@
 		],
 		"description": "팝업레이어.pop-layer.a "
 	},
-	";popLayer.win": {
+	";popup.win": {
 		"prefix": ";pop",
 		"body": [
 			"<article class=\"pop-layer win\">",
