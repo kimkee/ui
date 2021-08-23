@@ -94,7 +94,7 @@
 		},
 		list:function(){
 			var _this = this;
-			$(".page.ui .sect h3.hdt").each(function(idx){
+			$(".page.ui .sect:visible h3.hdt").each(function(idx){
 				// console.log( $(this).text() );
 				var mtxt = $(this).text();
 				var msid = $(this).closest(".sect").data("sid");
