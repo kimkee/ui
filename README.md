@@ -112,7 +112,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
 ### ui.form.spinner();
   > 수량입력 최고수량 data-max="5"
   ```
-  <div class="uispiner" data-min="1" data-max="5">
+  <div class="ui-amts" data-min="1" data-max="5">
     <input type="text" value="1" class="amt" title="수량선택">
     <button type="button" class="bt minus">수량더하기</button>
     <button type="button" class="bt plus">수량빼기</button>
@@ -121,9 +121,9 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
 ### ui.form.spined();
 > 수량선택
 ```
-<span class="uispined" data-max="5"><input class="amt" value="3" type="number"></span>
-<span class="uispined" data-max="12"><input class="amt" value="5" type="number"></span>
-<span class="uispined" data-max="20"><input class="amt" value="15" type="number"></span>
+<span class="ui-amtd" data-max="5"><input class="amt" value="3" type="number"></span>
+<span class="ui-amtd" data-max="12"><input class="amt" value="5" type="number"></span>
+<span class="ui-amtd" data-max="20"><input class="amt" value="15" type="number"></span>
 ```
 ![image](https://user-images.githubusercontent.com/6386956/109746477-cc163980-7c18-11eb-83d1-514bb6e7ec6f.png)
 ### ui.loading;
@@ -161,7 +161,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
   ```
   
 ### ui.cookie;
-  > 쿠기설정, 
+  > 쿠키설정, 
   ``` 
   ui.cookie.set(cname, cvalue, exdays);  // cname(이름), cvalue(값), exdays(시간)
   ui.cookie.get(cname); // cname(이름)
@@ -175,14 +175,14 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
 <a href="javascript:;" class="btn lg">버튼</a>
 <a href="javascript:;" class="btn xl">버튼</a>
 <a href="javascript:;" class="btn" disabled>버튼</a>
-<button class="btn" disabled="">버튼</button>
+<button class="btn" disabled>버튼</button>
 ```
 ![image](https://user-images.githubusercontent.com/6386956/109746618-05e74000-7c19-11eb-9be1-756c527b6496.png)
 ### 폼요소
 ```
 <label class="checkbox"><input type="checkbox"><span class="txt">선택</span></label>
 <label class="radio"><input type="radio" name="radio1"><span class="txt">선택</span></label>
-<div class="uiChk"><input type="checkbox" title="텍스트" checked><em></em></div>
+<div class="ui-chk"><input type="checkbox" title="텍스트" checked><em></em></div>
 ```
 ![image](https://user-images.githubusercontent.com/6386956/109746757-434bcd80-7c19-11eb-8c86-f58cd3f04a40.png)
 ### 입력
@@ -252,16 +252,16 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
   ```
   <ul class="ui-accd" data-accd="accd">
       <li class="open">
-          <div class="hBox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
-          <div class="cBox">내용</div>
+          <div class="hbox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
+          <div class="cbox">내용</div>
       </li>
       <li>
-          <div class="hBox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
-          <div class="cBox">내용</div>
+          <div class="hbox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
+          <div class="cbox">내용</div>
       </li>
       <li class="except">
-          <div class="hBox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
-          <div class="cBox">내용</div>
+          <div class="hbox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
+          <div class="cbox">내용</div>
       </li>
   </ul>
   ```
@@ -269,7 +269,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
 
 ### 툴팁레이어
 ```
-<a href="javascript:;" class="icoWarning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
+<a href="javascript:;" class="ico-warning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
 <!-- 툴팁 레이어 -->
 <article class="ui-tooltips" data-tooltip-cont="tooltip-email">
     <div class="pbd">
