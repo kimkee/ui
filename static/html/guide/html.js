@@ -132,13 +132,13 @@
 
 			$(document).on("click", ".btn-link-html", this.togMenu);
 
-			$(document).on("keydown mousedown", function (event) {
-				if (fStat === true) {
-					if (event.keyCode == 77 && $("body:not('.link')").length) { keyM();	} // M 키 이벤트
-					if (event.keyCode == 113) { keyF2(); } //F2 키 이벤트
-					if (event.keyCode == 118) { keyF7(); } //F7 키 이벤트
-					if (event.keyCode == 115) { keyF4(); } //F4 키 이벤트
-					if (event.keyCode == 8  ) { keyBack(); } //Back 키 이벤트
+			$(document).on("keydown mousedown", function (e) {
+				if( fStat === true ){
+					if( e.keyCode == 77 && $("body:not('.link')").length ) { keyM();	} // M 키 이벤트
+					if( e.keyCode == 113 ) { keyF2(); } //F2 키 이벤트
+					if( e.keyCode == 118 ) { keyF7(); } //F7 키 이벤트
+					if( e.keyCode == 115 ) { keyF4(); } //F4 키 이벤트
+					if( e.keyCode == 8   ) { keyBack(); } //Back 키 이벤트
 				}
 			}).on("mousedown", function () {
 				$(".temp-link").remove();

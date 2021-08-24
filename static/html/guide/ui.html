@@ -439,7 +439,7 @@
 						}
 					</script>
 					<p class="gap"></p>
-					<span class="select db">
+					<span class="select">
 						<select title="선택">
 							<option>선택</option>
 							<option>선택1</option>
@@ -450,7 +450,7 @@
 
 					<p class="gap"></p>
 
-					<span class="select db jqui custom">
+					<span class="select jqui custom">
 						<select class="dd" title="선택">
 							<option>선택1</option>
 							<option>선택2</option>
@@ -493,8 +493,10 @@
 					<span class="input valid"><input type="text" class="" placeholder="텍스트"></span>
 					<p class="gap"></p>
 					<span class="input valid"><input type="text" class="ok" placeholder="텍스트"></span>
+					<div class="vald-msg show ok">현금영수증 발행이 가능합니다.</div>
 					<p class="gap"></p>
 					<span class="input valid"><input type="text" class="no" placeholder="텍스트"></span>
+					<div class="vald-msg show no">정확한 비밀번호를 입력해주세요.</div>
 					<p class="gap"></p>
 					<span class="input valid"><input type="password" class="" placeholder="비밀번호"></span>
 					<p class="gap"></p>
@@ -515,7 +517,7 @@
 					<p class="gap"></p>
 					<span class="texthgt input"><textarea class="inline" data-ui="autoheight" placeholder="자동높이"></textarea></span>
 					<p class="gap"></p>
-					<span class="select db">
+					<span class="select">
 						<select>
 							<option>선택</option>
 							<option>선택1</option>
@@ -524,7 +526,7 @@
 						</select>
 					</span>
 					<p class="gap"></p>
-					<span class="select db">
+					<span class="select">
 						<select disabled>
 							<option>선택 Disabled</option>
 							<option>선택1</option>
@@ -533,7 +535,7 @@
 						</select>
 					</span>
 					<p class="gap"></p>
-					<span class="select db jqui custom">
+					<span class="select jqui custom">
 						<select class="dd">
 							<option>선택1</option>
 							<option>선택2</option>
@@ -1123,28 +1125,24 @@
 					</nav>
 					<p class="gap"></p>
 					<div style="text-align: right;">
-						<nav class="ui-dropm dmenu">
+						<nav class="ui-dropm">
 							<button type="button" class="bt st">메뉴열기</button>
-							<div class="list">
-								<ul class="menu">
-									<li><button type="button" class="bt">수정</button></li>
-									<li><button type="button" class="bt">삭제</button></li>
-								</ul>
-							</div>
+							<ul class="menu">
+								<li><button type="button" class="bt">수정</button></li>
+								<li><button type="button" class="bt">삭제</button></li>
+							</ul>
 						</nav>
 
 						<nav class="ui-sorts">
 							<button type="button" class="bt st"></button>
-							<div class="list">
-								<ul class="menu">
-									<li><button type="button" class="bt" value="v_1">등록일순</button></li>
-									<li><button type="button" class="bt" value="v_2">판매인기순</button></li>
-									<li><button type="button" class="bt" value="v_3">낮은가격순</button></li>
-									<li><button type="button" class="bt" value="v_4">높은가격순</button></li>
-									<li class="active"><button type="button" class="bt" value="v_5">상품평순</button></li>
-									<li><button type="button" class="bt" value="v_6">추천순</button></li>
-								</ul>
-							</div>
+							<ul class="menu">
+								<li><button type="button" class="bt" value="v_1">등록일순</button></li>
+								<li><button type="button" class="bt" value="v_2">판매인기순</button></li>
+								<li><button type="button" class="bt" value="v_3">낮은가격순</button></li>
+								<li><button type="button" class="bt" value="v_4">높은가격순</button></li>
+								<li class="active"><button type="button" class="bt" value="v_5">상품평순</button></li>
+								<li><button type="button" class="bt" value="v_6">추천순</button></li>
+							</ul>
 						</nav>
 
 
