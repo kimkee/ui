@@ -1,39 +1,32 @@
-﻿var uiHtml = {
-	init: function () {
-		
+﻿ui.html.set = {
+	init:function () {
 		this.tit();
 		this.menu.init();
 		this.uimenu.init();
+		this.bar();
+		console.log("ui.html.init();");
+	},
+	tit:function(){
+		var tit = window.location.pathname.split("/");
+		if ( !$("#container").hasClass("ui") ) {
+			document.title = "/" + tit[tit.length - 2] + "/" + tit[tit.length - 1];
+		}
+	},
+	bar:function(){
 		$(window).on("load scroll",function(e){
 			if( $("html").is(".is-lock") ) {
 				e.preventDefault();
 				return false;
 			}
-			var winH = $(window).height();
-			var docH = $(document).height();
-			var scrT = $(window).scrollTop();
+			var winH = ui.viewport.height();
+			var docH = ui.viewport.docHeight();
+			var scrT = ui.viewport.scrollTop();
 			var pct =  scrT / ( docH - winH ) * 100 ;
 			// console.log( winH , docH , scrT ,  pct );
 			$("#bar-ht>i").css({"width":pct+"%"});
 		});
 	},
-	tit:function(){
-		var tit = window.location.pathname.split("/");
-		if ( !$("#contain").hasClass("ui") ) {
-			document.title = "/" + tit[tit.length - 2] + "/" + tit[tit.length - 1];
-		}
-	},
-	param:(function(a) { // URL에서 파라미터 읽어오기
-		if (a == "") return {};
-		var b = {};
-		for (var i = 0; i < a.length; i++){
-			var p=a[i].split('=');
-			if (p.length != 2) continue;
-			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-		}
-		return b;
-	})(window.location.search.substr(1).split('&')),
-	uimenu: { // uimenu 
+	uimenu:{ // uimenu 
 		init: function() {
 			//ui.gnb.using("open");
 			this.evt();
@@ -102,7 +95,7 @@
 			});
 		}
 	},
-	menu: {
+	menu:{
 		init: function () {
 			this.addEvent();
 		},
@@ -204,7 +197,7 @@
 				}
 			}
 			var thisPg = window.location.pathname.replace("/ui/static/","../../");
-
+			console.log(thisPg);
 			$(".link-html .cont ul ul>li").each(function () {
 				var text = $(this).find("em").text();
 				$(this).find("em").addClass(text);
@@ -221,7 +214,7 @@
 				}
 				//}
 				$(this).find("em").wrapInner('<a href="' + link + '" target="_blank"></a>');
-
+				console.log(link);
 				if ( link == thisPg ) {
 					$(this).closest("li").addClass("active");
 					$(this).closest("li").closest("ul").show();
@@ -254,6 +247,7 @@
 			// window.history.back();
 		},
 		togMenu: function () {
+			var _this = this;
 			if ($(".temp-link").length) {
 				$(".temp-link").remove();
 			} else {
@@ -264,7 +258,7 @@
 				$("body").append(list);
 
 				$(".temp-link>.pan").load("../../html/guide/ia.html .link-html", function () {
-					uiHtml.menu.linkStat();
+					ui.html.set.menu.linkStat();
 				});
 
 				$(".temp-link , .btn-link-html").on("mousedown", function (e) {
@@ -275,10 +269,8 @@
 		},
 		togUrl: function () { // F2 키
 
-
 		},
 		togMobile: function () { // F7 키
-
 
 		},
 		togDev: function () { // F4 키
@@ -288,11 +280,11 @@
 			var tOrg = window.location.origin;
 			var tIp = window.location.hostname;
 			//console.log(tPort, tUrl);
-			if(tPort == "8083"){
+			if(tPort == "8082"){
 				location.href = tUrl.replace(tHost,"kimkee.github.io");
 			}
 			if(tOrg == "https://kimkee.gitlab.io" || tOrg == "https://kimkee.github.io"){
-				location.href = tUrl.replace(tOrg,"http://localhost:8083");
+				location.href = tUrl.replace(tOrg,"http://localhost:8082");
 			}
 
 		}
@@ -300,6 +292,6 @@
 };
 
 $(document).ready(function(){
-	uiHtml.init();
+	ui.html.set.init();
 });
 

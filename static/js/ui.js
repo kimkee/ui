@@ -105,12 +105,12 @@ var ui = { //
 		},
 		set:function(){
 			var dhtml = '<div id="debug"></div>';
-			!$('#debug').length && $("body").prepend(dhtml);
+			!$("#debug").length && $("body").prepend(dhtml);
 			var wHt = ui.viewport.height();
 			var docH= ui.viewport.docHeight();
 			var scr = ui.viewport.scrollTop() + wHt + 0; 
 			var sct = ui.viewport.scrollTop(); 
-			$('#debug').html('SCT : '+ sct + ' ,SCR : '+ scr + ' , DOCH : ' +docH + " , visualViewport : "+ wHt+"  , iosX :  "+JSON.stringify( ui.getSafe ) );
+			$("#debug").html('SCT : '+ sct + ' ,SCR : '+ scr + ' , DOCH : ' +docH + " , visualViewport : "+ wHt+"  , iosX :  "+JSON.stringify( ui.getSafe ) );
 		}
 	},
 	viewport:{
@@ -180,57 +180,6 @@ var ui = { //
 	cm:{ // 공통
 		init:function(){
 			
-		}
-	},
-	html:{ // Html 인클루드
-		incCom:false,
-		load:function(paramCallback){
-			if (paramCallback) {
-				this.loadCallback = paramCallback;
-			}
-		},
-		include:function(){
-			var _this = this;
-			var $inchtml = $("include");
-			var incAmt = 0;
-			
-			if ($inchtml.length) {
-				$inchtml.each(function(idx){
-					var inc = $(this).attr("src");
-					console.log(inc);
-					var incopt = $(this).data("include-opt");				
-					var incNums = $inchtml.length ;
-					$(this).load( inc ,function(response, status, xhr){
-						// console.log( inc, idx+1 , incNums,  status, xhr);
-						// console.log(incopt);
-						if( incopt && incopt.class ){
-							// console.log(inc ,incopt);
-							$(this).find(">*").addClass(incopt.class);
-						}
-						$(this).find(">*").unwrap();
-						incAmt ++;
-						if( status == "success" ){
-							
-
-						}else if( status == "error"){
-							_this.incCom = false ;
-							console.log("include 실패" , inc );
-						}						
-						if( incAmt == incNums ) {
-							_this.incCom = true ;
-							if( typeof _this.loadCallback == "function") _this.loadCallback();
-
-						}
-					
-					});
-				});
-			}else{
-				_this.incCom = true ;
-				if ( typeof _this.loadCallback == "function") _this.loadCallback();
-				
-
-			}
-			//console.log("완료" + _this.incCom);
 		}
 	},
 	movePage:{ // 스와이프로 이동할 페이지
@@ -422,59 +371,57 @@ var ui = { //
 			});
 		}
 	},
-	tree:{
-		init:function(){
-			this.evt();
-			this.set();
-		},
-		evt:function(){
-			$(document).on("click",".ui-tree li>.tog",function(e){
-				var $li = $(this).closest("li");
-				if( $li.hasClass("open") ) {
-					$li.find(">ul").slideUp(100,function(){
-						$li.removeClass("open");
-					});
-				}else{
-					$li.find(">ul").slideDown(100,function(){
-						$li.addClass("open");
-					});
-				}
-			});
-		},
-		set:function(){
-			$(".ui-tree li").each(function(){
-				var bt = '<button type="button" class="tog">+</button>';
-				if( $(this).find(">ul").length ){
-					$(this).addClass("dep");
-				}
-				if( !$(this).find(".tog").length ){
-					$(this).prepend(bt);
-				}
-			});
-		}
-	},
 	ly:{ // 레이아웃
 		init:function(){
-			if ( $("#container").length ) {
-				var cls = $("#container").attr("class").replace("container","").replace("page","");
-				$("body").addClass(cls);
-			}
-
-			$.fn.scrollStopped = function(callback) { // 스크롤 스톱 scroll stop event  
-				$(this).scroll(function(){
-					var self = this, $this = $(self);
-					if($this.data('scrollTimeout')) {
-						clearTimeout($this.data('scrollTimeout'));
-					}
-					$this.data('scrollTimeout', setTimeout(callback,250,self));
-				});
-			};
 			this.floating.init();
 			this.botnav.init();
 			this.height();
 			this.set();
 		},
-		floating:{
+		height:function(){
+			var $container = $(".wrap .container:visible");
+			var winH = $(window).height();
+			var menebarH = $(".wrap .menubar>.inr:visible").outerHeight() || 0;
+			var headH = $(".wrap .header>.inr:visible").outerHeight() || 0;
+			var pageH = $(".wrap .pagehead:not(.hauto)>.inr:visible").outerHeight() || 0;
+			var floatbtH = $(".wrap .floatbots>.inr:visible").outerHeight() || 0;
+			var footH = $(".wrap .footer>.inr:visible").outerHeight() || 0;
+			//console.log(winH , headH , footH );
+			$container.css("min-height", parseInt( winH - headH - footH - menebarH - pageH - floatbtH) );
+			$container.find(".contents.h100p").css("height", parseInt( winH - headH - footH - menebarH - pageH - floatbtH) );
+		},
+		set:function(){
+			if( $("#container:visible").length ){
+				var cls = $("#container:visible").attr("class").replace(/container|page/g,"");
+				$("body").addClass(cls);
+			}
+			var menubar = $(".wrap nav.menubar:visible").length;
+			var header  = $(".wrap .header>.inr:visible").length;
+			var floatbt = $(".wrap .floatbots>.inr:visible").length;
+			var footer  = $(".wrap .footer:visible").length;
+
+			if( menubar ){
+				$("body").addClass("is-menubar");
+			}else{
+				$("body").removeClass("is-menubar");
+			}
+			if( header ){
+				$("body").addClass("is-header");
+			}else{
+				$("body").removeClass("is-header");
+			}
+			if( floatbt ){
+				$("body").addClass("is-floatbots");
+			}else{
+				$("body").removeClass("is-floatbots");
+			}
+			if( footer ){
+				$("body").addClass("is-footer");
+			}else{
+				$("body").removeClass("is-footer");
+			}
+		},
+		floating:{ // 우하단 고정되있는 버튼들
 			init:function(){
 				this.evt();
 				this.ptreg.init();
@@ -520,14 +467,10 @@ var ui = { //
 							setTimeout(function(){
 								_this.close();
 							}, 500);
-							$(_this.btbox).hide();
-							$(_this.btbox).removeClass("show");
-							$(_this.btbox).removeClass("anim");
-							$(_this.btreg).removeClass("anim");
-							$(_this.btreg).removeClass("ing");
+							$(_this.btbox).hide().removeClass("show anim");
+							$(_this.btreg).removeClass("ing anim");
 							$("body").removeClass("is-regopen");
-							
-							$("#deb").append("뒤로옴..");
+							$("#debug").append("뒤로옴..");
 						} 
 					});
 					// console.log(document.referrer);
@@ -553,8 +496,8 @@ var ui = { //
 					$(_this.btbox).removeClass("anim").on(ui.transitionend,function(){
 						$(_this.btbox).off(ui.transitionend);
 						$(_this.btbox).hide().removeClass("show");
+						$(_this.btreg).removeClass("ing");
 						$("body").removeClass("is-regopen");
-						$(_this.btreg).removeClass("ing");	
 					});
 				}
 			},
@@ -578,18 +521,28 @@ var ui = { //
 				}
 			}
 		},
-		botnav:{
+		botnav:{  // 하단 메뉴 
 			show:function(){
-				$(".menubar").removeClass("hide");
 				$("body").removeClass("is-menubar-hide");
+				$(".menubar").removeClass("hide");
 				$(".floatnav").removeClass("hide");
 			},
 			hide:function(){
-				$(".menubar").addClass("hide");
 				$("body").addClass("is-menubar-hide");
+				$(".menubar").addClass("hide");
 				$(".floatnav").addClass("hide");
 			},
 			init:function(){
+
+				$.fn.scrollStopped = function(callback) { // 스크롤 스톱 scroll stop event  
+					$(this).scroll(function(){
+						var self = this, $this = $(self);
+						if( $this.data('scrollTimeout') ){
+							clearTimeout($this.data('scrollTimeout'));
+						}
+						$this.data('scrollTimeout', setTimeout(callback,250,self));
+					});
+				};
 				var _this = this;
 				var prevPosition = 0;
 				var dnVar = 0;
@@ -604,14 +557,14 @@ var ui = { //
 					var initPosition = $(this).scrollTop();
 					// console.log(initPosition , prevPosition);
 					// console.log(dnVar - upVar);
-					if(initPosition > prevPosition){
+					if( initPosition > prevPosition ){
 						dnVar ++ ;
 						// console.log("dn");
 						//스크롤다운중;
 						upVar = 0;
 						$("body").addClass("is-scroll-down").removeClass("is-scroll-up");
 						// console.log(dnVar,upVar , upVar-dnVar);
-						if ( upVar-dnVar < -10) {
+						if ( upVar-dnVar < -5 ) {
 							$(".menubar:visible").length && _this.hide();
 						}
 						$(window).scrollStopped(function(){
@@ -628,7 +581,7 @@ var ui = { //
 						//스크롤 업중;
 						$("body").addClass("is-scroll-up").removeClass("is-scroll-down");
 						dnVar = 0;
-						if ( dnVar-upVar < -5) {
+						if ( dnVar-upVar < -5 ) {
 							$(".menubar:visible").length && _this.show();
 						}
 					}
@@ -652,45 +605,37 @@ var ui = { //
 
 
 			}
+		}
+	},
+	tree:{ // 트리구조 메뉴
+		init:function(){
+			this.evt();
+			this.set();
 		},
-		height:function(){
-			var $container = $(".wrap .container:visible");
-			var winH = $(window).height();
-			var menebarH = $(".wrap .menubar>.inr:visible").outerHeight() || 0;
-			var headH = $(".wrap .header>.inr:visible").outerHeight() || 0;
-			var pageH = $(".wrap .pagehead:not(.hauto)>.inr:visible").outerHeight() || 0;
-			var floatbtH = $(".wrap .floatbots>.inr:visible").outerHeight() || 0;
-			var footH = $(".wrap .footer>.inr:visible").outerHeight() || 0;
-			//console.log(winH , headH , footH );
-			$container.css("min-height", parseInt( winH - headH - footH - menebarH - pageH - floatbtH) );
-			$container.find(".contents.h100p").css("height", parseInt( winH - headH - footH - menebarH - pageH - floatbtH) );
+		evt:function(){
+			$(document).on("click",".ui-tree li>.tog",function(e){
+				var $li = $(this).closest("li");
+				if( $li.hasClass("open") ) {
+					$li.find(">ul").slideUp(100,function(){
+						$li.removeClass("open");
+					});
+				}else{
+					$li.find(">ul").slideDown(100,function(){
+						$li.addClass("open");
+					});
+				}
+			});
 		},
 		set:function(){
-			var menubar = $(".wrap nav.menubar:visible").length;
-			var header  = $(".wrap .header>.inr:visible").length;
-			var floatbt = $(".wrap .floatbots>.inr:visible").length;
-			var footer  = $(".wrap .footer:visible").length;
-
-			if( menubar ){
-				$("body").addClass("is-menubar");
-			}else{
-				$("body").removeClass("is-menubar");
-			}
-			if( header ){
-				$("body").addClass("is-header");
-			}else{
-				$("body").removeClass("is-header");
-			}
-			if( floatbt ){
-				$("body").addClass("is-floatbots");
-			}else{
-				$("body").removeClass("is-floatbots");
-			}
-			if( footer ){
-				$("body").addClass("is-footer");
-			}else{
-				$("body").removeClass("is-footer");
-			}
+			$(".ui-tree li").each(function(){
+				var bt = '<button type="button" class="tog">+</button>';
+				if( $(this).find(">ul").length ){
+					$(this).addClass("dep");
+				}
+				if( !$(this).find(".tog").length ){
+					$(this).prepend(bt);
+				}
+			});
 		}
 	},
 	elip:{ // 5줄이상 내용더보기 
@@ -832,7 +777,7 @@ var ui = { //
 			}
 		}
 	},
-	htgrade:{ // 하트지수(Old version) 지금 안씀...
+	htgrade:{ // 하트지수
 		init:function(){
 			$(".ui-htgrade").length && this.set();
 		},
@@ -3097,20 +3042,66 @@ var ui = { //
 		del:function(cname){
 			document.cookie = cname + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
 		}
+	},
+	html:{ // Html 인클루드
+		incCom:false,
+		load:function( paramCallback ){
+			if( paramCallback ){
+				this.loadCallback = paramCallback;
+			}
+		},
+		include:function(){
+			var _this = this;
+			var $inchtml = $("include");
+			var incAmt = 0;
+			if ($inchtml.length) {
+				$inchtml.each(function(idx){
+					var inc = $(this).attr("src");
+					console.log(inc);
+					var incopt = $(this).data("include-opt");				
+					var incNums = $inchtml.length ;
+					$(this).load( inc ,function(response, status, xhr){
+						// console.log( inc, idx+1 , incNums,  status, xhr);
+						// console.log(incopt);
+						if( incopt && incopt.class ){
+							// console.log(inc ,incopt);
+							$(this).find(">*").addClass(incopt.class);
+						}
+						$(this).find(">*").unwrap();
+						incAmt ++;
+						if( status == "success" ){
+							
+						}else if( status == "error"){
+							_this.incCom = false ;
+							console.log("include 실패" , inc );
+						}						
+						if( incAmt == incNums ) {
+							_this.incCom = true ;
+							if( typeof _this.loadCallback == "function") _this.loadCallback();
+						}
+					
+					});
+				});
+			}else{
+				_this.incCom = true ;
+				if ( typeof _this.loadCallback == "function") _this.loadCallback();
+			}
+			//console.log("완료" + _this.incCom);
+		}
 	}
 };
 
-
-// ui.init(); 구동시점은 html include 완료시 
+// ui.init();
 $(document).ready(function(){
-	if ( typeof uiHtml  == "undefined" ) {
+	// console.log(typeof ui.html.set);
+	if ( typeof ui.html.set  == "undefined" ) {
 		ui.init();
 		console.log("ui.init();");
 	}else{
 		ui.html.include();
-		ui.times = setInterval(function(){ // console.log("uiHtml" ,  incNums , uiHtml.incCom);
+		ui.html.times = setInterval(function(){ // console.log("ui.html" ,  ui.html.incCom);
 			if (ui.html.incCom) {
-				clearInterval(ui.times);
+				clearInterval(ui.html.times);
 				ui.init();
 				console.log("ui.init();");
 			}
