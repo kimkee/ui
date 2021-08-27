@@ -54,7 +54,7 @@ button{cursor:pointer;background: none;border: none;}
 .header>.inr{color: #545454;display:flex;height: 50px;align-items: center;justify-content: center;position: fixed;left: 0;right: 0;z-index: 500;top: 0px;background: #ffffff;border-bottom: rgba(0,0,0,0.2) solid 1px;box-shadow:rgba(0,0,0,0.1) 2px 2px 3px;/* transition: left 0.5s; */}
 .header .title{font-weight: 500;font-size: 20px;/* background: linear-gradient(180deg,#669aff 12.41%,#6d4eb9 52.55%,#f1344d 89.95%); *//* -webkit-background-clip: text; *//* -webkit-text-fill-color: transparent; */}
 .footer{height: 50px;background: #86a941;text-align:center;display:block;}
-.footer>.inner{color: #ffffff;display:flex;height:50px;align-items: center;justify-content: center;}
+.footer>.inr{color: #ffffff;display:flex;height:50px;align-items: center;justify-content: center;}
 
 /* GNB */
 .btn-gnb{display:block;position: fixed;right: 7px;top: 7px;z-index: 900;height: 36px;width: 36px;/* background-color:#fff; *//* border: 1px solid #fff; */transition: all 0.2s;}
@@ -68,8 +68,8 @@ nav.gnb{position:fixed;width: 100%;height: 100%;z-index: 900;top: 0px;left: -100
 
 nav.gnb::after{left: -100%;width: 100%;height:100%;/* background-color: rgba(0, 0, 0, 0.3); */content:"";display:block;position: fixed;top: 0;/* left: 0px; */}
 nav.gnb .bt.close{display:block;position:absolute;right: 10px;top: 7px;z-index: 300;width: 36px;height: 36px;font-size: 0;background:url(../img/common/pop_layer_close.png) no-repeat center;background-size: 24px auto;}
-nav.gnb>.inner{padding: 50px 0px 20px 0px;height: 100vh;background-color: #ffffff;}
-nav.gnb .menu{background-color: #ffffff;height: calc(100% - 0px);padding: 0px 20px 0px 20px;overflow-y: auto;}
+nav.gnb>.inr{padding: 0px 0px 0px 0px;height: 100vh;background-color: #ffffff;}
+nav.gnb .menu{background-color: #ffffff;height: calc(100% - 0px);padding: 20px 20px 20px 20px;overflow-y: auto;}
 nav.gnb .menu .mCustomScrollBox{background-color: transparent;border-top:1px solid #ddd;outline: initial;}
 nav.gnb .menu .mCSB_scrollTools .mCSB_draggerRail{/* background-color: transparent; */}
 nav.gnb .menu .mCSB_scrollTools .mCSB_draggerContainer{ /* right: 4px; */ }
@@ -81,10 +81,10 @@ nav.gnb .menu .list>li:first-child{border-top-width:0px;}
 nav.gnb .menu .list>li:last-child{ border-bottom: #dddddd solid 1px; }
 nav.gnb .menu .list>li>a{display:block;padding: 8px 15px 8px 25px;font-size: 12px;font-weight: 400;position: relative;}
 nav.gnb .menu .list>li>a::before{content:"-";position: absolute;left: 16px;top: 8px;}
-body.gnbOn nav.gnb{left: 0%;}
-body.gnbOn nav.gnb::after{/* left: 0%; */}
-body.gnbOn .btn-gnb{/* left: 57%; */}
-.gnbScreen {display: none;background-color: rgba(0,0,0,0.3);width: 100%;height: 100%;zoom: 1;position: fixed;left: 0px;z-index: 700;top: 0px;/* transition: all 0.4s ease 0.0s;*/}
+body.is-gnb nav.gnb{left: 0%;}
+body.is-gnb nav.gnb::after{/* left: 0%; */}
+body.is-gnb .btn-gnb{/* left: 57%; */}
+.gnb-screen {display: none;background-color: rgba(0,0,0,0.3);width: 100%;height: 100%;zoom: 1;position: fixed;left: 0px;z-index: 700;top: 0px;/* transition: all 0.4s ease 0.0s;*/}
 
 
 /* LNB */
@@ -148,6 +148,7 @@ textarea[disabled],
 .input.del{}
 .input.del>input{padding-right: 30px;}
 .input.del .btdel{background: url(../img/common/btn_ico_input_del.png) no-repeat center;background-size: 22px auto;width:22px;height:22px;display:block;position: absolute;right: 7px;top: 9px;font-size: 0;padding: 0;}
+.input.focus input{border-color:#666666;}
 .input .ibts{position: absolute;right: 5px;top: 5px;font-size: 0;}
 .input .ibts .btn{ font-size: 13rem; }
 .input .ibts .btn + .btn{margin-left:5px;}
@@ -192,22 +193,22 @@ input[type="checkbox"]{width:30px;height:30px;display:inline-block;vertical-alig
 
 .texthgt{display: block;vertical-align: middle;position: relative;}
 .texthgt>textarea{ display: block; height: 40px; border: none; padding: 9px 10px 8px 10px; line-height: 1.36; resize: none; min-height: 40px; word-break: break-all; white-space: normal; overflow: hidden; display: block; width: 100%; margin: 0px 0; border: #dddddd solid 1px; background-image: none; -webkit-appearance: none; color: #000000; outline: none; vertical-align: middle; -webkit-border-radius: 4px; font-size: 14px; }
-.texthgt.focus{border-color: #000000;}
+.texthgt.focus input{border-color: #000000;}
 .texthgt.del textarea{padding-right: 30px;}
 
-
-.ui-priceset{/* display: flex; */border: #dddddd solid 1px;border-radius: 4px;}
-.ui-priceset.focus{ box-shadow: none;}
-.ui-priceset.focus input{border-bottom:none; box-shadow: none;}
-.ui-priceset input.amt{border-width: 0px;/* font-weight: 700; */color: #000000;/* font-size: 20px; */padding: 6px 10px 6px 10px;border-radius: 7px;}
-.ui-priceset .w{font-size: 13px;display: none;}
-.ui-priceset.won .w{display: inline-block;/* position: absolute; *//* left: 90px; *//* top: 26px; */vertical-align: middle;margin: 1px 0 0px -3px;}
-.ui-priceset.won input.amt{width: 0px;max-width: calc(100% - 17px);display: inline-block;padding-right: 0;}
-.ui-priceset.del input.amt{max-width: calc(100% - 37px);}
-.ui-priceset input::-webkit-input-placeholder{}
-.ui-priceset.del{}
-.ui-priceset .btdel{top:26px;}
-.ui-priceset.del input{padding-right:0px;}
+/* 가격입력 '원'자동이동 */
+.ui-prcset{border: #dddddd solid 1px; border-radius: 4px;}
+.ui-prcset.focus{ box-shadow: none; border-color:#666666;}
+.ui-prcset.focus input{border-color:#666666;}
+.ui-prcset input.amt{color: #000000;padding: 6px 10px 6px 10px;border: none;}
+.ui-prcset .w{font-size: 13px;display: none;}
+.ui-prcset.won .w{display: inline-block;vertical-align: middle;margin: 1px 0 0px -3px;}
+.ui-prcset.won input.amt{width: 0px;max-width: calc(100% - 17px);display: inline-block;padding-right: 0;}
+.ui-prcset.del input.amt{max-width: calc(100% - 37px);}
+.ui-prcset input::-webkit-input-placeholder{}
+.ui-prcset.del{}
+.ui-prcset .btdel{top:26px;}
+.ui-prcset.del input{padding-right:0px;}
 
 /* checkbox */
 .checkbox{position:relative;display:inline-block;vertical-align:middle;line-height: 1;}
@@ -218,7 +219,7 @@ input[type="checkbox"]{width:30px;height:30px;display:inline-block;vertical-alig
 .checkbox>input:checked + .txt::before{background-position-y: -30px;}
 .checkbox>input:disabled + .txt::before{background-position-y: -60px;}
 .checkbox>input:checked:disabled + .txt::before{background-position-y: -90px;}
-.checkbox>.txt{display:inline-block;vertical-align: middle;/* margin-left:5px; *//* padding-left: 30px; *//* line-height: 1.6; */padding-top: 0px;}
+.checkbox>.txt{display:inline-block;vertical-align: middle;padding-top: 0px;}
 .checkbox.t01>.txt{font-size:14px; color:#666; font-weight:normal;}
 
 /* radio */
@@ -230,7 +231,7 @@ input[type="checkbox"]{width:30px;height:30px;display:inline-block;vertical-alig
 .radio>input:checked + .txt::before{background-position-y: -30px;}
 .radio>input:disabled + .txt::before{background-position-y: -60px;}
 .radio>input:checked:disabled + .txt::before{ background-position-y:-90px; }
-.radio>.txt{display: inline-block;vertical-align: middle;/* margin-left: 5px; *//* padding-left: 30px; *//* line-height: 1.6; */padding-top: 0px;}
+.radio>.txt{display: inline-block;vertical-align: middle;padding-top: 0px;}
 
 
 .radiobox{display: flex;flex-wrap: wrap;margin: -3px;}
@@ -602,11 +603,11 @@ html.is-lock {position: fixed;width: 100%;height: 100%;overflow: hidden;}
 .contents{/* padding:0; */}
 
 /* 버튼들 */
-.btn{border: 1px solid #dddddd;background: #ffffff;color: #666666;height: 32px;overflow:hidden;padding:0 12px;display: inline-flex;justify-content: center;align-items: center;vertical-align:middle;cursor:pointer;white-space:nowrap;border-radius: 4px;line-height: 1.1;}
+.btn{border: 1px solid #dddddd;background: #ffffff;color: #666666;height: 40px;overflow:hidden;padding:0 12px;display: inline-flex;justify-content: center;align-items: center;vertical-align:middle;cursor:pointer;white-space:nowrap;border-radius: 4px;line-height: 1.1;font-size: 14px;}
 .btn.db{display:block;}
 .btn.xs{height: 24px;min-width:30px;padding: 0px 6px;font-size: 11px;line-height: 1;}
 .btn.sm{height: 30px;min-width:30px;padding: 0px 6px 0px 6px;font-size: 12px;}
-.btn.md{height: 48px;min-width:30px;padding: 0 10px;font-size: 13px;}
+.btn.md{height: 40px;font-size: 14px;}
 .btn.lg{height: 50px;min-width: 40px;padding: 0 15px;font-size: 15px;}
 .btn.xl{height: 60px;min-width: 80px;padding: 0 10px;font-size: 16px;font-weight: 400;}
 

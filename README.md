@@ -259,7 +259,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
           <div class="hbox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
           <div class="cbox">내용</div>
       </li>
-      <li class="except">
+      <li class="expt">
           <div class="hbox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
           <div class="cbox">내용</div>
       </li>
