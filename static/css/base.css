@@ -204,7 +204,7 @@ input::-webkit-datetime-edit-text { /* color: transparent; */ }
 
 
 
-.btn-link-html{width: 36px;height: 36px;text-indent:-9999px;overflow:hidden;position:fixed;bottom: 0px;left: 0px;display:block;z-index:999999;background-color:rgba(100,100,100,0.0);border-radius:30px;}
+.btn-link-html{width: 30px;height: 30px;text-indent:-9999px;overflow:hidden;position:fixed;bottom: 0px;left: 0px;display:block;z-index:999999;background-color:rgba(100,100,100,0.0);border-radius:30px;}
 .temp-link {position:fixed;left:0px;right:0px;top:0px;bottom:0px;z-index:10000;background-color: rgba(0,0,0,0.4);letter-spacing:0;display:block;box-sizing:border-box;}
 .temp-link .pan{position:absolute;left: 10px;right: 10px;top: 10px;bottom: 10px;box-shadow: rgba(0,0,0,0.4) 0px 0px 3px;background:#ffffff;/* border-radius: 5px; */}
 .temp-link>ul{ display:none;}
@@ -367,7 +367,7 @@ body.is-uimenu-on .btn-ui::after{transform: rotate(-140deg);width: 12px;top: 20p
 	.body.ui .header>.inr{z-index: 800;box-shadow: none;left: 250px;}
 	.body.ui .header>.inr{/* width:250px; */z-index: 800;box-shadow: none;}
 	.body.ui .menubar{}
-	.body.ui .menubar>.inr{left: 250px;z-index: 100;}
+	.body.ui .menubar{left: 250px;z-index: 100;}
 	#bar-ht{left: 0px;top: 0;height: 2px;z-index: 900;}
 	#bar-ht>i{height: 2px;}
 	nav.uimenu .menu{padding-top: 0px;/* border-bottom: 1px #ddd solid; */}

@@ -184,7 +184,6 @@
 			$(".link-html .cont>ul>li").each(function (i) {
 				$(this).attr("id", "linkID" + i);
 			});
-
 			var linkData = window.localStorage.getItem("linkMenu");
 			if (linkData) {
 				var linkObj = JSON.parse(linkData); //console.log( linkObj );
@@ -197,7 +196,7 @@
 				}
 			}
 			var thisPg = window.location.pathname.replace("/ui/static/","../../");
-			console.log(thisPg);
+			// console.log(thisPg);
 			$(".link-html .cont ul ul>li").each(function () {
 				var text = $(this).find("em").text();
 				$(this).find("em").addClass(text);
@@ -214,13 +213,12 @@
 				}
 				//}
 				$(this).find("em").wrapInner('<a href="' + link + '" target="_blank"></a>');
-				console.log(link);
+				// console.log(link);
 				if ( link == thisPg ) {
 					$(this).closest("li").addClass("active");
 					$(this).closest("li").closest("ul").show();
 					$(this).closest("li").closest("ul").closest("li:not(.open)").find("h3 a").trigger("click");
 				}
-
 			});
 
 			$(".link-html .cont").on("scroll",function(){
@@ -228,9 +226,8 @@
 				window.localStorage.setItem("linkScr", linkScr);
 			});
 			setTimeout(function(){
-				
 				var $active = $(".link-html .cont>ul>li>ul>li.active");
-				if ( $active.length ) {
+				if( $active.length ) {
 					var linkTxtTop = $active.offset().top - $(window).height()*0.5;
 					$(".link-html .cont").scrollTop(linkTxtTop );
 				}else{
@@ -238,15 +235,14 @@
 					$(".link-html .cont").scrollTop(linkScr);
 				}
 				// console.log(linkTxtTop,linkScr);
-
 			},10);
 
 		},
-		keyBack: function () {
+		keyBack:function(){
 			console.log("뒤로");
 			// window.history.back();
 		},
-		togMenu: function () {
+		togMenu:function(){
 			var _this = this;
 			if ($(".temp-link").length) {
 				$(".temp-link").remove();
@@ -267,13 +263,13 @@
 			}
 
 		},
-		togUrl: function () { // F2 키
+		togUrl:function(){ // F2 키
 
 		},
-		togMobile: function () { // F7 키
+		togMobile:function(){ // F7 키
 
 		},
-		togDev: function () { // F4 키
+		togDev:function(){ // F4 키
 			var tUrl = window.location.href;
 			var tPort = window.location.port;
 			var tHost = window.location.host;

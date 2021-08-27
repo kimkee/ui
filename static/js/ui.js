@@ -22,7 +22,7 @@ var ui = { //
 		this.tab.init();
 		this.tooltips.init();
 		this.mcscroll.init();
-		this.popLayer.init();
+		// this.popLayer.init();
 		this.popup.init();
 		this.popframe.init();
 		this.popsel.init();
@@ -254,26 +254,27 @@ var ui = { //
 			}
 		},
 		icon:
-			'<div class="pull-to-refresh-material2__control">' +
-				'<svg class="pull-to-refresh-material2__icon" fill="#666666" width="30" height="30" viewBox="0 0 24 24">' +
-					'<path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />'+
-					'<path d="M0 0h24v24H0z" fill="none" />'+
-				'</svg>'+
-				'<svg class="pull-to-refresh-material2__spinner" width="24" height="24" viewBox="25 25 50 50">'+
-					'<circle class="pull-to-refresh-material2__path" cx="50" cy="50" r="20" fill="none" stroke="#666666" stroke-width="4" stroke-miterlimit="10" />'+
-				'</svg>'+
+			'<div class="pull-to-refresh-material__control">' +
+			'	<svg class="pull-to-refresh-material__icon" fill="#669aff" width="30" height="30" viewBox="0 0 24 24">' +
+			'		<path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />'+
+			'		<path d="M0 0h24v24H0z" fill="none" />'+
+			'	</svg>'+
+			'	<svg class="pull-to-refresh-material__spinner" width="24" height="24" viewBox="25 25 50 50">'+
+			'		<circle class="pull-to-refresh-material__path" cx="50" cy="50" r="20" fill="none" stroke="#669aff" stroke-width="5" stroke-miterlimit="10" />'+
+			'	</svg>'+
 			'</div>',
+		sec:1200,
 		using:function(){
 			var _this = this;
 			pullToRefresh({
 				container: document.querySelector('#container'),
-				animates: ptrAnimatesMaterial2,
+				animates: ptrAnimatesMaterial,
 				refresh: function() {
 					return new Promise( function(resolve){
-						setTimeout(resolve, 1500);
+						setTimeout(resolve, _this.sec);
 						setTimeout(function(){
 							_this.pullCallback();
-						}, 1500);
+						}, _this.sec);
 					});
 				}
 			});
@@ -564,7 +565,7 @@ var ui = { //
 						upVar = 0;
 						$("body").addClass("is-scroll-down").removeClass("is-scroll-up");
 						// console.log(dnVar,upVar , upVar-dnVar);
-						if ( upVar-dnVar < -5 ) {
+						if( upVar-dnVar < -5 ) {
 							$(".menubar:visible").length && _this.hide();
 						}
 						$(window).scrollStopped(function(){
@@ -1007,13 +1008,14 @@ var ui = { //
 				this.set();
 			},
 			set:function(){
-				$(".input:not(.notdel)>input:not([disabled],[readonly]) , [data-ui='autoheight']").each(function(){
+				$(this.inpEls).each(function(){
 					// $(this).trigger("input");
 				});
 			},
+			inpEls:".input:not(.notdel)>input:not([disabled],[readonly]), [data-ui='autoheight']",
 			evt:function(){
 				var _this = this;
-				$(document).on("input focus",".input:not(.notdel)>input:not([disabled],[readonly]), [data-ui='autoheight']",function(e){
+				$(document).on("input focus",this.inpEls,function(e){
 					var els = this;
 					if( $(els).val() == "" ) {
 						_this.xhide(els);
@@ -1021,7 +1023,7 @@ var ui = { //
 						_this.xshow(els);
 					}
 				});
-				$(document).on("blur",".input:not(.notdel)>input:not([disabled],[readonly]) , [data-ui='autoheight']",function(e){
+				$(document).on("focusout",this.inpEls,function(e){
 					var els = this;
 					setTimeout( function(){
 						_this.xhide(els);
@@ -1035,26 +1037,27 @@ var ui = { //
 				});
 			},
 			xshow:function(els){
+				$(this.inpEls).closest(".input").removeClass("del").find(".btdel").remove();
 				var _this = this;
 				var myInput = $(els);
+				// console.log(myInput.val());
 				if( myInput.val() != ""  && myInput.closest(".input").find(".btdel").length == 0  ) {
-					myInput.closest(".input").addClass("del").append('<button type="button" class="btdel" tabindex="-1">삭ss제</button>');
-
-					var rpost = myInput.closest(".input").is(".b") ? 0 : 7 || 0 ;
-					var $ibts = myInput.closest(".input").find(".ibts");
-					var btpos = $ibts.length ? $ibts.width()+17+ rpost : $ibts.width()+ rpost;
-
-					myInput.closest(".input:not(.ui-priceset) input").css({ "padding-right":btpos + 25 });
-					myInput.closest(".input").find(".btdel").css({ "right":btpos });
+					myInput.closest(".input").addClass("del").append('<button type="button" class="btdel" tabindex="-1">삭제</button>');
 				}
+				myInput.closest(".input:not(.ui-priceset) input").css({ "padding-right":this.posit(els) });
+				myInput.closest(".input").find(".btdel").css({ "right":this.posit(els) });
 			},
 			xhide:function(els){
 				var myInput = $(els);
 				myInput.closest(".input").removeClass("del").find(".btdel").remove();
-				myInput.closest(".input input").css({ "padding-right":"" });
+				myInput.closest(".input:not(.ui-priceset) input").css({ "padding-right":this.posit(els) });
 			},
-			xdele:function(els){
-
+			posit:function(els){
+				var myInput = $(els);
+				var rpost = myInput.closest(".input").is(".b") ? 0 : 0 || 0 ;
+				var ibts  = myInput.closest(".input").find(".ibts");
+				var btpos = ibts.length ? ibts.width()+5+ rpost : "";
+				return btpos;
 			}
 		},
 		commas:{ // .input.commas 3자리마다 콤마찍기 
@@ -1082,7 +1085,6 @@ var ui = { //
 					var value = $input.val();
 					$input.attr("pattern","\\d*");
 					if( value == 0 ) {
-						// console.log(value );
 						$input.val("");
 					}
 					if( value != "" ) {
@@ -1093,6 +1095,13 @@ var ui = { //
 					$input.attr( "data-val" , org ).attr("value",value).data("val",org);
 					$input.closest(".input").find(".hideamt").val(  org );
 					// console.log( $input.data("val") , $input.val() );
+					if( $input.val() == "" ) {
+						$input.closest(".input").removeClass("del").find(".btdel").remove();
+					}
+					// console.log( $input.closest(".input").is(".ui-priceset") );
+					if( $input.closest(".input").is(".ui-priceset") ){
+						ui.form.prcset.set();
+					}
 				});
 			}
 		},
@@ -1117,7 +1126,6 @@ var ui = { //
 					var val = $(this).val();
 					var wid = $(this).prop('scrollWidth');
 					// console.log(val , wid);
-				
 					uipriceset.find(".amt").css("width",wid);
 					if( val != "" ) {
 						uipriceset.addClass("won");
@@ -1127,7 +1135,6 @@ var ui = { //
 					}
 					// var isNUMS = isNaN(delCommas(val));
 					// console.log(val , isNUMS);
-					
 					if( val == 0 ){
 						uipriceset.removeClass("won");
 						uipriceset.find(".amt").css("width","").val("");
@@ -1994,7 +2001,7 @@ var ui = { //
 		'		<button type="button" class="btn-close">닫기</button>'+
 		'	</div>'+
 		'</article>';
-		$("body").append(lyAlert);
+		$("body").append(lyAlert).addClass("is-alert");
 		if (opt.tit) {
 			$(".ui-alert>.pbd>.phd").addClass("is-tit");
 		}
@@ -2007,6 +2014,7 @@ var ui = { //
 
 		function alertClose(){
 			$(".ui-alert").remove();
+			$("body").removeClass("is-alert");
 			if( $(".pop-layer:visible").length < 1 ){
 				ui.lock.using(false);
 			}
@@ -2040,7 +2048,7 @@ var ui = { //
 		'		<button type="button" class="btn-close">닫기</button>'+
 		'	</div>'+
 		'</article>';
-		$("body").append(lyConfirm);
+		$("body").append(lyConfirm).addClass("is-confrim");
 		if (opt.tit) {
 			$(".ui-confrim>.pbd>.phd").addClass("is-tit");
 		}
@@ -2058,6 +2066,7 @@ var ui = { //
 
 		function confirmClose(){
 			$(".ui-confrim").remove();
+			$("body").removeClass("is-confrim");
 			if( $(".pop-layer:visible").length < 1 ){
 				ui.lock.using(false);
 			}
@@ -2081,7 +2090,7 @@ var ui = { //
 		'	</div>' +
 		'</article>';
 
-		$("body").append(lyToast);
+		$("body").append(lyToast).addClass("is-toast");
 		window.setTimeout(function() {
 			$(".pop-toast:visible").addClass("on").css({"padding-bottom" : opt.bot});
 		});
@@ -2090,6 +2099,7 @@ var ui = { //
 			$(".pop-toast:visible").removeClass("on").on(ui.transitionend,function(){
 				// console.log("fsd");
 				$(".pop-toast").remove();
+				$("body").removeClass("is-toast");
 			});
 		}, opt.sec);
 	
@@ -2134,7 +2144,7 @@ var ui = { //
 			// 	},600);
 			// });
 
-
+			this.drag.init();
 		},
 		callbacks:{},
 		open: function(id,params) {
@@ -2204,7 +2214,77 @@ var ui = { //
 				if( $pop.is(".c") ){ $pop.find(".pbd>div.pct").css({"max-height": pctnH - 20 });}
 			 });
 		},
-		scroll:{}
+		drag:{
+			init:function(){
+				this.evt();
+				this.set();
+			},
+			evt:function(){
+
+			},
+			set:function(){
+				$(document).on({
+					"touchstart":function(e){
+						console.log("touchstart");
+						s(e,this);
+					},
+					"touchmove":function(e){
+						// console.log("touchmove");
+						m(e,this);
+					},
+					"touchend":function(e){
+						console.log("touchend");
+						ee(e,this);
+					},
+					"mousedown":function(e){
+						// console.log("mousedown");
+					},
+					"click":function(e){
+						e.stopPropagation();
+					}
+				},".pop-layer.c .phd");
+				function s(e,el){
+					var y = (e.pageY !== undefined)?e.pageY:e.originalEvent.touches[0].screenY;
+					var ph = ( $(el).closest(".pbd").find(".pct").height()  );
+					$(el).data({"data-h":ph,"data-sy":y});
+					console.log( y);
+				}
+				function m(e,el){
+					e.stopPropagation();
+					e.preventDefault();
+					var y = (e.pageY !== undefined)?e.pageY:e.originalEvent.touches[0].screenY;
+					
+					var diff = $(el).data("data-sy") - y;
+					var wih = window.innerHeight;
+					var wsh = window.screen.availHeight;
+					var sh = window.screen.height;
+					var hDiff = ((wsh - wih) == 63)?63:0;
+					var p = parseInt(diff - hDiff) / ($(window).height() );
+					var ah = parseInt($(el).data("data-h") + p);
+					console.log(y,hDiff,diff,$(el));
+					$(el).closest(".pbd").find(".pct").css("height",diff+ah);
+					console.log(  $(el).data() );
+				}
+				function ee(e,el){
+					// var y = (e.pageY !== undefined)?e.pageY:e.originalEvent.touches[0].screenY;
+					
+					var diff = $(el).data("data-sy") - $(el).data("ah");
+					var wih = window.innerHeight;
+					var wsh = window.screen.availHeight;
+					var sh = window.screen.height;
+					var hDiff = ((wsh - wih) == 63)?63:0;
+
+					var p = (diff - hDiff) / ($(window).height() );
+					var pctH = $(el).closest(".pbd").find(".pct").outerHeight();
+					console.log( $(el).data("data-h") , pctH );
+					$(el).removeData("data-h");
+					$(el).removeData("ah");
+				}
+			}
+		},
+		scroll:{
+
+		}
 	},
 	popsel:{ // 셀렉트 스와이프
 		init:function(){
@@ -3111,3 +3191,138 @@ $(document).ready(function(){
 
 
 
+
+ui.history = {
+	add : function(key, val) {
+		var h 		= "";
+		var isAdd  	= true;
+		var data 	= location.hash.replace(/^#/, "").split("&");
+		
+		if (location.hash == "") {
+			location.hash = "#loactionHash";
+			this.add(key, val);
+		} else {
+			for (var i in data) {
+				var tmp = data[i].split("=");
+				if (tmp[0] == key) {
+					data[i] = key + "=" + val;
+					isAdd = false;
+					break;
+				}
+			}
+			
+			if (isAdd) {
+				data.push(key + "=" + val);
+			}
+			
+			h += "loactionHash";
+			
+			for (var j in data) {
+				if(data[j] != "loactionHash"){
+					h += "&" + data[j];
+				}
+			}
+			
+			var locationJ = $(location)[0];
+			var pathnameSearch = locationJ.pathname + locationJ.search + '#';
+			
+			history.replaceState(null, null, pathnameSearch+h);
+		}
+		
+	},
+	/* 	
+	addArray : function(arr) {
+		
+		var h 		= "";
+		var data 	= location.hash.replace(/^#/, "").split("&");
+		
+		if (typeof arr == "undefined" || arr == null || arr.length == 0) {
+			return;
+		}
+		
+		if (location.hash == "") {
+			for (var i in arr) {
+				if (i > 0) h += "&";
+				h += arr[i];
+			}
+			document.location.hash = h;
+		} else {
+			for (var i in data) {
+				var tmp = data[i].split("=");
+				for (var j in arr) {
+					var tmp2 = arr[j].split("=");
+					if (tmp[0] == tmp2[0]) {
+						data[i] = arr[j];
+						arr.splice(j, 1);
+					}
+				}
+			}
+			
+			if (arr != null && arr.length > 0) {
+				for (var i in arr) {
+					data.push(arr[i]);
+				}
+			}
+			
+			for (var i in data) {
+				if (i > 0) h += "&";
+				h += data[i];
+			}
+			
+			document.location.hash = h;
+		}
+	},
+	*/
+	remove : function(key) {
+		if (location.hash.length > 0) {
+			var arr = location.hash.replace(/^#/, "").split("&");
+			var idx = -1;
+			var str = "";
+			
+			if (arr.length == 1) {
+				idx = 0;
+				str = arr.toString().split("=")[0];
+			} else {
+				for (var i in arr) {
+					if (arr[i].indexOf(key + "=") > -1) {
+						idx = i;
+						str = arr[i].toString().split("=")[0];
+						break;
+					}
+				}
+			}
+			
+			if (str == key) {
+				arr.splice(idx,1);
+			}
+			
+			var h = "";
+			
+			h += "loactionHash";
+			
+			for (var j in arr) {
+				if(arr[j] != "loactionHash"){
+					h += "&" + arr[j];
+				}
+			}
+			
+			var locationJ = $(location)[0];
+			var pathnameSearch = locationJ.pathname + locationJ.search + '#';
+			
+			history.replaceState(null, null, pathnameSearch+h);
+		}
+	},
+	get : function(arg) {
+		var hashData = "";
+		if (location.hash.length > 0) {
+			var data = location.hash.replace(/^#/, "").split("&");
+			for (var i in data) {
+				if (data[i].indexOf(arg + "=") > -1) {
+					hashData = data[i].split("=")[1];
+					break;
+				}
+			}
+		}
+		return hashData;
+	}
+};
