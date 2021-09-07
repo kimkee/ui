@@ -1597,7 +1597,6 @@
 										// _this.page --;
 										console.log("페이징 = " + _this.page + "에러 = " + error.readyState);
 										$(".ui-loadmore").removeClass("active").addClass("error");
-										$(window).off("scroll");
 										$("#btn_list_more").prop("disabled",false);
 									}
 								});
