@@ -1035,19 +1035,19 @@
 						};
 
 						$(function(){
-							$("button[name=cur_focus]").click(function(){
+							$("button[name=cur_focus]").on("click",function(){
 								$("input[name=cur]").focus();
 							});
-							$("button[name=cur_position1]").click(function(){
+							$("button[name=cur_position1]").on("click",function(){
 								$("input[name=cur1]").focus().setCursorPosition(1);
 							});
-							$("button[name=cur_position2]").click(function(){
+							$("button[name=cur_position2]").on("click",function(){
 								$("input[name=cur2]").focus().setCursorPosition(2);
 							});
-							$("button[name=cur_position3]").click(function(){
+							$("button[name=cur_position3]").on("click",function(){
 								$("input[name=cur3]").focus().setCursorPosition(3);
 							});
-							$("button[name=cur_position4]").click(function(){
+							$("button[name=cur_position4]").on("click",function(){
 								$("input[name=cur4]").focus().setCursorPosition($("input[name=cur4]").val().length);
 							});
 						});
@@ -1626,11 +1626,11 @@
 			</div>
 			<div class="pct">
 				<main class="poptents">
-					<a class="btn" href="javascript:;" onclick="popsample_A();">팝레이어1</a>
+					<button type="button" class="btn" onclick="popsample_A();">팝레이어1</button>
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ab, aspernatur quasi minima inventore rerum deserunt vero dignissimos obcaecati? Esse delectus voluptatum iusto quo officia aspernatur dignissimos totam, et recusandae.</p>
-					<a class="btn" href="javascript:;" onclick="ui.popup.open('pop-sample2');">팝레이어2</a>
+					<button type="button" class="btn" onclick="ui.popup.open('pop-sample2');">팝레이어2</button>
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ab, aspernatur quasi minima inventore rerum deserunt vero dignissimos obcaecati? Esse delectus voluptatum iusto quo officia aspernatur dignissimos totam, et recusandae.</p>
-					<a class="btn" href="javascript:;" onclick="ui.popup.open('pop-sample3');">팝레이어3</a>
+					<button type="button" class="btn" onclick="ui.popup.open('pop-sample3');">팝레이어3</button>
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ab, aspernatur quasi minima inventore rerum deserunt vero dignissimos obcaecati? Esse delectus voluptatum iusto quo officia aspernatur dignissimos totam, et recusandae.</p>
 					<label class="checkbox"><input type="checkbox" checked><span class="txt"></span></label>
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo ab, aspernatur quasi minima inventore rerum deserunt vero dignissimos obcaecati? Esse delectus voluptatum iusto quo officia aspernatur dignissimos totam, et recusandae.</p>
@@ -1647,8 +1647,8 @@
 			</div>
 			<div class="pbt">
 				<div class="bts">
-					<a href="javascript:;" class="btn e" onclick="ui.popframe.close('pop-frame1');">닫기</a>
-					<a href="javascript:;" class="btn a">버튼</a>
+					<button type="button" class="btn e" onclick="ui.popframe.close('pop-frame1');">닫기</button>
+					<button type="button" class="btn a">버튼</button>
 				</div>
 			</div>
 		</div>
@@ -1667,9 +1667,9 @@
 			<div class="pct">
 				<main class="poptents">
 					<p>sdfsdfsfsd</p>
-					<a class="btn" href="javascript:;" onclick="popsample_B();">팝레이어2</a>
+					<button type="button" class="btn" onclick="popsample_B();">팝레이어2</button>
 					<p>sdfsdfsfsd</p>
-					<a class="btn" href="javascript:;" onclick="ui.popup.open('pop-sample3');">팝레이어3</a>
+					<button type="button" class="btn" onclick="ui.popup.open('pop-sample3');">팝레이어3</button>
 					<p>sdfsdfsfsd</p>
 					<label class="checkbox"><input type="checkbox" checked><span class="txt"></span></label>
 					<p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p> <p>sdfsdfsfsd</p>
@@ -1691,8 +1691,8 @@
 			</div>
 			<div class="pbt">
 				<div class="bts">
-					<a href="javascript:;" class="btn e" onclick="ui.popup.close('pop-sample1');">닫기</a>
-					<a href="javascript:;" class="btn a">버튼</a>
+					<button type="button" class="btn e" onclick="ui.popup.close('pop-sample1');">닫기</button>
+					<button type="button" class="btn a">버튼</button>
 				</div>
 			</div>
 		</div>
@@ -1713,7 +1713,7 @@
 					
 					<p>sdfsdfsfsd</p>
 					<p>sdfsdfsfsd</p>
-					<a class="btn" href="javascript:;" onclick="ui.popup.open('pop-sample3');">팝레이어3</a>
+					<button type="button" class="btn" onclick="ui.popup.open('pop-sample3');">팝레이어3</button>
 					<p>sdfsdfsfsd</p>
 					<span class="input"><input type="text"></span>
 					<p>sdfsdfsfsd</p>
@@ -1726,8 +1726,8 @@
 			</div>
 			<div class="pbt">
 				<div class="bts">
-					<a href="javascript:;" class="btn xl e" onclick="ui.popup.close('pop-sample2');">닫기</a>
-					<a href="javascript:;" class="btn xl a">확인</a>
+					<button type="button" class="btn xl e" onclick="ui.popup.close('pop-sample2');">닫기</button>
+					<button type="button" class="btn xl a">확인</button>
 				</div>
 			</div>
 		</div>
