@@ -2180,6 +2180,35 @@ var ui = { //
 			window.setTimeout(function(){
 				_this.resize();
 			});
+
+			/* 웹접근선 팝업안에서 탭키이동 */
+			var pbd = $("#" + id).find(".pbd");
+			var pls = pbd.find("button, input:not([type='hidden']), select, iframe, textarea, [href], [tabindex]:not([tabindex='-1'])");
+			var peF = pls && pls.first();
+			var peL = pls && pls.last();
+
+			pls.length ? peF.focus().on("keydown", function(event) { 
+				// 레이어 열리자마자 초점 받을 수 있는 첫번째 요소로 초점 이동
+				if (event.shiftKey && (event.keyCode || event.which) === 9) {
+					// Shift + Tab키 : 초점 받을 수 있는 첫번째 요소에서 마지막 요소로 초점 이동
+					event.preventDefault();
+					peL.focus();
+				}
+			}) : pbd.attr("tabindex", "0").focus().on("keydown", function(event){
+				tabDisable = true;
+				if ((event.keyCode || event.which) === 9) event.preventDefault();
+				// Tab키 / Shift + Tab키 : 초점 받을 수 있는 요소가 없을 경우 레이어 밖으로 초점 이동 안되게
+			});
+
+			peL.on("keydown", function(event) {
+				if (!event.shiftKey && (event.keyCode || event.which) === 9) {
+					// Tab키 : 초점 받을 수 있는 마지막 요소에서 첫번째 요소으로 초점 이동
+					event.preventDefault();
+					peF.focus();
+				}
+			});
+
+
 		},
 		close: function(id,params) {
 			var _this = this;
