@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
@@ -791,54 +791,31 @@
 
 				<section class="sect" data-sid="ui-sliders">
 					<h3 class="hdt">jQui슬라이더</h3>
-					<p class="gap"></p><p class="gap"></p><p class="gap"></p>
-					<div class="ut-slider" id="slider">
-						<div class="ui-slider-handle"><span id="custom-handle"></span></div>
+
+					<div class="ut-barslide a">
+						<div class="barslide">
+							<input type="hidden" class="amt" value="1500000">
+							<input type="hidden" class="min" value="200000">
+							<input type="hidden" class="max" value="3000000">
+							<input type="hidden" class="step" value="10000">
+							<div class="ui-slider-handle"><span class="hantxt"></span></div>
+							<em class="bar"></em>
+						</div>
 					</div>
-					<script>
-					$(document).ready(function(){
-						var handle = $( "#custom-handle" );
-						$( "#slider" ).slider({
-							orientation: "horizontal", // "vertical" , "horizontal"
-							value:55,
-							min: 0,
-							max: 100,
-							step: 1,
-							create: function() {
-								handle.text( $( this ).slider( "value" ) + "%");
-							},
-							slide: function( event, ui ) {
-								handle.text( ui.value + "%");
-								console.log(ui.value);	
-							}
-						});
-					});
-					</script>
 
 					<p class="gap"></p>
-					<p class="gap"></p>
-					
-					
+					<div class="ut-barslide b">
+						<div class="barslide">
+							<input type="hidden" class="amt0" value="1890000">
+							<input type="hidden" class="amt1" value="4000000">
+							<input type="hidden" class="min"  value="200000">
+							<input type="hidden" class="max"  value="5000000">
+							<input type="hidden" class="step" value="10000">
+							<span class="hantxt"></span>
+						</div>
+					</div>
 
-					<div id="amount"></div>
-					<p class="gap"></p>
-					<div class="ut-slider" id="slider-range"></div>
-					
-					<script>
-					$(document).ready(function(){
-						$( "#slider-range" ).slider({
-							range: true,
-							min: 0,
-							max: 500,
-							values: [ 75, 300 ],
-							slide: function( event, ui ) {
-								$( "#amount" ).text( ui.values[ 0 ] + "원 - " + ui.values[ 1 ] +"원" );
-								console.log(ui.values[0] ,ui.values[1]  );	
-							}
-						});
-						$( "#amount" ).text( $( "#slider-range" ).slider( "values", 0 ) + "원 - " + $( "#slider-range" ).slider( "values", 1 )+"원" );				
-					});
-					</script>
+
 				</section>
 
 				<section class="sect" data-sid="ui-pie">
