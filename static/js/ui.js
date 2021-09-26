@@ -3248,6 +3248,31 @@ var ui = { //
 			document.cookie = cname + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
 		}
 	},
+	data:{ // localStorage Set Get
+		set:function(name,obj){
+			var orgs = JSON.parse( localStorage.getItem(name) ) || {};
+			var news = obj;
+			// news[key] = val;
+			if (typeof obj == "object") {
+				news = $.extend(orgs,news);
+				// news = Object.assign(orgs,news);
+			}
+			localStorage.setItem(name, JSON.stringify(news) );
+		},
+		get:function(name,key){
+			// console.log(key);
+			var data = JSON.parse( localStorage.getItem(name) );
+			if( key != undefined) {
+				try{
+					return data[key] ;
+				}catch(e){
+					return false;
+				}
+			}else{
+				return data;
+			}
+		}
+	},
 	html:{ // Html 인클루드
 		incCom:false,
 		load:function( paramCallback ){
