@@ -316,6 +316,17 @@ input::-webkit-datetime-edit-text { /* color: transparent; */ }
 .page.ui .weeks{text-align:center;font-size: 12px;/* font-weight:bold; */margin: 10px 0 10px 0;border: #dddddd solid 1px;border-radius: 4px 4px 4px 4px;padding: 5px 4px;border-width: 1px 1px 1px 1px;}
 .page.ui [data-ui-tog='ctn']{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;margin-top: 10px;}
 .page.ui [data-ui-tab-ctn]{text-align:center;font-size: 14px;padding: 15px 10px;border: #aaaaaa solid 1px;border-top-width: 0;}
+.page.ui .tbdevice{ border-top: 1px solid #e0e2e7; margin-top: 10px; }
+.page.ui .tbdevice th{padding: 4px 5px;border-left: 1px solid #dddddd !important;border-right: 1px solid #dddddd !important;}
+.page.ui .tbdevice td{border-right: 1px solid #dddddd !important;border-left: 1px solid #dddddd !important;}
+.page.ui .tbdevice em{ font-size: 11px; display: block; padding: 4px 0 0 0; font-weight: 500; }
+.page.ui .tbdevice em::before{display: block;width: 22px;height: 22px;background: no-repeat center;background-size: 22px auto;font-size:0rem;vertical-align:middle;content:'';margin: 0px auto 0px auto;}
+.page.ui .tbdevice em.chrome::before {background-image: url(../img/common/bs_chrome.png);}
+.page.ui .tbdevice em.firefox::before{background-image: url(../img/common/bs_firefox.png);}
+.page.ui .tbdevice em.opera::before	{background-image: url(../img/common/bs_opera.png);}
+.page.ui .tbdevice em.safari::before{background-image: url(../img/common/bs_safari.png);}
+.page.ui .tbdevice em.edge::before	{background-image: url(../img/common/bs_edge.png);}
+.page.ui .tbdevice em.ie::before	{background-image: url(../img/common/bs_ie.png);}
 #bar-ht{height: 1px;background-color: #d4d4d4;position:fixed;left:0px;top: 49px;z-index: 900;transition: width .4s ease-out;width: 100%;}
 #bar-ht>i{content:"";height: 1px;background-color: #0365d5;display: block;transition: width .4s ease-out;width: 1px;}
 .body.ui #debug{position: fixed;left: 0px;right: 0;top: 50px;background: rgba(0, 0, 0, 0.7);z-index: 600;color: #ffffff;padding: 2px 7px;font-size: 10rem;text-align: center;}
