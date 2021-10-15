@@ -16538,6 +16538,7 @@ var ui = { //
 		this.sort.init();
 		this.dropmenu.init();
 		this.location.init();
+		this.range.init();
 		this.accd.init();
 		this.tog.init();
 		this.tab.init();
@@ -16576,6 +16577,7 @@ var ui = { //
 		this.form.amtd.set();
 		this.form.inthgt.set();
 		this.form.star.set();
+		this.range.set();
 		this.accd.set();
 		this.tab.set();
 		this.tree.set();
@@ -17457,6 +17459,100 @@ var ui = { //
 					$(this).find(">.bt").addClass("tt").removeClass("bt");
 				}
 			});
+		}
+	},
+	range:{
+		init:function(){
+			this.set();
+		},
+		set:function(){
+			$(".ut-barslide.a .barslide").each(function(){
+				var $this  = $(this);
+				var hantxt = $this.find(".hantxt");
+				var bardis = $this.find("em.bar");
+				var amt    = $this.find("input.amt");
+				var step   = parseInt( $this.find("input.step").val() );
+				var val    = parseInt( $this.find("input.amt").val() );
+				var min    = parseInt( $this.find("input.min").val() );
+				var max    = parseInt( $this.find("input.max").val() );
+				
+				setHandle(val,min,max);
+				function setHandle(val,min,max){
+					var wid = (val-min) / (max-min) * 100;
+					console.log(val);
+					bardis.css("width", wid  + "%");
+					hantxt.html( ui.commas.add(val) + '<i class="w">원</i>');
+					amt.val(val);
+				}
+				$this.slider({
+					value: val,
+					min: min,
+					max: max,
+					step: step,
+					create:function( event, ui ){
+						setHandle(val,min,max);
+					},
+					slide:function( event, ui ){
+						var val = ui.value;
+						setHandle(val,min,max);
+					},
+					stop: function( event, ui ){
+						var val = ui.value;
+						amt.trigger("change");
+					}
+				});
+			});
+
+			$(".ut-barslide.b .barslide").each(function(){
+				var $this  = $(this);
+				var hantxt = $this.find(".hantxt");
+				var bardis = $this.find("em.bar");
+				var amt0   = $this.find("input.amt0");
+				var amt1   = $this.find("input.amt1");
+				var step   = parseInt( $this.find("input.step").val() );
+				var val0   = parseInt( $this.find("input.amt0").val() );
+				var val1   = parseInt( $this.find("input.amt1").val() );
+				var min    = parseInt( $this.find("input.min").val() );
+				var max    = parseInt( $this.find("input.max").val() );
+				setHandle(val0,val1,min,max);
+				function setHandle(val0,val1,min,max){
+					hantxt.html( ui.commas.add(val0) + '<i class="w">원</i> ~ '+ ui.commas.add(val1) + '<i class="w">원</i>'  );
+					console.log(val0,val1);
+					amt0.val(val0);
+					amt1.val(val1);
+				}
+				$this.slider({
+					range: true,
+					min: min,
+					max: max,
+					values: [ val0, val1 ],
+					step: step,
+					create:function( event, ui ){
+						setHandle(val0,val1,min,max);
+					},
+					slide: function( event, ui ) {
+						var val0 = ui.values[0];
+						var val1 = ui.values[1];
+						setHandle(val0,val1,min,max);
+					},
+					stop: function( event, ui ){
+						var val0 = ui.values[0];
+						var val1 = ui.values[1];
+						amt0.trigger("change");
+						amt1.trigger("change");
+					}
+				});
+				
+			});
+
+		}
+	},
+	commas:{
+		add:function(str){
+			return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		},
+		del:function(str){
+			return parseInt(str.replace(/,/g , ''));
 		}
 	},
 	form:{  //  폼요소
@@ -18701,6 +18797,35 @@ var ui = { //
 			window.setTimeout(function(){
 				_this.resize();
 			});
+
+			/* 웹접근선 팝업안에서 탭키이동 */
+			var pbd = $("#" + id).find(".pbd");
+			var pls = pbd.find("button, input:not([type='hidden']), select, iframe, textarea, [href], [tabindex]:not([tabindex='-1'])");
+			var peF = pls && pls.first();
+			var peL = pls && pls.last();
+
+			pls.length ? peF.focus().on("keydown", function(event) { 
+				// 레이어 열리자마자 초점 받을 수 있는 첫번째 요소로 초점 이동
+				if (event.shiftKey && (event.keyCode || event.which) === 9) {
+					// Shift + Tab키 : 초점 받을 수 있는 첫번째 요소에서 마지막 요소로 초점 이동
+					event.preventDefault();
+					peL.focus();
+				}
+			}) : pbd.attr("tabindex", "0").focus().on("keydown", function(event){
+				tabDisable = true;
+				if ((event.keyCode || event.which) === 9) event.preventDefault();
+				// Tab키 / Shift + Tab키 : 초점 받을 수 있는 요소가 없을 경우 레이어 밖으로 초점 이동 안되게
+			});
+
+			peL.on("keydown", function(event) {
+				if (!event.shiftKey && (event.keyCode || event.which) === 9) {
+					// Tab키 : 초점 받을 수 있는 마지막 요소에서 첫번째 요소으로 초점 이동
+					event.preventDefault();
+					peF.focus();
+				}
+			});
+
+
 		},
 		close: function(id,params) {
 			var _this = this;
@@ -19642,6 +19767,31 @@ var ui = { //
 		},
 		del:function(cname){
 			document.cookie = cname + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
+		}
+	},
+	data:{ // localStorage Set Get
+		set:function(name,obj){
+			var orgs = JSON.parse( localStorage.getItem(name) ) || {};
+			var news = obj;
+			// news[key] = val;
+			if (typeof obj == "object") {
+				news = $.extend(orgs,news);
+				// news = Object.assign(orgs,news);
+			}
+			localStorage.setItem(name, JSON.stringify(news) );
+		},
+		get:function(name,key){
+			// console.log(key);
+			var data = JSON.parse( localStorage.getItem(name) );
+			if( key != undefined) {
+				try{
+					return data[key] ;
+				}catch(e){
+					return false;
+				}
+			}else{
+				return data;
+			}
 		}
 	},
 	html:{ // Html 인클루드

@@ -64,7 +64,7 @@
         <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
       </Realm>
 
-      <Host name="localhost"  appBase="D:\workspace\ui_kimkee" unpackWARs="true" autoDeploy="true">
+      <Host name="localhost"  appBase="D:\workspace\ui" unpackWARs="true" autoDeploy="true">
        
 	
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
@@ -88,8 +88,7 @@
         <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
       </Realm>
 
-      <Host name="localhost"  appBase="C:\work\workspace\ncp_web_pc_mlb\src\main\webapp" unpackWARs="true" autoDeploy="true">
-       
+      <Host name="localhost"  appBase="D:\workspace" unpackWARs="true" autoDeploy="true">
 	
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                prefix="localhost_access_log" suffix=".txt"
@@ -99,7 +98,6 @@
     </Engine>
 
   </Service>
-
 
   <Service name="Catalina2">
 
@@ -113,7 +111,7 @@
         <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
       </Realm>
 
-      <Host name="localhost"  appBase="C:\work\workspace\ncp_web_mb_mlb\src\main\webapp" unpackWARs="true" autoDeploy="true">
+      <Host name="localhost"  appBase="D:\workspace" unpackWARs="true" autoDeploy="true">
        
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                prefix="localhost_access_log" suffix=".txt"
@@ -123,7 +121,6 @@
     </Engine>
 
   </Service>
-
 
   <Service name="Catalina3">
 
@@ -137,7 +134,7 @@
         <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
       </Realm>
 
-      <Host name="localhost"  appBase="C:\work\workspace\ncp_web_pc_sa\src\main\webapp" unpackWARs="true" autoDeploy="true">
+      <Host name="localhost"  appBase="D:\workspace" unpackWARs="true" autoDeploy="true">
        
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                prefix="localhost_access_log" suffix=".txt"
@@ -147,9 +144,6 @@
     </Engine>
 
   </Service>
-
-
-
 
   <Service name="Catalina4">
 
@@ -163,7 +157,7 @@
         <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
       </Realm>
 
-      <Host name="localhost"  appBase="C:\work\workspace\ncp_web_mb_sa\src\main\webapp" unpackWARs="true" autoDeploy="true">
+      <Host name="localhost"  appBase="D:\workspace" unpackWARs="true" autoDeploy="true">
        
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                prefix="localhost_access_log" suffix=".txt"
