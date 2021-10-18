@@ -1,8 +1,5 @@
-
-
-
 # ui.js
-HTML,CSS,JS UI
+> HTML,CSS,JS UI
 ## https://kimkee.github.io/ui/
 ### https://kimkee.github.io/ui/static/js/ui.js
 
@@ -175,7 +172,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
 <a href="javascript:;" class="btn lg">버튼</a>
 <a href="javascript:;" class="btn xl">버튼</a>
 <a href="javascript:;" class="btn" disabled>버튼</a>
-<button class="btn" disabled>버튼</button>
+<button type="button" class="btn" disabled>버튼</button>
 ```
 ![image](https://user-images.githubusercontent.com/6386956/109746618-05e74000-7c19-11eb-9be1-756c527b6496.png)
 ### 폼요소
