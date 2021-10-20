@@ -20,6 +20,8 @@
 	<link rel="stylesheet" href="../../css/swiper.css?v=20">
 	<link rel="stylesheet" href="../../css/base.css?v=20">
 	<link rel="stylesheet" href="../../css/common.css">
+	<!-- The Perfect Scrollbar CSS files -->
+	<link href="../../css/perfect-scrollbar.css" rel="stylesheet">
 	
 	<script src="../../js/jquery-3.4.1.js"></script>
 	<script src="../../js/jquery-ui.js"></script>
@@ -31,6 +33,9 @@
 	<script src="../../js/pullToRefresh.js"></script>
 	<script src="../../js/lib/jquery.hammer.js-master/hammer.js"></script>
 	<script src="../../js/lib/jquery.hammer.js-master/jquery.hammer.js"></script>
+	<!-- The Perfect Scrollbar JS files -->
+	<script src="../../js/perfect-scrollbar.js"></script>
+
 
 	<script src="../../js/ui.js"></script>
 	<script src="../guide/html.js"></script><!-- 개발페이지에서는 html.js 임포트 하지말아주세요. -->
@@ -50,6 +55,26 @@
 			<ul class="list"></ul>
 		</div>
 	</nav>
+
+	<!-- <style>
+		.uimenu .ps__rail-y {margin: 3px 3px;}
+	</style>
+	<script>
+		$(document).ready(function(){
+			
+		});
+		const ps = new PerfectScrollbar("#ui-psscroll-menu", {
+			wheelSpeed: 0.3,
+			wheelPropagation: false,
+			minScrollbarLength: 10
+		});
+		$('#ui-psscroll-menu').on('ps-y-reach-end ps-y-reach-start ps-scroll-down ps-scroll-up',function(e){
+			console.log(e.type);
+		} );
+	</script>
+ -->
+
+
 	<!-- 컨텐츠 시작 -->
 	<div id="bar-ht"><i></i></div>
 
@@ -58,7 +83,6 @@
 		<div class="contents" id="contents">
 
 			<div class="uisect">
-
 				<section class="sect" data-sid="ui-agent">
 					<h3 class="hdt">User Agent</h3>
 					<div class="device">
@@ -797,17 +821,22 @@
 				<section class="sect" data-sid="ui-mcscrolls">
 					<h3 class="hdt">mCustomScroll</h3>
 					<style>
-						.sampleMscroll{display:flex; justify-content: space-between;}
-						.sampleMscroll .ui-mcscroll{width: calc(50% - 5px); border:1px solid #dddddd; padding: 10px;}
+						.sampleMscroll{/* display:flex; */justify-content: space-between;}
+						.sampleMscroll .box{border: 1px solid #dddddd;margin: 10px 0;}
+						.sampleMscroll .box .ui-mcscroll{/* width: calc(50% - 5px); */padding: 10px;position: relative;height: 130px;margin: 3px 3px;}
 					</style>
 					<script src="../../js/jquery.mousewheel.min.js"></script>
 					<script src="../../js/jquery.mCustomScrollbar.js"></script>
 					<section class="sampleMscroll">
-						<div class="ui-mcscroll" style="max-height:150px">
-							<p>내용</p> <p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p>
+						<div class="box">
+							<div class="ui-mcscroll">
+								<p>내용</p> <p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p><p>내용</p>
+							</div>
 						</div>
-						<div class="ui-mcscroll x" style="max-height:150px">
-							<p style="white-space: nowrap;"> 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 </p>
+						<div class="box">
+							<div class="ui-mcscroll x">
+								<p style="white-space: nowrap;"> 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 </p>
+							</div>
 						</div>
 					</section>
 				</section>

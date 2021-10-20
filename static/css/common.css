@@ -561,7 +561,7 @@ ul.bullet.type.b>li:before{ content:""; background:#666666; top:6px; width:4px; 
 
 
 /* mCustomScroll */
-.ui-mcscroll { overflow: hidden !important; }
+.ui-mcscroll {overflow: auto;}
 
 .mCustomScrollBox:focus{/* outline:1px dotted #8f6c44; */}
 .mCSB_scrollTools .mCSB_draggerRail{background: rgba(200, 203, 208, 0.4);/* background: transparent; */border-radius: 0px;}

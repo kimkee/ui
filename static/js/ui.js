@@ -1597,11 +1597,18 @@ var ui = { //
 		using:function() {
 			var _this = this;
 			$(".ui-mcscroll").each(function(){
-				_this.opt.axis = $(this).hasClass("x") ? "x" : "y" ;
+				// _this.opt.axis = $(this).hasClass("x") ? "x" : "y" ;
 				// console.log(_this.opt.axis);
-				if( $(this).find(">*").length >= 1 ){
-					$(this).mCustomScrollbar(_this.opt);
-				}
+				// if( $(this).find(">*").length >= 1 ){
+					// $(this).mCustomScrollbar(_this.opt);
+				// }
+
+				_this = new PerfectScrollbar(this, {
+					wheelSpeed: 0.3,
+					wheelPropagation: false,
+					minScrollbarLength: 10
+				});
+
 			});
 			// $(".ui-mcscroll").mCustomScrollbar("update");
 			// $(".ui-mcscroll").mCustomScrollbar("destroy");
