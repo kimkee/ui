@@ -1606,7 +1606,9 @@ var ui = { //
 				_this = new PerfectScrollbar(this, {
 					wheelSpeed: 0.3,
 					wheelPropagation: false,
-					minScrollbarLength: 10
+					minScrollbarLength: 10,
+					scrollingThreshold :1000,
+					useBothWheelAxes:true
 				});
 
 			});
