@@ -1170,12 +1170,6 @@ var ui = { //
 			},
 			set:function(){
 				var _this = this;
-				function addCommas(x) {
-					return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-				}
-				function delCommas(strNum){
-					return parseInt(strNum.replace(/,/g , ''));
-				}
 				$(_this.els).each(function(){
 					var $input = $(this);
 					var value = $input.val();
@@ -1184,10 +1178,10 @@ var ui = { //
 						$input.val("");
 					}
 					if( value != "" ) {
-						value = addCommas( $input.val().replace(/[^0-9]/g,"") );
+						value = ui.commas.add( ui.commas.del( $input.val() ) );
 						$input.val(value);
 					}
-					var org = +delCommas( $input.val() ) || "";
+					var org = +ui.commas.del( $input.val() ) || "";
 					$input.attr( "data-val" , org ).attr("value",value).data("val",org);
 					$input.closest(".input").find(".hideamt").val(  org );
 					// console.log( $input.data("val") , $input.val() );
