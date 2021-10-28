@@ -1064,6 +1064,11 @@
 							$("button[name=cur_position4]").on("click",function(){
 								$("input[name=cur4]").focus().setCursorPosition($("input[name=cur4]").val().length);
 							});
+
+
+							$("#test_input").on('keyup', function(e) {
+								console.log('Caret at: ', e.target.selectionStart)
+							})
 						});
 						var inputFouseSet = function(){
 							$('input[name=testspd]').focus().setCursorPosition(2);
@@ -1087,7 +1092,7 @@
 						<button class="btn xs" name="cur_position3">setCursorPosition(3)</button>
 					</div>
 					<div>
-						<input type="text" name="cur4" value="test_last">
+						<input type="text" name="cur4" value="test_last" id="test_input">
 						<button class="btn xs" name="cur_position4">setCursorPosition(last)</button>
 					</div>
 
