@@ -1178,7 +1178,7 @@ var ui = { //
 						$input.val("");
 					}
 					if( value != "" ) {
-						value = ui.commas.add( ui.commas.del( $input.val() ) );
+						value = ui.commas.add( ui.commas.del( $input.val() ) || "" );
 						$input.val(value);
 					}
 					var org = +ui.commas.del( $input.val() ) || "";
