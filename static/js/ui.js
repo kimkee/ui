@@ -1620,9 +1620,18 @@ var ui = { //
 			$(".ui-accd>li>.cbox").hide();
 			$(".ui-accd>li.open>.cbox").show();
 			$(".ui-accd>li.expt>.cbox").show();
+			$(".ui-accd>li>.hbox .btn-tog").each(function(){
+				if( !$(this).find(".btxt").length ){ $(this).append('<span class="btxt"></span>'); }
+
+				if( $(this).closest("li").is(".open") ){
+					$(this).find(".btxt").text("닫기");
+				}else{
+					$(this).find(".btxt").text("열기");
+				}
+			});
 		},
 		using: function() {
-			$(document).on("click", ".ui-accd>li:not(.expt)>.hbox>.btn-tog", function() {
+			$(document).on("click", ".ui-accd>li:not(.expt)>.hbox .btn-tog", function() {
 				var type =  $(this).closest(".ui-accd").attr("data-accd");
 				var $li =   $(this).closest("li");
 				var $cbox = $li.find(">.cbox");
@@ -1630,21 +1639,21 @@ var ui = { //
 				if( type == "tog" ){
 					if( $cbox.is(":hidden") ){
 						$cbox.slideDown(100,function(){
-							$li.addClass("open");
+							$li.addClass("open").find(".btn-tog>.btxt").text("닫기");
 						});
 					}else{
 						$cbox.slideUp(100,function(){
-							$li.removeClass("open");
+							$li.removeClass("open").find(".btn-tog>.btxt").text("열기");
 						});
 					}
 				}
 				if( type == "accd" ){
 					$(this).closest(".ui-accd").find(">li.open").not("li.expt").find(">.cbox").slideUp(100,function(){
-						$(this).closest(".ui-accd").find(">li.open").removeClass("open");
+						$(this).closest(".ui-accd").find(">li.open").removeClass("open").find(".btn-tog>.btxt").text("열기");
 					});
 					if( $cbox.is(":hidden") ){
 						$cbox.slideDown(100,function(){
-							$li.addClass("open");
+							$li.addClass("open").find(".btn-tog>.btxt").text("닫기");
 						});
 					}
 				}
@@ -1915,28 +1924,36 @@ var ui = { //
 	tog:{ // 토글 UI
 		init: function() {
 			this.using();
-			// this.set();
+			this.set();
 			if( ui.param.tog ) this.set( ui.param.tog );
 		},
 		set:function(id){
 			$("[data-ui-tog='ctn']").hide();
 			$("[data-ui-tog='ctn'].open").show();
 			var _this = this;
-			var togid = id.split(",");
+			// var togid = id.split(",");
 			$("[data-ui-tog='btn']").each(function(idx){
 				// console.log(idx,togid[idx] );
 				// $("[data-ui-tog='btn'][href='#"+togid[idx]+"']").trigger("click");
-				_this.open(togid[idx]);
+				// _this.open(togid[idx]);
+
+				if( !$(this).find(".btxt").length ){ $(this).append('<span class="btxt"></span>'); }
+	
+				if( $(this).is(".open") ){
+					$(this).find(".btxt").text("닫기");
+				}else{
+					$(this).find(".btxt").text("열기");
+				}
 			});
 		},
 		open:function(id){
-			$("[data-ui-tog='btn'][data-ui-tog-val='"+id+"']").addClass("open");
+			$("[data-ui-tog='btn'][data-ui-tog-val='"+id+"']").addClass("open").find(".btxt").text("닫기");
 			$("[data-ui-tog='ctn'][data-ui-tog-val='"+id+"']").slideDown(100,function(){
 				$(this).addClass("open");
 			});
 		},
 		close:function(id){
-			$("[data-ui-tog='btn'][data-ui-tog-val='"+id+"']").removeClass("open");
+			$("[data-ui-tog='btn'][data-ui-tog-val='"+id+"']").removeClass("open").find(".btxt").text("열기");
 			$("[data-ui-tog='ctn'][data-ui-tog-val='"+id+"']").slideUp(100,function(){
 				$(this).removeClass("open");
 			});

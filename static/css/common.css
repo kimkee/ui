@@ -672,6 +672,7 @@ a.btn.disabled{ pointer-events: none; }
 
 /* 토글 UI */
 [data-ui-tog="btn"]{}
+[data-ui-tog="btn"] .btxt{position: absolute;left: -999rem;font-size:0rem;height: 0;overflow: hidden;}
 [data-ui-tog="ctn"]{display:none;}
 [data-ui-tog="ctn"].open{display:block;}
 
@@ -683,6 +684,7 @@ a.btn.disabled{ pointer-events: none; }
 .ui-accd>li .hbox{padding: 10px;position:relative;}
 .ui-accd>li .hbox .btn-tog{display:block;position:absolute;right:0px;top:0px;bottom:0px;padding: 12px;width:100%;font-size: 0px;box-sizing:border-box;text-align:right;background: none;border: none;outline: none;}
 .ui-accd>li .hbox .btn-tog:before{width:40px; height:40px; background:url(../img/common/accd_tog.png); background-size:100% auto; position:absolute; right:0px; top:0px; content:"";}
+.ui-accd>li .hbox .btn-tog .btxt{position: absolute;left: -999rem;font-size:0rem;height: 0;overflow: hidden;}
 .ui-accd>li.open .hbox{ font-weight: bold;}
 .ui-accd>li.open .hbox .btn-tog:before{background-position-y: -43px;}
 .ui-accd>li>.cbox{display:none; border-top:#ddd solid 1px;  padding:10px; background-color:#fafafa;}
