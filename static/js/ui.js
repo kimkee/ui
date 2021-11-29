@@ -1562,7 +1562,15 @@ var ui = { //
 	loading:{ // 로딩중..
 		show: function () {
 			if( !$(".ui-loading").length ) {
-				var els = '<div class="ui-loading"><em></em></div>';
+				// var els = '<div class="ui-loading"><em></em></div>';
+				var els = '<div class="ui-loading load-spin">'+
+								'<div class="box">'+
+									'<div class="rotat">'+
+										'<div class="rot l"></div>'+
+										'<div class="rot r"></div>'+
+									'</div>'+
+								'</div>'+
+							'</div>';
 				$("body").prepend(els).addClass("is-loading");
 			}
 		},
