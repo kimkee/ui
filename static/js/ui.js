@@ -1563,12 +1563,12 @@ var ui = { //
 		show: function () {
 			if( !$(".ui-loading").length ) {
 				// var els = '<div class="ui-loading"><em></em></div>';
-				var els = '<div class="ui-loading load-spin">'+
+				var els = '<div class="ui-loading">'+
 								'<div class="box">'+
-									'<div class="rotat">'+
-										'<div class="rot l"></div>'+
-										'<div class="rot r"></div>'+
-									'</div>'+
+									'<em class="rtt">'+
+										'<i class="rot l"></i>'+
+										'<i class="rot r"></i>'+
+									'</em>'+
 								'</div>'+
 							'</div>';
 				$("body").prepend(els).addClass("is-loading");
