@@ -2296,9 +2296,12 @@ var ui = { //
 			}
 		
 			$("#" + id).addClass(_this.opt.direct).css({ zIndex: _this.opt.zIndex }).fadeIn(10,function(){
-				if(_this.callbacks[id].open)  _this.callbacks[id].open();
 				$(this).addClass("on").attr("tabindex","0").focus(); 
 				_this.resize();
+				$(this).find(">.pbd").on(ui.transitionend,function(){
+					if(_this.callbacks[id].open)  _this.callbacks[id].open();
+					$(this).off(ui.transitionend);
+				});
 			});
 			
 			window.setTimeout(function(){
