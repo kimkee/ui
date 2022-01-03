@@ -379,8 +379,13 @@
 					</div>
 					<script>
 						var toast_sample1 = function(){
-							ui.toast("삭제 되었습니다.",{   // 토스트 창띄우기
-								// bot:70
+							ui.toast("위험자산은 전체 적립금의 70%까지 매도 가능하며, 현재 71% 입력되었습니다. 위험자산 매도 금액을 조정해주세요.",{
+								cls:"abcd", // null , string
+								bot:0,  // 바닥에서 띄울 간격 기본 0
+								sec:2000, // 사라질 시간 number 기본 2000
+								ccb:function(){
+									console.log("토스트 닫힘");
+								}
 							});
 						}
 						var toast_sample2 = function(){

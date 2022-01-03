@@ -2197,35 +2197,56 @@ var ui = { //
 		}
 	},
 	toast:function(msg,params){ // 토스트창 
-
-		var opt = $.extend({
-			msg:msg,
+		var _this = this;
+		_this.opt = $.extend({
+			msg:msg,	
 			cls:"",
-			sec:1000,
-			bot:""
+			sec:2000,
+			bot:"",
+			ccb: null,
+			zIndex:1000,
+			setTime:true 
 		}, params);
 
 		if ( $(".pop-toast:visible").length ) { return; }
 
 		var lyToast =
-		'<article class="pop-toast ' + opt.cls + '">' +
+		'<article role="alert" aria-live="assertive" class="pop-toast ' + _this.opt.cls + '">' +
 		'	<div class="pbd">' +
-		'		<div class="pct">' + opt.msg + '</div>' +
+		'		<div class="pct">' + _this.opt.msg + '</div>' +
+		'		<button type="button" class="btn-close""></button>' +
 		'	</div>' +
 		'</article>';
 
 		$("body").append(lyToast).addClass("is-toast");
+
+		$(".pop-toast").find(".btn-close").on("click",function(){
+			toastClose("close");
+		});
+
 		window.setTimeout(function() {
-			$(".pop-toast:visible").addClass("on").css({"padding-bottom" : opt.bot});
+			$(".pop-toast:visible").addClass("on").css({"padding-bottom" : _this.opt.bot , "z-index" : _this.opt.zIndex});
 		});
 		
-		window.setTimeout(function() {
-			$(".pop-toast:visible").removeClass("on").on(ui.transitionend,function(){
-				// console.log("fsd");
-				$(".pop-toast").remove();
-				$("body").removeClass("is-toast");
-			});
-		}, opt.sec);
+		if(_this.opt.setTime){
+			toastClose();
+		}
+		function toastClose(sec){
+			if(sec == "close"){
+				_this.opt.sec = 0;
+				clearTimeout(_this.timer);
+			}
+			_this.timer = setTimeout(function() {
+				$(".pop-toast:visible").removeClass("on").on(ui.transitionend,function(){
+					// console.log("fsd");
+					$(".pop-toast").remove();
+					$("body").removeClass("is-toast");
+					if( typeof _this.opt.ccb == "function" ){
+						_this.opt.ccb();
+					}
+				});
+			}, _this.opt.sec);
+		}
 	
 		
 	},
