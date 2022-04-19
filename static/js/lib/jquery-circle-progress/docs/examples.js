@@ -1,5 +1,5 @@
 /* Examples */
-//(function($) {
+(function($) {
   /*
    * Example 1:
    *
@@ -24,9 +24,6 @@
     value: 0.6
   }).on('circle-animation-progress', function(event, progress) {
     $(this).find('strong').html(Math.round(100 * progress) + '<i>%</i>');
-  }).on('circle-animation-end', function (event, progress) {
-      console.log("완료");
-      // $(this).find("canvas").css({"opacity":"0"});
   });
 
   /*
@@ -82,4 +79,4 @@
     // "data-" attributes are taken into account only on init (not on update/redraw)
     // "data-fill" (and other object options) should be in valid JSON format
   });
-//})(jQuery);
+})(jQuery);
