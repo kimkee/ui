@@ -2,7 +2,6 @@
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>인덱스</title>
 </head>
 <body>
@@ -22,7 +21,6 @@
 	<script>
 
 		var lottieSet = {
-			id:{},
 			draw: function(nm,params){
 				var _this = this;
 				_this.opt = {
@@ -36,7 +34,7 @@
 				console.log(nm, _this.opt , document.getElementById(nm).firstElementChild );
 				
 				if( document.getElementById(nm).firstElementChild != null ) return;
-				_this.id[nm] = lottie.loadAnimation({
+				_this[nm] = lottie.loadAnimation({
 					container: document.getElementById(nm),
 					path: _this.opt.path,
 					renderer: _this.opt.renderer,
