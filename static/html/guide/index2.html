@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>UI</title>
+	<meta name="format-detection" content="telephone=no">
+	<meta name="theme-color" content="#333333">
+	<link href="../../img/common/favicon.ico" rel="shrtcut icon">
+	<link href="../../img/common/favicon.png" rel="apple-touch-icon-precomposed">
+
+</head>
+
+<body style="background-color: #252525; color: #565656;">
+<!-- Load our React component. -->
+<div id="root"></div>
+
+
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="https://kimkee.github.io/js/data.js"></script>
+
+
+<!-- <script>
+	fetch("./data.json")
+	.then((res) => {
+		return res.json(); //Promise 반환
+	})
+	.then((json) => {
+		console.log(json); // 서버에서 주는 json데이터가 출력 됨
+		data = json;
+
+		
+
+	});
+
+</script> -->
+<script type="text/babel">	
+	// let data = {"update":"11111","puix":[{ "tits": "KYO", "date": "2021.09 ~ 2022.04", "plce": "KYO", "tech": [ "CSS", "HTML", "JS", "Mobile" ], "imgs": "./img/ss/ssKyobo.jpg", "urls": "https://kimkee.gitlab.io/Kyobo" }, { "tits": "마켓", "date": "2021.04 ~ 2021.08", "plce": "롯데", "tech": [ "HTML", "CSS", "JS", "Mobile" ], "imgs": "./img/ss/ssLhmk.jpg", "urls": "https://kimkee.gitlab.io/htmt" }, { "tits": "3333", "date": "2021.04 ~ 2021.08", "plce": "롯데", "tech": [ "HTML", "CSS", "JS", "Mobile" ], "imgs": "./img/ss/ssLhmk.jpg", "urls": "https://kimkee.gitlab.io/htmt" }]} ;
+	
+	const { useState } = React;
+
+	const App = (props) => { 
+		console.log(data);
+		const [text, setText] = useState(data);
+		const techRender = (tt) => {
+			const result = [];
+			
+			console.log(text.puix[tt].tech);
+			for (let i = 0; i < text.puix[tt].tech.length; i++) {
+				result.push(<em key={i}> {text.puix[tt].tech[i]} </em>);
+				// console.log(tt);
+			
+			}
+			return result;
+		};
+		
+		const rendering = () => {
+			const result = [];
+			for (let i = 0; i < text.puix.length; i++) {
+				result.push(<li key={i}>
+					<h5>{ text.puix[i].tits }</h5>
+					<h5>{ text.puix[i].date }</h5>
+					<h5>{ text.puix[i].plce }</h5>
+					<div className="tech">{ techRender(i) }</div>
+					<h5>{ text.puix[i].imgs }</h5>
+					<h5>{ text.puix[i].urls }</h5>
+				</li>);
+			}
+			return result;
+		};
+
+		return (
+			<div>
+				<h1>{text.update}</h1>
+				{/* <input type="text" value={text.update} onChange={(e) => setText(e.target.value)} /> */}
+				{/* <div className="list"> {text.puix[0].tits}</div> */}
+
+				<ul>{rendering()}</ul>
+
+				<Mbox></Mbox>
+				<button type="button" onClick={ ()=>{
+					setText("PPP") ;
+					console.log(text)
+				}}>dfsf</button>
+				
+			</div>
+		);
+	}
+	
+	const Mbox = () => {
+		return(
+			<ul>
+				<li className="box">jkdsfdssflj;l </li>
+				<li className="box">jklj;l </li>
+				<li className="box">jklj;l </li>
+			</ul>
+		)
+	}
+	const root = ReactDOM.createRoot(document.getElementById('root'));
+	root.render(<App />);
+	
+</script>
+</body>
+</html>
