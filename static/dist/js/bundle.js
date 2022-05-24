@@ -16218,67 +16218,6 @@ if ( typeof module != 'undefined' && module.exports ) {
     });
   };
 });
-
-
-
-// Arc layout
-$.circleProgress.defaults.arcCoef = 1.0; // range: 0..1
-$.circleProgress.defaults.startAngle = 1.5 * Math.PI;
-
-$.circleProgress.defaults.drawArc = function(v) {
-  var ctx = this.ctx,
-    r = this.radius,
-    t = this.getThickness(),
-    c = this.arcCoef,
-    a = this.startAngle + (1 - c) * Math.PI;
-  
-  v = Math.max(0, Math.min(1, v));
-
-  ctx.save();
-  ctx.beginPath();
-
-  if (!this.reverse) {
-    ctx.arc(r, r, r - t / 2, a, a + 2 * c * Math.PI * v);
-  } else {
-    ctx.arc(r, r, r - t / 2, a + 2 * c * Math.PI, a + 2 * c * (1 - v) * Math.PI, a);
-  }
-
-  ctx.lineWidth = t;
-  ctx.lineCap = this.lineCap;
-  ctx.strokeStyle = this.arcFill;
-  ctx.stroke();
-  ctx.restore();
-};
-
-$.circleProgress.defaults.drawEmptyArc = function(v) {
-  var ctx = this.ctx,
-    r = this.radius,
-    t = this.getThickness(),
-    c = this.arcCoef,
-    a = this.startAngle + (1 - c) * Math.PI;
-
-  v = Math.max(0, Math.min(1, v));
-  
-  if (v < 1) {
-    ctx.save();
-    ctx.beginPath();
-
-    if (v <= 0) {
-      ctx.arc(r, r, r - t / 2, a, a + 2 * c * Math.PI);
-    } else {
-      if (!this.reverse) {
-        ctx.arc(r, r, r - t / 2, a + 2 * c * Math.PI * v, a + 2 * c * Math.PI);
-      } else {
-        ctx.arc(r, r, r - t / 2, a, a + 2 * c * (1 - v) * Math.PI);
-      }
-    }
-
-    ctx.lineWidth = t;
-    ctx.strokeStyle = this.emptyFill;
-    ctx.stroke();
-    ctx.restore();
-  }
-};
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -17691,12 +17630,6 @@ var ui = { //
 			},
 			set:function(){
 				var _this = this;
-				function addCommas(x) {
-					return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-				}
-				function delCommas(strNum){
-					return parseInt(strNum.replace(/,/g , ''));
-				}
 				$(_this.els).each(function(){
 					var $input = $(this);
 					var value = $input.val();
@@ -17705,10 +17638,10 @@ var ui = { //
 						$input.val("");
 					}
 					if( value != "" ) {
-						value = addCommas( $input.val().replace(/[^0-9]/g,"") );
+						value = ui.commas.add( ui.commas.del( $input.val() ) || "" );
 						$input.val(value);
 					}
-					var org = +delCommas( $input.val() ) || "";
+					var org = +ui.commas.del( $input.val() ) || "";
 					$input.attr( "data-val" , org ).attr("value",value).data("val",org);
 					$input.closest(".input").find(".hideamt").val(  org );
 					// console.log( $input.data("val") , $input.val() );
@@ -18089,7 +18022,15 @@ var ui = { //
 	loading:{ // 로딩중..
 		show: function () {
 			if( !$(".ui-loading").length ) {
-				var els = '<div class="ui-loading"><em></em></div>';
+				// var els = '<div class="ui-loading"><em></em></div>';
+				var els = '<div class="ui-loading">'+
+								'<div class="box">'+
+									'<em class="rtt">'+
+										'<i class="rot l"></i>'+
+										'<i class="rot r"></i>'+
+									'</em>'+
+								'</div>'+
+							'</div>';
 				$("body").prepend(els).addClass("is-loading");
 			}
 		},
@@ -18118,11 +18059,20 @@ var ui = { //
 		using:function() {
 			var _this = this;
 			$(".ui-mcscroll").each(function(){
-				_this.opt.axis = $(this).hasClass("x") ? "x" : "y" ;
+				// _this.opt.axis = $(this).hasClass("x") ? "x" : "y" ;
 				// console.log(_this.opt.axis);
-				if( $(this).find(">*").length >= 1 ){
-					$(this).mCustomScrollbar(_this.opt);
-				}
+				// if( $(this).find(">*").length >= 1 ){
+					// $(this).mCustomScrollbar(_this.opt);
+				// }
+
+				_this = new PerfectScrollbar(this, {
+					wheelSpeed: 0.3,
+					wheelPropagation: false,
+					minScrollbarLength: 10,
+					scrollingThreshold :1000,
+					useBothWheelAxes:true
+				});
+
 			});
 			// $(".ui-mcscroll").mCustomScrollbar("update");
 			// $(".ui-mcscroll").mCustomScrollbar("destroy");
@@ -18138,9 +18088,18 @@ var ui = { //
 			$(".ui-accd>li>.cbox").hide();
 			$(".ui-accd>li.open>.cbox").show();
 			$(".ui-accd>li.expt>.cbox").show();
+			$(".ui-accd>li>.hbox .btn-tog").each(function(){
+				if( !$(this).find(".btxt").length ){ $(this).append('<span class="btxt"></span>'); }
+
+				if( $(this).closest("li").is(".open") ){
+					$(this).find(".btxt").text("닫기");
+				}else{
+					$(this).find(".btxt").text("열기");
+				}
+			});
 		},
 		using: function() {
-			$(document).on("click", ".ui-accd>li:not(.expt)>.hbox>.btn-tog", function() {
+			$(document).on("click", ".ui-accd>li:not(.expt)>.hbox .btn-tog", function() {
 				var type =  $(this).closest(".ui-accd").attr("data-accd");
 				var $li =   $(this).closest("li");
 				var $cbox = $li.find(">.cbox");
@@ -18148,21 +18107,21 @@ var ui = { //
 				if( type == "tog" ){
 					if( $cbox.is(":hidden") ){
 						$cbox.slideDown(100,function(){
-							$li.addClass("open");
+							$li.addClass("open").find(".btn-tog>.btxt").text("닫기");
 						});
 					}else{
 						$cbox.slideUp(100,function(){
-							$li.removeClass("open");
+							$li.removeClass("open").find(".btn-tog>.btxt").text("열기");
 						});
 					}
 				}
 				if( type == "accd" ){
 					$(this).closest(".ui-accd").find(">li.open").not("li.expt").find(">.cbox").slideUp(100,function(){
-						$(this).closest(".ui-accd").find(">li.open").removeClass("open");
+						$(this).closest(".ui-accd").find(">li.open").removeClass("open").find(".btn-tog>.btxt").text("열기");
 					});
 					if( $cbox.is(":hidden") ){
 						$cbox.slideDown(100,function(){
-							$li.addClass("open");
+							$li.addClass("open").find(".btn-tog>.btxt").text("닫기");
 						});
 					}
 				}
@@ -18433,28 +18392,36 @@ var ui = { //
 	tog:{ // 토글 UI
 		init: function() {
 			this.using();
-			// this.set();
+			this.set();
 			if( ui.param.tog ) this.set( ui.param.tog );
 		},
 		set:function(id){
 			$("[data-ui-tog='ctn']").hide();
 			$("[data-ui-tog='ctn'].open").show();
 			var _this = this;
-			var togid = id.split(",");
+			// var togid = id.split(",");
 			$("[data-ui-tog='btn']").each(function(idx){
 				// console.log(idx,togid[idx] );
 				// $("[data-ui-tog='btn'][href='#"+togid[idx]+"']").trigger("click");
-				_this.open(togid[idx]);
+				// _this.open(togid[idx]);
+
+				if( !$(this).find(".btxt").length ){ $(this).append('<span class="btxt"></span>'); }
+	
+				if( $(this).is(".open") ){
+					$(this).find(".btxt").text("닫기");
+				}else{
+					$(this).find(".btxt").text("열기");
+				}
 			});
 		},
 		open:function(id){
-			$("[data-ui-tog='btn'][data-ui-tog-val='"+id+"']").addClass("open");
+			$("[data-ui-tog='btn'][data-ui-tog-val='"+id+"']").addClass("open").find(".btxt").text("닫기");
 			$("[data-ui-tog='ctn'][data-ui-tog-val='"+id+"']").slideDown(100,function(){
 				$(this).addClass("open");
 			});
 		},
 		close:function(id){
-			$("[data-ui-tog='btn'][data-ui-tog-val='"+id+"']").removeClass("open");
+			$("[data-ui-tog='btn'][data-ui-tog-val='"+id+"']").removeClass("open").find(".btxt").text("열기");
 			$("[data-ui-tog='ctn'][data-ui-tog-val='"+id+"']").slideUp(100,function(){
 				$(this).removeClass("open");
 			});
@@ -18690,35 +18657,56 @@ var ui = { //
 		}
 	},
 	toast:function(msg,params){ // 토스트창 
-
-		var opt = $.extend({
-			msg:msg,
+		var _this = this;
+		_this.opt = $.extend({
+			msg:msg,	
 			cls:"",
-			sec:1000,
-			bot:""
+			sec:2000,
+			bot:"",
+			ccb: null,
+			zIndex:1000,
+			setTime:true 
 		}, params);
 
 		if ( $(".pop-toast:visible").length ) { return; }
 
 		var lyToast =
-		'<article class="pop-toast ' + opt.cls + '">' +
+		'<article role="alert" aria-live="assertive" class="pop-toast ' + _this.opt.cls + '">' +
 		'	<div class="pbd">' +
-		'		<div class="pct">' + opt.msg + '</div>' +
+		'		<div class="pct">' + _this.opt.msg + '</div>' +
+		'		<button type="button" class="btn-close""></button>' +
 		'	</div>' +
 		'</article>';
 
 		$("body").append(lyToast).addClass("is-toast");
+
+		$(".pop-toast").find(".btn-close").on("click",function(){
+			toastClose("close");
+		});
+
 		window.setTimeout(function() {
-			$(".pop-toast:visible").addClass("on").css({"padding-bottom" : opt.bot});
+			$(".pop-toast:visible").addClass("on").css({"padding-bottom" : _this.opt.bot , "z-index" : _this.opt.zIndex});
 		});
 		
-		window.setTimeout(function() {
-			$(".pop-toast:visible").removeClass("on").on(ui.transitionend,function(){
-				// console.log("fsd");
-				$(".pop-toast").remove();
-				$("body").removeClass("is-toast");
-			});
-		}, opt.sec);
+		if(_this.opt.setTime){
+			toastClose();
+		}
+		function toastClose(sec){
+			if(sec == "close"){
+				_this.opt.sec = 0;
+				clearTimeout(_this.timer);
+			}
+			_this.timer = setTimeout(function() {
+				$(".pop-toast:visible").removeClass("on").on(ui.transitionend,function(){
+					// console.log("fsd");
+					$(".pop-toast").remove();
+					$("body").removeClass("is-toast");
+					if( typeof _this.opt.ccb == "function" ){
+						_this.opt.ccb();
+					}
+				});
+			}, _this.opt.sec);
+		}
 	
 		
 	},
@@ -18789,9 +18777,12 @@ var ui = { //
 			}
 		
 			$("#" + id).addClass(_this.opt.direct).css({ zIndex: _this.opt.zIndex }).fadeIn(10,function(){
-				if(_this.callbacks[id].open)  _this.callbacks[id].open();
 				$(this).addClass("on").attr("tabindex","0").focus(); 
 				_this.resize();
+				$(this).find(">.pbd").on(ui.transitionend,function(){
+					if(_this.callbacks[id].open)  _this.callbacks[id].open();
+					$(this).off(ui.transitionend);
+				});
 			});
 			
 			window.setTimeout(function(){

@@ -1,0 +1,92 @@
+<!doctype html> 
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>인덱스</title>
+</head>
+<body>
+	<script>
+	// location.href="./static/html/guide/ui.html";
+	
+	</script>
+
+	<style>
+		.anim{width: 100px; height: 100px; display: inline-block; vertical-align: middle; position: relative;}
+	</style>
+	<span class="anim" id="anim1"></span>
+	<span class="anim" id="anim2"></span>
+	<span class="anim" id="anim3"></span>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.4/lottie.min.js"></script>
+	<script>
+
+		var lottieSet = {
+			draw: function(nm,params){
+				var _this = this;
+				_this.opt = {
+					loop:true,
+					autoplay:true,
+					renderer: "canvas",
+					path:"./static/"+nm+".json",
+				}
+				Object.assign(_this.opt, params);
+
+				console.log(nm, _this.opt , document.getElementById(nm).firstElementChild );
+				
+				if( document.getElementById(nm).firstElementChild != null ) return;
+				_this[nm] = lottie.loadAnimation({
+					container: document.getElementById(nm),
+					path: _this.opt.path,
+					renderer: _this.opt.renderer,
+					loop: _this.opt.loop, 
+					autoplay: _this.opt.autoplay, 
+				});
+			}
+		}
+
+		lottieSet.draw("anim1",{
+			
+			// path:"./static/anim2.json",
+			kpath:"https://assets4.lottiefiles.com/packages/lf20_keqlhgrz.json"
+		});
+		lottieSet.draw("anim2",{
+			loop:true,
+			path:"anim2",
+			path:"https://assets7.lottiefiles.com/packages/lf20_oNHjED.json"
+		});
+		lottieSet.draw("anim3",{
+			loop:true,
+			path:"https://assets4.lottiefiles.com/packages/lf20_01bh9ld2.json"
+		});
+	</script>
+	
+	<style>
+		body{background-color: #ffffff;}
+		.ui-loading{display: none; position: fixed; left: 0; right: 0; top: 0; bottom: 0; z-index: 9000; background: rgba(255, 255, 255, 0.5)}
+		.ui-loading>.bx{pointer-events: none; position: absolute; width: 50px; text-align: center; top: 50%; left: 50%; transform: translate3d(-50%,-50%,0); }
+		.ui-loading>.bx em{display: flex; justify-content: center;}
+		.ui-loading>.bx em i,
+		.ui-loading>.bx em::before,
+		.ui-loading>.bx em::after{width: 6px; height: 6px; display: inline-flex; background-color: #6081ff; border-radius: 10px; margin: 0px 2px; animation: bounce 0.5s alternate infinite; content: "";}
+		.ui-loading>.bx em::before{}
+		.ui-loading>.bx em i{animation-delay: 0.16s;}
+		.ui-loading>.bx em::after{animation-delay: 0.32s;}
+		.ui-loading>.bx::after{content: "LOADING..."; font-size: 10px; margin-left: 4px; text-align: center; margin-top: 10px; display: block; color: #6081ff;}
+		@keyframes bounce {
+			from{
+				transform: scaleX(1.15);
+			}
+			to{
+				transform: translateY(-20px) scaleX(0.95);
+			}
+		}
+	</style>
+	<div class="ui-loading">
+		<div class="bx">
+			<em><i></i></em>
+		</div>
+	</div>
+
+</body>
+</html>

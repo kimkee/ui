@@ -22,9 +22,9 @@
     "gulp-uglify": "^3.0.2",
     "gulp-webserver": "^0.9.1",
     "html-includes": "^4.3.2",
-    "jshint": "^2.13.1"
+    "jshint": "^2.13.1",
+    "lottie-web": "^5.9.4"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kimkee/ui.git"
