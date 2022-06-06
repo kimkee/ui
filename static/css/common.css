@@ -1133,7 +1133,7 @@ a.btn.disabled{ pointer-events: none; }
 .pop-layer.top{}
 .pop-layer.top>.pbd{transform: translateY(calc(-50% + -50vh  ));}
 .pop-layer.top.on>.pbd{transform: translateY(0%);}
-
+.pop-layer.none.on>.pbd{transform: translateY(0%);}
 
 
 
