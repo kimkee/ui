@@ -1,0 +1,28 @@
+@charset "utf-8";
+*{box-sizing: border-box;} html{font-size: 10px; color: #333333; }
+body {margin: 0rem 0rem 0rem 0rem; background-color: #222222; color: #989898;}
+a{transition: all 0.1s; }
+a:active{transform: translate3d(0.1rem, 0.1rem,0);}
+.wrap{max-width: 75rem;position: relative; padding: 2rem 40rem 2rem 2rem; height: calc(100vh - 1rem);}
+ul,li{padding: 0; margin: 0;}
+ul{margin: 0rem 0.5rem 2rem 0.5rem; padding: 2.4rem 0rem 0rem 0rem; position: relative; width: 100%; max-width: 25rem; display: block; vertical-align: top;} 
+ul::before{content:" "attr(tit)""; font-weight: 700; font-size: 1.6rem; margin-left: 0rem; margin-bottom: 1rem; position: absolute;left: 0; top: 0; color: #dddddd;}
+ul:last-child>li:last-child i{user-select: none;} 
+li{list-style: none; margin: 0.5rem 0; position: relative; font-size: 1.4rem; padding: 0;}
+li::marker{font-size: 1rem; color:tomato}
+li a{padding: 0.5rem 0.5rem 0.6rem 0.5rem; color: #9a9a9a; z-index: 5;border: #5a5a5a solid 0.1rem; background-color: transparent; font-family: "Consolas";line-height: 1; display: block;position: relative; border-radius: 0.3rem; font-size: 1.2rem; text-decoration: none; min-height: 2.5rem;} 
+li a::before{content: ""; position: absolute; left: 0; top: 0.2rem; line-height: 1; color: #666666;}
+li a:hover{border-color: #888888;background-color: rgba(231, 231, 255, 0.1); color: #efefef;}
+li a.dk{position: absolute;right: -3rem; top: 0rem; width: 2.4rem; height: 2.5rem; text-align: center; user-select: none;} 
+li i{position: absolute;font-size: 0;position: absolute;right: 0.5rem; top: 0.5rem; font-style: normal;z-index: 1;} li i::after{content: ""attr(tit)""; font-size: 1.1rem;}
+.sect{}
+.sect.ifr{width: 375px; position: absolute;right: 2rem; top: 2rem; bottom: 2rem; border-radius: 2.4rem; overflow: hidden;} 
+.sect.ifr.w320{width: 320px; height: 568px;}
+.sect.ifr .box{border: 1.8rem solid #484848; border-width: 5.7rem 1.5rem 5rem 1.5rem; height: calc(100% - 0rem);}
+.sect.ifr .iframe{width: 100%; height: 100%;}
+.sect.ifr .bts{position: absolute;bottom: 1rem; left: 1.5rem; right: 1.5rem; z-index: 10;text-align: center;}
+.sect.ifr .urls{position: absolute;top: 2.4rem; right: 1.5rem; left: 1.5rem; z-index: 10; text-align: center;display: flex; justify-content: space-between; align-items: center; background: #000; border-radius: 1rem 1rem 0 0;height: 3rem; padding: 0.5rem 1rem 0.5rem 1.5rem; font-weight: 700; user-select: none;}
+
+.sect.ifr .urls .time{color: #c1c1c1; font-style: normal; font-size: 1.1rem; position: absolute;left: 0rem; right: 0rem;text-align: center; top: -1.6rem; font-family: 'Arial';}
+.sect.ifr .urls .title{font-style: normal; color: #eeeeee; font-size: 1.2rem; user-select: none;} .sect.ifr .urls .link-now{display: block; color: #dddddd; font-size: 1.2rem; background: #000;border-radius: 1rem 1rem 0 0; text-decoration: none; text-align: right; font-family: "Tahoma"; user-select: none;}
+.sect.ifr .bts .bt-f{width: 3.2rem; height: 3.2rem; background: #ddd; display: inline-block; border-radius: 30rem; font-size: 0;vertical-align: middle;user-select: none;}
