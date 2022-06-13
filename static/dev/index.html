@@ -1,30 +1,25 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>KH</title>
-	<link rel="stylesheet" href="kh.css">
+	<link rel="stylesheet" href="./kh.css">
 </head>
-
 <body>
 	<div class="wrap">
 		<section class="sect 1st">
 			<ul tit="UI">
 				<li><a href="/static/html/guide/ui.html"></a>		<i tit="UI">,</i></li>
-				<li><a href="/static/html/guide/index.html"></a>	<i tit="index">,</i></li>
-			</ul>
-			<ul tit="Exe">
-				<li><a href="/static/html/guide/spin3.html"></a>	<i tit="스핀3">,</i></li>
+				<li><a href="/static/html/guide/index.html"></a>	<i tit="React">,</i></li>
+				<li><a href="/static/html/guide/index2.html"></a>	<i tit="React">,</i></li>
 			</ul>
 			<ul tit="List">
-				<li><a href="/lottie.html"></a>						<i tit="로티">,</i></li>
-				<li><a href="/index.html"></a>						<i tit="index">,</i></li>
+				<li><a href="/static/html/guide/spin3.html"></a>	<i tit="스핀3">,</i></li>
+				<li><a href="/static/html/guide/lottie.html"></a>	<i tit="로티">,</i></li>
 			</ul>
 		</section>
-
 		<section class="sect ifr">
 			<div class="urls">
 				<em class="time"></em>
@@ -32,7 +27,7 @@
 				<a href="#none" class="link-now"></a>
 			</div>
 			<div class="box">
-				<iframe src="" class="iframe" id="myframe" name="myframe" frameborder="0" scrolling="auto"></iframe>
+				<iframe src="" class="iframe" id="myframe" name="myframe" frameborder="0" scrolling="auto" crossorigin></iframe>
 			</div>
 			<div class="bts">
 				<a href="/static/html/guide/ui.html" class="bt bt-f">F</a>
@@ -104,7 +99,8 @@
 		}
 		alink.forEach((el, idx) => {
 			el.addEventListener("click", (e) => {
-				e.ctrikey ? mDbl(el) : mclick(el); // console.log( e.ctrikey );
+				e.ctrlKey ? mDbl(el) : mclick(el); 
+				console.log( e.ctrlKey );
 				e.preventDefault();
 			});
 		});
