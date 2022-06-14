@@ -1,0 +1,86 @@
+<!doctype html> 
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link href="./static/img/common/favicon.ico" rel="shrtcut icon">
+	<title>JS</title>
+</head>
+<body style="background-color: #444444; color:#999999;">
+	<ul>
+		<li><a href="javascript:;">kk</a></li>
+		<li class="on"><a href="javascript:;">kk</a></li>
+	</ul>
+	<ul>
+		<li><a href="javascript:;">kk</a></li>
+		<li><a href="javascript:;">kk</a></li>
+	</ul>
+
+	<script>
+		document.querySelectorAll("ul").forEach((ul,i)=>{
+			i++;
+			ul.classList.add("ul"+i);
+			ul.querySelectorAll("li").forEach( (li,i) => {
+				i++
+				li.classList.add("m"+i);
+				// console.log(  li.hhh() );
+				if ( li.classList.contains("on") ) {
+					
+					li.querySelectorAll("a").forEach( a => a.style.backgroundColor = "red");
+				}
+			});
+		});
+		/* function getClassType(obj){
+			return Object.prototype.toString.call(obj).slice(8,-1);
+		} */
+		var $ = function(els){
+			var result = [];
+			console.log( 
+				els
+				// document.querySelector(els)    , 
+				// document.querySelectorAll(els) ,
+				// document.querySelectorAll(els).forEach
+			 );
+			// if(  document.querySelectorAll(els).forEach ) {
+			// 
+			// }
+			
+			document.querySelectorAll(els).forEach(function(ddd){
+				// console.log(ddd);
+				result.push(ddd)
+			});
+			// console.log(result);
+			return result;
+			
+			
+		}
+
+
+		Element.prototype.addClass = function(s){
+			var el = this;
+			
+			
+			console.log( this );
+
+			// console.log( s );
+			// s = s.trim();
+			c = s.trim().split(" ");
+			// console.log( c );
+			for (var i = 0; i < c.length; i++) {
+				// const element = c[i];
+				el.classList.add(c[i]);
+				
+			}
+
+		};
+		
+		// document.querySelector("ul").addClass(" aa s ");
+		console.log( $("ul") ); 
+		$("ul>li").forEach(function(els,idx){
+			els.addClass("k"+idx);
+		})
+		
+		
+	</script>
+</body>
+</html>

@@ -180,7 +180,7 @@ input[type="checkbox"]{width:30px;height:30px;display:inline-block;vertical-alig
 
 /* textarea */
 .textarea{padding: 15px 15px 15px 15px;border-radius: 5px;}
-.textarea>textarea{display: block;height: 121px;border: none;padding: 0;line-height: 1.45;word-break: break-all;vertical-align: middle;}
+.textarea>textarea{display: block;height: 121px;border: none;padding: 0;line-height: 1.45;word-break: break-all;vertical-align: middle;resize: vertical;}
 .textarea{border: #dddddd solid 1px;}
 .textarea.focus{border-color: #000000;}
 .textarea .num{font-size:12rem;position: relative;margin: 6px 0px -1px 0px;display: block;text-align: right;color: #666666;}
