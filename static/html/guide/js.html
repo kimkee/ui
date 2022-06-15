@@ -8,8 +8,8 @@
 </head>
 <body style="background-color: #444444; color:#999999;">
 	<ul>
-		<li><a href="javascript:;">kk</a></li>
 		<li class="on"><a href="javascript:;">kk</a></li>
+		<li><a href="javascript:;">kk</a></li>
 	</ul>
 	<ul>
 		<li><a href="javascript:;">kk</a></li>
@@ -17,7 +17,7 @@
 	</ul>
 
 	<script>
-		document.querySelectorAll("ul").forEach((ul,i)=>{
+/* 		document.querySelectorAll("ul").forEach((ul,i)=>{
 			i++;
 			ul.classList.add("ul"+i);
 			ul.querySelectorAll("li").forEach( (li,i) => {
@@ -30,21 +30,9 @@
 				}
 			});
 		});
-		/* function getClassType(obj){
-			return Object.prototype.toString.call(obj).slice(8,-1);
-		} */
+ */
 		var $ = function(els){
 			var result = [];
-			console.log( 
-				els
-				// document.querySelector(els)    , 
-				// document.querySelectorAll(els) ,
-				// document.querySelectorAll(els).forEach
-			 );
-			// if(  document.querySelectorAll(els).forEach ) {
-			// 
-			// }
-			
 			document.querySelectorAll(els).forEach(function(ddd){
 				// console.log(ddd);
 				result.push(ddd)
@@ -58,28 +46,55 @@
 
 		Element.prototype.addClass = function(s){
 			var el = this;
-			
-			
-			console.log( this );
-
-			// console.log( s );
-			// s = s.trim();
+			// console.log( this );
 			c = s.trim().split(" ");
 			// console.log( c );
 			for (var i = 0; i < c.length; i++) {
-				// const element = c[i];
 				el.classList.add(c[i]);
-				
 			}
-
 		};
+		/* 
+		function toggleClass(element, className){
+			const check = new RegExp("(\\s|^)" + className + "(\\s|^)");
+			console.log( check.test(element, className) );
+			if( check.test(element, className) ){
+
+				element.className = element.className.replace(check, " ").trim();
+			}else{
+				element.className += " " + className;
+			}
+		}
+		*/
+		
+		 /* 
+		Element.prototype.toggleClass = function( className) {
+			var element = this;
+			if (!element || !className) { return; }
+			var classString = element.className;
+			var nameIndex = classString.indexOf(className);
+			if (nameIndex == -1) {
+				classString += (classString.length) ? ' ' + className : className;
+			} else {
+				classString = classString.replace(' '+className, '');
+				classString = classString.replace(className, '');
+			}
+			element.className = classString.trim().replace(/ +/g, " ");
+		}
+		*/
+		Element.prototype.toggleClass = function(className,callback) {
+			this.classList.toggle(className);
+			callback = true;
+			console.log(callback);
+		}
 		
 		// document.querySelector("ul").addClass(" aa s ");
 		console.log( $("ul") ); 
 		$("ul>li").forEach(function(els,idx){
+			els.closest("ul");
 			els.addClass("k"+idx);
 		})
 		
+		document.querySelector('body').toggleClass("open");
 		
 	</script>
 </body>
