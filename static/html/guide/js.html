@@ -32,6 +32,7 @@
 		});
  */
 		var $ = function(els){
+			
 			var result = [];
 			document.querySelectorAll(els).forEach(function(ddd){
 				// console.log(ddd);
@@ -44,57 +45,34 @@
 		}
 
 
-		Element.prototype.addClass = function(s){
+		Element.prototype.addClass = function(cls){
 			var el = this;
-			// console.log( this );
-			c = s.trim().split(" ");
-			// console.log( c );
-			for (var i = 0; i < c.length; i++) {
-				el.classList.add(c[i]);
+			var arr = cls.trim().split(" ");
+			console.log( arr );
+			for (var i = 0; i < arr.length; i++) {
+				el.classList.add(arr[i]);
 			}
 		};
-		/* 
-		function toggleClass(element, className){
-			const check = new RegExp("(\\s|^)" + className + "(\\s|^)");
-			console.log( check.test(element, className) );
-			if( check.test(element, className) ){
-
-				element.className = element.className.replace(check, " ").trim();
-			}else{
-				element.className += " " + className;
+		Element.prototype.toggleClass = function(cls) {
+			var el = this;
+			var arr = cls.split(" ");
+			console.log(arr);
+			for (var i = 0; i < arr.length; i++) {
+				el.classList.toggle(arr[i]);
 			}
-		}
-		*/
-		
-		 /* 
-		Element.prototype.toggleClass = function( className) {
-			var element = this;
-			if (!element || !className) { return; }
-			var classString = element.className;
-			var nameIndex = classString.indexOf(className);
-			if (nameIndex == -1) {
-				classString += (classString.length) ? ' ' + className : className;
-			} else {
-				classString = classString.replace(' '+className, '');
-				classString = classString.replace(className, '');
-			}
-			element.className = classString.trim().replace(/ +/g, " ");
-		}
-		*/
-		Element.prototype.toggleClass = function(className,callback) {
-			this.classList.toggle(className);
-			callback = true;
-			console.log(callback);
 		}
 		
 		// document.querySelector("ul").addClass(" aa s ");
 		console.log( $("ul") ); 
-		$("ul>li").forEach(function(els,idx){
-			els.closest("ul");
-			els.addClass("k"+idx);
+		$("ul").forEach(function(els,idx){
+			console.log( this );
+			els.querySelectorAll("li").forEach(function(el,id){
+				id++;
+				el.addClass("k"+id);
+			});
 		})
 		
-		document.querySelector('body').toggleClass("open");
+		document.querySelector('html').toggleClass("open");
 		
 	</script>
 </body>
