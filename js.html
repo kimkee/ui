@@ -8,8 +8,8 @@
 </head>
 <body style="background-color: #444444; color:#999999;">
 	<ul>
-		<li><a href="javascript:;">kk</a></li>
 		<li class="on"><a href="javascript:;">kk</a></li>
+		<li><a href="javascript:;">kk</a></li>
 	</ul>
 	<ul>
 		<li><a href="javascript:;">kk</a></li>
@@ -17,7 +17,7 @@
 	</ul>
 
 	<script>
-		document.querySelectorAll("ul").forEach((ul,i)=>{
+/* 		document.querySelectorAll("ul").forEach((ul,i)=>{
 			i++;
 			ul.classList.add("ul"+i);
 			ul.querySelectorAll("li").forEach( (li,i) => {
@@ -30,21 +30,10 @@
 				}
 			});
 		});
-		/* function getClassType(obj){
-			return Object.prototype.toString.call(obj).slice(8,-1);
-		} */
+ */
 		var $ = function(els){
-			var result = [];
-			console.log( 
-				els
-				// document.querySelector(els)    , 
-				// document.querySelectorAll(els) ,
-				// document.querySelectorAll(els).forEach
-			 );
-			// if(  document.querySelectorAll(els).forEach ) {
-			// 
-			// }
 			
+			var result = [];
 			document.querySelectorAll(els).forEach(function(ddd){
 				// console.log(ddd);
 				result.push(ddd)
@@ -56,30 +45,34 @@
 		}
 
 
-		Element.prototype.addClass = function(s){
+		Element.prototype.addClass = function(cls){
 			var el = this;
-			
-			
-			console.log( this );
-
-			// console.log( s );
-			// s = s.trim();
-			c = s.trim().split(" ");
-			// console.log( c );
-			for (var i = 0; i < c.length; i++) {
-				// const element = c[i];
-				el.classList.add(c[i]);
-				
+			var arr = cls.trim().split(" ");
+			console.log( arr );
+			for (var i = 0; i < arr.length; i++) {
+				el.classList.add(arr[i]);
 			}
-
 		};
+		Element.prototype.toggleClass = function(cls) {
+			var el = this;
+			var arr = cls.split(" ");
+			console.log(arr);
+			for (var i = 0; i < arr.length; i++) {
+				el.classList.toggle(arr[i]);
+			}
+		}
 		
 		// document.querySelector("ul").addClass(" aa s ");
 		console.log( $("ul") ); 
-		$("ul>li").forEach(function(els,idx){
-			els.addClass("k"+idx);
+		$("ul").forEach(function(els,idx){
+			console.log( this );
+			els.querySelectorAll("li").forEach(function(el,id){
+				id++;
+				el.addClass("k"+id);
+			});
 		})
 		
+		document.querySelector('html').toggleClass("open");
 		
 	</script>
 </body>
