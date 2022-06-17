@@ -112,11 +112,7 @@
 			const glk = localStorage.getItem("glink");
 			document.querySelectorAll("a").forEach((link) => {
 				const mylink = link.getAttribute("href");
-				if( glk == mylink){
-					link.classList.add("active");
-				}else{
-					link.classList.remove("active");
-				}
+				glk == mylink ? link.classList.add("active") : link.classList.remove("active");
 			});
 			console.log("setActive()" , glk);
 		}
