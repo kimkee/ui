@@ -133,7 +133,7 @@
 		});
 	</script>
 	<script>
-		setInterval(() => {
+		/* setInterval(() => {
 			setTm();
 		}, 5000);
 		function setTm() {
@@ -149,6 +149,19 @@
 			document.querySelector(".time").innerHTML = pm + time + "";
 		}
 		setTm();
+		 */
+	</script>
+	<script>
+		const clock = document.querySelector(".time");
+		const dgit = (n) => n < 10 ? "0"+n : n;
+		const ampm = (n) => n > 12 ? "PM "+ dgit( n-12 ) : "AM "+ dgit(n);
+		const setT = ( ) => {
+			const date = new Date();
+			const time = ampm( date.getHours() ) +":"+ dgit( date.getMinutes() );
+			clock.innerHTML = time;
+		}
+		setT();
+		setInterval( setT, 5000 );
 	</script>
 </body>
 
