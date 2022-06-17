@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=768, initial-scale=1.0">
 	<link href="../img/common/favicon.ico" rel="shrtcut icon">
 	<title>KH</title>
 	<link rel="stylesheet" href="./kh.css">
@@ -122,13 +122,14 @@
 		}
 	</script>
 	<script>
-		document.querySelector(".sect.ifr .urls .time").addEventListener("click", (el) => {
-			console.log(document.querySelector(".ifr.sect").classList.value.includes("w320"));
-			if (document.querySelector(".ifr.sect").classList.value.includes("w320")) {
-				document.querySelector(".ifr.sect").classList.remove("w320");
-			} else {
-				document.querySelector(".ifr.sect").classList.add("w320");
-			}
+		const ifrm = document.querySelector(".ifr.sect");
+		ifrm.addEventListener("click", (e) => {
+			// console.log( ifrm.classList.contains("w320") );
+			e.target.className == "time"
+			? ifrm.classList.contains("w320")
+			  ?	ifrm.classList.remove("w320")
+			  : ifrm.classList.add("w320")
+			: null ;
 		});
 	</script>
 	<script>
@@ -136,15 +137,14 @@
 			setTm();
 		}, 5000);
 		function setTm() {
-			var date = new Date();
-			var hh = date.getHours();
-			var mm = date.getMinutes();
-			var pm = "";
-			hh > 12 ? pm = "PM " : pm = "AM ";
+			const date = new Date();
+			let hh = date.getHours();
+			let mm = date.getMinutes();
+			const pm = hh > 12 ? "PM " : "AM ";
 			hh > 12 ? hh = (hh - 12) : hh;
 			hh < 10 ? hh = "0" + (hh) : hh;
 			mm < 10 ? mm = "0" + (mm) : mm;
-			var time = hh + ":" + mm;
+			const time = hh + ":" + mm;
 			// console.log(time);
 			document.querySelector(".time").innerHTML = pm + time + "";
 		}
