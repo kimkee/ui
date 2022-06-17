@@ -96,7 +96,9 @@
 			localStorage.setItem("glink", glink);
 		}
 		document.getElementById('myframe').onload = function () {
-			title.innerHTML = document.myframe.window.document.title; console.log(glink, document.myframe.window.document.title);
+			title.innerHTML = document.myframe.window.document.title;
+			console.log(glink, document.myframe.window.document.title);
+			setActive(glink);
 		}
 		alink.forEach((el, idx) => {
 			el.addEventListener("click", (e) => {
@@ -106,6 +108,18 @@
 			});
 		});
 		setLink(glink);
+		function setActive(glink){
+			const glk = localStorage.getItem("glink");
+			document.querySelectorAll("a").forEach((link) => {
+				const mylink = link.getAttribute("href");
+				if( glk == mylink){
+					link.classList.add("active");
+				}else{
+					link.classList.remove("active");
+				}
+			});
+			console.log("setActive()" , glk);
+		}
 	</script>
 	<script>
 		document.querySelector(".sect.ifr .urls .time").addEventListener("click", (el) => {

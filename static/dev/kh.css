@@ -14,7 +14,10 @@ li a{padding: 0.5rem 0.5rem 0.6rem 0.5rem; color: #9a9a9a; z-index: 5;border: #5
 li a::before{content: ""; position: absolute; left: 0; top: 0.2rem; line-height: 1; color: #666666;}
 li a:hover{border-color: #888888;background-color: rgba(231, 231, 255, 0.1); color: #efefef;}
 li a.dk{position: absolute;right: -3rem; top: 0rem; width: 2.4rem; height: 2.5rem; text-align: center; user-select: none;} 
-li i{position: absolute;font-size: 0;position: absolute;right: 0.5rem; top: 0.5rem; font-style: normal;z-index: 1;} li i::after{content: ""attr(tit)""; font-size: 1.1rem;}
+li a.active{color: #dadada; border-color: #dadada; background-color: rgba(231, 231, 255, 0.1);}
+li i{position: absolute;font-size: 0;position: absolute;right: 0.5rem; top: 0.5rem; font-style: normal;z-index: 1;}
+li i::after{content: ""attr(tit)""; font-size: 1.1rem;}
+li a.active+i::after{color: #dadada;}
 .sect{}
 .sect.ifr{width: 375px; position: absolute;right: 2rem; top: 2rem; bottom: 2rem; border-radius: 2.4rem; overflow: hidden;} 
 .sect.ifr.w320{width: 320px; height: 568px;}
@@ -24,5 +27,6 @@ li i{position: absolute;font-size: 0;position: absolute;right: 0.5rem; top: 0.5r
 .sect.ifr .urls{position: absolute;top: 2.4rem; right: 1.5rem; left: 1.5rem; z-index: 10; text-align: center;display: flex; justify-content: space-between; align-items: center; background: #000; border-radius: 1rem 1rem 0 0;height: 3rem; padding: 0.5rem 1rem 0.5rem 1.5rem; font-weight: 700; user-select: none;}
 
 .sect.ifr .urls .time{color: #c1c1c1; font-style: normal; font-size: 1.1rem; position: absolute;left: 0rem; right: 0rem;text-align: center; top: -1.6rem; font-family: 'Arial';}
-.sect.ifr .urls .title{font-style: normal; color: #eeeeee; font-size: 1.2rem; user-select: none;} .sect.ifr .urls .link-now{display: block; color: #dddddd; font-size: 1.2rem; background: #000;border-radius: 1rem 1rem 0 0; text-decoration: none; text-align: right; font-family: "Tahoma"; user-select: none;}
+.sect.ifr .urls .title{font-style: normal; color: #eeeeee; font-size: 1.2rem; user-select: none;}
+.sect.ifr .urls .link-now{display: block; color: #dddddd; font-size: 1.2rem; background: #000;border-radius: 1rem 1rem 0 0; text-decoration: none; text-align: right; font-family: "Tahoma"; user-select: none;}
 .sect.ifr .bts .bt-f{width: 3.2rem; height: 3.2rem; background: #ddd; display: inline-block; border-radius: 30rem; font-size: 0;vertical-align: middle;user-select: none;}
