@@ -56,14 +56,14 @@
 				idx++;
 				tot++;
 				li.classList.add("m" + idx);
-				const link  = li.querySelector("a");
-				const fname = link.getAttribute("href").replace(loctxt, "");
+				const btn  = li.querySelector("a");
+				const fname = btn.getAttribute("href").replace(loctxt, "");
 				const itits = li.querySelector("i").getAttribute("tit");
 				tbl[ utit ].push( itits );
-				link.setAttribute("class", "lk");
-				link.innerHTML = fname;
-				link.setAttribute("href", loctxt + fname + "");
-				link.setAttribute("target", "_blank");
+				btn.setAttribute("class", "lk");
+				btn.innerHTML = fname;
+				btn.setAttribute("href", loctxt + fname + "");
+				btn.setAttribute("target", "_blank");
 				appendHtml( li, '<a class="dk" href="#">D</a>');
 				li.querySelector(".dk").setAttribute("href", loctxt + fname + "?dark=true");
 			});
@@ -75,7 +75,7 @@
 
 		const title = document.querySelector(".title");
 		const nlink = document.querySelector(".link-now");
-		const alink = document.querySelectorAll("a");
+		const bts = document.querySelectorAll("a");
 		const iframe = document.querySelector(".iframe");
 
 		const mclick = (el) => {
@@ -97,7 +97,7 @@
 			console.log(glink, document.myframe.window.document.title);
 			setActive(glink);
 		}
-		alink.forEach((el, idx) => {
+		bts.forEach((el, idx) => {
 			el.addEventListener("click", (e) => {
 				e.ctrlKey ? mDbl(el) : mclick(el); 
 				console.log( e.ctrlKey );
