@@ -39,7 +39,7 @@
 		/* 김기현 */
 		const tbl = new Object;
 		const loctxt = "";
-		let num = 0;
+		let tot = 0;
 		function appendHtml(el, str) {
 			var div = document.createElement('div');
 			div.innerHTML = str;
@@ -50,29 +50,26 @@
 		document.querySelectorAll("ul").forEach((ul, i) => {
 			i++;
 			ul.classList.add("ul" + i);
-			//console.log(ul.getAttribute("tit"));
-			tbl[ul.getAttribute("tit")] = [];
-
+			utit = ul.getAttribute("tit");
+			tbl[ utit ] = [];
 			ul.querySelectorAll("li").forEach((li, idx) => {
-				li.querySelectorAll("a").forEach((link, idx) => {
-					const fname = link.getAttribute("href").replace(loctxt, "");
-					idx++;
-					link.setAttribute("class", "lk");
-					link.innerHTML = fname;
-					link.closest("li").classList.add("m" + idx);
-					link.setAttribute("href", loctxt + fname + "");
-					link.setAttribute("target", "_blank");
-					// console.log( "m"+idx+"=", fname);
-					num++;
-					tbl[ul.getAttribute("tit")].push(li.querySelector("i").getAttribute("tit"));
-					appendHtml(link.closest("li"), '<a class="dk" href="#">D</a>');
-					link.closest("li").querySelector(".dk").setAttribute("href", loctxt + fname + "?dark=true");
-					// link.closest("li").prepend(btdark);
-				});
+				idx++;
+				tot++;
+				li.classList.add("m" + idx);
+				const link  = li.querySelector("a");
+				const fname = link.getAttribute("href").replace(loctxt, "");
+				const itits = li.querySelector("i").getAttribute("tit");
+				tbl[ utit ].push( itits );
+				link.setAttribute("class", "lk");
+				link.innerHTML = fname;
+				link.setAttribute("href", loctxt + fname + "");
+				link.setAttribute("target", "_blank");
+				appendHtml( li, '<a class="dk" href="#">D</a>');
+				li.querySelector(".dk").setAttribute("href", loctxt + fname + "?dark=true");
 			});
 		});
 		console.table(tbl);
-		console.table("" + num);
+		console.table("" + tot);
 
 		let glink = localStorage.getItem("glink");
 
@@ -81,15 +78,15 @@
 		const alink = document.querySelectorAll("a");
 		const iframe = document.querySelector(".iframe");
 
-		function mclick(el) {
+		const mclick = (el) => {
 			var ilk = el.getAttribute("href");
 			setLink(ilk);
 		};
-		function mDbl(el) {
+		const mDbl = (el) => {
 			var ilk = el.getAttribute("href");
 			window.open(ilk, "_blank");
 		};
-		function setLink(glink) {
+		const setLink = (glink) => {
 			if (glink == null) { glink = loctxt + "/static/html/guide/ui.html" }; nlink.setAttribute("href", glink);
 			nlink.innerHTML = glink.replace("../html/", "");
 			iframe.setAttribute("src", glink);
@@ -108,7 +105,7 @@
 			});
 		});
 		setLink(glink);
-		function setActive(glink){
+		const setActive = (glink) => {
 			const glk = localStorage.getItem("glink");
 			document.querySelectorAll("a").forEach((link) => {
 				const mylink = link.getAttribute("href");
@@ -116,8 +113,9 @@
 			});
 			console.log("setActive()" , glk);
 		}
-	</script>
-	<script>
+
+
+		// iframe size
 		const ifrm = document.querySelector(".ifr.sect");
 		ifrm.addEventListener("click", (e) => {
 			// console.log( ifrm.classList.contains("w320") );
@@ -127,37 +125,17 @@
 			  : ifrm.classList.add("w320")
 			: null ;
 		});
-	</script>
-	<script>
-		/* setInterval(() => {
-			setTm();
-		}, 5000);
-		function setTm() {
-			const date = new Date();
-			let hh = date.getHours();
-			let mm = date.getMinutes();
-			const pm = hh > 12 ? "PM " : "AM ";
-			hh > 12 ? hh = (hh - 12) : hh;
-			hh < 10 ? hh = "0" + (hh) : hh;
-			mm < 10 ? mm = "0" + (mm) : mm;
-			const time = hh + ":" + mm;
-			// console.log(time);
-			document.querySelector(".time").innerHTML = pm + time + "";
-		}
-		setTm();
-		 */
-	</script>
-	<script>
+		
+		// 시계
 		const clock = document.querySelector(".time");
 		const dgit = (n) => n < 10 ? "0"+n : n;
 		const ampm = (n) => n > 12 ? "PM "+ dgit( n-12 ) : "AM "+ dgit(n);
 		const setT = ( ) => {
 			const date = new Date();
-			const time = ampm( date.getHours() ) +":"+ dgit( date.getMinutes() );
-			clock.innerHTML = time;
+			const time = ampm( date.getHours() ) +":"+ dgit( date.getMinutes() +":"+ dgit( date.getSeconds() ));
+			clock.innerText = time;
 		}
-		setT();
-		setInterval( setT, 5000 );
+		setInterval(setT, 1000);
 	</script>
 </body>
 
