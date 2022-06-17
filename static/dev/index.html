@@ -78,13 +78,9 @@
 		const glbts = document.querySelectorAll(".sect a");
 		const iframe = document.querySelector(".iframe");
 
-		const mclick = (el) => {
+		const mclick = (el, opt) => {
 			var ilk = el.getAttribute("href");
-			setLink(ilk);
-		};
-		const mDbl = (el) => {
-			var ilk = el.getAttribute("href");
-			window.open(ilk, "_blank");
+			opt ? window.open(ilk, "_blank") : setLink(ilk);
 		};
 
 		const setLink = (glink) => {
@@ -103,8 +99,8 @@
 
 		glbts.forEach((el, idx) => {
 			el.addEventListener("click", (e) => {
-				e.ctrlKey ? mDbl(el) : mclick(el); 
-				console.log( e.ctrlKey );
+				const opt = e.ctrlKey ? true : false ;
+				mclick(el, opt)
 				e.preventDefault();
 			});
 		});
