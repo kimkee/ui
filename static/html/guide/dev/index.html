@@ -56,14 +56,14 @@
 				idx++;
 				tot++;
 				li.classList.add("m" + idx);
-				const link  = li.querySelector("a");
-				const fname = link.getAttribute("href").replace(loctxt, "");
+				const btn  = li.querySelector("a");
+				const fname = btn.getAttribute("href").replace(loctxt, "");
 				const itits = li.querySelector("i").getAttribute("tit");
 				tbl[ utit ].push( itits );
-				link.setAttribute("class", "lk");
-				link.innerHTML = fname;
-				link.setAttribute("href", loctxt + fname + "");
-				link.setAttribute("target", "_blank");
+				btn.setAttribute("class", "lk");
+				btn.innerHTML = fname;
+				btn.setAttribute("href", loctxt + fname + "");
+				btn.setAttribute("target", "_blank");
 				appendHtml( li, '<a class="dk" href="#">D</a>');
 				li.querySelector(".dk").setAttribute("href", loctxt + fname + "?dark=true");
 			});
@@ -75,37 +75,37 @@
 
 		const title = document.querySelector(".title");
 		const nlink = document.querySelector(".link-now");
-		const alink = document.querySelectorAll("a");
+		const glbts = document.querySelectorAll(".sect a");
 		const iframe = document.querySelector(".iframe");
 
-		const mclick = (el) => {
+		const mclick = (el, opt) => {
 			var ilk = el.getAttribute("href");
-			setLink(ilk);
+			opt ? window.open(ilk, "_blank") : setLink(ilk);
 		};
-		const mDbl = (el) => {
-			var ilk = el.getAttribute("href");
-			window.open(ilk, "_blank");
-		};
+
 		const setLink = (glink) => {
 			if (glink == null) { glink = loctxt + "/static/html/guide/ui.html" }; nlink.setAttribute("href", glink);
 			nlink.innerHTML = glink.replace("../html/", "");
 			iframe.setAttribute("src", glink);
 			localStorage.setItem("glink", glink);
 		}
+		setLink(glink);
+
 		document.getElementById('myframe').onload = function () {
 			title.innerHTML = document.myframe.window.document.title;
 			console.log(glink, document.myframe.window.document.title);
-			setActive(glink);
+			setActive();
 		}
-		alink.forEach((el, idx) => {
+
+		glbts.forEach((el, idx) => {
 			el.addEventListener("click", (e) => {
-				e.ctrlKey ? mDbl(el) : mclick(el); 
-				console.log( e.ctrlKey );
+				const opt = e.ctrlKey ? true : false ;
+				mclick(el, opt)
 				e.preventDefault();
 			});
 		});
-		setLink(glink);
-		const setActive = (glink) => {
+
+		const setActive = () => {
 			const glk = localStorage.getItem("glink");
 			document.querySelectorAll("a").forEach((link) => {
 				const mylink = link.getAttribute("href");
@@ -114,11 +114,9 @@
 			console.log("setActive()" , glk);
 		}
 
-
 		// iframe size
 		const ifrm = document.querySelector(".ifr.sect");
 		ifrm.addEventListener("click", (e) => {
-			// console.log( ifrm.classList.contains("w320") );
 			e.target.className == "time"
 			? ifrm.classList.contains("w320")
 			  ?	ifrm.classList.remove("w320")
