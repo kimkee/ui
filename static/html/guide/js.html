@@ -17,7 +17,8 @@
 	</ul>
 
 	<script>
-/* 		document.querySelectorAll("ul").forEach((ul,i)=>{
+		/* 		
+		document.querySelectorAll("ul").forEach((ul,i)=>{
 			i++;
 			ul.classList.add("ul"+i);
 			ul.querySelectorAll("li").forEach( (li,i) => {
@@ -30,8 +31,9 @@
 				}
 			});
 		});
- */
+ 		*/
 		var $ = function(els){
+			
 			var result = [];
 			document.querySelectorAll(els).forEach(function(ddd){
 				// console.log(ddd);
@@ -44,58 +46,76 @@
 		}
 
 
-		Element.prototype.addClass = function(s){
+		Element.prototype.addClass = function(cls){
 			var el = this;
-			// console.log( this );
-			c = s.trim().split(" ");
-			// console.log( c );
-			for (var i = 0; i < c.length; i++) {
-				el.classList.add(c[i]);
+			var arr = cls.trim().split(" ");
+			console.log( arr );
+			for (var i = 0; i < arr.length; i++) {
+				el.classList.add(arr[i]);
 			}
 		};
-		/* 
-		function toggleClass(element, className){
-			const check = new RegExp("(\\s|^)" + className + "(\\s|^)");
-			console.log( check.test(element, className) );
-			if( check.test(element, className) ){
-
-				element.className = element.className.replace(check, " ").trim();
-			}else{
-				element.className += " " + className;
+		Element.prototype.toggleClass = function(cls) {
+			var el = this;
+			var arr = cls.split(" ");
+			console.log(arr);
+			for (var i = 0; i < arr.length; i++) {
+				el.classList.toggle(arr[i]);
 			}
-		}
-		*/
-		
-		 /* 
-		Element.prototype.toggleClass = function( className) {
-			var element = this;
-			if (!element || !className) { return; }
-			var classString = element.className;
-			var nameIndex = classString.indexOf(className);
-			if (nameIndex == -1) {
-				classString += (classString.length) ? ' ' + className : className;
-			} else {
-				classString = classString.replace(' '+className, '');
-				classString = classString.replace(className, '');
-			}
-			element.className = classString.trim().replace(/ +/g, " ");
-		}
-		*/
-		Element.prototype.toggleClass = function(className,callback) {
-			this.classList.toggle(className);
-			callback = true;
-			console.log(callback);
 		}
 		
 		// document.querySelector("ul").addClass(" aa s ");
 		console.log( $("ul") ); 
-		$("ul>li").forEach(function(els,idx){
-			els.closest("ul");
-			els.addClass("k"+idx);
+		$("ul").forEach(function(els,idx){
+			// console.log( els );
+			els.querySelectorAll("li").forEach(function(el,id){
+				id++;
+				el.addClass("m"+id);
+			});
 		})
 		
-		document.querySelector('body').toggleClass("open");
+		document.querySelector('html').toggleClass("open");
 		
 	</script>
+
+
+	<style>
+	.droptarget { float: left; width: 100px; height: 35px; margin: 15px; padding: 10px; border: 1px solid #aaaaaa; }
+	</style>
+
+
+	<p>Drag the p element back and forth between the two rectangles:</p>
+
+	<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
+	<p ondragstart="dragStart(event)" ondrag="dragging(event)" draggable="true" id="dragtarget">Drag me!</p>
+	</div>
+
+	<div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+	<p style="clear:both;"><strong>Note:</strong> drag events are not supported in Internet Explorer 8 and earlier versions or Safari 5.1 and earlier versions.</p>
+
+	<p id="demo"></p>
+
+	<script>
+	function dragStart(event) {
+		event.dataTransfer.setData("Text", event.target.id);
+	}
+
+	function dragging(event) {
+		document.getElementById("demo").innerHTML = "The p element is being dragged";
+	}
+
+	function allowDrop(event) {
+		event.preventDefault();
+	}
+
+	function drop(event) {
+		event.preventDefault();
+		var data = event.dataTransfer.getData("Text");
+		event.target.appendChild(document.getElementById(data));
+		document.getElementById("demo").innerHTML = "The p element was dropped";
+	}
+	</script>
+
+
 </body>
 </html>
