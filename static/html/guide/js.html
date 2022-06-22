@@ -17,7 +17,10 @@
 	</ul>
 
 	<div class="anims">d</div>
-
+	<style>
+		.anims{transition: all 0.4s; height: 44px; background-color: #999999; width: 100%;}
+		.anims.on{height: 100px; width: 50%; transform: rotate(180deg);}
+	</style>
 	<script>
 		/* 		
 		document.querySelectorAll("ul").forEach((ul,i)=>{
@@ -76,28 +79,41 @@
 		})
 		
 		document.querySelector('html').toggleClass("open");
-		document.querySelector('.anims').animate(
-			[
-				{ 
-					transform: 'translateX(0px)',
-					opacity:"0"
-				},
-				{
-					transform: 'translateX(100px)',
-					opacity:"1"
-				},
-				{
-					transform: 'translateX(0px)',
-					opacity:"0"
-				},
-			], {
-				// timing options
-				duration: 2000,
-				iterations: Infinity
+		// document.querySelector('.anims').animate(
+		// 	[
+		// 		{ 
+		// 			transform: 'translateX(0px)',
+		// 			opacity:"0"
+		// 		},
+		// 		{
+		// 			transform: 'translateX(100px)',
+		// 			opacity:"1"
+		// 		},
+		// 		{
+		// 			transform: 'translateX(0px)',
+		// 			opacity:"0"
+		// 		},
+		// 	], {
+		// 		// timing options
+		// 		duration: 2000,
+		// 		iterations: Infinity
+		// 	}
+		// );
+		
+		// document.querySelector('.anims').animate({ 
+		// 	transform: 'translateX(100px)'
+		// },2000);
+		const anims = document.querySelector('.anims');
+
+		anims.addEventListener('click', () => {
+			anims.classList.toggle("on");
+		});
+
+		anims.addEventListener('transitionend', (e) => {
+			if( e.propertyName == 'transform' ){
+				console.log(e.propertyName+' - Animation ended');
 			}
-		);
-		
-		
+		});
 	</script>
 
 
