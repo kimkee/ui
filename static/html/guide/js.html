@@ -16,6 +16,8 @@
 		<li><a href="javascript:;">kk</a></li>
 	</ul>
 
+	<div class="anims">d</div>
+
 	<script>
 		/* 		
 		document.querySelectorAll("ul").forEach((ul,i)=>{
@@ -74,6 +76,27 @@
 		})
 		
 		document.querySelector('html').toggleClass("open");
+		document.querySelector('.anims').animate(
+			[
+				{ 
+					transform: 'translateX(0px)',
+					opacity:"0"
+				},
+				{
+					transform: 'translateX(100px)',
+					opacity:"1"
+				},
+				{
+					transform: 'translateX(0px)',
+					opacity:"0"
+				},
+			], {
+				// timing options
+				duration: 2000,
+				iterations: Infinity
+			}
+		);
+		
 		
 	</script>
 
