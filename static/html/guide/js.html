@@ -19,7 +19,7 @@
 	<div class="anims">d</div>
 	<style>
 		.anims{transition: all 0.4s; height: 44px; background-color: #999999; width: 100%;}
-		.anims.on{height: 100px; width: 50%; transform: rotate(180deg);}
+		.anims.on{height: 100px; width: 50%;}
 	</style>
 	<script>
 		/* 		
@@ -67,6 +67,24 @@
 				el.classList.toggle(arr[i]);
 			}
 		}
+		Element.prototype.appendHtml = function(str){
+			var div = document.createElement("div");
+			div.innerHTML = str;
+			while (div.children.length > 0) {
+				console.log(div.children);
+				this.appendChild( div.children[0] );
+				// this.prepend( div.children[0] );
+			}
+		}
+		Element.prototype.html = function(str){
+			// console.log(this);
+			if (str == undefined) {
+				return this.innerHtml;
+			}else{
+				this.innerHTML = str;
+				return str;
+			}
+		}
 		
 		// document.querySelector("ul").addClass(" aa s ");
 		console.log( $("ul") ); 
@@ -110,7 +128,7 @@
 		});
 
 		anims.addEventListener('transitionend', (e) => {
-			if( e.propertyName == 'transform' ){
+			if( e.propertyName == 'height' ){
 				console.log(e.propertyName+' - Animation ended');
 			}
 		});
