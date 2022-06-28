@@ -12,13 +12,15 @@
 	<div class="wrap">
 		<section class="sect 1st">
 			<ul tit="UI">
-				<li><a href="/static/html/guide/ui.html"></a>		<i tit="UI">,</i></li>
-				<li><a href="/static/html/guide/index.html"></a>	<i tit="React">,</i></li>
-				<li><a href="/static/html/guide/index2.html"></a>	<i tit="React">,</i></li>
+				<li><a href="../html/guide/ui.html"></a>		<i tit="UI">,</i></li>
+				<li><a href="../html/guide/index.html"></a>		<i tit="React">,</i></li>
+				<li><a href="../html/guide/index2.html"></a>	<i tit="React">,</i></li>
 			</ul>
 			<ul tit="List">
-				<li><a href="/static/html/guide/spin3.html"></a>	<i tit="스핀3">,</i></li>
-				<li><a href="/static/html/guide/lottie.html"></a>	<i tit="로티">,</i></li>
+				<li><a href="../html/guide/spin3.html"></a>		<i tit="스핀3">,</i></li>
+				<li><a href="../html/guide/lottie.html"></a>	<i tit="로티">,</i></li>
+				<li><a href="../html/guide/js.html"></a>		<i tit="pure js">,</i></li>
+				<li><a href="../html/guide/ia.html"></a>		<i tit="pure js">,</i></li>
 			</ul>
 		</section>
 		<section class="sect ifr">
@@ -31,7 +33,7 @@
 				<iframe src="" class="iframe" id="myframe" name="myframe" frameborder="0" scrolling="auto" crossorigin></iframe>
 			</div>
 			<div class="bts">
-				<a href="/static/html/guide/ui.html" class="bt bt-f">F</a>
+				<a href="../html/guide/ui.html" class="bt bt-f">F</a>
 			</div>
 		</section>
 	</div>
@@ -84,7 +86,7 @@
 		};
 
 		const setLink = (glink) => {
-			if (glink == null) { glink = loctxt + "/static/html/guide/ui.html" }; nlink.setAttribute("href", glink);
+			if (glink == null) { glink = loctxt + "../html/guide/ui.html" }; nlink.setAttribute("href", glink);
 			nlink.innerHTML = glink.replace("../html/", "");
 			iframe.setAttribute("src", glink);
 			localStorage.setItem("glink", glink);
@@ -122,6 +124,11 @@
 			  ?	ifrm.classList.remove("w320")
 			  : ifrm.classList.add("w320")
 			: null ;
+		});
+		ifrm.addEventListener("transitionend", function(e){
+			if( e.propertyName == "width"){
+				console.log( e.propertyName );
+			}
 		});
 		
 		// 시계
