@@ -125,6 +125,11 @@
 			  : ifrm.classList.add("w320")
 			: null ;
 		});
+		ifrm.addEventListener("transitionend", function(e){
+			if( e.propertyName == "width"){
+				console.log( e.propertyName );
+			}
+		});
 		
 		// 시계
 		const clock = document.querySelector(".time");
