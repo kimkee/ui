@@ -85,6 +85,10 @@
 				return str;
 			}
 		}
+		Element.prototype.unwrap = function(){
+			console.log(this.parentElement, this.parentElement.childNodes );
+			this.parentElement.replaceWith( ...this.parentElement.childNodes );
+		}
 		
 		// document.querySelector("ul").addClass(" aa s ");
 		console.log( $("ul") ); 
