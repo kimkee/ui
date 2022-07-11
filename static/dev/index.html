@@ -141,6 +141,29 @@
 			clock.innerText = time;
 		}
 		setInterval(setT, 1000);
+		
+		const fetchHtml = function(url){
+			fetch(url)
+			.then( function(res){
+				if (res.ok) {
+					return res.text();
+				}else{
+					return "에러 error"
+				}
+			})
+			.then( function(html){
+				if(html){
+					document.querySelector(".sect.lst").innerHTML = html;
+					return document.querySelectorAll(".sect.lst ul>li").length;
+				}
+			})
+			.then( function(html){
+				console.log(html);
+			})
+		}
+		// fetchHtml("./inc.html");
+		
+		
 	</script>
 </body>
 
