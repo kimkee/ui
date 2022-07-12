@@ -89,6 +89,9 @@
 			console.log(this.parentElement, this.parentElement.childNodes );
 			this.parentElement.replaceWith( ...this.parentElement.childNodes );
 		}
+		Element.prototype.isVisible = function(){
+			return !!( this.offsetWidth || this.offsetHeight || this.getClientRects().length )
+		}
 		
 		// document.querySelector("ul").addClass(" aa s ");
 		console.log( $("ul") ); 
