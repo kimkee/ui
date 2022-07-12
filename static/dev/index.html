@@ -10,19 +10,7 @@
 </head>
 <body>
 	<div class="wrap">
-		<section class="sect 1st">
-			<ul tit="UI">
-				<li><a href="../html/guide/ui.html"></a>		<i tit="UI">,</i></li>
-				<li><a href="../html/guide/index.html"></a>		<i tit="React">,</i></li>
-				<li><a href="../html/guide/index2.html"></a>	<i tit="React">,</i></li>
-			</ul>
-			<ul tit="List">
-				<li><a href="../html/guide/spin3.html"></a>		<i tit="스핀3">,</i></li>
-				<li><a href="../html/guide/lottie.html"></a>	<i tit="로티">,</i></li>
-				<li><a href="../html/guide/js.html"></a>		<i tit="pure js">,</i></li>
-				<li><a href="../html/guide/ia.html"></a>		<i tit="pure js">,</i></li>
-			</ul>
-		</section>
+		<include src="./inc.html"></include>
 		<section class="sect ifr">
 			<div class="urls">
 				<em class="time"></em>
@@ -36,135 +24,171 @@
 				<a href="../html/guide/ui.html" class="bt bt-f">F</a>
 			</div>
 		</section>
+		<include src="./inc1.html" data-include-opt='{"class":"is-ui", "tit":"제목"}'></include>
+		<include src="./inc2.html" data-include-opt='{"class":"is-hide"}'></include>
 	</div>
-	<script>
-		/* 김기현 */
-		const tbl = new Object;
-		const loctxt = "";
-		let tot = 0;
-		function appendHtml(el, str) {
-			var div = document.createElement('div');
-			div.innerHTML = str;
-			while (div.children.length > 0) {
-				el.appendChild(div.children[0]);
+<script> 
+const ia = {
+	init: function () {
+		this.html.include();
+	},
+	menu: {
+		init:function(){
+			/* 김기현 */
+			const tbl = new Object;
+			const loctxt = "";
+			let tot = 0;
+			function appendHtml(el, str) {
+				var div = document.createElement('div');
+				div.innerHTML = str;
+				while (div.children.length > 0) {
+					el.appendChild(div.children[0]);
+				}
 			}
-		}
-		document.querySelectorAll("ul").forEach((ul, i) => {
-			i++;
-			ul.classList.add("ul" + i);
-			utit = ul.getAttribute("tit");
-			tbl[ utit ] = [];
-			ul.querySelectorAll("li").forEach((li, idx) => {
-				idx++;
-				tot++;
-				li.classList.add("m" + idx);
-				const btn  = li.querySelector("a");
-				const fname = btn.getAttribute("href").replace(loctxt, "");
-				const itits = li.querySelector("i").getAttribute("tit");
-				tbl[ utit ].push( itits );
-				btn.setAttribute("class", "lk");
-				btn.innerHTML = fname;
-				btn.setAttribute("href", loctxt + fname + "");
-				btn.setAttribute("target", "_blank");
-				appendHtml( li, '<a class="dk" href="#">D</a>');
-				li.querySelector(".dk").setAttribute("href", loctxt + fname + "?dark=true");
+			document.querySelectorAll("ul").forEach((ul, i) => {
+				i++;
+				ul.classList.add("ul" + i);
+				utit = ul.getAttribute("tit");
+				console.log(utit);
+				tbl[utit] = [];
+				ul.querySelectorAll("li").forEach((li, idx) => {
+					idx++;
+					tot++;
+					li.classList.add("m" + idx);
+					const btn  = li.querySelector("a");
+					const fnm = btn.getAttribute("href").replace(loctxt, "");
+					const tit = li.querySelector("i").getAttribute("tit");
+					tbl[ utit ].push( tit );
+					btn.setAttribute("class", "lk");
+					btn.innerHTML = fnm;
+					btn.setAttribute("href", loctxt + fnm + "");
+					btn.setAttribute("target", "_blank");
+					appendHtml( li, '<a class="dk" href="#">D</a>');
+					li.querySelector(".dk").setAttribute("href", loctxt + fnm + "?dark=true");
+				});
 			});
-		});
-		console.table(tbl);
-		console.table("" + tot);
+			console.table(tbl);
+			console.table("전체" + tot);
 
-		let glink = localStorage.getItem("glink");
+			let glink = localStorage.getItem("glink");
 
-		const title = document.querySelector(".title");
-		const nlink = document.querySelector(".link-now");
-		const glbts = document.querySelectorAll(".sect a");
-		const iframe = document.querySelector(".iframe");
+			const title = document.querySelector(".title");
+			const nlink = document.querySelector(".link-now");
+			const glbts = document.querySelectorAll(".sect a");
+			const iframe = document.querySelector(".iframe");
 
-		const mclick = (el, opt) => {
-			var ilk = el.getAttribute("href");
-			opt ? window.open(ilk, "_blank") : setLink(ilk);
-		};
+			const mclick = (el, opt) => {
+				var ilk = el.getAttribute("href");
+				opt ? window.open(ilk, "_blank") : setLink(ilk);
+			};
 
-		const setLink = (glink) => {
-			if (glink == null) { glink = loctxt + "../html/guide/ui.html" }; nlink.setAttribute("href", glink);
-			nlink.innerHTML = glink.replace("../html/", "");
-			iframe.setAttribute("src", glink);
-			localStorage.setItem("glink", glink);
-		}
-		setLink(glink);
-
-		document.getElementById('myframe').onload = function () {
-			title.innerHTML = document.myframe.window.document.title;
-			console.log(glink, document.myframe.window.document.title);
-			setActive();
-		}
-
-		glbts.forEach((el, idx) => {
-			el.addEventListener("click", (e) => {
-				const opt = e.ctrlKey ? true : false ;
-				mclick(el, opt)
-				e.preventDefault();
-			});
-		});
-
-		const setActive = () => {
-			const glk = localStorage.getItem("glink");
-			document.querySelectorAll("a").forEach((link) => {
-				const mylink = link.getAttribute("href");
-				glk == mylink ? link.classList.add("active") : link.classList.remove("active");
-			});
-			console.log("setActive()" , glk);
-		}
-
-		// iframe size
-		const ifrm = document.querySelector(".ifr.sect");
-		ifrm.addEventListener("click", (e) => {
-			e.target.className == "time"
-			? ifrm.classList.contains("w320")
-			  ?	ifrm.classList.remove("w320")
-			  : ifrm.classList.add("w320")
-			: null ;
-		});
-		ifrm.addEventListener("transitionend", function(e){
-			if( e.propertyName == "width"){
-				console.log( e.propertyName );
+			const setLink = (glink) => {
+				if (glink == null) { glink = loctxt + "../html/guide/ui.html" }; nlink.setAttribute("href", glink);
+				nlink.innerHTML = glink.replace("../html/", "");
+				iframe.setAttribute("src", glink);
+				localStorage.setItem("glink", glink);
 			}
-		});
-		
-		// 시계
-		const clock = document.querySelector(".time");
-		const dgit = (n) => n < 10 ? "0"+n : n;
-		const ampm = (n) => n > 12 ? "PM "+ dgit( n-12 ) : "AM "+ dgit(n);
-		const setT = ( ) => {
-			const date = new Date();
-			const time = ampm( date.getHours() ) +":"+ dgit( date.getMinutes() +":"+ dgit( date.getSeconds() ));
-			clock.innerText = time;
+			setLink(glink);
+
+			document.getElementById('myframe').onload = function () {
+				title.innerHTML = document.myframe.window.document.title;
+				console.log(glink, document.myframe.window.document.title);
+				setActive();
+			}
+
+			glbts.forEach((el, idx) => {
+				el.addEventListener("click", (e) => {
+					const opt = e.ctrlKey ? true : false ;
+					mclick(el, opt)
+					e.preventDefault();
+				});
+			});
+
+			const setActive = () => {
+				const glk = localStorage.getItem("glink");
+				document.querySelectorAll("a").forEach((link) => {
+					const mylink = link.getAttribute("href");
+					glk == mylink ? link.classList.add("active") : link.classList.remove("active");
+				});
+				console.log("setActive()" , glk);
+			}
+
+			// iframe size
+			const ifrm = document.querySelector(".ifr.sect");
+			ifrm.addEventListener("click", (e) => {
+				e.target.className == "time"
+				? ifrm.classList.contains("w320")
+				?	ifrm.classList.remove("w320")
+				: ifrm.classList.add("w320")
+				: null ;
+			});
+			ifrm.addEventListener("transitionend", function(e){
+				if( e.propertyName == "width"){
+					console.log( e.propertyName );
+				}
+			});
+			
+			// 시계
+			const clock = document.querySelector(".time");
+			const dgit = (n) => n < 10 ? "0"+n : n;
+			const ampm = (n) => n > 12 ? "PM "+ dgit( n-12 ) : "AM "+ dgit(n);
+			const setT = ( ) => {
+				const date = new Date();
+				const time = ampm( date.getHours() ) +":"+ dgit( date.getMinutes() +":"+ dgit( date.getSeconds() ));
+				clock.innerText = time;
+			}
+			setInterval(setT, 1000);
 		}
-		setInterval(setT, 1000);
-		
-		const fetchHtml = function(url){
-			fetch(url)
-			.then( function(res){
-				if (res.ok) {
-					return res.text();
+	},
+	html: {
+		init:function(){
+			this.include();
+		},
+		load: function (paramCallback) {
+			if(paramCallback) { this.loadCallback = paramCallback; }
+		},
+		include: function(){ 
+			var _this = this;
+			var incd = document.querySelectorAll("include");
+			var inum = incd.length;
+			var cout = 0;
+			if( incd.length ){
+				incd.forEach(function(els,idx) {
+					var url = els.getAttribute("src");
+					var opt = JSON.parse(els.getAttribute("data-include-opt")) || {};
+					fetch(url).then(function(res) {
+						if(res.ok){
+							return res.text();
+						}
+					}).then(function(html) { 
+						cout++;
+						els.innerHTML = html;
+						console.log(url, opt, cout, inum);
+						if( opt && opt.class && els.firstElementChild ) {
+							els.firstElementChild.classList.add(opt.class);
+						}
+						els.replaceWith(...els.childNodes );
+						if( cout == inum ){
+							_this.set();
+						}
+					});
+				});
 				}else{
-					return "에러 error"
+					_this.set();
 				}
-			})
-			.then( function(html){
-				if(html){
-					document.querySelector(".sect.lst").innerHTML = html;
-					return document.querySelectorAll(".sect.lst ul>li").length;
-				}
-			})
-			.then( function(html){
-				console.log(html);
-			})
+			},
+			set: function(){
+				if(typeof this.loadCallback == "function"){ this.loadCallback(); }
+			}
 		}
-		// fetchHtml("./inc.html");
-		
-		
-	</script>
-</body>
+	}; 
 
+	ia.init();
+	ia.html.load(function(){
+		console.log("HTML-include ");
+		ia.menu.init();
+	});
+</script>
+
+</body>
 </html>

@@ -8,12 +8,12 @@ ul,li{padding: 0; margin: 0;}
 ul{margin: 0rem 0.5rem 2rem 0.5rem; padding: 2.4rem 0rem 0rem 0rem; position: relative; width: 100%; max-width: 25rem; display: block; vertical-align: top;} 
 ul::before{content:" "attr(tit)""; font-weight: 700; font-size: 1.6rem; margin-left: 0rem; margin-bottom: 1rem; position: absolute;left: 0; top: 0; color: #dddddd;}
 ul:last-child>li:last-child i{user-select: none;} 
-li{list-style: none; margin: 0.5rem 0; position: relative; font-size: 1.4rem; padding: 0;}
+li{list-style: none;margin: 0.5rem 3rem 0.5rem 0;position: relative;font-size: 1.4rem;padding: 0;}
 li::marker{font-size: 1rem; color:tomato}
 li a{padding: 0.5rem 0.5rem 0.6rem 0.5rem; color: #9a9a9a; z-index: 5;border: #5a5a5a solid 0.1rem; background-color: transparent; font-family: "Consolas";line-height: 1; display: block;position: relative; border-radius: 0.3rem; font-size: 1.2rem; text-decoration: none; min-height: 2.5rem;} 
 li a::before{content: ""; position: absolute; left: 0; top: 0.2rem; line-height: 1; color: #666666;}
 li a:hover{border-color: #888888;background-color: rgba(231, 231, 255, 0.1); color: #efefef;}
-li a.dk{position: absolute;right: -3rem; top: 0rem; width: 2.4rem; height: 2.5rem; text-align: center; user-select: none;} 
+li a.dk{position: absolute;right: -3rem;top: 0rem;width: 2.4rem;height: 2.5rem;text-align: center;user-select: none;} 
 li a.active{color: #dadada; border-color: #dadada; background-color: rgba(231, 231, 255, 0.1);}
 li i{position: absolute;font-size: 0;position: absolute;right: 0.5rem; top: 0.5rem; font-style: normal;z-index: 1;}
 li i::after{content: ""attr(tit)""; font-size: 1.1rem;}
