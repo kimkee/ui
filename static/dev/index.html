@@ -10,8 +10,8 @@
 </head>
 <body>
     <div class="wrap">
-        <include src="./inc.html"></include>
-        <include src="./fram.html" data-include-opt='{"class":"is-ui","data":"ui-abc", "display":"block", "tit":"제목"}'></include>
+        <include src="./menu.html" data-include-opt='{"class":"menu", "tit":"메뉴", "value":"dd"}'></include>
+        <include src="./fram.html" data-include-opt='{"class":"list", "tit":"제목", "data-ui":"dd"}'></include>
         <include src="./inc2.html" data-include-opt='{"class":"is-hide", "display":"none"}'></include>
     </div>
 <script> 
@@ -153,9 +153,20 @@ const ia = {
                         els.innerHTML = res;
                         console.log(url, opt, cout, inum);
                         const elc = els.firstElementChild;
+                        for (const key in opt) {
+                            if (Object.hasOwnProperty.call(opt, key)) {
+                                const element = opt[key];
+
+                                console.log( key,element );
+                                if(key != "class" && key != "display"){
+                                    elc.setAttribute( key, element);
+                                }
+                            }
+                        }
                         elc && opt.class   ? elc.classList.add(opt.class) : null;       /* class   */
                         elc && opt.display ? elc.style.display = opt.display : null;    /* display */
                         elc && opt.data    ? elc.setAttribute("data", opt.data) : null; /* data    */
+                        elc && opt.value    ? elc.setAttribute("value", opt.value) : null; /* data    */
                         els.replaceWith( ...els.childNodes ); /* unwrap */
                         cout == inum ? _this.acti() : null;
                     });
