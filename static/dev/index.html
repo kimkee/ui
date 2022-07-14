@@ -1,193 +1,209 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=768, initial-scale=1.0">
-	<link href="../img/common/favicon.ico" rel="shrtcut icon">
-	<title>KH</title>
-	<link rel="stylesheet" href="./kh.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=768, initial-scale=1.0">
+    <link href="../../../img/common/favicon.ico" rel="shrtcut icon">
+    <title>KH</title>
+    <link rel="stylesheet" href="./kh.css">
 </head>
 <body>
-	<div class="wrap">
-		<include src="./inc.html"></include>
-		<section class="sect ifr">
-			<div class="urls">
-				<em class="time"></em>
-				<em class="title"></em>
-				<a href="#none" class="link-now"></a>
-			</div>
-			<div class="box">
-				<iframe src="" class="iframe" id="myframe" name="myframe" frameborder="0" scrolling="auto" crossorigin></iframe>
-			</div>
-			<div class="bts">
-				<a href="../html/guide/ui.html" class="bt bt-f">F</a>
-			</div>
-		</section>
-		<include src="./inc1.html" data-include-opt='{"class":"is-ui", "tit":"제목"}'></include>
-		<include src="./inc2.html" data-include-opt='{"class":"is-hide"}'></include>
-	</div>
+    <div class="wrap">
+        <include src="./inc.html"></include>
+        <section class="sect ifr">
+            <div class="urls">
+                <em class="time"></em>
+                <em class="title"></em>
+                <a href="#none" class="link-now"></a>
+            </div>
+            <div class="box">
+                <iframe src="" class="iframe" id="myframe" name="myframe" frameborder="0" scrolling="auto" crossorigin></iframe>
+            </div>
+            <div class="bts">
+                <a href="../ui.html" class="bt bt-f">F</a>
+            </div>
+        </section>
+        <include src="./inc1.html" data-include-opt='{"class":"is-ui","data":"ui-abc", "display":"block", "tit":"제목"}'></include>
+        <include src="./inc2.html" data-include-opt='{"class":"is-hide", "display":"none"}'></include>
+    </div>
 <script> 
 const ia = {
-	init: function () {
-		this.html.include();
-	},
-	menu: {
-		init:function(){
-			/* 김기현 */
-			const tbl = new Object;
-			const loctxt = "";
-			let tot = 0;
-			function appendHtml(el, str) {
-				var div = document.createElement('div');
-				div.innerHTML = str;
-				while (div.children.length > 0) {
-					el.appendChild(div.children[0]);
-				}
-			}
-			document.querySelectorAll("ul").forEach((ul, i) => {
-				i++;
-				ul.classList.add("ul" + i);
-				utit = ul.getAttribute("tit");
-				console.log(utit);
-				tbl[utit] = [];
-				ul.querySelectorAll("li").forEach((li, idx) => {
-					idx++;
-					tot++;
-					li.classList.add("m" + idx);
-					const btn  = li.querySelector("a");
-					const fnm = btn.getAttribute("href").replace(loctxt, "");
-					const tit = li.querySelector("i").getAttribute("tit");
-					tbl[ utit ].push( tit );
-					btn.setAttribute("class", "lk");
-					btn.innerHTML = fnm;
-					btn.setAttribute("href", loctxt + fnm + "");
-					btn.setAttribute("target", "_blank");
-					appendHtml( li, '<a class="dk" href="#">D</a>');
-					li.querySelector(".dk").setAttribute("href", loctxt + fnm + "?dark=true");
-				});
-			});
-			console.table(tbl);
-			console.table("전체" + tot);
+    init: function () {
+        this.menu.init();
+    },
+    menu: {
+        init:function(){
+            this.set();
+        },
+        set:function(){
+            /* 김기현 */
+            const tbl = new Object;
+            const loctxt = "../";
+            let tot = 0;
+            function appendHtml(el, str) {
+                var div = document.createElement('div');
+                div.innerHTML = str;
+                while (div.children.length > 0) {
+                    el.appendChild(div.children[0]);
+                }
+            }
+            document.querySelectorAll("ul").forEach((ul, i) => {
+                i++;
+                ul.classList.add("ul" + i);
+                utit = ul.getAttribute("tit");
+                console.log(utit);
+                tbl[utit] = [];
+                ul.querySelectorAll("li").forEach((li, idx) => {
+                    idx++;
+                    tot++;
+                    li.classList.add("m" + idx);
+                    const btn  = li.querySelector("a");
+                    const fnm = btn.getAttribute("href").replace(loctxt, "");
+                    const tit = li.querySelector("i").getAttribute("tit");
+                    tbl[ utit ].push( tit );
+                    btn.setAttribute("class", "lk");
+                    btn.innerHTML = fnm;
+                    btn.setAttribute("href", loctxt + fnm + "");
+                    btn.setAttribute("target", "_blank");
+                    appendHtml( li, '<a class="dk" href="#">D</a>');
+                    li.querySelector(".dk").setAttribute("href", loctxt + fnm + "?dark=true");
+                });
+            });
+            console.table(tbl);
+            console.table("전체" + tot);
 
-			let glink = localStorage.getItem("glink");
+            let glink = localStorage.getItem("glink");
 
-			const title = document.querySelector(".title");
-			const nlink = document.querySelector(".link-now");
-			const glbts = document.querySelectorAll(".sect a");
-			const iframe = document.querySelector(".iframe");
+            const title = document.querySelector(".title");
+            const nlink = document.querySelector(".link-now");
+            const glbts = document.querySelectorAll(".sect a");
+            const iframe = document.querySelector(".iframe");
 
-			const mclick = (el, opt) => {
-				var ilk = el.getAttribute("href");
-				opt ? window.open(ilk, "_blank") : setLink(ilk);
-			};
+            const mclick = (el, opt) => {
+                var ilk = el.getAttribute("href");
+                opt ? window.open(ilk, "_blank") : setLink(ilk);
+            };
 
-			const setLink = (glink) => {
-				if (glink == null) { glink = loctxt + "../html/guide/ui.html" }; nlink.setAttribute("href", glink);
-				nlink.innerHTML = glink.replace("../html/", "");
-				iframe.setAttribute("src", glink);
-				localStorage.setItem("glink", glink);
-			}
-			setLink(glink);
+            const setLink = glink => {
+                if (glink == null) { glink = loctxt + "../html/guide/ui.html" }; nlink.setAttribute("href", glink);
+                nlink.innerHTML = glink.replace("../html/", "");
+                iframe.setAttribute("src", glink);
+                localStorage.setItem("glink", glink);
+            }
+            setLink(glink);
 
-			document.getElementById('myframe').onload = function () {
-				title.innerHTML = document.myframe.window.document.title;
-				console.log(glink, document.myframe.window.document.title);
-				setActive();
-			}
+            document.getElementById('myframe').onload = function () {
+                title.innerHTML = document.myframe.window.document.title;
+                console.log(glink, document.myframe.window.document.title);
+                setActive();
+            }
 
-			glbts.forEach((el, idx) => {
-				el.addEventListener("click", (e) => {
-					const opt = e.ctrlKey ? true : false ;
-					mclick(el, opt)
-					e.preventDefault();
-				});
-			});
+            glbts.forEach((el, idx) => {
+                el.addEventListener("click", e => {
+                    const opt = e.ctrlKey ? true : false ;
+                    mclick(el, opt)
+                    e.preventDefault();
+                });
+            });
 
-			const setActive = () => {
-				const glk = localStorage.getItem("glink");
-				document.querySelectorAll("a").forEach((link) => {
-					const mylink = link.getAttribute("href");
-					glk == mylink ? link.classList.add("active") : link.classList.remove("active");
-				});
-				console.log("setActive()" , glk);
-			}
+            const setActive = e => {
+                const glk = localStorage.getItem("glink");
+                document.querySelectorAll("a").forEach( link => {
+                    const mylink = link.getAttribute("href");
+                    glk == mylink ? link.classList.add("active") : link.classList.remove("active");
+                });
+                console.log("setActive()" , glk);
+            }
 
-			// iframe size
-			const ifrm = document.querySelector(".ifr.sect");
-			ifrm.addEventListener("click", (e) => {
-				e.target.className == "time"
-				? ifrm.classList.contains("w320")
-				?	ifrm.classList.remove("w320")
-				: ifrm.classList.add("w320")
-				: null ;
-			});
-			ifrm.addEventListener("transitionend", function(e){
-				if( e.propertyName == "width"){
-					console.log( e.propertyName );
-				}
-			});
-			
-			// 시계
-			const clock = document.querySelector(".time");
-			const dgit = (n) => n < 10 ? "0"+n : n;
-			const ampm = (n) => n > 12 ? "PM "+ dgit( n-12 ) : "AM "+ dgit(n);
-			const setT = ( ) => {
-				const date = new Date();
-				const time = ampm( date.getHours() ) +":"+ dgit( date.getMinutes() +":"+ dgit( date.getSeconds() ));
-				clock.innerText = time;
-			}
-			setInterval(setT, 1000);
-		}
-	},
-	html: {
-		init:function(){
-			this.include();
-		},
-		load: function (paramCallback) {
-			if(paramCallback) { this.loadCallback = paramCallback; }
-		},
-		include: function(){ 
-			var _this = this;
-			var incd = document.querySelectorAll("include");
-			var inum = incd.length;
-			var cout = 0;
-			if( incd.length ){
-				incd.forEach(function(els,idx) {
-					var url = els.getAttribute("src");
-					var opt = JSON.parse(els.getAttribute("data-include-opt")) || {};
-					fetch(url).then(function(res) {
-						if(res.ok){
-							return res.text();
-						}
-					}).then(function(html) { 
-						cout++;
-						els.innerHTML = html;
-						console.log(url, opt, cout, inum);
-						if( opt && opt.class && els.firstElementChild ) {
-							els.firstElementChild.classList.add(opt.class);
-						}
-						els.replaceWith(...els.childNodes );
-						if( cout == inum ){
-							_this.set();
-						}
-					});
-				});
-				}else{
-					_this.set();
-				}
-			},
-			set: function(){
-				if(typeof this.loadCallback == "function"){ this.loadCallback(); }
-			}
-		}
-	}; 
+            /* iframe size */
+            const ifrm = document.querySelector(".ifr.sect");
+            ifrm.addEventListener("click", e => {
+                e.target.className == "time"
+                ? ifrm.classList.contains("w320")
+                ?	ifrm.classList.remove("w320")
+                : ifrm.classList.add("w320")
+                : null ;
+            });
+            ifrm.addEventListener("transitionend", e => {
+                if( e.propertyName == "width"){
+                    console.log( e.propertyName );
+                }
+            });
+            
+            /* 시계 */
+            const clock = document.querySelector(".time");
+            const dgit = (n) => n < 10 ? "0"+n : n;
+            const ampm = (n) => n > 12 ? "PM "+ dgit( n-12 ) : "AM "+ dgit(n);
+            const setT = ( ) => {
+                const date = new Date();
+                const time = ampm( date.getHours() ) +":"+ dgit( date.getMinutes() +":"+ dgit( date.getSeconds() ));
+                clock.innerText = time;
+            }
+            setInterval(setT, 1000);
+        },
+    },
+    html: {
+        init: function(){
+            this.set();
+        },
+        load: function (paramCallback) {
+            this.loadCallback = paramCallback; 
+        },
+        set: function(){ 
+            const _this = this;
+            const incd = document.querySelectorAll("include");
+            const inum = incd.length;
+            let cout = 0;
+            if( inum ){
+                incd.forEach( els => {
+                    const url = els.getAttribute("src");
+                    const opt = JSON.parse(els.getAttribute("data-include-opt")) || {};
+                    _this.fetch = fetch(url)
+                    .then( res => res.ok ? res.text() : null )
+                    .then( res => { 
+                        cout++;
+                        els.innerHTML = res;
+                        console.log(url, opt, cout, inum);
+                        const elc = els.firstElementChild;
+                        elc && opt.class   ? elc.classList.add(opt.class) : null;       /* class   */
+                        elc && opt.display ? elc.style.display = opt.display : null;    /* display */
+                        elc && opt.data    ? elc.setAttribute("data", opt.data) : null; /* data    */
+                        els.replaceWith( ...els.childNodes ); /* unwrap */
+                        cout == inum ? _this.acti() : null;
+                    });
+                });
+            }else{
+                _this.acti();
+            }
+        },
+        acti: function(){
+            this.comp = true;
+            this.call();
+        },
+        call: function(){
+            typeof this.loadCallback == "function" ? this.loadCallback(): null ;
+        }
+    }
+}; 
 
-	ia.init();
-	ia.html.load(function(){
-		console.log("HTML-include ");
-		ia.menu.init();
-	});
+window.addEventListener("load", e => {
+    if( typeof ia.html.set  == undefined ) {
+        ia.init();
+        console.log("ia.init(); 로드 완료");
+    }else{
+        ia.html.set();
+        ia.html.times = setInterval( e => {  /* console.log("times" ,  ia.html.comp); */
+            if (ia.html.comp) {
+                clearInterval(ia.html.times);
+                ia.init();
+                console.log("ia.init(); 로드 완료");
+            }
+        });
+    }
+});
+
+
 </script>
 
 </body>
