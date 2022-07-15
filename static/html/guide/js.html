@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<link href="./static/img/common/favicon.ico" rel="shrtcut icon">
+	<link href="/static/img/common/favicon.ico" rel="shrtcut icon">
 	<title>JS</title>
 </head>
 <body style="background-color: #444444; color:#999999;">
@@ -16,10 +16,10 @@
 		<li><a href="javascript:;">kk</a></li>
 	</ul>
 
-	<div class="anims">d</div>
+	<div class="anims">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab natus, quas quis id necessitatibus aperiam. Cumque qui esse reiciendis ratione earum nam consequatur repellendus, debitis fuga eius numquam, blanditiis cupiditate.</div>
 	<style>
-		.anims{transition: all 0.4s; height: 44px; background-color: #999999; width: 100%;}
-		.anims.on{height: 100px; width: 50%;}
+		.anims{transition: all 0.4s; max-height: 44px; background-color: #999999; width: 100%; overflow: hidden;}
+		.anims.on{max-height:300px;}
 	</style>
 	<script>
 		/* 		
@@ -59,6 +59,14 @@
 				el.classList.add(arr[i]);
 			}
 		};
+		Element.prototype.removeClass = function(cls){
+			var el = this;
+			var arr = cls.trim().split(" ");
+			console.log( arr );
+			for (var i = 0; i < arr.length; i++) {
+				el.classList.remove(arr[i]);
+			}
+		};
 		Element.prototype.toggleClass = function(cls) {
 			var el = this;
 			var arr = cls.split(" ");
@@ -89,8 +97,14 @@
 			console.log(this.parentElement, this.parentElement.childNodes );
 			this.parentElement.replaceWith( ...this.parentElement.childNodes );
 		}
-		Element.prototype.isVisible = function(){
-			return !!( this.offsetWidth || this.offsetHeight || this.getClientRects().length )
+		Element.prototype.is = function(opt){
+			console.log(this , opt);
+			if (opt == ":visible") {
+				return !!(  this.offsetWidth || this.offsetHeight || this.getClientRects().length )
+			}
+			if (opt == ":hidden") {
+				return !!!( this.offsetWidth || this.offsetHeight || this.getClientRects().length )
+			}
 		}
 		
 		// document.querySelector("ul").addClass(" aa s ");
@@ -128,20 +142,27 @@
 		// document.querySelector('.anims').animate({ 
 		// 	transform: 'translateX(100px)'
 		// },2000);
-		const anims = document.querySelector('.anims');
+		const anims = document.querySelector(".anims");
 
-		anims.addEventListener('click', () => {
+		anims.addEventListener("click", () => {
 			anims.classList.toggle("on");
 		});
 
-		anims.addEventListener('transitionend', (e) => {
-			if( e.propertyName == 'height' ){
+		anims.addEventListener("transitionend", (e) => {
+			if( e.propertyName == "height" ){
 				console.log(e.propertyName+' - Animation ended');
 			}
 		});
+
+		visualViewport.addEventListener("resize", function(){
+			console.log(visualViewport.width);	
+		});
+		window.addEventListener("load", function(){
+			console.log(visualViewport.width);	
+		});
 	</script>
 
-
+<!-- 
 	<style>
 	.droptarget { float: left; width: 100px; height: 35px; margin: 15px; padding: 10px; border: 1px solid #aaaaaa; }
 	</style>
@@ -180,6 +201,6 @@
 	}
 	</script>
 
-
+ -->
 </body>
 </html>
