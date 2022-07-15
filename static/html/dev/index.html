@@ -10,9 +10,9 @@
 </head>
 <body>
     <div class="wrap">
-        <include src="./menu.html" data-include-opt='{"class":"menu", "tit":"메뉴", "value":"dd", "count":"false"}'></include>
+        <include src="./menu.html" data-include-opt='{"class":"menu", "tit":"메뉴", "value":" dd ", "count":"false"}'></include>
         <include src="./fram.html" data-include-opt='{"class":"list", "tit":"제목", "data-ui":"dd"}'></include>
-        <include src="./inc2.html" data-include-opt='{"class":"is-hide", "display":"flex"}'></include>
+        <include src="./inc2.html" data-include-opt='{"class":"fff", "display":"none"}'></include>
     </div>
 <script> 
 const ia = {
@@ -154,19 +154,13 @@ const ia = {
                         console.log(url, opt, cout, inum);
                         const elc = els.firstElementChild;
                         for (const key in opt) {
-                            if (Object.hasOwnProperty.call(opt, key)) {
-                                const element = opt[key];
-
-                                console.log( key,element );
-                                if(key != "class" && key != "display"){
-                                    elc.setAttribute( key, element);
-                                }
+                            if(key != "class" && key != "display" && Object.hasOwnProperty.call(opt, key)){
+                                elc.setAttribute( key, opt[key].trim() );
                             }
                         }
-                        elc && opt.class   ? elc.classList.add(opt.class) : null;       /* class   */
-                        elc && opt.display ? elc.style.display = opt.display : null;    /* display */
-                        elc && opt.data    ? elc.setAttribute("data", opt.data) : null; /* data    */
-                        elc && opt.value    ? elc.setAttribute("value", opt.value) : null; /* data    */
+                        elc && opt.class   ? elc.classList.add( opt.class.trim() ) : null;       /* class   */
+                        elc && opt.display ? elc.style.display = opt.display.trim() : null;    /* display */
+
                         els.replaceWith( ...els.childNodes ); /* unwrap */
                         cout == inum ? _this.acti() : null;
                     });
@@ -186,7 +180,7 @@ const ia = {
 }; 
 
 window.addEventListener("load", e => {
-    if( typeof ia.html.set  == undefined ) {
+    if( typeof ia.html  == "undefined" ) {
         ia.init();
         console.log("ia.init(); 로드 완료");
     }else{
