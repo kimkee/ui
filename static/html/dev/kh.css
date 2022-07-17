@@ -3,9 +3,9 @@
 body {margin: 0rem 0rem 0rem 0rem; background-color: #222222; color: #989898;}
 a{transition: all 0.1s; }
 a:active{transform: translate3d(0.1rem, 0.1rem,0);}
-.wrap{max-width: 75rem;position: relative;padding: 2rem 44rem 2rem 2rem;height: calc(100vh - 1rem);}
+.wrap{max-width: 72rem;position: relative;padding: 2rem 44rem 2rem 1rem;height: calc(100vh - 1rem);}
 ul,li{padding: 0; margin: 0;}
-ul{margin: 0rem 0.5rem 2rem 0.5rem; padding: 2.4rem 0rem 0rem 0rem; position: relative; width: 100%; max-width: 25rem; display: block; vertical-align: top;} 
+ul{margin: 0rem 0.5rem 2rem 0.5rem;padding: 2.4rem 0rem 0rem 0rem;position: relative;width: 100%;max-width: 25rem;display: block;vertical-align: top;} 
 ul::before{content:" "attr(tit)""; font-weight: 700; font-size: 1.6rem; margin-left: 0rem; margin-bottom: 1rem; position: absolute;left: 0; top: 0; color: #dddddd;}
 ul:last-child>li:last-child i{user-select: none;} 
 li{list-style: none;margin: 0.5rem 3rem 0.5rem 0;position: relative;font-size: 1.4rem;padding: 0;}
@@ -19,7 +19,7 @@ li i{position: absolute;font-size: 0;position: absolute;right: 0.5rem; top: 0.5r
 li i::after{content: ""attr(tit)""; font-size: 1.1rem;}
 li a.active+i::after{color: #dadada;}
 .sect{}
-.sect.ifr{width: 405px;position: absolute;right: 2rem;top: 2rem;border-radius: 2.4rem;overflow: hidden;transition: all 0.4s;height: calc(100% - 3rem);} 
+.sect.ifr{width: 405px;position: absolute;left: 31rem;top: 2rem;border-radius: 2.4rem;overflow: hidden;transition: all 0.4s;height: calc(100% - 3rem);} 
 .sect.ifr.w320{width: 350px;height: 675px;}
 .sect.ifr .box{border: 1.8rem solid #484848; border-width: 5.7rem 1.5rem 5rem 1.5rem; height: calc(100% - 0rem);}
 .sect.ifr .iframe{width: 100%; height: 100%;}

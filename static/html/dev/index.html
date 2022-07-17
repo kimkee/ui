@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=768, initial-scale=1.0">
+    <meta name="viewport" content="width=720, initial-scale=1.0">
     <link href="../../img/common/favicon.ico" rel="shrtcut icon">
     <title>KH</title>
     <link rel="stylesheet" href="./kh.css">
@@ -12,7 +12,7 @@
     <div class="wrap">
         <include src="./menu.html" data-include-opt='{" class":" menu", " tit ":"메뉴", "value":" dd ", "count":"false"}'></include>
         <include src="./fram.html" data-include-opt='{"class":"list", "tit":"제목", "data-ui":"dd"}'></include>
-        <include src="./inc2.html" data-include-opt='{"class":"     fff", "display":"none"}'></include>
+        <include src="./inc2.html" data-include-opt='{"class":" fff", "display":"none"}'></include>
     </div>
 <script> 
 const ia = {
@@ -72,18 +72,18 @@ const ia = {
             };
 
             const setLink = glink => {
-                if (glink == null) { glink = loctxt + "../html/guide/ui.html" }; nlink.setAttribute("href", glink);
-                nlink.innerHTML = glink.replace("../html/", "");
+                if (glink == null) { glink = loctxt + "../guide/ui.html" }; nlink.setAttribute("href", glink);
+                nlink.innerHTML = glink.replace("../guide/", "");
                 iframe.setAttribute("src", glink);
                 localStorage.setItem("glink", glink);
             }
             setLink(glink);
 
-            document.getElementById('myframe').onload = function () {
+            document.getElementById('myframe').addEventListener("load", e => {
                 title.innerHTML = document.myframe.window.document.title;
                 console.log(glink, document.myframe.window.document.title);
                 setActive();
-            }
+            });
 
             glbts.forEach((el, idx) => {
                 el.addEventListener("click", e => {
@@ -99,7 +99,7 @@ const ia = {
                     const mylink = link.getAttribute("href");
                     glk == mylink ? link.classList.add("active") : link.classList.remove("active");
                 });
-                console.log("setActive()" , glk);
+                // console.log("setActive()" , glk);
             }
 
             /* iframe size */
@@ -145,7 +145,7 @@ const ia = {
                 incd.forEach( els => {
                     const url = els.getAttribute("src");
                     const opt = JSON.parse(els.getAttribute("data-include-opt")) || {};
-                    const obj = {}
+                    const obj = {};
                     Object.keys(opt).forEach( k => obj[k.trim()] = opt[k].trim() );
                     _this.fetch = fetch(url)
                     .then( res => res.ok ? res.text() : null )
@@ -154,7 +154,7 @@ const ia = {
                         els.innerHTML = res;
                         console.log(url, obj, cout+"/"+inum);
                         const elc = els.firstElementChild;
-                        for (const key in obj) {
+                        for(const key in obj){
                             const sxt = ( key != "class" && key != "display" && elc ) ;
                             sxt ? elc.setAttribute( key, obj[key] ) : null ;
                         }
