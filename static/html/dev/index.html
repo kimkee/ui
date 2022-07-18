@@ -104,18 +104,8 @@ const ia = {
 
             /* iframe size */
             const ifrm = document.querySelector(".ifr.sect");
-            ifrm.addEventListener("click", e => {
-                e.target.className == "time"
-                ? ifrm.classList.contains("w320")
-                ?	ifrm.classList.remove("w320")
-                : ifrm.classList.add("w320")
-                : null ;
-            });
-            ifrm.addEventListener("transitionend", e => {
-                if( e.propertyName == "width"){
-                    console.log( e.propertyName );
-                }
-            });
+            ifrm.addEventListener("click", e => e.target.className == "time" ? ifrm.classList.toggle("w320") : null );
+            ifrm.addEventListener("transitionend", e => e.propertyName == "width" ? console.log( e.propertyName ) : null );
             
             /* 시계 */
             const clock = document.querySelector(".time");
