@@ -30,9 +30,7 @@ const ia = {
             function appendHtml(el, str) {
                 var div = document.createElement('div');
                 div.innerHTML = str;
-                while (div.children.length > 0) {
-                    el.appendChild(div.children[0]);
-                }
+                while( div.children.length > 0 ){ el.appendChild(div.children[0]); }
             }
             document.querySelectorAll("ul").forEach((ul, i) => {
                 i++;
@@ -71,6 +69,14 @@ const ia = {
                 opt ? window.open(ilk, "_blank") : setLink(ilk);
             };
 
+            glbts.forEach( el => {
+                el.addEventListener("click", e => {
+                    const opt = e.ctrlKey ? true : false ;
+                    mclick(el, opt)
+                    e.preventDefault();
+                });
+            });
+
             const setLink = glink => {
                 if (glink == null) { glink = loctxt + "../guide/ui.html" }; nlink.setAttribute("href", glink);
                 nlink.innerHTML = glink.replace("../guide/", "");
@@ -79,28 +85,14 @@ const ia = {
             }
             setLink(glink);
 
-            document.getElementById('myframe').addEventListener("load", e => {
-                title.innerHTML = document.myframe.window.document.title;
-                console.log(glink, document.myframe.window.document.title);
-                setActive();
-            });
-
-            glbts.forEach((el, idx) => {
-                el.addEventListener("click", e => {
-                    const opt = e.ctrlKey ? true : false ;
-                    mclick(el, opt)
-                    e.preventDefault();
-                });
-            });
-
             const setActive = e => {
                 const glk = localStorage.getItem("glink");
-                document.querySelectorAll("a").forEach( link => {
-                    const mylink = link.getAttribute("href");
-                    glk == mylink ? link.classList.add("active") : link.classList.remove("active");
-                });
-                // console.log("setActive()" , glk);
+                const lks = document.querySelectorAll("a");
+                lks.forEach( link => glk == link.getAttribute("href") ? link.classList.add("active") : link.classList.remove("active") );
+                title.innerHTML = document.myframe.window.document.title;
+                console.log(glink, document.myframe.window.document.title);
             }
+            iframe.addEventListener("load", e => setActive() );
 
             /* iframe size */
             const ifrm = document.querySelector(".ifr.sect");
