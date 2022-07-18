@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=768, initial-scale=1.0">
+    <meta name="viewport" content="width=720, initial-scale=1.0">
     <link href="../../img/common/favicon.ico" rel="shrtcut icon">
     <title>KH</title>
     <link rel="stylesheet" href="./kh.css">
@@ -12,7 +12,7 @@
     <div class="wrap">
         <include src="./menu.html" data-include-opt='{" class":" menu", " tit ":"메뉴", "value":" dd ", "count":"false"}'></include>
         <include src="./fram.html" data-include-opt='{"class":"list", "tit":"제목", "data-ui":"dd"}'></include>
-        <include src="./inc2.html" data-include-opt='{"class":"     fff", "display":"none"}'></include>
+        <include src="./inc2.html" data-include-opt='{"class":" fff", "display":"none"}'></include>
     </div>
 <script> 
 const ia = {
@@ -30,9 +30,7 @@ const ia = {
             function appendHtml(el, str) {
                 var div = document.createElement('div');
                 div.innerHTML = str;
-                while (div.children.length > 0) {
-                    el.appendChild(div.children[0]);
-                }
+                while( div.children.length > 0 ){ el.appendChild(div.children[0]); }
             }
             document.querySelectorAll("ul").forEach((ul, i) => {
                 i++;
@@ -71,21 +69,7 @@ const ia = {
                 opt ? window.open(ilk, "_blank") : setLink(ilk);
             };
 
-            const setLink = glink => {
-                if (glink == null) { glink = loctxt + "../html/guide/ui.html" }; nlink.setAttribute("href", glink);
-                nlink.innerHTML = glink.replace("../html/", "");
-                iframe.setAttribute("src", glink);
-                localStorage.setItem("glink", glink);
-            }
-            setLink(glink);
-
-            document.getElementById('myframe').onload = function () {
-                title.innerHTML = document.myframe.window.document.title;
-                console.log(glink, document.myframe.window.document.title);
-                setActive();
-            }
-
-            glbts.forEach((el, idx) => {
+            glbts.forEach( el => {
                 el.addEventListener("click", e => {
                     const opt = e.ctrlKey ? true : false ;
                     mclick(el, opt)
@@ -93,35 +77,33 @@ const ia = {
                 });
             });
 
+            const setLink = glink => {
+                if (glink == null) { glink = loctxt + "../guide/ui.html" }; nlink.setAttribute("href", glink);
+                nlink.innerHTML = glink.replace("../guide/", "");
+                iframe.setAttribute("src", glink);
+                localStorage.setItem("glink", glink);
+            }
+            setLink(glink);
+
             const setActive = e => {
                 const glk = localStorage.getItem("glink");
-                document.querySelectorAll("a").forEach( link => {
-                    const mylink = link.getAttribute("href");
-                    glk == mylink ? link.classList.add("active") : link.classList.remove("active");
-                });
-                console.log("setActive()" , glk);
+                const lks = document.querySelectorAll("a");
+                lks.forEach( link => glk == link.getAttribute("href") ? link.classList.add("active") : link.classList.remove("active") );
+                title.innerHTML = document.myframe.window.document.title;
+                console.log(glink, document.myframe.window.document.title);
             }
+            iframe.addEventListener("load", e => setActive() );
 
             /* iframe size */
             const ifrm = document.querySelector(".ifr.sect");
-            ifrm.addEventListener("click", e => {
-                e.target.className == "time"
-                ? ifrm.classList.contains("w320")
-                ?	ifrm.classList.remove("w320")
-                : ifrm.classList.add("w320")
-                : null ;
-            });
-            ifrm.addEventListener("transitionend", e => {
-                if( e.propertyName == "width"){
-                    console.log( e.propertyName );
-                }
-            });
+            ifrm.addEventListener("click", e => e.target.className == "time" ? ifrm.classList.toggle("w320") : null );
+            ifrm.addEventListener("transitionend", e => e.propertyName == "width" ? console.log( e.propertyName ) : null );
             
             /* 시계 */
             const clock = document.querySelector(".time");
-            const dgit = (n) => n < 10 ? "0"+n : n;
-            const ampm = (n) => n > 12 ? "PM "+ dgit( n-12 ) : "AM "+ dgit(n);
-            const setT = ( ) => {
+            const dgit = n => n < 10 ? "0"+n : n;
+            const ampm = n => n > 12 ? "PM "+ dgit( n-12 ) : "AM "+ dgit(n);
+            const setT = n => {
                 const date = new Date();
                 const time = ampm( date.getHours() ) +":"+ dgit( date.getMinutes() +":"+ dgit( date.getSeconds() ));
                 clock.innerText = time;
@@ -145,7 +127,7 @@ const ia = {
                 incd.forEach( els => {
                     const url = els.getAttribute("src");
                     const opt = JSON.parse(els.getAttribute("data-include-opt")) || {};
-                    const obj = {}
+                    const obj = {};
                     Object.keys(opt).forEach( k => obj[k.trim()] = opt[k].trim() );
                     _this.fetch = fetch(url)
                     .then( res => res.ok ? res.text() : null )
@@ -154,8 +136,9 @@ const ia = {
                         els.innerHTML = res;
                         console.log(url, obj, cout+"/"+inum);
                         const elc = els.firstElementChild;
-                        for (const key in obj) {
-                            key != "class" && key != "display" && elc ? elc.setAttribute( key, obj[key] ) : null ;
+                        for(const key in obj){
+                            const sxt = ( key != "class" && key != "display" && elc ) ;
+                            sxt ? elc.setAttribute( key, obj[key] ) : null ;
                         }
                         elc && obj.display ? elc.style.display = obj.display : null;    /* display */
                         elc && obj.class   ? elc.classList.add( obj.class ) : null;     /* class   */
