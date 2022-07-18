@@ -64,7 +64,7 @@ const ia = {
             const glbts = document.querySelectorAll(".sect a");
             const iframe = document.querySelector(".iframe");
 
-            const mclick = (el, opt) => {
+            const mClick = (el, opt) => {
                 var ilk = el.getAttribute("href");
                 opt ? window.open(ilk, "_blank") : setLink(ilk);
             };
@@ -72,7 +72,7 @@ const ia = {
             glbts.forEach( el => {
                 el.addEventListener("click", e => {
                     const opt = e.ctrlKey ? true : false ;
-                    mclick(el, opt)
+                    mClick(el, opt)
                     e.preventDefault();
                 });
             });
