@@ -126,37 +126,33 @@ const ia = {
             const _this = this;
             const inum = incd.length;
             let cout = 0;
-            if( inum ){
-                incd.forEach( els => {
-                    const url = els.getAttribute("src");
-                    const opt = JSON.parse(els.getAttribute("data-include-opt")) || {};
-                    const obj = {};
-                    Object.keys(opt).forEach( k => obj[k.trim()] = opt[k].trim() );
-                    _this.fetch = fetch(url)
-                    .then( res => res.ok ? res.text() : null )
-                    .then( res => { 
-                        cout++;
-                        els.innerHTML = res;
-                        console.log(url, obj, cout+"/"+inum);
-                        const elc = els.firstElementChild;
-                        /* attr */
-                        for(const key in obj){
-                            const sxt = ( key != "class" && key != "display" && elc ) ;
-                            sxt ? elc.setAttribute( key, obj[key] ) : null ;
-                        }
-                        /* display */
-                        elc && obj.display ? elc.style.display = obj.display : null;
-                        /* class */
-                        const cls = elc && obj.class ? obj.class.split(" ") : null;
-                        for(const c in cls) elc.classList.add( cls[c] );
-                        /* unwrap */
-                        els.replaceWith( ...els.childNodes );
-                        cout == inum ? _this.acti() : null;
-                    });
+            incd.forEach( els => {
+                const url = els.getAttribute("src");
+                const opt = JSON.parse(els.getAttribute("data-include-opt")) || {};
+                const obj = {};
+                Object.keys(opt).forEach( k => obj[k.trim()] = opt[k].trim() );
+                _this.fetch = fetch(url)
+                .then( res => res.ok ? res.text() : null )
+                .then( res => { 
+                    cout++;
+                    els.innerHTML = res;
+                    console.log(url, obj, cout+"/"+inum);
+                    const elc = els.firstElementChild;
+                    /* attr */
+                    for(const key in obj){
+                        const sxt = ( key != "class" && key != "display" && elc ) ;
+                        sxt ? elc.setAttribute( key, obj[key] ) : null ;
+                    }
+                    /* display */
+                    elc && obj.display ? elc.style.display = obj.display : null;
+                    /* class */
+                    const cls = elc && obj.class ? obj.class.split(" ") : null;
+                    for(const c in cls) elc.classList.add( cls[c] );
+                    /* unwrap */
+                    els.replaceWith( ...els.childNodes );
+                    cout == inum ? _this.acti() : null;
                 });
-            }else{
-                _this.acti();
-            }
+            });
         },
         acti: function(){
             this.comp = true;

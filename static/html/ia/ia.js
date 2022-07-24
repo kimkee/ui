@@ -30,7 +30,6 @@ var ia = {
 				news = $.extend(orgs,news);
 				// news = Object.assign(orgs,news);
 			}
-			console.log(name);
 			localStorage.setItem(name, JSON.stringify(news) );
 		},
 		get:function(name,key){
