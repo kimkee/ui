@@ -26,7 +26,8 @@ li a.active+i::after{color: #dadada;}
 .sect.ifr .bts{position: absolute;bottom: 1rem; left: 1.5rem; right: 1.5rem; z-index: 10;text-align: center;}
 .sect.ifr .urls{position: absolute;top: 2.4rem; right: 1.5rem; left: 1.5rem; z-index: 10; text-align: center;display: flex; justify-content: space-between; align-items: center; background: #000; border-radius: 1rem 1rem 0 0;height: 3rem; padding: 0.5rem 1rem 0.5rem 1.5rem; font-weight: 700; user-select: none;}
 
-.sect.ifr .urls .time{color: #c1c1c1; font-style: normal; font-size: 1.1rem; position: absolute;left: 0rem; right: 0rem;text-align: center; top: -1.6rem; font-family: 'Arial';}
+.sect.ifr .urls .time{color: #c1c1c1;font-style: normal;font-size: 1.1rem;position: absolute;left: 0rem;right: 0rem;text-align: left;top: -1.6rem;font-family: 'Arial';}
 .sect.ifr .urls .title{font-style: normal; color: #eeeeee; font-size: 1.2rem; user-select: none;}
-.sect.ifr .urls .link-now{display: block; color: #dddddd; font-size: 1.2rem; background: #000;border-radius: 1rem 1rem 0 0; text-decoration: none; text-align: right; font-family: "Tahoma"; user-select: none;}
+.sect.ifr .urls .link-now{display: block;color: #dddddd;font-size: 1.2rem;background: #000;border-radius: 1rem 1rem 0 0;text-decoration: none;text-align: right;font-family: "Tahoma";user-select: none;position: absolute;left: 0;top: 0rem;bottom: 0rem;opacity: 0;}
+.sect.ifr .urls input.now{display: block;color: #dddddd;font-size: 1.2rem;background: #000;text-align: right;font-family: "Tahoma";border: none;width: 3rem;}
 .sect.ifr .bts .bt-f{width: 3.2rem; height: 3.2rem; background: #ddd; display: inline-block; border-radius: 30rem; font-size: 0;vertical-align: middle;user-select: none;}
