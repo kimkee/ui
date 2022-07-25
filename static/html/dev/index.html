@@ -61,6 +61,7 @@ const ia = {
 
             const title = document.querySelector(".title");
             const nlink = document.querySelector(".link-now");
+            const ntext = document.querySelector("input.now");
             const glbts = document.querySelectorAll(".sect a");
             const iframe = document.querySelector(".iframe");
 
@@ -80,10 +81,13 @@ const ia = {
             const setLink = glink => {
                 if (glink == null) { glink = loctxt + "../guide/ui.html" }; nlink.setAttribute("href", glink);
                 nlink.innerHTML = glink.replace("../guide/", "");
+                ntext.value = glink.replace("../guide/", "");
+                ntext.style.width = ntext.scrollWidth / 10+"rem";
                 iframe.setAttribute("src", glink);
                 localStorage.setItem("glink", glink);
             }
             setLink(glink);
+            ntext.addEventListener("focus", e => e.target.select())
 
             const setActive = e => {
                 const glk = localStorage.getItem("glink");
