@@ -5,7 +5,7 @@
 
 ### ui.alert();
   > 커스텀 알럿창 Alert UI
-  ```
+  ``` js
   ui.alert('공통 알럿창입니다.'); // 옵션없이 메시지만..
   ui.alert('공통 알럿창입니다.',{ // 알럿 옵션들
     tit:"알럿타이틀",
@@ -17,7 +17,7 @@
   ```
 ### ui.confirm();
   > 커스텀 컨펌창 Confirm UI
-  ```
+  ``` js
   ui.confirm('공통 컨펌창 입니다.',{ // 컨펌 창 옵션들
     tit:"컨펌타이틀",
     ycb:function(){
@@ -32,7 +32,7 @@
   ```
 ### ui.toast();
   > 토스트창 하단에서 올라오는 알림메시지 UI
-  ```
+  ``` js
   // 토스트 창띄우기
   ui.toast('토스트메시지입니다.');
   ui.toast('토스트메시지입니다.',{
@@ -43,7 +43,7 @@
   ```
 ### ui.popup
   > 레이어팝업 뛰우기 (전체,가운데,하단에 띄우기)  히스토리백 historyback 레이어팝업 닫기 지원
-```
+``` js
 ui.popup.open('pop-sample1'); // 팝레이어열기
 ui.popup.close('pop-sample1'); // 팝레이어닫기
 ui.popup.refresh('pop-sample1'); // 팝스크롤새로고침
@@ -55,6 +55,8 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
         console.log("pop-sample1 닫힘");
     }
 });
+```
+``` html
 <article class="pop-layer a pop-sample1" id="pop-sample1">
     <div class="pbd">
         <div class="phd">
@@ -78,14 +80,14 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
 </article>
 ```
 ### ui.isUA(t);
-  ```
+  ``` js
   ui.isUA("Chrome");  // true
   ui.isUA("Windows"); // false
   ui.isUA("Chrome Windows"); // false
   ```
 ### ui.form.attach();
   > 첨부파일 UI
-  ```
+  ``` html
   <span class="ui-add-file on" data-ui="attach">
       <span class="btn-attach btn">
           <label class="fileButton">파일선택<input type="file" class="fileInput" accept="*/*"></label>
@@ -98,7 +100,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
   ```
 ### ui.form.chkall();
   > 첵크박스 모두 첵크
-  ```
+  ``` html
 <label class="checkbox"><input type="checkbox" data-check="all" data-check-id="checkTest1"><span>전체선택</span></label>
 <label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택1</span></label>
 <label class="checkbox"><input type="checkbox" data-check="check" data-check-id="checkTest1"><span>선택2</span></label>
@@ -108,7 +110,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
 
 ### ui.form.spinner();
   > 수량입력 최고수량 data-max="5"
-  ```
+  ``` html
   <div class="ui-amts" data-min="1" data-max="5">
     <input type="text" value="1" class="amt" title="수량선택">
     <button type="button" class="bt minus">수량더하기</button>
@@ -117,7 +119,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
   ```
 ### ui.form.spined();
 > 수량선택
-```
+``` html
 <span class="ui-amtd" data-max="5"><input class="amt" value="3" type="number"></span>
 <span class="ui-amtd" data-max="12"><input class="amt" value="5" type="number"></span>
 <span class="ui-amtd" data-max="20"><input class="amt" value="15" type="number"></span>
@@ -125,13 +127,13 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
 ![image](https://user-images.githubusercontent.com/6386956/109746477-cc163980-7c18-11eb-83d1-514bb6e7ec6f.png)
 ### ui.loading;
   > 로딩중...  ui.loading.show(); ui.loading.hide();
-  ```
+  ``` js
   ui.loading.show(); // 로딩열기
   ui.loading.hide(); // 로딩닫기
   ```
 ### ui.datePick
   > 달력 날짜 선택 - 일선택,주선택,월선택
-  ```
+  ``` html
 <span class="input db ui-date"><input type="text"  placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
 <div class="weeks"><span id="START_DT"></span> ~ <span id="END_DT"></span></div>
 <span class="ui-date input db week"><input type="text" id="schedWeek" value="2019-04-09" placeholder="YYYY-MM-DD" class="datepicker" readonly></span>
@@ -143,7 +145,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
 ![image](https://user-images.githubusercontent.com/6386956/81261279-c098c700-9076-11ea-8061-dda43bdb0a2c.png)
 ### ui.tog
   > 토글 UI
-  ```
+  ``` html
   <a href="javascript:;" data-ui-tog="btn" data-ui-tog-val="tog_sample1" class="btn">토글UI</a>
   <div data-ui-tog="ctn" data-ui-tog-val="tog_sample1">
       <p>토글내용 토글내용</p>
@@ -152,20 +154,20 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
   ```
 ### ui.lock.using();
   > 화면 스크롤 잠금,풀기 (레이어팝업 띄울때 사용)
-  ``` 
+  ``` js
   ui.lock.using(true);  // 잠금
   ui.lock.using(false); // 풀기
   ```
   
 ### ui.cookie;
   > 쿠키설정, 
-  ``` 
+  ```  js
   ui.cookie.set(cname, cvalue, exdays);  // cname(이름), cvalue(값), exdays(시간)
   ui.cookie.get(cname); // cname(이름)
   ```
 
 ### 버튼
-```
+``` html
 <a href="javascript:;" class="btn xs">버튼</a>
 <a href="javascript:;" class="btn sm">버튼</a>
 <a href="javascript:;" class="btn md">버튼</a>
@@ -176,14 +178,14 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
 ```
 ![image](https://user-images.githubusercontent.com/6386956/109746618-05e74000-7c19-11eb-9be1-756c527b6496.png)
 ### 폼요소
-```
+``` html
 <label class="checkbox"><input type="checkbox"><span class="txt">선택</span></label>
 <label class="radio"><input type="radio" name="radio1"><span class="txt">선택</span></label>
 <div class="ui-chk"><input type="checkbox" title="텍스트" checked><em></em></div>
 ```
 ![image](https://user-images.githubusercontent.com/6386956/109746757-434bcd80-7c19-11eb-8c86-f58cd3f04a40.png)
 ### 입력
-```
+``` html
 <span class="input"><input type="text" placeholder="텍스트"></span>
 <span class="input del"><input type="text" placeholder="삭제버튼" value="텍스트"></span>
 <span class="input sch"><input type="text" placeholder="검색어 입력"><a href="javascript:;" class="btnSch">검색</a></span>
@@ -191,7 +193,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
 ```
 ![image](https://user-images.githubusercontent.com/6386956/109746945-9de52980-7c19-11eb-8f92-b4092070be93.png)
 ### Select
-  ```
+  ``` html
   <span class="select"> //기본UI
       <select>
           <option>선택1</option>
@@ -206,7 +208,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
   </span>
   ```
 ### 별점
-```
+``` html
 <div class="ui-star">  // 별점 보기
     <input type="hidden" class="amt" value="3.5">
     <ul>
@@ -232,7 +234,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
 ```
 ![image](https://user-images.githubusercontent.com/6386956/81248311-02b21080-9057-11ea-8174-fa4922a978d0.png)
 ### 탭UI
-  ```
+  ``` html
   <ul class="ui-tab a">
       <li class="active"><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_1" href="javascript:;">탭메뉴1</a></li>
       <li><a data-ui-tab-btn="tab_c" data-ui-tab-val="tab_c_2" href="javascript:;">탭메뉴2</a></li>
@@ -246,7 +248,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
   ```
 ![image](https://user-images.githubusercontent.com/6386956/81248519-748a5a00-9057-11ea-9c37-a7ba4f965ca6.png)
 ### 아코디언
-  ```
+  ``` html
   <ul class="ui-accd" data-accd="accd">
       <li class="open">
           <div class="hbox">타이틀 <button type="button" class="btn-tog">버튼</button></div>
@@ -265,7 +267,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
   ![image](https://user-images.githubusercontent.com/6386956/81160926-b4a0fc80-8fc5-11ea-8a31-f68701e4e9e8.png)
 
 ### 툴팁레이어
-```
+``` html
 <a href="javascript:;" class="ico-warning" data-ui-tooltip="btn" data-ui-tooltip-cont="tooltip-email">!</a>
 <!-- 툴팁 레이어 -->
 <article class="ui-tooltips" data-tooltip-cont="tooltip-email">
@@ -288,7 +290,7 @@ ui.popup.open('pop-sample1',{  // 레이어팝업 콜백
 ```
 
 ### 리스트 More Load
-```
+``` html
 <section class="ut-tblist">
     <ul class="list" id="dp_list"></ul>
     <div class="ui-loadmore">

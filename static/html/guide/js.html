@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<link href="/static/img/common/favicon.ico" rel="shrtcut icon">
+	<link href="./static/img/common/favicon.ico" rel="shrtcut icon">
 	<title>JS</title>
 </head>
 <body style="background-color: #444444; color:#999999;">
@@ -16,10 +16,10 @@
 		<li><a href="javascript:;">kk</a></li>
 	</ul>
 
-	<div class="anims">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab natus, quas quis id necessitatibus aperiam. Cumque qui esse reiciendis ratione earum nam consequatur repellendus, debitis fuga eius numquam, blanditiis cupiditate.</div>
+	<div class="anims">d</div>
 	<style>
-		.anims{transition: all 0.4s; max-height: 44px; background-color: #999999; width: 100%; overflow: hidden;}
-		.anims.on{max-height:300px;}
+		.anims{transition: all 0.4s; height: 44px; background-color: #999999; width: 100%;}
+		.anims.on{height: 100px; width: 50%;}
 	</style>
 	<script>
 		/* 		
@@ -57,14 +57,6 @@
 			console.log( arr );
 			for (var i = 0; i < arr.length; i++) {
 				el.classList.add(arr[i]);
-			}
-		};
-		Element.prototype.removeClass = function(cls){
-			var el = this;
-			var arr = cls.trim().split(" ");
-			console.log( arr );
-			for (var i = 0; i < arr.length; i++) {
-				el.classList.remove(arr[i]);
 			}
 		};
 		Element.prototype.toggleClass = function(cls) {

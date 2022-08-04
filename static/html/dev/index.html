@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="./kh.css">
 </head>
 <body>
-    <div class="keypad">
-        <ul class="pad"></ul>
-    </div>
     <div class="wrap">
         <include src="./menu.html" data-include-opt='{" class":" menu mm", " tit ":"메뉴", "value":" dd ", "count":"false"}'></include>
         <include src="./fram.html" data-include-opt='{"class":"list", "tit":"제목", "data-ui":"dd"}'></include>
@@ -186,50 +183,9 @@ window.addEventListener("load", e => {
         });
     }
 });
-</script>
 
-<script data-discript="배열요소뽑기">
-const arrs = [1,2,3,4,5,6,7,8,9,10];
-const game = cc => {
-    let rdom = e => Math.floor( Math.random() * arrs.length );
-    let prnt = t => console.log(t, rr, arrs);
-    let rr = arrs.splice( rdom() , 1); /* 섞기 */
-    rr == cc ? prnt("👍") : prnt("🤢");
-};
-game(3);
-</script>
 
-<script data-discript="키패드섞기">
-const kset = cc => {
-    const kpad = document.querySelector(".keypad .pad");
-    const norg = [0,1,2,3,4,5,6,7,8,9];
-    const nums = [...norg];
-    const rdom = e => Math.floor( Math.random() * nums.length );
-    const choc = e => nums.splice( rdom() , 1);
-    let btn = '';
-    let bn = '';
-    let bx = '<button type="button" value="delete" class="bt bt-del">X</button>';
-    let bc = '<button type="button" value="clear" class="bt bt-clr">Clear</button>';
-    for(let i in norg ) {
-        let pp = choc(); /* 뽑기 */
-        let bt = '<button type="button" value="'+pp+'" class="bt">'+pp+'</button>';
-        console.log(i , pp , nums);
-        i == 8  ? bn = bc : null ; 
-        i == 9  ? bn = bx : null ;        
-        btn += bt + bn;
-    }
-    kpad.innerHTML = btn;
-};
-kset();
 </script>
-
-<style>
-.keypad{ background-color: #dddddd;width: 100%;}
-.keypad .pad{width: 100%;  max-width: 100%; display: flex; flex-wrap: wrap;  padding: 0; margin: 0px;}
-.keypad .pad .bt{width: calc(100% / 3 + 1px ); height: 4rem; margin: -1px 0px 0px -1px;background-color: #333333; border: 1px solid #000000; color: #999999; }
-.keypad .pad .bt:hover{background-color: #222222;}
-.keypad .pad .bt:active{background-color: #111111;}
-</style>
 
 </body>
 </html>

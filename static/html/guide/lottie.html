@@ -3,7 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>인덱스</title>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>UI</title>
+	<meta name="format-detection" content="telephone=no">
+	<meta name="theme-color" content="#333333">
 </head>
 <body>
 	<script>
@@ -12,12 +15,14 @@
 	</script>
 
 	<style>
-		.anim{width: 100px; height: 100px; display: inline-block; vertical-align: middle; position: relative;}
+		.lottie{display: flex;}
+		.lottie .anims{width: 100px; height: 100px; display: inline-block; vertical-align: middle; position: relative;}
 	</style>
-	<div>
-		<span class="anim" id="anim1"></span>
-		<span class="anim" id="anim2"></span>
-		<span class="anim" id="anim3"></span>
+	
+	<div class="lottie">
+		<span class="anims" id="anim1"></span>
+		<span class="anims" id="anim2"></span>
+		<span class="anims" id="anim3"></span>
 	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.4/lottie.min.js"></script>
@@ -32,7 +37,7 @@
 					renderer: "canvas",
 					path:"./static/"+nm+".json",
 				}
-				Object.assign(_this.opt, params);
+				Object.assign(_this.opt, params)
 
 				console.log(nm, _this.opt , document.getElementById(nm).firstElementChild );
 				
@@ -48,8 +53,8 @@
 		}
 
 		lottieSet.draw("anim1",{
-			
-			// path:"./static/anim2.json",
+			loop:false,
+			path:"anim1",
 			path:"https://assets4.lottiefiles.com/packages/lf20_keqlhgrz.json"
 		});
 		lottieSet.draw("anim2",{
@@ -59,13 +64,13 @@
 		});
 		lottieSet.draw("anim3",{
 			loop:true,
-			path:"https://assets4.lottiefiles.com/packages/lf20_01bh9ld2.json"
+			path:"https://assets4.lottiefiles.com/packages/lf20_crjwdlqs.json"
 		});
 	</script>
 	
 	<style>
 		body{background-color: #ffffff;}
-		.ui-loading{display: none; position: fixed; left: 0; right: 0; top: 0; bottom: 0; z-index: 9000; background: rgba(255, 255, 255, 0.5)}
+		.ui-loading{display: n one; position: fixed; left: 0; right: 0; top: 0; bottom: 0; z-index: 9000; background: rgba(255, 255, 255, 0.5)}
 		.ui-loading>.bx{pointer-events: none; position: absolute; width: 50px; text-align: center; top: 50%; left: 50%; transform: translate3d(-50%,-50%,0); }
 		.ui-loading>.bx em{display: flex; justify-content: center;}
 		.ui-loading>.bx em i,
