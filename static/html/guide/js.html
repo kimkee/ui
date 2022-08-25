@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<link href="./static/img/common/favicon.ico" rel="shrtcut icon">
+	<link href="../../img/common/favicon.ico" rel="shrtcut icon">
 	<title>JS</title>
 </head>
 <body style="background-color: #444444; color:#999999;">
@@ -12,6 +12,9 @@
 		<li><a href="javascript:;">kk</a></li>
 	</ul>
 	<ul>
+		<li><a href="javascript:;">kk</a></li>
+		<li><a href="javascript:;">kk</a></li>
+		<li><a href="javascript:;">kk</a></li>
 		<li><a href="javascript:;">kk</a></li>
 		<li><a href="javascript:;">kk</a></li>
 	</ul>
@@ -98,7 +101,20 @@
 				return !!!( this.offsetWidth || this.offsetHeight || this.getClientRects().length )
 			}
 		}
+		Element.prototype.index = function(){ /* document.querySelector("li.m5").index(); */
+			var child = this.parentNode.childNodes;
+			var num = 0;
+			for(var i = 0; i < child.length; i++){
+				if( child[i] == this ) return num;
+				if( child[i].nodeType == 1 ) num++;
+			}
+			return -1;
+		}
+
+
+
 		
+
 		// document.querySelector("ul").addClass(" aa s ");
 		console.log( $("ul") ); 
 		$("ul").forEach(function(els,idx){
