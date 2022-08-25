@@ -110,9 +110,18 @@
 			}
 			return -1;
 		}
-
-
-
+		Element.prototype.siblings = function(opt){
+			console.log(opt);
+			const el = this;
+			const children = el.parentElement.children;
+			const tempArr = [];
+			for(let i = 0; i < children.length; i++) {    
+				tempArr.push(children[i]);
+			}
+			return tempArr.filter(function(e){
+				return e != el;
+			});
+		}
 		
 
 		// document.querySelector("ul").addClass(" aa s ");
