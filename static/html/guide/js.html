@@ -62,6 +62,14 @@
 				el.classList.add(arr[i]);
 			}
 		};
+		Element.prototype.removeClass = function(cls){
+			var el = this;
+			var arr = cls.trim().split(" ");
+			console.log( arr );
+			for (var i = 0; i < arr.length; i++) {
+				el.classList.remove(arr[i]);
+			}
+		};
 		Element.prototype.toggleClass = function(cls) {
 			var el = this;
 			var arr = cls.split(" ");
