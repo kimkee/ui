@@ -4,6 +4,7 @@
 		this.menu.init();
 		this.uimenu.init();
 		this.bar();
+		this.gohub.init();
 		console.log("ui.html.init();");
 	},
 	tit:function(){
@@ -276,15 +277,34 @@
 			var tOrg = window.location.origin;
 			var tIp = window.location.hostname;
 			//console.log(tPort, tUrl);
-			if(tPort == "8082"){
-				location.href = tUrl.replace(tHost,"kimkee.github.io");
+			if(tPort == "9002"){
+				// location.href = tUrl.replace(tHost,"kimkee.github.io");
 			}
 			if(tOrg == "https://kimkee.gitlab.io" || tOrg == "https://kimkee.github.io"){
 				location.href = tUrl.replace(tOrg,"http://localhost:8082");
 			}
 
 		}
-	}
+	},
+    gohub:{
+		init: function(){
+			this.evt();	
+		},
+		evt: function(){
+			document.addEventListener("keydown", e => e.code == "F2" ? this.set() : null );
+		},
+		set: function(){
+            const l = location;
+            const t = ["127.0.0.1","localhost","192.168.0.55"].includes(l.hostname);
+			const k = { 
+                m: ["127.0.0.1:9002","http:"],
+                p: ["kimkee.github.io","https:"]
+            };
+			t ? l.href = l.href.replace(l.host, k.p[0]).replace(l.protocol, k.p[1])
+              : l.href = l.href.replace(l.host, k.m[0]).replace(l.protocol, k.m[1]);
+            
+		}
+	},
 };
 
 $(document).ready(function(){
