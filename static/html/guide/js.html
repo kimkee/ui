@@ -18,13 +18,40 @@
 		<li><a href="javascript:;">kk</a></li>
 		<li><a href="javascript:;">kk</a></li>
 	</ul>
-
+	<p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p>
+	<p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p>
+	<p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p>
+	<p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p>
+	<p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p>
+	<p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p>
+	<p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p>
+	<p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p>
+	<p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p>
+	<p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p><p>d</p>
 	<div class="anims">d</div>
 	<style>
 		.anims{transition: all 0.4s; height: 44px; background-color: #999999; width: 100%;}
 		.anims.on{height: 100px; width: 50%;}
 	</style>
 	<script>
+
+		function scrollTo(element, to, duration) {
+			if (duration < 0) return;
+			var difference = to - element.scrollTop;
+			var perTick = difference / duration * 2;
+			console.log(element  , perTick);
+
+			setTimeout(function() {
+				element.scrollTop = element.scrollTop + perTick;
+				scrollTo(element, to, duration - 2);
+			}, 10);
+		}
+
+		document.querySelector('.anims').onclick = function () {
+			scrollTo(document.querySelector("html"), 0, 50);
+		};
+
+
 		/* 		
 		document.querySelectorAll("ul").forEach((ul,i)=>{
 			i++;
@@ -169,22 +196,16 @@
 		// },2000);
 		const anims = document.querySelector(".anims");
 
-		anims.addEventListener("click", () => {
-			anims.classList.toggle("on");
-		});
+		anims.addEventListener("click", e => e.target.classList.toggle("on") );
 
-		anims.addEventListener("transitionend", (e) => {
+		anims.addEventListener("transitionend", e => {
 			if( e.propertyName == "height" ){
 				console.log(e.propertyName+' - Animation ended');
 			}
 		});
 
-		visualViewport.addEventListener("resize", function(){
-			console.log(visualViewport.width);	
-		});
-		window.addEventListener("load", function(){
-			console.log(visualViewport.width);	
-		});
+		visualViewport.addEventListener("resize", e => console.log( e, visualViewport.height ) );
+		window.addEventListener("load", e => console.log( visualViewport.height ) );
 	</script>
 
 <!-- 

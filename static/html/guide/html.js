@@ -307,7 +307,5 @@
 	},
 };
 
-$(document).ready(function(){
-	ui.html.set.init();
-});
+$(document).ready( ui.html.set.init() );
 
