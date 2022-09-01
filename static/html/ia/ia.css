@@ -234,7 +234,7 @@ body.pc .ia-head .link>li.active .lk{background: #1065a5;}
 .ia-body table.tbl tr.del td.stat::before{background-color: #a7a7a7;}
 .ia-body table.tbl tr.wan td.stat::before{background-color: #f1344d;animation: aniblink 0.7s infinite steps(30);color: #ffffff !important;}
 .ia-body table.tbl tr.sty.none td.stat{color: rgba(125 ,125, 125 , 0.6);font-weight: normal;}
-.ia-body table.tbl tr.sty.none td.stat::before{background-color: #44444400;color: #7d7d7d;opacity: 0.6;}
+.ia-body table.tbl tr.sty.none td.stat::before{background-color: #44444400;color: #7d7d7d;/* opacity: 0.6; */}
 
 .ia-body table.tbl tr.del{}
 .ia-body table.tbl tr.del td{position:relative;}
