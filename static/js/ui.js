@@ -536,6 +536,17 @@ var ui = { //
                 $(".floatnav").addClass("hide");
             },
             init:function(){
+                /* 스크롤 멈춤 이벤트 pure js */
+                var timer = null;
+                window.addEventListener('scroll', function() {
+                    if(timer !== null) {
+                        clearTimeout(timer);        
+                    }
+                    timer = setTimeout(function() {
+                        console.log("scrollStoped");
+                    }, 1000);
+                }, false);
+
 
                 $.fn.scrollStopped = function(callback) { // 스크롤 스톱 scroll stop event  
                     $(this).scroll(function(){
