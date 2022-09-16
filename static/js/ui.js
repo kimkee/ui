@@ -1894,15 +1894,15 @@ var ui = { //
                 _this.close(bt);
             });
             $(document).on({
-                "mouseenter": function(e) {
+                "mouseenter": function(e) {
                     _this.open(this);
-                },
-                "mouseleave": function(e) {
+                },
+                "mouseleave": function(e) {
                     _this.close(this);
-                },
-                "click": function(e) {
+                },
+                "click": function(e) {
                     e.preventDefault();
-                }
+                }
             }, els);
         },
         open:function(els){
@@ -1922,14 +1922,14 @@ var ui = { //
             var t = $(els).offset().top  || 0;
             console.log(l,t);
             if (t >= winHf + scY) { // console.log("top-오버");
-                t = t - scY - ulayH;
+                t = t - scY - ulayH;
             } else { // console.log("top-하프");
-                t = t - scY + elH;
+                t = t - scY + elH;
             }
             if (l >= winWf + scX) { // console.log("left-오버");
-                l = l - scX - ulayW;
+                l = l - scX - ulayW;
             } else { // console.log("left-하프");
-                l = l - scX + elW;
+                l = l - scX + elW;
             }
             // console.log(l,t);
             $(chl).css({ "top": t, "left": l });

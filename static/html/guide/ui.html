@@ -1952,7 +1952,7 @@ $(document).ready(function(){
         navigator.clipboard.writeText(hljsTxt);/* 텍스트 클립보드 복사 */
         self.innerText = 'Copied !';
         self.classList.add('on');
-        setTimeout(() => {
+        setTimeout( e => {
             self.innerText = 'Copy';
             self.classList.remove('on');
         },1000);
