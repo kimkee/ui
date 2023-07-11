@@ -27,7 +27,7 @@ const extention = {
 	},
 	bgs:{
 		init: function(){
-			
+			 
 		}
 	},
 	param:(function(a) { // URL에서 파라미터 읽어오기  ui.param.***
