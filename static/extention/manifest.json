@@ -2,19 +2,23 @@
 	"manifest_version": 3,
 	"name": "App test",
     "description":"App test 설명",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
 			"js": ["index.js"]
+		},
+		{
+			"matches": ["<all_urls>"],
+			"css": ["css/style.css"]
 		}
 	],
 	"icons": {
-		"256": "symbol_color.png"
+		"256": "img/symbol_color.png"
 	},
 	"action": {
 		"default_title": "My",
-		"default_icon": "symbol_color.png",
+		"default_icon": "img/symbol_color.png",
 		"default_popup": "popup.html"
 	},
   	"permissions": ["tabs"],
