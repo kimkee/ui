@@ -24,6 +24,14 @@ address,em,i{font-style:normal; }
 *,::before,::after{-webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box;}
 *{outline-color: rgb(0 114 255 / 20%);}
 ::-ms-clear{display: none; }
+
+
+:root {
+    --safe-top: calc( env(safe-area-inset-top)   );
+    --safe-bottom: calc( env(safe-area-inset-bottom)  );
+}
+
+
 /* clears the 'X' from Internet Explorer */
 input[type=search]::-ms-clear{display:none; width:0; height:0; }
 input[type=search]::-ms-reveal{display:none; width:0; height:0; }
@@ -335,16 +343,16 @@ input::-webkit-datetime-edit-text { /* color: transparent; */ }
 .page.ui .tbdevice em.ie::before	{background-image: url(../img/common/bs_ie.png);}
 .page.ui .tbdevice em.android::before	{background-image: url(../img/common/bs_android.png);}
 .page.ui .tbdevice em.ios::before	{background-image: url(../img/common/bs_ios.png);}
-#bar-ht{height: 1px;background-color: #d4d4d4;position:fixed;left:0px;top: 49px;z-index: 900;transition: width .4s ease-out;width: 100%;}
+#bar-ht{height: 1px;background-color: #d4d4d4;position:fixed;left:0px;top: 53px;top: calc( 53px + var(--safe-top) );z-index: 900;transition: width .4s ease-out;width: 100%;}
 #bar-ht>i{content:"";height: 1px;background-color: #0365d5;display: block;transition: width .4s ease-out;width: 1px;}
-.body.ui #debug{position: fixed;left: 0px;right: 0;top: 50px;background: rgba(0, 0, 0, 0.7);z-index: 600;color: #ffffff;padding: 2px 7px;font-size: 10rem;text-align: center;}
+.body.ui #debug{position: fixed;left: 0px;right: 0;top: 54px;top: calc( 54px + var(--safe-top) );background: rgba(0, 0, 0, 0.7);z-index: 600;color: #ffffff;padding: 2px 7px;font-size: 10rem;text-align: center;}
 .is-gnb #bar-ht{z-index:0;}
 .is-regopen #bar-ht{z-index:0;}
 
 
 
 /* uimenu */
-.btn-ui{display:block;position: fixed;left: 9px;top: 7px;z-index: 850;height: 36px;width: 36px;/* background-color:#fff; *//* border: 1px solid #fff; */transition: all 0.2s;}
+.btn-ui{display:block;position: fixed;left: 9px;top: 9px;top: calc( 9px + var(--safe-top) );z-index: 850;height: 36px;width: 36px;/* background-color:#fff; *//* border: 1px solid #fff; */transition: all 0.2s;}
 .btn-ui::before,
 .btn-ui::after,
 .btn-ui>b{display:block;width: 20px;height: 2px;background-color: #5f5f5f;border-radius: 0.5px;content:"";font-size:0;position:absolute;left: 7px;transition: all 0.3s;overflow: hidden;}

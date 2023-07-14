@@ -6,19 +6,32 @@ const extention = {
 	iosx:{
 		init: function(){
 			this.evt();	
-			this.set();	
 		},
 		evt: function(){
 			document.addEventListener("keydown", e => e.code == "KeyQ" && e.altKey ? this.set(true) : null )	;
-			extention.param['iosx'] ? this.set(true) : null;
+			extention.param['iosx'] == "true" ? this.set(true) : this.set(false);
+			console.log(  extention.param['iosx']  );
 		},
 		set: function(opt){
+			console.log(opt);
 			const html = document.querySelector("html");
 			if ( opt && !html.classList.contains("iosx") ) {
-				document.querySelector("head")?.insertAdjacentHTML("beforeend", `<style class="iosx> :root{ --safe-top: 26px !important; --safe-bottom: 26px !important; }`);
+				console.log(opt);
+				document.querySelector("head")?.insertAdjacentHTML("beforeend", `<style class="iosx"> :root{ --safe-top: 26px !important; --safe-bottom: 26px !important; }</style>`);
 				document.querySelector("body")?.insertAdjacentHTML("afterbegin", `<div class="nochi"><div class="rbox"></div><span class="inf"><b></b><i></i></span></div>`);
 				html.classList.add("iosx");
+				const time =() => {
+					const d = new Date();
+					let hh = d.getHours() > 12 ? d.getHours() - 12 : d.getHours() ;
+					let min = d.getMinutes();				
+					const digt = n => n < 10 ? "0"+n : n ;
+					const ttt =  `${digt(hh) > 12 ? "오후" : "오전"} ${digt(hh)}:${digt(min)}`;
+					document.querySelector(".nochi .inf b").innerHTML = ttt;
+				};
+				this.clock = setInterval( time , 1000);
+				time();
 			}else{
+				clearInterval(this.clock);
 				html.classList.remove("iosx");
 				document.querySelector("style.iosx")?.remove();
 				document.querySelector("body>.nochi")?.remove();
