@@ -1099,7 +1099,7 @@ a.btn.disabled{ pointer-events: none; }
 .pop-layer.c .phd>.in{position:relative;background-color: transparent;height: 55px;display: flex;justify-content: center;align-items: center;}
 .pop-layer.c .phd .ptit{font-size: 17px;text-align: center;padding: 20px 0px 12px 0px;font-weight: 700;max-width: calc(100vw - 90px);white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 .pop-layer.c .phd button.close{ background: url(../img/cm/pop-layerClose.png)}
-.pop-layer.c .pct{overflow-y: auto;  -webkit-overflow-scrolling: touch;}
+.pop-layer.c .pct{overflow-y: auto;-webkit-overflow-scrolling: touch;min-height: 120px;}
 .pop-layer.c .pct .poptents{padding: 15px 20px 20px 20px;padding-bottom: calc(20px + var(--safe-bottom));}
 .pop-layer.c .pct .poptents.nopad{padding: 0px;padding-bottom: calc(0px + env(safe-area-inset-bottom));}
 .pop-layer.c .pbt{min-height: auto;padding: 15px 20px 15px 20px;}
