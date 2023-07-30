@@ -35,7 +35,7 @@ var ui = { //
         this.timepick.init();
         // this.daypick.init();
         this.listLoad.init();
-        this.getSafe.init();
+        this.iosx.init();
         this.movePage.init();
         this.elip.init();
         this.htgrade.init();				// 하트그래프 circle-progress.js  미사용
@@ -112,7 +112,7 @@ var ui = { //
             var docH= ui.viewport.docHeight();
             var scr = ui.viewport.scrollTop() + wHt + 0; 
             var sct = ui.viewport.scrollTop(); 
-            $("#debug").html('SCT : '+ sct + ' ,SCR : '+ scr + ' , DOCH : ' +docH + " , visualViewport : "+ wHt+"  , iosX :  "+JSON.stringify( ui.getSafe ) );
+            $("#debug").html('SCT : '+ sct + ' ,SCR : '+ scr + ' , DOCH : ' +docH + " , visualViewport : "+ wHt+"  , iosX - top:"+ ui.iosx.top() +" bottom: "+ ui.iosx.bottom() );
         }
     },
     viewport:{
@@ -227,7 +227,7 @@ var ui = { //
             document.body.removeChild(div);
         }
     }, */
-    getSafe:{ // 아이폰X 여백값
+    iosx:{ // 아이폰X 여백값
         init:function(){
             
         },
