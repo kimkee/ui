@@ -12,6 +12,8 @@ const extention = {
 			extention.param['iosx'] == "true" ? this.set(true) : this.set(false);
 			console.log(  extention.param['iosx']  );
 		},
+		top: ()=>    parseInt(getComputedStyle(document.documentElement).getPropertyValue("--safe-top").replace(/[^0-9]/g, "")) || 0 ,
+		bottom: ()=> parseInt(getComputedStyle(document.documentElement).getPropertyValue("--safe-bottom").replace(/[^0-9]/g, "")) || 0,
 		set: function(opt){
 			console.log(opt);
 			const html = document.querySelector("html");
