@@ -1,4 +1,4 @@
-//*******************************************//
+﻿//*******************************************//
 // 김기현 : kimkee@naver.com    
 // url : http://kimkee.github.io/
 // update : 2021-04-01
@@ -213,7 +213,7 @@ var ui = { //
         }
         return result ;
     },
-    getSafe:{ // 아이폰X 여백값
+/*     getSafe:{ // 아이폰X 여백값
         init:function(){
             var _this = this;
             var computed, div = document.createElement('div');
@@ -225,6 +225,17 @@ var ui = { //
             _this.bottom= parseInt(computed.paddingBottom) || 0;
             _this.left= parseInt(computed.paddingLeft) || 0;
             document.body.removeChild(div);
+        }
+    }, */
+    getSafe:{ // 아이폰X 여백값
+        init:function(){
+            
+        },
+        top: function(){
+            return parseInt(getComputedStyle(document.documentElement).getPropertyValue("--safe-top").replace(/[^0-9]/g, "")) || 0;
+        },
+        bottom: function(){
+            return parseInt(getComputedStyle(document.documentElement).getPropertyValue("--safe-bottom").replace(/[^0-9]/g, "")) || 0;
         }
     },
     param:(function(a) { // URL에서 파라미터 읽어오기  ui.param.***
