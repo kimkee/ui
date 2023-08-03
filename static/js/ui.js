@@ -6,6 +6,11 @@
 
 var ui = { //
     init:function(){ // 초기구동
+
+        var vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty("--vh", vh+"px");
+
+
         this.cm.init();
         this.skip.init();
         this.gnb.init();
