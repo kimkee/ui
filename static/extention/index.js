@@ -2,6 +2,7 @@ const extention = {
 	init: function(){
 		this.bgs.init();
 		this.iosx.init();
+		document.querySelector("head")?.insertAdjacentHTML("beforeend",`<style>a,button,input { user-select: auto; touch-action: auto; -webkit-tap-highlight-color: initial; } button{cursor: pointer;} </style>`);
 	},
 	iosx:{
 		init: function(){
