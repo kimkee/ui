@@ -208,6 +208,84 @@
 		window.addEventListener("load", e => console.log( visualViewport.height ) );
 	</script>
 
+
+	<script>
+		/* $(this).addClass("active").siblings("li").removeClass("active"); */
+        document.querySelectorAll(".btn.sm").forEach(li => {
+            li.addEventListener("click", () => {
+                li.classList.add("active");
+                [...li.parentNode.children].filter(sibling => sibling !== li)
+                .forEach(sibling => sibling.classList.remove("active"));
+            });
+        });
+
+
+        /*  $(".box").unwrap() */
+        document.querySelectorAll(".box").forEach(box => {
+            const pElm = box.parentElement;
+            while (box.firstChild) {
+                pElm.insertBefore(box.firstChild, box);
+            }
+            pElm.removeChild(box);
+        });
+
+        /* $(".box").wrap(`<div class="www"></div>`) */
+        document.querySelectorAll(".box").forEach(box => {
+            const wrap = document.createElement("div");
+            wrap.classList.add("www");
+            box.parentNode.insertBefore(wrap, box);
+            wrap.appendChild(box);
+        });
+
+
+        // $("body,html").animate({ scrollTop: 0 }, 200, function() {
+        //         console.log("도착")
+        // });
+        const scrollToPosition = (selector, position, duration, callback) => {
+            const element = document.querySelector(selector);
+            if (!element) return;
+
+            const startingYOffset = element.scrollTop || document.documentElement.scrollTop;
+            const targetYOffset = position;
+            const startTime = performance.now();
+
+            const animateScroll = (timestamp) => {
+                const currentTime = timestamp - startTime;
+                const progress = Math.min(currentTime / duration, 1);
+                const easeInOutCubic = progress < 0.5 ? 4 * progress * progress * progress : (progress - 1) * (2 * progress - 2) * (2 * progress - 2) + 1;
+                const yOffset = startingYOffset + (targetYOffset - startingYOffset) * easeInOutCubic;
+
+                if (element === document.body) {
+                    window.scrollTo(0, yOffset);
+                } else {
+                    element.scrollTop = yOffset;
+                }
+
+                if (currentTime < duration) {
+                    requestAnimationFrame(animateScroll);
+                } else {
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
+                }
+            };
+
+            requestAnimationFrame(animateScroll);
+        };
+
+        // 예시로 body와 .box 영역을 동시에 스크롤하여 100px 지점으로 이동하는 코드
+        /* scrollToPosition(document.body, 100, 200, () => {
+            console.log("body 도착");
+        });
+
+        const boxElement = document.querySelector(".box");
+        scrollToPosition(boxElement, 100, 200, () => {
+            console.log(".box 도착");
+        }); */
+	</script>
+
+
+
 <!-- 
 	<style>
 	.droptarget { float: left; width: 100px; height: 35px; margin: 15px; padding: 10px; border: 1px solid #aaaaaa; }
