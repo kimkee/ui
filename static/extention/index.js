@@ -24,12 +24,12 @@ const extention = {
 				document.querySelector("body")?.insertAdjacentHTML("afterbegin", `<div class="nochi"><div class="rbox"></div><span class="inf"><b></b><i></i></span></div>`);
 				html.classList.add("iosx");
 				const time =() => {
-					const d = new Date();
-					let hh = d.getHours() > 12 ? d.getHours() - 12 : d.getHours() ;
-					let min = d.getMinutes();				
+					const date = new Date();
 					const digt = n => n < 10 ? "0"+n : n ;
-					const ttt =  `${digt(hh) > 12 ? "오후" : "오전"} ${digt(hh)}:${digt(min)}`;
-					document.querySelector(".nochi .inf b").innerHTML = ttt;
+					const hh = date.getHours() > 12 ? date.getHours() - 12 : date.getHours() ;
+					const mm = date.getMinutes();				
+					const time =  `${digt(hh) > 12 ? "오후" : "오전"} ${digt(hh)}:${digt(mm)}`;
+					document.querySelector(".nochi .inf b").innerHTML = time;
 				};
 				this.clock = setInterval( time , 1000);
 				time();
