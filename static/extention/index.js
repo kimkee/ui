@@ -16,7 +16,7 @@ const extention = {
 		top: ()=>    parseInt(getComputedStyle(document.documentElement).getPropertyValue("--safe-top").replace(/[^0-9]/g, "")) || 0 ,
 		bottom: ()=> parseInt(getComputedStyle(document.documentElement).getPropertyValue("--safe-bottom").replace(/[^0-9]/g, "")) || 0,
 		set: function(opt){
-			console.log(opt);
+			// console.log(opt);
 			const html = document.querySelector("html");
 			if ( opt && !html.classList.contains("iosx") ) {
 				console.log(opt);
