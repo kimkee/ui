@@ -13,6 +13,10 @@
 			"css": ["css/style.css"]
 		}
 	],
+	"web_accessible_resources":[{
+		"resources":["img/*", "dist/*"],
+		"matches": ["<all_urls>"]
+	}],
 	"icons": {
 		"256": "img/symbol_color.png"
 	},
