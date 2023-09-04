@@ -43,14 +43,13 @@ const extention = {
 	},
 	bgs:{
 		init: function(){
-			const img = location.pathname.split('.').reverse()[0].includes('png','jpg','gif');
-			if (img) {
-				console.log('img');
-				const bgSrc = chrome.runtime.getURL("/img/bg.png");
-				document.body.style.backgroundImage = `url('${bgSrc}')`;
-				if ( !document.querySelector("body img") ) { return }
-				document.querySelector("body img").style.backgroundColor = "transparent";
-			}
+			const isImgUrl = location.pathname.split('.').pop().includes('png','jpg','gif');
+			if( !isImgUrl ) { return } console.log('img');
+			const bgSrc = chrome.runtime.getURL("/img/bg.png");
+			document.body.style.backgroundImage = `url('${bgSrc}')`;
+			const isImg = document.querySelector("body>img");
+			if( !isImg ) { return }
+			isImg.style.backgroundColor = "transparent";
 		}
 	},
 	param:(function(a) { // URL에서 파라미터 읽어오기  ui.param.***

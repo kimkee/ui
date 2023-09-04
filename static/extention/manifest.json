@@ -18,11 +18,11 @@
 		"matches": ["<all_urls>"]
 	}],
 	"icons": {
-		"256": "img/symbol_color.png"
+		"256": "img/logo.png"
 	},
 	"action": {
 		"default_title": "My",
-		"default_icon": "img/symbol_color.png",
+		"default_icon": "img/logo.png",
 		"default_popup": "popup.html"
 	},
   	"permissions": ["tabs"],
