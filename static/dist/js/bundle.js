@@ -18490,7 +18490,7 @@ var ui = { //
     lock:{ // 스크롤 막기,풀기
         sct:0,
         stat:false,
-        els:".pop-layer:visible  , .ui-confrim:visible , .ui-alert:visible",
+        els:".pop-layer:visible  , .ui-confirm:visible , .ui-alert:visible",
         set:function(){
             if(	$(this.els).length <= 0 ){
                 this.using(false);
@@ -18627,12 +18627,12 @@ var ui = { //
             nbt:"취소"
         }, params);
 
-        if( $(".ui-confrim").length ) return;
+        if( $(".ui-confirm").length ) return;
         
         ui.lock.using(true);
 
         var lyConfirm =
-        '<article class="ui-confrim ' + opt.cls + '" tabindex="0">' +
+        '<article class="ui-confirm ' + opt.cls + '" tabindex="0">' +
         '	<div class="pbd">'+
         '		<div class="phd"><span class="tit">'+opt.tit+'</span></div>'+
         '		<div class="pct"><div class="msg">'+opt.msg+'</div></div>'+
@@ -18645,22 +18645,22 @@ var ui = { //
         '</article>';
         $("body").append(lyConfirm).addClass("is-confrim");
         if (opt.tit) {
-            $(".ui-confrim>.pbd>.phd").addClass("is-tit");
+            $(".ui-confirm>.pbd>.phd").addClass("is-tit");
         }
-        $(".ui-confrim:visible").focus();
+        $(".ui-confirm:visible").focus();
 
-        $(".ui-confrim").find(".btn-confirm").on("click",function(){
+        $(".ui-confirm").find(".btn-confirm").on("click",function(){
             window.setTimeout(opt.ycb);
         });
 
-        $(".ui-confrim").find(".btn-cancel").on("click",function(){
+        $(".ui-confirm").find(".btn-cancel").on("click",function(){
             window.setTimeout(opt.ncb);
         });
 
-        $(".ui-confrim").find(".btn-confirm, .btn-close , .btn-cancel").on("click",confirmClose);
+        $(".ui-confirm").find(".btn-confirm, .btn-close , .btn-cancel").on("click",confirmClose);
 
         function confirmClose(){
-            $(".ui-confrim").remove();
+            $(".ui-confirm").remove();
             $("body").removeClass("is-confrim");
             if( $(".pop-layer:visible").length < 1 ){
                 ui.lock.using(false);

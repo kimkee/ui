@@ -862,24 +862,24 @@ a.btn.disabled{ pointer-events: none; }
 
 
 /* 팝업 컨펌 */
-.ui-confrim{white-space:nowrap;position:fixed;left:0px;right:0px;top:0px;bottom:0;text-align:center;overflow-y:auto;z-index:1500;background-color: rgba(0,0,0,0.5);outline:none;}
-.ui-confrim>.pbd{display:inline-block;max-width: 315px;min-width: 315px;vertical-align:middle;text-align:left;position:relative;white-space:normal;z-index:200;box-shadow: rgba(0,0,0,0.2) 2px 2px 7px;border-radius: 10px;background-color: #ffffff;overflow: hidden;}
-.ui-confrim:after{content:''; width:0; height:100%; display:inline-block; vertical-align:middle;}
-.ui-confrim>.pbd>.phd{display: none;padding: 15px 20px 0px 20px;box-sizing: border-box;background-color: #fff;text-align: center;font-size: 16px;font-weight: 700;margin-bottom: -17px;line-height: 1.5;}
-.ui-confrim>.pbd>.phd .ptit{ font-weight: 700; font-size:16px; }
-.ui-confrim>.pbd>.phd.is-tit{display:block;}
-.ui-confrim>.pbd>.pct{overflow:auto;padding: 30px 20px 30px 20px;text-align:center;font-size: 16px;color: #000000;min-height: 102px;display: flex;justify-content: center;align-items: center;}
-.ui-confrim>.pbd>.pct .msg{word-break: break-all;}
-.ui-confrim>.pbd>.pct p{}
-.ui-confrim>.pbd>.pct b{color: #f0344d;font-weight: 700;}
-.ui-confrim>.pbd>.pbt{padding: 0px 0px 0px 0px;box-sizing: border-box;text-align: center;display: flex;margin: 0px 0px;}
-.ui-confrim>.pbd>.pbt .btn {width: 100%;border-radius: 0px;background: #aeb0bd;border: #aeb0bd 1px solid;color: #ffffff;font-size: 14px;height: 50px;font-weight: 400;}
-.ui-confrim>.pbd>.pbt .btn + .btn{border: #669aff solid 1px;color: #ffffff;background: #669aff;}
-.ui-confrim>.pbd>.pbt .btn.btn-confirm:active{border-color: #0673c4;background-color: #0673c4;}
-.ui-confrim>.pbd>.pbt .btn.btn-cancel:active{border-color:#898c9d; background-color:#898c9d;}
-.ui-confrim>.pbd>.pbt .btn:disabled{border-color:#cccedb; background-color:#cccedb;}
-.ui-confrim>.pbd>.pbt .btn-cancel{color: #ffffff;}
-.ui-confrim>.pbd>.btn-close{width: 24px;height: 24px;position:absolute;right: 10px;top: 10px;text-indent:-9999px;overflow:hidden;background: url(../img/common/btn_popup_close@2x.png) no-repeat center;background-size: 20px auto;/* display: none; */}
+.ui-confirm{white-space:nowrap;position:fixed;left:0px;right:0px;top:0px;bottom:0;text-align:center;overflow-y:auto;z-index:1500;background-color: rgba(0,0,0,0.5);outline:none;}
+.ui-confirm>.pbd{display:inline-block;max-width: 315px;min-width: 315px;vertical-align:middle;text-align:left;position:relative;white-space:normal;z-index:200;box-shadow: rgba(0,0,0,0.2) 2px 2px 7px;border-radius: 10px;background-color: #ffffff;overflow: hidden;}
+.ui-confirm:after{content:''; width:0; height:100%; display:inline-block; vertical-align:middle;}
+.ui-confirm>.pbd>.phd{display: none;padding: 15px 20px 0px 20px;box-sizing: border-box;background-color: #fff;text-align: center;font-size: 16px;font-weight: 700;margin-bottom: -17px;line-height: 1.5;}
+.ui-confirm>.pbd>.phd .ptit{ font-weight: 700; font-size:16px; }
+.ui-confirm>.pbd>.phd.is-tit{display:block;}
+.ui-confirm>.pbd>.pct{overflow:auto;padding: 30px 20px 30px 20px;text-align:center;font-size: 16px;color: #000000;min-height: 102px;display: flex;justify-content: center;align-items: center;}
+.ui-confirm>.pbd>.pct .msg{word-break: break-all;}
+.ui-confirm>.pbd>.pct p{}
+.ui-confirm>.pbd>.pct b{color: #f0344d;font-weight: 700;}
+.ui-confirm>.pbd>.pbt{padding: 0px 0px 0px 0px;box-sizing: border-box;text-align: center;display: flex;margin: 0px 0px;}
+.ui-confirm>.pbd>.pbt .btn {width: 100%;border-radius: 0px;background: #aeb0bd;border: #aeb0bd 1px solid;color: #ffffff;font-size: 14px;height: 50px;font-weight: 400;}
+.ui-confirm>.pbd>.pbt .btn + .btn{border: #669aff solid 1px;color: #ffffff;background: #669aff;}
+.ui-confirm>.pbd>.pbt .btn.btn-confirm:active{border-color: #0673c4;background-color: #0673c4;}
+.ui-confirm>.pbd>.pbt .btn.btn-cancel:active{border-color:#898c9d; background-color:#898c9d;}
+.ui-confirm>.pbd>.pbt .btn:disabled{border-color:#cccedb; background-color:#cccedb;}
+.ui-confirm>.pbd>.pbt .btn-cancel{color: #ffffff;}
+.ui-confirm>.pbd>.btn-close{width: 24px;height: 24px;position:absolute;right: 10px;top: 10px;text-indent:-9999px;overflow:hidden;background: url(../img/common/btn_popup_close@2x.png) no-repeat center;background-size: 20px auto;/* display: none; */}
 
 /* 팝업 토스트 */
 .pop-toast{position:fixed;left:0rem;right:0rem;transform: translateY(150%);bottom: 0rem;transition: all 0.4s;opacity: 0;text-align:center;overflow-y:auto;z-index: 1000;outline:none;margin-bottom: calc(20rem);margin-bottom: calc(20rem + env(safe-area-inset-bottom));}
