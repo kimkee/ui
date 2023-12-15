@@ -35,9 +35,11 @@ const extention = {
 				time();
 			}else{
 				clearInterval(this.clock);
-				html.classList.remove("iosx");
-				document.querySelector("style.iosx")?.remove();
-				document.querySelector("body>.nochi")?.remove();
+				if(document.querySelector("html")){
+					html.classList.remove("iosx");
+					document.querySelector("style.iosx")?.remove();
+					document.querySelector("body>.nochi")?.remove();
+				}
 			}
 		}
 	},
