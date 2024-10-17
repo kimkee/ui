@@ -10,8 +10,9 @@ const extention = {
 		},
 		evt: function(){
 			document.addEventListener("keydown", e => e.code == "KeyQ" && e.altKey ? this.set(true) : null )	;
-			extention.param['iosx'] == "true" ? this.set(true) : this.set(false);
+			// extention.param['iosx'] == "true" ? this.set(true) : this.set(false);
 			// console.log(  extention.param['iosx']  );
+			localStorage.getItem("isIOSX") == 'true' ? this.set(true) : this.set(false)
 		},
 		top: ()=>    parseInt(getComputedStyle(document.documentElement).getPropertyValue("--safe-top").replace(/[^0-9]/g, "")) || 0 ,
 		bottom: ()=> parseInt(getComputedStyle(document.documentElement).getPropertyValue("--safe-bottom").replace(/[^0-9]/g, "")) || 0,
@@ -33,6 +34,7 @@ const extention = {
 				};
 				this.clock = setInterval( time , 1000);
 				time();
+				localStorage.setItem('isIOSX',true);
 			}else{
 				clearInterval(this.clock);
 				if(document.querySelector("html")){
@@ -40,6 +42,7 @@ const extention = {
 					document.querySelector("style.iosx")?.remove();
 					document.querySelector("body>.nochi")?.remove();
 				}
+				localStorage.setItem('isIOSX',false);
 			}
 		}
 	},
