@@ -3,7 +3,7 @@ const extention = {
 		this.bgs.init();
 		
 		if(typeof window !== 'undefined') setTimeout(() => { this.iosx.init(); },50); 
-		
+		this.apppush.init();
 		document.querySelector("head")?.insertAdjacentHTML("beforeend",`<style>a,button,input { user-select: auto; touch-action: auto; -webkit-tap-highlight-color: initial; } button{cursor: pointer;} </style>`);
 	},
 	iosx:{
@@ -57,6 +57,29 @@ const extention = {
 			const isImg = document.querySelector("body>img");
 			if( !isImg ) { return }
 			isImg.style.backgroundColor = "transparent";
+		}
+	},
+	apppush:{
+		init: function(){
+			location.pathname.includes('/webapp/mobile/images/push/') ? this.evt() : null;
+		},
+		evt: function(){
+			document.addEventListener("keydown", e =>  this.set(e) );	
+		},
+		set: function(e){
+			const path = location.pathname;
+			const extn = path.split('.').pop();
+			const ppp = path.split(`.${extn}`)[0].slice(0,-2);
+			let num = parseInt( path.split(`.${extn}`)[0].slice(-2) );
+			const dgit = t => t < 10 ? "0"+t : t;
+			const gourl = url => location.href = location.href.replace(location.host, `${url}`);
+			const goimg = eee => location.href = `https://${location.host + ppp + dgit(num)}.${extn}`
+			switch (e.code) {
+				case 'ArrowUp' : gourl('image.lottecard.co.kr'); break;
+				case 'ArrowDown' : gourl('dimage.lottecard.co.kr'); break;
+				case 'ArrowRight' : goimg(num++); break;
+				case 'ArrowLeft' : goimg(num--); break;
+			}
 		}
 	},
 	param:(function(a) { // URL에서 파라미터 읽어오기  ui.param.***
