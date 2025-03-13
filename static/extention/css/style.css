@@ -18,3 +18,8 @@ html.iosx body>.nochi .inf b::before{content:""; font-size:12px; line-height: 1;
 html.iosx body>.nochi .inf i{position: relative; display: inline-flex; width: 6px; height: 11px; background: rgba(58,58,58,0.5); margin-top: 1px;}
 html.iosx body>.nochi .inf i::before{content:"";height: 70%;width: 6px;position: absolute;left: 0px;bottom: 0px;background: rgba(17,17,17,0.5);border-radius: 0px;}
 html.iosx body>.nochi .inf i::after{content:"";height: 2px;width: 4px;position: absolute;left: 1px;top: -2px;background: rgba(58,58,58,0.5);border-radius: 0px;}
+
+*{
+    user-select: initial !important;
+    -webkit-user-select: initial !important;
+}
