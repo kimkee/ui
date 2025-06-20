@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSS 3D 박스 회전 예제</title>
+<style>
+  .container {
+    perspective: 500px; /* 원근감 설정 */
+    width: 200px;
+    height: 200px;
+    margin: 50px;
+    border: 1px solid black;
+  }
+
+  .box {
+    width: 100%;
+    height: 100%;
+    background-color: lightblue;
+    transform-style: preserve-3d; /* 자식 요소들이 3D 공간에 있도록 설정 */
+    transition: transform 1s; /* 회전 애니메이션 */
+  }
+
+  .box:hover {
+    transform: rotateX(45deg) rotateY(45deg); /* 호버 시 회전 */
+  }
+
+  .front, .back, .left, .right, .top, .bottom {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* 뒷면 숨기기 */
+  }
+
+  .front {
+    background-color: rgba(255, 0, 0, 0.7);
+    transform: translateZ(100px);
+  }
+
+  .back {
+    background-color: rgba(0, 255, 0, 0.7);
+    transform: rotateY(180deg) translateZ(100px);
+  }
+
+  .left {
+    background-color: rgba(0, 0, 255, 0.7);
+    transform: rotateY(-90deg) translateZ(100px);
+  }
+
+  .right {
+    background-color: rgba(255, 255, 0, 0.7);
+    transform: rotateY(90deg) translateZ(100px);
+  }
+
+  .top {
+    background-color: rgba(0, 255, 255, 0.7);
+    transform: rotateX(90deg) translateZ(100px);
+  }
+
+  .bottom {
+    background-color: rgba(255, 0, 255, 0.7);
+    transform: rotateX(-90deg) translateZ(100px);
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="box">
+      <div class="front">앞면</div>
+      <div class="back">뒷면</div>
+      <div class="left">왼쪽</div>
+      <div class="right">오른쪽</div>
+      <div class="top">윗면</div>
+      <div class="bottom">아랫면</div>
+    </div>
+  </div>
+</body>
+</html>

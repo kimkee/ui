@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>3D 육각 기둥</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body { background: #373737; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+.container { perspective: 800px;width: var(--box-w); height: var(--box-h); transform: rotate(10deg); --box-w: 110px; --box-h: 174px; --box-z: 110px;}
+.container .cylinder {animation: rotatebox linear infinite 10s; width: 100%; height: 100%;  position: relative; transform-style: preserve-3d; }
+.container .cylinder:hover {}
+.container .cylinder .side { position: absolute; width: var(--box-w); height: var(--box-h); left: 0; top: 0; transform-origin: center;  opacity: 0.95;}
+.container .cylinder .side img{ width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+.container .cylinder .side:nth-child(1) { transform: rotateY(calc(60deg * 0)) translateZ(var(--box-z)); }
+.container .cylinder .side:nth-child(2) { transform: rotateY(calc(60deg * 1)) translateZ(var(--box-z)); }
+.container .cylinder .side:nth-child(3) { transform: rotateY(calc(60deg * 2)) translateZ(var(--box-z)); }
+.container .cylinder .side:nth-child(4) { transform: rotateY(calc(60deg * 3)) translateZ(var(--box-z)); }
+.container .cylinder .side:nth-child(5) { transform: rotateY(calc(60deg * 4)) translateZ(var(--box-z)); }
+.container .cylinder .side:nth-child(6) { transform: rotateY(calc(60deg * 5)) translateZ(var(--box-z)); }
+.container .cylinder .top,
+.container .cylinder .bottom { position: absolute; width: var(--box-w); height: var(--box-w);  clip-path: polygon( 50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25% ); left: 0; transform-origin: center; }
+.container .cylinder .top{top: 0%;background: rgba(255, 100, 100, 0.7); transform: translateY(-50%) rotateX(90deg);}
+.container .cylinder .bottom {top: 100%; background: rgba(100, 255, 100, 0.7); transform: translateY(-50%) rotateX(-90deg); }
+.container .cylinder::after{ background: #000000; content:""; position: absolute;width: var(--box-w); height: var(--box-w); left: 0; top: 130%; transform: translateY(-50%) rotateX(-90deg); transform-origin: center;  border-radius: 100%; filter: blur(40px); opacity: 0.3; }
+@keyframes rotatebox {
+  from { transform: rotate3d(0, 1, 0.3, 0deg); }
+  to { transform:  rotate3d( 0, 1, 0, 360deg); }
+}
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="cylinder">
+      <div class="side"><img src="https://image.lottecard.co.kr/UploadFiles/ecenterPath/cdInfo/ecenterCdInfoP15584-A15584_nm1_v.png" alt=""></div>
+      <div class="side"><img src="https://image.lottecard.co.kr/UploadFiles/ecenterPath/cdInfo/ecenterCdInfoP13949-A13949_nm1_v.png" alt=""></div>
+      <div class="side"><img src="https://image.lottecard.co.kr/UploadFiles/ecenterPath/cdInfo/ecenterCdInfoP14715-A14715_nm1_v.png" alt=""></div>
+      <div class="side"><img src="https://image.lottecard.co.kr/UploadFiles/ecenterPath/cdInfo/ecenterCdInfoP13464-A13464_nm1_v.png" alt=""></div>
+      <div class="side"><img src="https://image.lottecard.co.kr/UploadFiles/ecenterPath/cdInfo/ecenterCdInfoP12921-A12921_nm1_v.png" alt=""></div>
+      <div class="side"><img src="https://image.lottecard.co.kr/UploadFiles/ecenterPath/cdInfo/ecenterCdInfoP13998-A13998_nm1_v.png" alt=""></div>
+      <div class="top"></div>
+      <div class="bottom"></div>
+    </div>
+  </div>
+  <script>
+    document.querySelector('.cylinder').addEventListener('transitionend', function() {
+      this.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
