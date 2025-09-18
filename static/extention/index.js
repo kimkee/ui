@@ -62,7 +62,7 @@ const extention = {
 	},
 	apppush:{
 		init: function(){
-			location.pathname.includes('/webapp/mobile/images/push/') ? this.evt() : null;
+			this.evt();
 		},
 		evt: function(){
 			document.addEventListener("keydown", e =>  this.set(e) );	
