@@ -62,7 +62,7 @@ const extention = {
 	},
 	apppush:{
 		init: function(){
-			this.evt();
+			location.pathname.includes('/webapp/mobile/images/push/') ? this.evt() : null;
 		},
 		evt: function(){
 			document.addEventListener("keydown", e =>  this.set(e) );	
@@ -74,7 +74,7 @@ const extention = {
 			let num = parseInt( path.split(`.${extn}`)[0].slice(-2) );
 			const dgit = t => t < 10 ? "0"+t : t;
 			const gourl = url => location.href = location.href.replace(location.host, `${url}`);
-			const goimg = eee => location.href = `https://${location.host + ppp + dgit(num)}.${extn}`
+			const goimg = eee => location.href = `${location.origin + ppp + dgit(num)}.${extn}`;
 			switch (e.code) {
 				case 'ArrowUp' : gourl('image.lottecard.co.kr'); break;
 				case 'ArrowDown' : gourl('dimage.lottecard.co.kr'); break;
