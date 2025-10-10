@@ -1,6 +1,7 @@
 const extention = {
 	init: function(){
 		this.bgs.init();
+		this.speedScroll.init();
 		
 		if(typeof window !== 'undefined') setTimeout(() => { this.iosx.init(); },50); 
 		this.apppush.init();
@@ -82,6 +83,55 @@ const extention = {
 				case 'ArrowLeft' : goimg(num--); break;
 			}
 		}
+	},
+	speedScroll:{
+		init: function(){
+			this.set();
+		},
+		set: function(){
+			let isRightMouseDown = false;
+			let isKeyA = false;
+			let suppressContextMenu = false;
+			window.addEventListener('keydown', (e)=> {  e.code === 'KeyA' ? isKeyA = true : null; });
+			window.addEventListener('keyup', (e)=> {  e.code === 'KeyA' ? isKeyA = false : null; });
+			window.addEventListener('mousedown', (e)=> { console.log(e.button); e.button === 2 ? isRightMouseDown = true : null; });
+			window.addEventListener('mouseup', (e)=> { e.button === 2 ? isRightMouseDown = false : null; });
+			window.addEventListener('contextmenu', (e)=> { 
+				isRightMouseDown = false;
+				if (!suppressContextMenu) return;
+				e.preventDefault(); 
+				suppressContextMenu = false;
+				isKeyA = false;
+			});
+
+			window.addEventListener('wheel', (e)=> { 
+				if (!(isKeyA && !e.ctrlKey || isRightMouseDown)) return; // A 키 or Right마우스 가 눌린 상태에서만 작동
+				suppressContextMenu = true;
+				const scrollFactor = e.shiftKey ? 0.3 : 2.5; // Shift 키가 눌린 경우 스크롤 속도를 줄임
+				const deltaY = e.deltaY * scrollFactor;
+				const deltaX = e.deltaX * scrollFactor;
+				const el = getScrollableElement(e.target);
+				if (!el) return; // 스크롤 가능한 요소가 없으면 종료
+				e.preventDefault(); // 기본 스크롤 동작 방지
+				el.scrollBy({ top: deltaY, left: deltaX, behavior: e.shiftKey ? 'smooth' : 'auto' });
+			},
+			{ 
+				passive: false // 기본 동작을 방지하기 위해 passive 옵션을 false로 설정
+			});
+
+			const getScrollableElement = (el) => {
+				while (el && el !== document.body) {
+					const style = getComputedStyle(el);
+					const overflowY = style.overflowY;
+					const isScrollable = (overflowY === 'auto' || overflowY === 'scroll');
+					if(isScrollable  && el.scrollHeight > el.clientHeight) { 
+						return el;
+					}
+					el = el.parentElement;
+				}
+				return document.scrollingElement || document.documentElement;
+			}
+		},
 	},
 	param:(function(a) { // URL에서 파라미터 읽어오기  ui.param.***
 		if (a == "") return {};
