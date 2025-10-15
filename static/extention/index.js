@@ -2,6 +2,7 @@ const extention = {
 	init: function(){
 		this.bgs.init();
 		this.speedScroll.init();
+		this.gesture.init();
 		
 		if(typeof window !== 'undefined') setTimeout(() => { this.iosx.init(); },50); 
 		this.apppush.init();
@@ -94,7 +95,7 @@ const extention = {
 			let suppressContextMenu = false;
 			window.addEventListener('keydown', (e)=> {  e.code === 'KeyA' ? isKeyA = true : null; });
 			window.addEventListener('keyup', (e)=> {  e.code === 'KeyA' ? isKeyA = false : null; });
-			window.addEventListener('mousedown', (e)=> { console.log(e.button); e.button === 2 ? isRightMouseDown = true : null; });
+			window.addEventListener('mousedown', (e)=> { e.button === 2 ? isRightMouseDown = true : null; });
 			window.addEventListener('mouseup', (e)=> { e.button === 2 ? isRightMouseDown = false : null; });
 			window.addEventListener('contextmenu', (e)=> { 
 				isRightMouseDown = false;
@@ -132,6 +133,64 @@ const extention = {
 				return document.scrollingElement || document.documentElement;
 			}
 		},
+	},
+	gesture:{
+		init: function(){
+			this.set();
+		},
+		set: function(){
+			let isRightClick = false;
+			let path = [];
+			let lastPos = { x: 0, y: 0 };
+
+			document.addEventListener("contextmenu", (e) => {
+			// 우클릭 메뉴가 열리면 mousemove 이벤트가 안 먹음
+			e.preventDefault();
+			});
+
+			document.addEventListener("mousedown", (e) => {
+			if (e.button === 2) {
+				isRightClick = true;
+				path = [];
+				lastPos = { x: e.clientX, y: e.clientY };
+			}
+			});
+
+			document.addEventListener("mousemove", (e) => {
+				if (!isRightClick) return;
+
+				const dx = e.clientX - lastPos.x;
+				const dy = e.clientY - lastPos.y;
+				const absDx = Math.abs(dx);
+				const absDy = Math.abs(dy);
+
+				if (absDx < 5 && absDy < 5) return; // 감도 낮춤
+
+				const dir =
+					absDy > absDx ? (dy > 0 ? "↓" : "↑") : dx > 0 ? "→" : "←";
+
+				if (path[path.length - 1] !== dir) {
+					path.push(dir);
+					console.log("path:", path.join(""));
+				}
+
+				lastPos = { x: e.clientX, y: e.clientY };
+			});
+
+			document.addEventListener("mouseup", (e) => {
+				if (e.button === 2 && isRightClick) {
+					isRightClick = false;
+					const gesture = path.join("");
+					console.log("Gesture:", gesture);
+					if (gesture === "↓→") {
+						chrome.runtime.sendMessage({ action: "close_tab" });
+					}
+					path = [];
+				}
+			});
+
+
+		}
 	},
 	param:(function(a) { // URL에서 파라미터 읽어오기  ui.param.***
 		if (a == "") return {};
