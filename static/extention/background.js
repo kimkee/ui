@@ -22,7 +22,15 @@ chrome.action.onClicked.addListener((tab) => {
 
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
-  if (msg.action === "close_tab" && sender.tab?.id) {
-    chrome.tabs.remove(sender.tab.id);
+	if (msg.action === "close_tab" && sender.tab?.id) {
+		chrome.tabs.remove(sender.tab.id);
+	}
+});
+
+
+chrome.runtime.onMessage.addListener((message, sender) => {
+  if (message.action === "hard_reload" && sender.tab) {
+    chrome.tabs.reload(sender.tab.id, { bypassCache: true });
   }
 });
+

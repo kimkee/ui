@@ -139,41 +139,135 @@ const extention = {
 			this.set();
 		},
 		set: function(){
+			
+
+
+
+
+
 			let isRightClick = false;
 			let path = [];
 			let lastPos = { x: 0, y: 0 };
+			let overlay, ctx;
+			let suppressContextMenu = false;
+			let messageEl = null; // 피드백 표시용
+
+			function createOverlay() {
+				overlay = document.createElement("canvas");
+				overlay.style.position = "fixed";
+				overlay.style.top = "0";
+				overlay.style.left = "0";
+				overlay.style.width = "100%";
+				overlay.style.height = "100%";
+				overlay.style.pointerEvents = "none";
+				overlay.style.zIndex = "999998";
+				overlay.width = window.innerWidth;
+				overlay.height = window.innerHeight;
+				document.body.appendChild(overlay);
+
+				ctx = overlay.getContext("2d");
+				ctx.strokeStyle = "rgba(0, 150, 255, 0.8)";
+				ctx.lineWidth = 3;
+				ctx.lineJoin = "round";
+				ctx.lineCap = "round";
+			}
+
+			function showMessage(gesture, text) {
+				if (messageEl) messageEl.remove();
+				messageEl = document.createElement("div");
+				messageEl.innerHTML = `<strong>${gesture}</strong> : ${text}`;
+				Object.assign(messageEl.style, {
+					position: "fixed",
+					top: "50%",
+					left: "50%",
+					transform: "translate(-50%, -50%)",
+					background: "rgba(0,0,0,0.6)",
+					color: "white",
+					padding: "10px 20px",
+					borderRadius: "12px",
+					fontSize: "18px",
+					zIndex: "999999",
+					pointerEvents: "none",
+				});
+				document.body.appendChild(messageEl);
+			}
+
+			function removeMessage() {
+				if (messageEl) {
+					messageEl.remove();
+					messageEl = null;
+				}
+			}
+
+			function removeOverlay() {
+				if (overlay) {
+					overlay.remove();
+					overlay = null;
+					ctx = null;
+				}
+			}
+
+			function temporarilySuppressContextMenu(duration = 500) {
+				suppressContextMenu = true;
+				setTimeout(() => {
+					suppressContextMenu = false;
+				}, duration);
+			}
 
 			document.addEventListener("contextmenu", (e) => {
-			// 우클릭 메뉴가 열리면 mousemove 이벤트가 안 먹음
-			e.preventDefault();
+				if (suppressContextMenu) {
+					e.preventDefault();
+					suppressContextMenu = false; // 한번만 막고 자동 복귀
+				}
 			});
 
 			document.addEventListener("mousedown", (e) => {
-			if (e.button === 2) {
-				isRightClick = true;
-				path = [];
-				lastPos = { x: e.clientX, y: e.clientY };
-			}
+				if (e.button === 2) {
+					isRightClick = true;
+					path = [];
+					lastPos = { x: e.clientX, y: e.clientY };
+					if (!overlay) {
+						createOverlay();
+						ctx.beginPath();
+						ctx.moveTo(lastPos.x, lastPos.y);
+					}
+				}
 			});
 
 			document.addEventListener("mousemove", (e) => {
-				if (!isRightClick) return;
+				if (!isRightClick || !ctx) return;
 
 				const dx = e.clientX - lastPos.x;
 				const dy = e.clientY - lastPos.y;
 				const absDx = Math.abs(dx);
 				const absDy = Math.abs(dy);
 
-				if (absDx < 5 && absDy < 5) return; // 감도 낮춤
+				if (absDx < 10 && absDy < 10) return;
 
 				const dir =
 					absDy > absDx ? (dy > 0 ? "↓" : "↑") : dx > 0 ? "→" : "←";
 
 				if (path[path.length - 1] !== dir) {
 					path.push(dir);
-					console.log("path:", path.join(""));
+					const gesture = path.join("");
+					console.log("path:", gesture);
+
+					// 매칭되는 제스처만 메시지 표시
+					switch (gesture) {
+						case "↓→"	: showMessage(gesture, `탭닫기`); break;
+						case "↑↓"	: showMessage(gesture, `새로고침`); break;
+						case "↑↓↑"	: showMessage(gesture, `강력새로고침`); break;
+						case "←"	: showMessage(gesture, `뒤로가기`); break;
+						case "→"	: showMessage(gesture, `앞으로가기`); break;
+						case "↓"	: showMessage(gesture, `맨아래로`); break;
+						case "↑"	: showMessage(gesture, `맨위로`); break;
+						default		: removeMessage(); // 매칭 안 되면 메시지 제거 break;
+					}
 				}
 
+
+				ctx.lineTo(e.clientX, e.clientY);
+				ctx.stroke();
 				lastPos = { x: e.clientX, y: e.clientY };
 			});
 
@@ -182,12 +276,66 @@ const extention = {
 					isRightClick = false;
 					const gesture = path.join("");
 					console.log("Gesture:", gesture);
-					if (gesture === "↓→") {
-						chrome.runtime.sendMessage({ action: "close_tab" });
+					removeOverlay();
+					removeMessage();
+
+					if (gesture) {
+						handleGesture(gesture);
+						suppressContextMenu = true; // 제스처가 있었을 때만 메뉴 막음
+					} else {
+						suppressContextMenu = false; // 제스처 없으면 메뉴 정상 출력
 					}
+
 					path = [];
 				}
 			});
+
+
+			function handleGesture(gesture) {
+				switch (gesture) {
+					case "↓→"	: chrome.runtime.sendMessage({ action: "close_tab" }); break;
+					case "←"	: history.back(); break;
+					case "→"	: history.forward(); break;
+					case "↑↓"	: location.reload(); break;
+					case "↑↓↑"	: hardReload(); break;
+					case "↑"	: scrollInDirection("up", lastPos.x, lastPos.y); break;
+					case "↓"	: scrollInDirection("down", lastPos.x, lastPos.y); break;
+					default		: temporarilySuppressContextMenu(500); break;
+				}
+			}
+
+			function hardReload() {
+				chrome.runtime.sendMessage({ action: "hard_reload" });
+			}
+
+			function findScrollableElement(el) {
+				while (el) {
+					const { overflowY } = getComputedStyle(el);
+					const canScroll = (overflowY === "auto" || overflowY === "scroll") && el.scrollHeight > el.clientHeight;
+					if (canScroll) return el;
+					el = el.parentElement;
+				}
+				return document.scrollingElement || document.documentElement;
+			}
+
+			function scrollInDirection(direction, x, y) {
+				const target = findScrollableElement(document.elementFromPoint(x, y));
+				const isUp = direction === "up"; // true: 위로, false: 아래로
+				const scrollTarget = target ===  document.body ? window : target;
+				const scrollAmount = scrollTarget.scrollHeight || document.body.scrollHeight;
+				console.log(scrollTarget);
+				scrollTarget.scrollTo({ top: isUp ? 0 : scrollAmount, behavior: "auto" });
+			}
+
+
+
+
+
+
+
+
+
+
 
 
 		}
