@@ -175,7 +175,7 @@ const extention = {
 			function showMessage(gesture, text) {
 				if (messageEl) messageEl.remove();
 				messageEl = document.createElement("div");
-				messageEl.innerHTML = `<strong>${gesture}</strong> : ${text}`;
+				messageEl.innerHTML = `<strong style="font-size: 40px; letter-spacing: -10px; margin: 0 0 0 -8px;">${gesture}</strong><p>${text}</p>`;
 				Object.assign(messageEl.style, {
 					position: "fixed",
 					top: "50%",
@@ -184,7 +184,16 @@ const extention = {
 					background: "rgba(0,0,0,0.6)",
 					color: "white",
 					padding: "10px 20px",
-					borderRadius: "12px",
+					borderRadius: "100%",
+					width: "150px",
+					height: "150px",
+					boxSizing: "border-box",
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					alignItems: "center",
+					gap: "10px",
+					textAlign: "center",
 					fontSize: "18px",
 					zIndex: "999999",
 					pointerEvents: "none",
