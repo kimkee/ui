@@ -116,3 +116,7 @@ function startServer(name, port, dirt) {
 }
 
 SERVERLIST.forEach((server) => startServer(server.name, server.port, server.dirt));
+// 1초 대기 후에 서버 시작 메시지 출력
+setTimeout(() => {
+  console.log(`서버가 시작되었습니다.`);
+}, 1000);
