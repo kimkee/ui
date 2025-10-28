@@ -25,7 +25,7 @@
 		"default_icon": "img/logo.png",
 		"default_popup": "popup.html"
 	},
-  	"permissions": ["browsingData","webRequest", "webRequestBlocking", "declarativeNetRequest", "tabs"],
+  	"permissions": ["browsingData","webRequest", "declarativeNetRequest", "tabs"],
 	"host_permissions": ["<all_urls>"],
 	"background": {
 		"service_worker": "background.js"

@@ -175,7 +175,7 @@ const extention = {
 			function showMessage(gesture, text) {
 				if (messageEl) messageEl.remove();
 				messageEl = document.createElement("div");
-				messageEl.innerHTML = `<strong style="font-size: 40px; letter-spacing: -10px; margin: 0 0 0 -8px;">${gesture}</strong><p>${text}</p>`;
+				messageEl.innerHTML = `<strong style="font-size: 52px; font-family: 'Consolas'; letter-spacing: 0px; margin: 0 0 0 0px !important;">${gesture}</strong><p style="margin: 0px !important;">${text}</p>`;
 				Object.assign(messageEl.style, {
 					position: "fixed",
 					top: "50%",
@@ -195,8 +195,9 @@ const extention = {
 					gap: "10px",
 					textAlign: "center",
 					fontSize: "18px",
+					lineHeight: "1",
 					zIndex: "999999",
-					pointerEvents: "none",
+					pointerEvents: "auto",
 				});
 				document.body.appendChild(messageEl);
 			}
@@ -270,6 +271,9 @@ const extention = {
 						case "→"	: showMessage(gesture, `앞으로가기`); break;
 						case "↓"	: showMessage(gesture, `맨아래로`); break;
 						case "↑"	: showMessage(gesture, `맨위로`); break;
+						case "→↑"	: showMessage(gesture, `창최대화`); break;
+						case "→↓"	: showMessage(gesture, `창최소화`); break;
+						case "←↑"	: showMessage(gesture, `전체화면`); break;
 						default		: removeMessage(); // 매칭 안 되면 메시지 제거 break;
 					}
 				}
@@ -309,6 +313,9 @@ const extention = {
 					case "↑↓↑"	: hardReload(); break;
 					case "↑"	: scrollInDirection("up", lastPos.x, lastPos.y); break;
 					case "↓"	: scrollInDirection("down", lastPos.x, lastPos.y); break;
+					case "→↑"	: chrome.runtime.sendMessage({ action: "maximize_window" }); break;
+					case "→↓"	: chrome.runtime.sendMessage({ action: "minimize_window" }); break;
+					case "←↑"	: chrome.runtime.sendMessage({ action: "toggle_fullscreen" }); break;
 					default		: temporarilySuppressContextMenu(500); break;
 				}
 			}
