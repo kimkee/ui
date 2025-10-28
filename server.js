@@ -120,3 +120,19 @@ SERVERLIST.forEach((server) => startServer(server.name, server.port, server.dirt
 setTimeout(() => {
   console.log(`서버가 시작되었습니다.`);
 }, 1000);
+
+
+// 실행중인 서버 종료하기
+process.on('SIGINT', () => { // Ctrl+C 처리
+  console.log('\n서버를 종료합니다.');
+  process.exit();
+});
+
+process.on('SIGTERM', () => { // 종료 신호 처리
+  console.log('\n서버를 종료합니다...');
+  process.exit();
+});
+// 서버 종료시 메시지 출력
+process.on('exit', () => {
+  console.log('서버가 종료되었습니다.');
+});
