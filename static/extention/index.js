@@ -77,11 +77,13 @@ const extention = {
 			const dgit = t => t < 10 ? "0"+t : t;
 			const gourl = url => location.href = location.href.replace(location.host, `${url}`);
 			const goimg = eee => location.href = `${location.origin + ppp + dgit(num)}.${extn}`;
+			if(!isNaN(num) === false ) { return } // 숫자가 아니면 종료
+			if(!e.ctrlKey) { return } // ctrl 을 안 누르면 종료
 			switch (e.code) {
-				case 'ArrowUp' : gourl('image.lottecard.co.kr'); break;
-				case 'ArrowDown' : gourl('dimage.lottecard.co.kr'); break;
-				case 'ArrowRight' : goimg(num++); break;
-				case 'ArrowLeft' : goimg(num--); break;
+				case 'ArrowUp'		: gourl('image.lottecard.co.kr'); break;
+				case 'ArrowDown'	: gourl('dimage.lottecard.co.kr'); break;
+				case 'ArrowRight'	: num = num >= 99 ? -1 : num; goimg(num++); break; // 99 이상이면 00으로
+				case 'ArrowLeft'	: num = num <= 0  ? 100 : num; goimg(num--); break; // 00 이하면 99로
 			}
 		}
 	},
