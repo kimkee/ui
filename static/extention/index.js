@@ -341,23 +341,88 @@ const extention = {
 				const isUp = direction === "up"; // true: 위로, false: 아래로
 				const scrollTarget = target ===  document.body ? window : target;
 				const scrollAmount = scrollTarget.scrollHeight || document.body.scrollHeight;
-				console.log(scrollTarget);
-				scrollTarget.scrollTo({ top: isUp ? 0 : scrollAmount, behavior: "auto" });
+				console.log(target);
+				// scrollTarget.scrollTo({ top: isUp ? 0 : scrollAmount, behavior: "auto" });
+				scrollToAni( target , isUp ? 0 : scrollAmount, 200, () => { console.log('도착');} );
+				
 			}
 
+			function scrollToAni  (selector, position, duration, callback)  { // 부드러운 스크롤 애니메이션
+				// scrollAniTo(boxElement, 100, 200, () => {
+				//     console.log(".box 도착");
+				// });
+				// console.log(selector);
+				// const element = document.querySelector(selector);
+				const element = selector;
+				if (!element) return;
+				// console.log(element);
+				const startingYOffset = element.scrollTop || document.documentElement.scrollTop;
+				const targetYOffset = position;
+				const startTime = performance.now(); //
 
+				const animateScroll = (timestamp) => {
+					const currentTime = timestamp - startTime;
+					const progress = Math.min(currentTime / duration, 1);
+					const easeInOutCubic = progress < 0.5 ? 4 * progress * progress * progress : (progress - 1) * (2 * progress - 2) * (2 * progress - 2) + 1;
+					const yOffset = startingYOffset + (targetYOffset - startingYOffset) * easeInOutCubic;
 
+					if (element === document.body) {
+						window.scrollTo(0, yOffset);
+					}else{
+						element.scrollTop = yOffset;
+					}
 
+					if (currentTime < duration) {
+						requestAnimationFrame(animateScroll);
+					}else{
+						if (typeof callback === 'function') {
+							callback();
+						}
+					}
+				};
 
+				requestAnimationFrame(animateScroll);
+			}
 
-
-
-
-
-
-
+			
 		}
 	},
+	scrollToAni: (selector, position, duration, callback) => { // 부드러운 스크롤 애니메이션
+        // scrollAniTo(boxElement, 100, 200, () => {
+        //     console.log(".box 도착");
+        // });
+		// console.log(selector);
+        // const element = document.querySelector(selector);
+        const element = selector;
+        if (!element) return;
+        // console.log(element);
+        const startingYOffset = element.scrollTop || document.documentElement.scrollTop;
+        const targetYOffset = position;
+        const startTime = performance.now();
+
+        const animateScroll = (timestamp) => {
+            const currentTime = timestamp - startTime;
+            const progress = Math.min(currentTime / duration, 1);
+            const easeInOutCubic = progress < 0.5 ? 4 * progress * progress * progress : (progress - 1) * (2 * progress - 2) * (2 * progress - 2) + 1;
+            const yOffset = startingYOffset + (targetYOffset - startingYOffset) * easeInOutCubic;
+
+            if (element === document.body) {
+                window.scrollTo(0, yOffset);
+            }else{
+                element.scrollTop = yOffset;
+            }
+
+            if (currentTime < duration) {
+                requestAnimationFrame(animateScroll);
+            }else{
+                if (typeof callback === 'function') {
+                    callback();
+                }
+            }
+        };
+
+        requestAnimationFrame(animateScroll);
+    },
 	param:(function(a) { // URL에서 파라미터 읽어오기  ui.param.***
 		if (a == "") return {};
 		var b = {};
