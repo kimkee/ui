@@ -136,257 +136,263 @@ const extention = {
 			}
 		},
 	},
-	gesture:{
-		init: function(){
-			this.set();
-		},
-		set: function(){
-			
+    gesture:{
+        init: function(){
+            this.set();
+        },
+        set: function(){
+            
 
 
 
 
 
-			let isRightClick = false;
-			let path = [];
-			let lastPos = { x: 0, y: 0 };
-			let overlay, ctx;
-			let suppressContextMenu = false;
-			let messageEl = null; // 피드백 표시용
+            let isRightClick = false;
+            let path = [];
+            let lastPos = { x: 0, y: 0 };
+            let overlay, ctx;
+            let suppressContextMenu = false;
+            let messageEl = null; // 피드백 표시용
 
-			function createOverlay() {
-				overlay = document.createElement("canvas");
-				overlay.style.position = "fixed";
-				overlay.style.top = "0";
-				overlay.style.left = "0";
-				overlay.style.width = "100%";
-				overlay.style.height = "100%";
-				overlay.style.pointerEvents = "none";
-				overlay.style.zIndex = "999998";
-				overlay.width = window.innerWidth;
-				overlay.height = window.innerHeight;
-				document.body.appendChild(overlay);
+            function createOverlay() {
+                overlay = document.createElement("canvas");
+                overlay.style.position = "fixed";
+                overlay.style.top = "0";
+                overlay.style.left = "0";
+                overlay.style.width = "100%";
+                overlay.style.height = "100%";
+                overlay.style.pointerEvents = "none";
+                overlay.style.zIndex = "999998";
+                overlay.width = window.innerWidth;
+                overlay.height = window.innerHeight;
+                document.body.appendChild(overlay);
 
-				ctx = overlay.getContext("2d");
-				ctx.strokeStyle = "rgba(0, 150, 255, 0.8)";
-				ctx.lineWidth = 3;
-				ctx.lineJoin = "round";
-				ctx.lineCap = "round";
-			}
+                ctx = overlay.getContext("2d");
+                ctx.strokeStyle = "rgba(0, 150, 255, 0.8)";
+                ctx.lineWidth = 3;
+                ctx.lineJoin = "round";
+                ctx.lineCap = "round";
+            }
 
-			function showMessage(gesture, text) {
-				if (messageEl) messageEl.remove();
-				messageEl = document.createElement("div");
-				messageEl.innerHTML = `<strong style="font-size: 52px; font-family: 'Consolas'; letter-spacing: 0px; margin: 0 0 0 0px !important;">${gesture}</strong><p style="margin: 0px !important;">${text}</p>`;
-				Object.assign(messageEl.style, {
-					position: "fixed",
-					top: "50%",
-					left: "50%",
-					transform: "translate(-50%, -50%)",
-					background: "rgba(0,0,0,0.6)",
-					color: "white",
-					padding: "10px 20px",
-					borderRadius: "100%",
-					width: "150px",
-					height: "150px",
-					boxSizing: "border-box",
-					display: "flex",
-					flexDirection: "column",
-					justifyContent: "center",
-					alignItems: "center",
-					gap: "10px",
-					textAlign: "center",
-					fontSize: "18px",
-					lineHeight: "1",
-					zIndex: "999999",
-					pointerEvents: "auto",
-				});
-				document.body.appendChild(messageEl);
-			}
+            function showMessage(gesture, text) {
+                if (messageEl) messageEl.remove();
+                messageEl = document.createElement("div");
+                messageEl.innerHTML = `<strong style="font-size: 52px; font-family: 'Consolas'; letter-spacing: 0px; margin: 0 0 0 0px !important;">${gesture}</strong><p style="margin: 0px !important;">${text}</p>`;
+                Object.assign(messageEl.style, {
+                    position: "fixed",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    background: "rgba(0,0,0,0.6)",
+                    color: "white",
+                    padding: "10px 20px",
+                    borderRadius: "100%",
+                    width: "150px",
+                    height: "150px",
+                    boxSizing: "border-box",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "10px",
+                    textAlign: "center",
+                    fontSize: "18px",
+                    lineHeight: "1",
+                    zIndex: "999999",
+                    pointerEvents: "auto",
+                });
+                document.body.appendChild(messageEl);
+            }
 
-			function removeMessage() {
-				if (messageEl) {
-					messageEl.remove();
-					messageEl = null;
-				}
-			}
+            function removeMessage() {
+                if (messageEl) {
+                    messageEl.remove();
+                    messageEl = null;
+                }
+            }
 
-			function removeOverlay() {
-				if (overlay) {
-					overlay.remove();
-					overlay = null;
-					ctx = null;
-				}
-			}
+            function removeOverlay() {
+                if (overlay) {
+                    overlay.remove();
+                    overlay = null;
+                    ctx = null;
+                }
+            }
 
-			function temporarilySuppressContextMenu(duration = 500) {
-				suppressContextMenu = true;
-				setTimeout(() => {
-					suppressContextMenu = false;
-				}, duration);
-			}
+            function temporarilySuppressContextMenu(duration = 500) {
+                suppressContextMenu = true;
+                setTimeout(() => {
+                    suppressContextMenu = false;
+                }, duration);
+            }
 
-			document.addEventListener("contextmenu", (e) => {
-				if (suppressContextMenu) {
-					e.preventDefault();
-					suppressContextMenu = false; // 한번만 막고 자동 복귀
-				}
-			});
+            document.addEventListener("contextmenu", (e) => {
+                if (suppressContextMenu) {
+                    e.preventDefault();
+                    suppressContextMenu = false; // 한번만 막고 자동 복귀
+                }
+            });
 
-			document.addEventListener("mousedown", (e) => {
-				if (e.button === 2) {
-					isRightClick = true;
-					path = [];
-					lastPos = { x: e.clientX, y: e.clientY };
-					if (!overlay) {
-						createOverlay();
-						ctx.beginPath();
-						ctx.moveTo(lastPos.x, lastPos.y);
-					}
-				}
-			});
+            document.addEventListener("mousedown", (e) => {
+                if (e.button === 2) {
+                    isRightClick = true;
+                    path = [];
+                    lastPos = { x: e.clientX, y: e.clientY };
+                    if (!overlay) {
+                        createOverlay();
+                        ctx.beginPath();
+                        ctx.moveTo(lastPos.x, lastPos.y);
+                    }
+                }
+            });
 
-			document.addEventListener("mousemove", (e) => {
-				if (!isRightClick || !ctx) return;
+            document.addEventListener("mousemove", (e) => {
+                if (!isRightClick || !ctx) return;
 
-				const dx = e.clientX - lastPos.x;
-				const dy = e.clientY - lastPos.y;
-				const absDx = Math.abs(dx);
-				const absDy = Math.abs(dy);
+                const dx = e.clientX - lastPos.x;
+                const dy = e.clientY - lastPos.y;
+                const absDx = Math.abs(dx);
+                const absDy = Math.abs(dy);
 
-				if (absDx < 10 && absDy < 10) return;
+                if (absDx < 10 && absDy < 10) return;
 
-				const dir =
-					absDy > absDx ? (dy > 0 ? "↓" : "↑") : dx > 0 ? "→" : "←";
+                const dir =
+                    absDy > absDx ? (dy > 0 ? "↓" : "↑") : dx > 0 ? "→" : "←";
 
-				if (path[path.length - 1] !== dir) {
-					path.push(dir);
-					const gesture = path.join("");
-					console.log("path:", gesture);
+                if (path[path.length - 1] !== dir) {
+                    path.push(dir);
+                    const gesture = path.join("");
+                    console.log("path:", gesture);
 
-					// 매칭되는 제스처만 메시지 표시
-					switch (gesture) {
-						case "↓→"	: showMessage(gesture, `탭닫기`); break;
-						case "↑↓"	: showMessage(gesture, `새로고침`); break;
-						case "↑↓↑"	: showMessage(gesture, `강력새로고침`); break;
-						case "←"	: showMessage(gesture, `뒤로가기`); break;
-						case "→"	: showMessage(gesture, `앞으로가기`); break;
-						case "↓"	: showMessage(gesture, `맨아래로`); break;
-						case "↑"	: showMessage(gesture, `맨위로`); break;
-						case "→↑"	: showMessage(gesture, `창최대화`); break;
-						case "→↓"	: showMessage(gesture, `창최소화`); break;
-						case "←↑"	: showMessage(gesture, `전체화면`); break;
-						default		: removeMessage(); // 매칭 안 되면 메시지 제거 break;
-					}
-				}
-
-
-				ctx.lineTo(e.clientX, e.clientY);
-				ctx.stroke();
-				lastPos = { x: e.clientX, y: e.clientY };
-			});
-
-			document.addEventListener("mouseup", (e) => {
-				if (e.button === 2 && isRightClick) {
-					isRightClick = false;
-					const gesture = path.join("");
-					console.log("Gesture:", gesture);
-					removeOverlay();
-					removeMessage();
-
-					if (gesture) {
-						handleGesture(gesture);
-						suppressContextMenu = true; // 제스처가 있었을 때만 메뉴 막음
-					} else {
-						suppressContextMenu = false; // 제스처 없으면 메뉴 정상 출력
-					}
-
-					path = [];
-				}
-			});
+                    // 매칭되는 제스처만 메시지 표시
+                    switch (gesture) {
+                        case "↓→"	: showMessage(gesture, `탭닫기`); break;
+                        case "↑↓"	: showMessage(gesture, `새로고침`); break;
+                        case "↑↓↑"	: showMessage(gesture, `강력새로고침`); break;
+                        case "←"	: showMessage(gesture, `뒤로가기`); break;
+                        case "→"	: showMessage(gesture, `앞으로가기`); break;
+                        case "↓"	: showMessage(gesture, `맨아래로`); break;
+                        case "↑"	: showMessage(gesture, `맨위로`); break;
+                        case "→↑"	: showMessage(gesture, `창최대화`); break;
+                        case "→↓"	: showMessage(gesture, `창최소화`); break;
+                        case "←↑"	: showMessage(gesture, `전체화면`); break;
+                        default		: removeMessage(); // 매칭 안 되면 메시지 제거 break;
+                    }
+                }
 
 
-			function handleGesture(gesture) {
-				switch (gesture) {
-					case "↓→"	: chrome.runtime.sendMessage({ action: "close_tab" }); break;
-					case "←"	: history.back(); break;
-					case "→"	: history.forward(); break;
-					case "↑↓"	: location.reload(); break;
-					case "↑↓↑"	: hardReload(); break;
-					case "↑"	: scrollInDirection("up", lastPos.x, lastPos.y); break;
-					case "↓"	: scrollInDirection("down", lastPos.x, lastPos.y); break;
-					case "→↑"	: chrome.runtime.sendMessage({ action: "maximize_window" }); break;
-					case "→↓"	: chrome.runtime.sendMessage({ action: "minimize_window" }); break;
-					case "←↑"	: chrome.runtime.sendMessage({ action: "toggle_fullscreen" }); break;
-					default		: temporarilySuppressContextMenu(500); break;
-				}
-			}
+                ctx.lineTo(e.clientX, e.clientY);
+                ctx.stroke();
+                lastPos = { x: e.clientX, y: e.clientY };
+            });
 
-			function hardReload() {
-				chrome.runtime.sendMessage({ action: "hard_reload" });
-			}
+            document.addEventListener("mouseup", (e) => {
+                if (e.button === 2 && isRightClick) {
+                    isRightClick = false;
+                    const gesture = path.join("");
+                    console.log("Gesture:", gesture);
+                    removeOverlay();
+                    removeMessage();
 
-			function findScrollableElement(el) {
-				while (el) {
-					const { overflowY } = getComputedStyle(el);
-					const canScroll = (overflowY === "auto" || overflowY === "scroll") && el.scrollHeight > el.clientHeight;
-					if (canScroll) return el;
-					el = el.parentElement;
-				}
-				return document.scrollingElement || document.documentElement;
-			}
+                    if (gesture) {
+                        handleGesture(gesture);
+                        suppressContextMenu = true; // 제스처가 있었을 때만 메뉴 막음
+                    } else {
+                        suppressContextMenu = false; // 제스처 없으면 메뉴 정상 출력
+                    }
 
-			function scrollInDirection(direction, x, y) {
-				const target = findScrollableElement(document.elementFromPoint(x, y));
-				const isUp = direction === "up"; // true: 위로, false: 아래로
-				const scrollTarget = target ===  document.body ? window : target;
-				const scrollAmount = scrollTarget.scrollHeight || document.body.scrollHeight;
-				console.log(target);
-				// scrollTarget.scrollTo({ top: isUp ? 0 : scrollAmount, behavior: "auto" });
-				scrollToAni( target , isUp ? 0 : scrollAmount, 200, () => { console.log('도착');} );
-				
-			}
+                    path = [];
+                }
+            });
 
-			function scrollToAni  (selector, position, duration, callback)  { // 부드러운 스크롤 애니메이션
-				// scrollAniTo(boxElement, 100, 200, () => {
-				//     console.log(".box 도착");
-				// });
-				// console.log(selector);
-				// const element = document.querySelector(selector);
-				const element = selector;
-				if (!element) return;
-				// console.log(element);
-				const startingYOffset = element.scrollTop || document.documentElement.scrollTop;
-				const targetYOffset = position;
-				const startTime = performance.now(); //
 
-				const animateScroll = (timestamp) => {
-					const currentTime = timestamp - startTime;
-					const progress = Math.min(currentTime / duration, 1);
-					const easeInOutCubic = progress < 0.5 ? 4 * progress * progress * progress : (progress - 1) * (2 * progress - 2) * (2 * progress - 2) + 1;
-					const yOffset = startingYOffset + (targetYOffset - startingYOffset) * easeInOutCubic;
+            function handleGesture(gesture) {
+                switch (gesture) {
+                    case "↓→"	: chrome.runtime.sendMessage({ action: "close_tab" }); break;
+                    case "←"	: history.back(); break;
+                    case "→"	: history.forward(); break;
+                    case "↑↓"	: location.reload(); break;
+                    case "↑↓↑"	: hardReload(); break;
+                    case "↑"	: scrollInDirection("up", lastPos.x, lastPos.y); break;
+                    case "↓"	: scrollInDirection("down", lastPos.x, lastPos.y); break;
+                    case "→↑"	: chrome.runtime.sendMessage({ action: "maximize_window" }); break;
+                    case "→↓"	: chrome.runtime.sendMessage({ action: "minimize_window" }); break;
+                    case "←↑"	: chrome.runtime.sendMessage({ action: "toggle_fullscreen" }); break;
+                    default		: temporarilySuppressContextMenu(500); break;
+                }
+            }
 
-					if (element === document.body) {
-						window.scrollTo(0, yOffset);
-					}else{
-						element.scrollTop = yOffset;
-					}
+            function hardReload() {
+                chrome.runtime.sendMessage({ action: "hard_reload" });
+            }
 
-					if (currentTime < duration) {
-						requestAnimationFrame(animateScroll);
-					}else{
-						if (typeof callback === 'function') {
-							callback();
-						}
-					}
-				};
+            function findScrollableElement(el) {
+                while (el) {
+                    const { overflowY } = getComputedStyle(el);
+                    const canScroll = (overflowY === "auto" || overflowY === "scroll") && el.scrollHeight > el.clientHeight;
+                    if (canScroll) return el;
+                    el = el.parentElement;
+                }
+                return document.scrollingElement || document.documentElement;
+            }
 
-				requestAnimationFrame(animateScroll);
-			}
+            function scrollInDirection(direction, x, y) {
+                const target = findScrollableElement(document.elementFromPoint(x, y));
+                const isUp = direction === "up"; // true: 위로, false: 아래로
 
-			
-		}
-	},
+                // 스크롤 가능한 대상
+                const scrollTarget = target === document.body ? window : target;
+
+                // 바닥 위치 계산: scrollHeight - clientHeight
+                const maxScroll = (scrollTarget.scrollHeight || document.body.scrollHeight) - (scrollTarget.clientHeight || window.innerHeight);
+
+                const targetPos = isUp ? 0 : maxScroll;
+
+                scrollToAni(target, targetPos, 200, () => { console.log("도착"); });
+            }
+
+
+            function scrollToAni(element, position, duration, callback) {
+                if (!element) return;
+
+                const startingYOffset = element.scrollTop || document.documentElement.scrollTop;
+                const targetYOffset = position;
+                const startTime = performance.now();
+
+                const animateScroll = (timestamp) => {
+                    const currentTime = timestamp - startTime;
+                    const progress = Math.min(currentTime / duration, 1);
+
+                    // easing 함수 (cubic)
+                    const easing = {
+                        easeInOutCubic	: (t) => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
+                        easeInOut		: (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t,
+                        easeOutIn		: (t) => t < 0.5 ? (1 - Math.pow(1 - 2 * t, 2)) / 2 : (Math.pow(2 * t - 1, 2) + 1) / 2,
+                        easeIn			: (t) => t * t * t,
+                        easeOut			: (t) => 1 - Math.pow(1 - t, 3),
+                        linear			: (t) => t,
+                    };				
+
+                    const yOffset = startingYOffset + (targetYOffset - startingYOffset) * easing.easeOut(progress);
+
+                    (element === document.body) ? window.scrollTo(0, yOffset) : element.scrollTop = yOffset;
+
+                    if (currentTime < duration) {
+                        requestAnimationFrame(animateScroll);
+                    }else{
+                        if (typeof callback === 'function') {
+                            callback();
+                        }
+                    }
+                };
+
+                requestAnimationFrame(animateScroll);
+            }
+
+
+            
+        }
+    },
 	scrollToAni: (selector, position, duration, callback) => { // 부드러운 스크롤 애니메이션
         // scrollAniTo(boxElement, 100, 200, () => {
         //     console.log(".box 도착");
