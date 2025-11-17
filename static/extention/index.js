@@ -371,7 +371,7 @@ const extention = {
                         easeIn          : (t) => t * t * t,
                         easeOut         : (t) => 1 - Math.pow(1 - t, 3),
                         linear          : (t) => t,
-                    };				
+                    };
 
                     const yOffset = startingYOffset + (targetYOffset - startingYOffset) * easing.easeOut(progress);
 
@@ -393,15 +393,9 @@ const extention = {
             
         }
     },
-    scrollToAni: (selector, position, duration, callback) => { // 부드러운 스크롤 애니메이션
-        // scrollAniTo(boxElement, 100, 200, () => {
-        //     console.log(".box 도착");
-        // });
-        // console.log(selector);
-        // const element = document.querySelector(selector);
-        const element = selector;
+    scrollToAni: (element, position, duration, callback) => {
         if (!element) return;
-        // console.log(element);
+
         const startingYOffset = element.scrollTop || document.documentElement.scrollTop;
         const targetYOffset = position;
         const startTime = performance.now();
@@ -409,14 +403,20 @@ const extention = {
         const animateScroll = (timestamp) => {
             const currentTime = timestamp - startTime;
             const progress = Math.min(currentTime / duration, 1);
-            const easeInOutCubic = progress < 0.5 ? 4 * progress * progress * progress : (progress - 1) * (2 * progress - 2) * (2 * progress - 2) + 1;
-            const yOffset = startingYOffset + (targetYOffset - startingYOffset) * easeInOutCubic;
 
-            if (element === document.body) {
-                window.scrollTo(0, yOffset);
-            }else{
-                element.scrollTop = yOffset;
-            }
+            // 다양한 easing 함수
+            const easing = {
+                easeInOutCubic  : (t) => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
+                easeInOut       : (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t,
+                easeOutIn       : (t) => t < 0.5 ? (1 - Math.pow(1 - 2 * t, 2)) / 2 : (Math.pow(2 * t - 1, 2) + 1) / 2,
+                easeIn          : (t) => t * t * t,
+                easeOut         : (t) => 1 - Math.pow(1 - t, 3),
+                linear          : (t) => t,
+            };
+
+            const yOffset = startingYOffset + (targetYOffset - startingYOffset) * easing.easeOut(progress);
+
+            (element === document.body) ? window.scrollTo(0, yOffset) : element.scrollTop = yOffset;
 
             if (currentTime < duration) {
                 requestAnimationFrame(animateScroll);
