@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>크롬 익스텐션 기능 예시 페이지 (동적 팝업)</title>
+    <style>
+        /* 팝업 레이어의 기본 스타일 (팝업이 동적으로 생성되더라도 CSS는 그대로 적용) */
+        #customPop {
+            position: absolute; /* 커서 위치에 띄우기 위해 absolute 설정 */
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10000; /* 다른 요소 위에 표시되도록 높은 z-index 설정 */
+            display: none; /* 초기에는 숨김 */
+            font-family: Arial, sans-serif;
+        }
+
+        #customPop ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #customPop li {
+            margin-bottom: 5px;
+        }
+
+        #customPop a {
+            text-decoration: none;
+            color: #007bff;
+            display: block;
+            padding: 3px 5px;
+        }
+
+        #customPop a:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>크롬 익스텐션 기능 구현 예시 (동적 팝업)</h1>
+    <p>아래 숫자를 드래그하여 선택한 후, **Alt + 마우스 오른쪽 클릭**을 해보세요.</p>
+    <p>이벤트 ID: <span style="font-size: 20px; font-weight: bold;">21431</span></p>
+    <p>다른 ID: <span style="font-size: 20px;">98765</span></p>
+    <p>일반 텍스트입니다. 여기서는 동작하지 않습니다.</p>
+
+
+    <script>
+        // 기본 URL 정의
+        const BASE_URL_MO = 'https://abc.com/page/mo/?newsSeq=';
+        const BASE_URL_PC = 'https://abc.com/page/pc/?newsSeq=';
+
+        // ----------------------------------------------------
+        // 1. 팝업 요소를 동적으로 생성하고 문서에 삽입
+        // ----------------------------------------------------
+
+        // 팝업 컨테이너 생성
+        const customPop = document.createElement('div');
+        customPop.id = 'customPop';
+        customPop.innerHTML = `
+            <ul>
+                <li><a id="link-mo" href="#" target="_blank">MO이벤트열기</a></li>
+                <li><a id="link-pc" href="#" target="_blank">PC이벤트열기</a></li>
+            </ul>
+        `;
+        // body에 팝업 요소 추가
+        document.body.appendChild(customPop);
+
+
+        // 생성된 내부 DOM 요소 가져오기
+        const linkMo = document.getElementById('link-mo');
+        const linkPc = document.getElementById('link-pc');
+
+        // ----------------------------------------------------
+        // 2. 함수 및 이벤트 리스너 (기존 로직 유지 및 적용)
+        // ----------------------------------------------------
+
+        /**
+         * 현재 선택된 텍스트를 가져오는 함수
+         */
+        function getSelectedText() {
+            const selection = window.getSelection();
+            return selection ? selection.toString().trim() : '';
+        }
+
+        /**
+         * 팝업을 숨기는 함수
+         */
+        function hidePopup() {
+            customPop.style.display = 'none';
+        }
+
+        /**
+         * 컨텍스트 메뉴(Alt + 마우스 우클릭) 이벤트 리스너
+         */
+        document.addEventListener('contextmenu', function(e) {
+            if (e.ctrlKey) {
+                e.preventDefault(); 
+                
+                const selectedText = getSelectedText();
+                const isValidNumber = /^\d+$/.test(selectedText);
+
+                if (selectedText.length > 0 && isValidNumber) {
+                    // 링크 업데이트
+                    linkMo.href = BASE_URL_MO + selectedText;
+                    linkPc.href = BASE_URL_PC + selectedText;
+                    
+                    // 팝업 위치 지정
+                    customPop.style.left = e.clientX + 'px';
+                    customPop.style.top = e.clientY + 'px';
+                    
+                    // 팝업 표시
+                    customPop.style.display = 'block';
+
+                } else {
+                    hidePopup();
+                }
+            } else {
+                hidePopup();
+            }
+        });
+
+        // --- 팝업 닫힘 로직 ---
+
+        // 1. 팝업 외부 클릭 시 팝업 숨김
+        document.addEventListener('click', function(e) {
+            // 클릭된 요소가 팝업 자체가 아니거나 팝업의 자식 요소가 아닐 경우만 숨김
+            if (!customPop.contains(e.target)) {
+                hidePopup();
+            }
+        });
+
+        // 2. 팝업 내부 클릭 시 이벤트 버블링 차단 및 팝업 닫기 (이전 수정 로직)
+        customPop.addEventListener('mousedown', function(e) {
+            // 마우스 오른쪽 버튼(2)이 아닌 경우만 버블링 차단
+            if (e.button !== 2) {
+                e.stopPropagation(); 
+            }
+        }, true); // 캡처링 단계에서 이벤트를 먼저 잡기 위해 true 설정
+
+        customPop.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            // 링크 클릭 후에는 페이지 이동이 발생하므로, 약간의 딜레이를 주고 팝업을 닫아줍니다.
+            setTimeout(hidePopup, 50);
+
+        }, true);
+        
+        // 3. Alt 키를 누르지 않은 일반 마우스 클릭(좌클릭) 시 팝업 숨김
+        document.addEventListener('mousedown', function(e) {
+            // 마우스 오른쪽 버튼(버튼 2)이 아닌 경우
+            if (e.button !== 2) { 
+                hidePopup();
+            }
+        });
+    </script>
+</body>
+</html>

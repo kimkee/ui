@@ -64,7 +64,9 @@ const extention = {
     },
     apppush:{
         init: function(){
-            location.pathname.includes('/webapp/mobile/images/push/') ? this.evt() : null;
+            if( !["dimage.lottecard.co.kr","image.lottecard.co.kr"].includes(location.hostname) ) { return }
+            this.evt();
+            // location.pathname.includes('/webapp/mobile/images/push/') ? this.evt() : null;
         },
         evt: function(){
             document.addEventListener("keydown", e =>  this.set(e) );	
@@ -362,7 +364,7 @@ const extention = {
                 const animateScroll = (timestamp) => {
                     const currentTime = timestamp - startTime;
                     const progress = Math.min(currentTime / duration, 1);
-
+                    console.log( parseInt(currentTime) , duration);
                     // easing 함수 (cubic)
                     const easing = {
                         easeInOutCubic  : (t) => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
