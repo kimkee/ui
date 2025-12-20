@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>mergesData</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="workList" class="m-4"> </div>
+    <style>
+        body{background-color: #111111; color: #dddddd; font-size:12px;}
+        a, button{color: #dddddd;}
+        button{cursor: pointer; border: #666 solid 1px; background-color: #222222; padding: 0.2rem 0.5rem; margin-right: 0.2rem;}
+        tr.hide{opacity: 0.5;}
+        table{width: 100%; }
+        table th{ }
+        table th,
+        table td{ padding: 0.5rem; border: 1px solid #888888; text-align: left;}
+    </style>
+    <script>
+        let mergesData = [
+            {
+                "category": "LP-static",
+                "works": [
+                    {
+                        "id": "M-01",
+                        "clss" : "show",
+                        "taskName": "작업 이름1",
+                        "branchId": "hotfix/DESIMG-1234",
+                        "status": "DEV",
+                    },
+                    {
+                        "id": "M-02",
+                        "clss" : "hide",
+                        "taskName": "작업 이름2",
+                        "branchId": "hotfix/DESIMG-2341",
+                        "status": "DEV",
+                    }
+                ]
+            },
+            {
+                "category": "LP-static 2.0",
+                "works": [
+                    {
+                        "id": "M-011",
+                        "clss" : "show",
+                        "taskName": "작업 이름1",
+                        "branchId": "hotfix/DESIMG-1234",
+                        "status": "DEV",
+                    },
+                    {
+                        "id": "M-012",
+                        "clss" : "hide",
+                        "taskName": "작업 이름2",
+                        "branchId": "hotfix/DESIMG-2341",
+                        "status": "DEV",
+                    }
+                ]
+            },
+            {
+                "category": "MO-static 1",
+                "works": [
+                    {
+                        "id": "M-03",
+                        "clss" : "show",
+                        "taskName": "작업 이름3",
+                        "branchId": "hotfix/DESIMG-6455",
+                        "status": "DEV",
+                    },
+                    {
+                        "id": "M-04",
+                        "clss" : "hide",
+                        "taskName": "작업 이름4",
+                        "branchId": "hotfix/DESIMG-2343",
+                        "status": "DEV",
+                    },
+                    {
+                        "id": "M-05",
+                        "clss" : "show",
+                        "taskName": "작업 이름5",
+                        "branchId": "hotfix/DESIMG-2343",
+                        "status": "DEV",
+                    },
+                    {
+                        "id": "M-06",
+                        "clss" : "show",
+                        "taskName": "작업 이름6",
+                        "branchId": "hotfix/DESIMG-2343",
+                        "status": "DEV",
+                    },
+                    {
+                        "id": "M-07",
+                        "clss" : "show",
+                        "taskName": "작업 이름7",
+                        "branchId": "hotfix/DESIMG-2343",
+                        "status": "DEV",
+                    },
+                    {
+                        "id": "M-08",
+                        "clss" : "show",
+                        "taskName": "작업 이름8",
+                        "branchId": "hotfix/DESIMG-2343",
+                        "status": "DEV",
+                    },
+                ]
+            }
+        ];
+
+       
+        const workList = document.getElementById('workList');
+        const deleteBtn = document.querySelectorAll('.deleteBtn');
+        const checkShowHide = document.querySelectorAll('.checkShowHide');
+        const viewBtn = document.querySelectorAll('.viewBtn');
+        const moveBtn = document.querySelectorAll('.moveBtn');
+
+        document.addEventListener('click', (e) => {
+            if(e.target.closest('.deleteBtn'))  deleteBtnClick(e); 
+            if(e.target.closest('.checkShowHide'))  checkShowHideClick(e); 
+            if(e.target.closest('.viewBtn'))  viewBtnClick(e); 
+            if(e.target.closest('.moveBtn'))  moveBtnClick(e); 
+        });
+
+        const moveBtnClick = (e) => {
+
+            const id = e.target.dataset.id;
+            console.log(id);
+            const item = mergesData.find(item => item.works.find(item => item.id === id));
+            const workItem = item.works.find(item => item.id === id);
+            console.log(workItem);
+            const index = item.works.indexOf(workItem);
+            console.log(index);
+            // up 버튼이면 한칸 위로
+            // down 버튼이면 한칸 아래로
+            // 맨 아래면  맨위로 이동,  
+            // 맨 위면  맨 아래로 이동
+            if(e.target.classList.contains('up')) {
+                if(index === 0) {
+                    item.works.splice(index, 1);
+                    item.works.push(workItem); // Move to the very end of the array
+                } else {
+                    item.works.splice(index, 1);
+                    item.works.splice(index - 1, 0, workItem);
+                }
+            } else {
+                if(index === item.works.length - 1) {
+                    item.works.splice(index, 1);
+                    item.works.unshift(workItem); // Move to the very end of the array
+                } else {
+                    item.works.splice(index, 1);
+                    item.works.splice(index + 1, 0, workItem);
+                }
+            }
+            drawWorkList();
+        }
+        const drawWorkList = () => {
+            workList.innerHTML = mergesData.map(item => {
+                return item.works.length > 0 ? `
+                    <div data-works-num="${item.works.length}" data-works-hide-num="${item.works.filter(item => item.clss === 'hide').length}">
+                        <h4>${item.category}</h4>
+                        <table class="border-collapse border border-gray-500">
+                            <tbody>
+                            ${item.works.map(item => {
+                                return `
+                                <tr class="${item.clss}" data-id="${item.id}">
+                                    <td>${item.taskName}</td>
+                                    <td>
+                                        <button data-id="${item.id}" class="moveBtn up">&uarr;</button>
+                                        <button data-id="${item.id}" class="moveBtn down">&darr;</button>
+                                    </td>
+                                    <td>${item.branchId}</td>
+                                    <td>${item.status}</td>
+                                    <td><input type="checkbox" ${item.clss === 'show' ? 'checked' : ''} class="checkShowHide" data-id="${item.id}"></td>
+                                    <td>
+                                        <button data-id="${item.id}" class="viewBtn">보기</button>
+                                        <button data-id="${item.id}" class="deleteBtn">삭제</button>
+                                    </td>
+                                </tr>`;
+                            }).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                ` : '';
+            }).join('');
+            console.log(mergesData);
+
+            if( workList.innerHTML.trim() === '') {
+                workList.innerHTML = 'No data';
+            }
+        }
+        
+        const viewBtnClick = (e) => {
+            // 수정버튼을 누르면  해당 works 항목의  객체를 출력
+            const id = e.target.dataset.id;
+            const item = mergesData.find(item => item.works.find(item => item.id === id));
+            const workItem = item.works.find(item => item.id === id);
+            console.log(workItem);
+            
+        }
+        const deleteBtnClick = (e) => {
+            // 삭제버튼을 누르면  해당  항목을 삭제
+            const id = e.target.dataset.id;
+            console.log(id);
+            mergesData = mergesData.map(item => {
+                return {
+                    ...item,
+                    "works": item.works.filter(item => item.id !== id)
+                }
+            })
+            drawWorkList();
+        }
+        const checkShowHideClick = (e) => {
+            // 체크박스를 누르면  해당  항목의 show/hide를 변경
+            const id = e.target.dataset.id;
+            console.log(id);
+            mergesData = mergesData.map(item => {
+                return {
+                    ...item,
+                    "works": item.works.map(item => {
+                        return item.id === id ? { ...item, clss: item.clss === 'show' ? 'hide' : 'show' } : item
+                    })
+                }
+            })
+            drawWorkList();
+        }
+        
+        drawWorkList();
+
+    </script> 
+
+</body>
+</html>

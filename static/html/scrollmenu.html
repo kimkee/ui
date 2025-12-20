@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title></title>
+<meta charset="utf-8">
+<style type="text/css">
+    body{background: #333333}
+    * { font-size: 12px; margin: 0; padding: 0; line-height: 160%; color: #333333 }
+    li { list-style: none; }
+</style>
+<script type="text/javascript">
+
+    var stmnLEFT = 20; //  스크롤 메뉴의 왼쪽 위치
+    var stmnGAP1 = 170; //
+    var stmnGAP2 = 20; //
+    var stmnBASE = 300; //
+    var stmnActivateSpeed = 200; //
+    var stmnScrollSpeed = 5; //
+
+    var stmnTimer;
+
+    function ReadCookie(name) {
+        var label = name + "=";
+        var labelLen = label.length;
+        var cLen = document.cookie.length;
+        var i = 0;
+
+        while (i < cLen) {
+            var j = i + labelLen;
+
+            if (document.cookie.substring(i, j) == label) {
+                var cEnd = document.cookie.indexOf(";", j);
+                if (cEnd == -1) cEnd = document.cookie.length;
+
+                return unescape(document.cookie.substring(j, cEnd));
+            }
+
+            i++;
+        }
+
+        return "";
+    }
+
+    function SaveCookie(name, value, expire) {
+        var eDate = new Date();
+        eDate.setDate(eDate.getDate() + expire);
+        document.cookie = name + "=" + value + "; expires=" + eDate.toGMTString() + "; path=/";
+    }
+
+    function RefreshStaticMenu() {
+
+        var stmnStartPoint, stmnEndPoint, stmnRefreshTimer;
+
+        stmnStartPoint = parseInt(document.getElementById("STATICMENU").style.top, 10);
+        //stmnEndPoint = document.body.scrollTop + stmnGAP2;
+        stmnEndPoint = document.documentElement.scrollTop + stmnGAP2;
+        //window.status = document.documentElement.scrollTop;
+
+
+        if (stmnEndPoint < stmnGAP1) stmnEndPoint = stmnGAP1;
+
+        stmnRefreshTimer = stmnActivateSpeed;
+
+        if (stmnStartPoint != stmnEndPoint) {
+            stmnScrollAmount = Math.ceil(Math.abs(stmnEndPoint - stmnStartPoint) / 15);
+            document.getElementById("STATICMENU").style.top = parseInt(document.getElementById("STATICMENU").style.top, 10) + ((stmnEndPoint < stmnStartPoint) ? -stmnScrollAmount : stmnScrollAmount) + "px";
+            stmnRefreshTimer = stmnScrollSpeed;
+            console.log(stmnEndPoint);
+        }
+
+
+        stmnTimer = setTimeout("RefreshStaticMenu()", stmnRefreshTimer);
+
+
+    }
+    function ToggleAnimate() {
+        if (ANIMATE.checked) {
+            RefreshStaticMenu();
+            SaveCookie("ANIMATE", "true", 300);
+        }
+        else {
+            clearTimeout(stmnTimer);
+            document.getElementById("STATICMENU").style.top = stmnGAP1 + "px";
+            SaveCookie("ANIMATE", "false", 300);
+        }
+    }
+    function InitializeStaticMenu() {
+        document.getElementById("STATICMENU").style.left = stmnLEFT + "px";
+        if (ReadCookie("ANIMATE") == "false") {
+            document.getElementById("ANIMATE").checked = false;
+            document.getElementById("STATICMENU").style.top = document.body.scrollTop + stmnGAP1;
+        }
+        else {
+            document.getElementById("ANIMATE").checked = true;
+            document.getElementById("STATICMENU").style.top = document.body.scrollTop + stmnBASE;
+            RefreshStaticMenu();
+        }
+    }
+
+</script>
+</head>
+
+<body>
+    <div style="height:150px; background: #000;"></div>
+    <div id="STATICMENU" style="z-index:100; left:0px; top: 170px; position: absolute; background:#CCCCCC; padding:20px;">
+        <ul>
+            <li>Menu Item 1</li>
+            <li>Menu Item 2</li>
+            <li>Menu Item 3</li>
+        </ul>
+        <label for="ANIMATE"><input id="ANIMATE" onclick="ToggleAnimate();" type="checkbox"> Animate</label>
+    </div>
+    <script type="text/javascript">InitializeStaticMenu();</script>
+    <div style="width:600px; height:2500px"></div>
+</body>
+
+</html>

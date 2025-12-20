@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>크롬 익스텐션 기능 예시 페이지 (동적 팝업)</title>
+    <link rel="shortcut icon" href="#" type="image/x-icon">
     <style>
+        body{background-color: #111111; color: #dddddd;}
         /* 팝업 레이어의 기본 스타일 (팝업이 동적으로 생성되더라도 CSS는 그대로 적용) */
         #customPop {
             position: absolute; /* 커서 위치에 띄우기 위해 absolute 설정 */
@@ -41,7 +43,7 @@
 <body>
 
     <h1>크롬 익스텐션 기능 구현 예시 (동적 팝업)</h1>
-    <p>아래 숫자를 드래그하여 선택한 후, **Alt + 마우스 오른쪽 클릭**을 해보세요.</p>
+    <p>아래 숫자를 드래그하여 선택한 후, ** Ctrl + 마우스 오른쪽 클릭**을 해보세요.</p>
     <p>이벤트 ID: <span style="font-size: 20px; font-weight: bold;">21431</span></p>
     <p>다른 ID: <span style="font-size: 20px;">98765</span></p>
     <p>일반 텍스트입니다. 여기서는 동작하지 않습니다.</p>
@@ -155,6 +157,35 @@
                 hidePopup();
             }
         });
+
+        const alimData = [
+            { checked: true , time: "2024-06-01T10:10", content: "알림 내용 1" },
+            { checked: true , time: "2024-06-01T11:10", content: "알림 내용 2" },
+            { checked: false, time: "2024-06-01T09:10", content: "알림 내용 4" },
+            { checked: true , time: "2024-06-01T12:10", content: "알림 내용 3" },
+            { checked: false, time: "2024-06-01T12:10", content: "알림 내용 2" },
+        ];
+
+        // checked 된 항목 우선 정렬 후, checked true  최근시간 순 정렬,  checked false  최근시간 순 정렬
+        alimData.sort((a, b) => {
+            if (a.checked === b.checked) {
+                return new Date(b.time) - new Date(a.time); // 최근 시간 순
+            }
+            return a.checked ? -1 : 1; // true가 먼저 오도록
+        });
+
+        console.log(alimData);
+
     </script>
+    <select>
+        <option value="01" data-lname="lname1">1</option>
+        <option value="02" data-lname="lname2">2</option>
+        <option value="03" data-lname="lname3" selected>3</option>
+    </select>
+    <script>
+        const select = document.querySelector('select');
+        console.log(select.value , select.selectedIndex , select.options[select.selectedIndex]);
+        console.log(select.options[select.selectedIndex].dataset.lname);
+    </script>   
 </body>
 </html>

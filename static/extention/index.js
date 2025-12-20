@@ -340,7 +340,7 @@ const extention = {
 
             function scrollInDirection(direction, x, y) {
                 const target = findScrollableElement(document.elementFromPoint(x, y));
-                const isUp = direction === "up"; // true: 위로, false: 아래로
+                const isUp = direction === "up" ? true : false; // true: 위로, false: 아래로
 
                 // 스크롤 가능한 대상
                 const scrollTarget = target === document.body ? window : target;
