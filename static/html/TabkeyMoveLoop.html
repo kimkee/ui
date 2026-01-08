@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TabkeyMoveLoop</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        body { }
+        a, button { color: #dddddd; }
+        button { cursor: pointer; border: #666 solid 1px; background-color: #222222; padding: 0.2rem 0.5rem; margin-right: 0.2rem; }
+        .popup{ width: 600px; height: 600px; overflow: auto; border: 1px solid #666666; padding: 0.5rem; margin: 1rem 0; display: none;}
+        .popup.open{display: block;}
+        .autoTabindexBox{width: 100%;}
+        *:focus-visible { outline: 3px dashed #222222; outline-offset: -1px; }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+
+<body>
+    <button onclick="popup.open('popup1')">팝업열기</button>
+
+    <div class="popup" id="popup1">
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
+        <textarea name="" id="">sfsfds</textarea>
+        <button>버튼</button>
+        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="">
+        <input type="radio" name="rname1" id="">
+        <input type="radio" name="rname1" id="">
+        <a href="javascript:;">버튼</a>
+        <div tabindex="0">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</div>
+        <button onclick="popup.close('popup1')">닫기</button>
+    </div>
+
+    <script>
+        var popup = {
+            open: function(id) {
+                $('#' + id).addClass('open').attr('tabindex', '-1').focus();
+            },
+            close: function(id) {
+                $('#' + id).removeClass('open');
+            }
+        }
+    </script>
+
+</body>
+
+</html>

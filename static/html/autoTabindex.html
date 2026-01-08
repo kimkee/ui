@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>autoTabindex</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #111111;
+            color: #dddddd;
+            font-size: 12px;
+        }
+
+        a,
+        button {
+            color: #dddddd;
+        }
+
+        button {
+            cursor: pointer;
+            border: #666 solid 1px;
+            background-color: #222222;
+            padding: 0.2rem 0.5rem;
+            margin-right: 0.2rem;
+        }
+        .pop, .autoTabindexBox {
+            width: 300px;
+            height: 100px;
+            overflow: auto;
+            border: 1px solid #666666;
+            padding: 0.5rem;
+            margin: 1rem 0;
+        }
+        .autoTabindexBox{width: 100%;}
+    </style>
+</head>
+
+<body>
+    <div class="pop">
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
+    </div>
+    <div class="autoTabindexBox">
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
+    </div>
+
+    <script>
+        function updateScrollableTabIndex(el) {
+            const hasScroll = el.scrollHeight > el.clientHeight;
+            if (hasScroll) {
+                el.setAttribute("tabindex", "0");
+            } else {
+                el.removeAttribute("tabindex");
+            }
+        }
+
+        function initAutoScrollableTabIndex(selector) {
+            if (!selector) return;
+
+            const elements = document.querySelectorAll(selector);
+            if (!elements.length) return;
+
+            const updateAll = () => {
+                elements.forEach(updateScrollableTabIndex);
+            };
+
+            // 초기 1회 체크
+            updateAll();
+
+            // 각 영역 내용 변경 감지
+            elements.forEach(el => {
+                const observer = new MutationObserver(updateAll);
+                observer.observe(el, { childList: true, subtree: true });
+            });
+
+            // 리사이즈 시 전체 다시 계산
+            window.addEventListener("resize", updateAll);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // 필요에 따라 원하는 셀렉터로 호출
+            
+        });
+
+        initAutoScrollableTabIndex(".pop, .autoTabindexBox");
+    </script>
+
+</body>
+
+</html>
