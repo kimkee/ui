@@ -29,16 +29,139 @@
         <input type="radio" name="rname1" id="">
         <a href="javascript:;">버튼</a>
         <div tabindex="0">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</div>
+        <div style="width: 200px; height: 200px; overflow: auto; border: 1px solid #666666; padding: 0.5rem; margin: 1rem 0;" class="textareaauto">
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit? Extra content to force scroll. Extra content to force scroll. Extra content to force scroll. Extra content to force scroll. Extra content to force scroll. Extra content to force scroll. Extra content to force scroll. Extra content to force scroll. Extra content to force scroll. Extra content to force scroll.</p>
+        </div>
+        <button onclick="popup.addElement('popup1')">요소추가</button>
+        <button onclick="popup.removeElement('popup1')">요소삭제</button>
         <button onclick="popup.close('popup1')">닫기</button>
     </div>
 
     <script>
         var popup = {
             open: function(id) {
-                $('#' + id).addClass('open').attr('tabindex', '-1').focus();
+                var $popup = $('#' + id);
+                $popup.addClass('open').attr('tabindex', '-1');
+                
+                var popupElement = $popup[0];
+                
+                // 초기 포커스: .popup에 줌
+                $popup.focus();
+                
+                // 포커스 가능한 내부 요소 목록 가져오기 및 업데이트 함수
+                var updateFocusable = function() {
+                    var standardSelectors = 'a[href], area[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), textarea:not([disabled]), select:not([disabled]), iframe, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
+                    var $standardFocusable = $popup.find(standardSelectors).filter(':visible');
+                    
+                    // 스크롤 가능한 요소 찾기 (overflow: auto 또는 scroll이고 실제 오버플로 발생)
+                    var $scrollableElements = $popup.find('*').filter(function() {
+                        if (this.tabIndex < 0 || $(this).is('[disabled]') || !$(this).is(':visible')) return false;
+                        var style = window.getComputedStyle(this);
+                        var overflowY = style.overflowY;
+                        var overflowX = style.overflowX;
+                        if ((overflowY === 'auto' || overflowY === 'scroll' || overflowX === 'auto' || overflowX === 'scroll') &&
+                            (this.scrollHeight > this.clientHeight || this.scrollWidth > this.clientWidth)) {
+                            return true;
+                        }
+                        return false;
+                    });
+                    
+                    // 중복 제거하고 병합
+                    var $internalFocusable = $standardFocusable.add($scrollableElements).not($popup);
+                    
+                    var data = $popup.data('focusableElements') || {};
+                    
+                    if ($internalFocusable.length > 0) {
+                        // DOM 순서대로 정렬 (자연스러운 탭 순서 유지)
+                        $internalFocusable.sort(function(a, b) {
+                            return (a.compareDocumentPosition(b) & 6) - 2; // 4: preceding, 2: following
+                        });
+                        data.firstInternal = $internalFocusable[0];
+                        data.lastInternal = $internalFocusable[$internalFocusable.length - 1];
+                    } else {
+                        data.firstInternal = null;
+                        data.lastInternal = null;
+                    }
+                    
+                    $popup.data('focusableElements', data);
+                };
+                
+                // 키다운 이벤트 리스너 (동적 데이터 참조, 매번 업데이트 호출)
+                var handleKeydown = function(e) {
+                    if (e.key === 'Tab') {
+                        // 매 탭 키 눌림마다 요소 목록 업데이트 (동적 변화 대응)
+                        updateFocusable();
+                        
+                        var data = $popup.data('focusableElements');
+                        var firstInternal = data.firstInternal;
+                        var lastInternal = data.lastInternal;
+                        var active = document.activeElement;
+                        
+                        if (!e.shiftKey) { // forward tab
+                            if (lastInternal && active === lastInternal) {
+                                popupElement.focus();
+                                e.preventDefault();
+                            } else if (active === popupElement) {
+                                if (firstInternal) {
+                                    firstInternal.focus();
+                                    e.preventDefault();
+                                }
+                            }
+                        } else { // shift + tab
+                            if (firstInternal && active === firstInternal) {
+                                popupElement.focus();
+                                e.preventDefault();
+                            } else if (active === popupElement) {
+                                if (lastInternal) {
+                                    lastInternal.focus();
+                                    e.preventDefault();
+                                }
+                            }
+                        }
+                    }
+                };
+                
+                // document에 이벤트 리스너 등록
+                $(document).on('keydown.popupTrap', handleKeydown);
+                
+                // 초기 데이터 설정
+                $popup.data('focusableElements', {
+                    handleKeydown: handleKeydown
+                });
+                
+                // 초기 업데이트
+                updateFocusable();
             },
             close: function(id) {
-                $('#' + id).removeClass('open');
+                var $popup = $('#' + id);
+                $popup.removeClass('open').removeAttr('tabindex');
+                
+                // 키다운 이벤트 리스너 제거
+                $(document).off('keydown.popupTrap');
+                
+                // 데이터 정리
+                $popup.removeData('focusableElements');
+            },
+            addElement: function(id) {
+                var $popup = $('#' + id);
+                // 새로운 요소 추가 (예: 버튼)
+                var newButton = $('<button>새 버튼</button>');
+                $popup.find('button[onclick*="close"]').before(newButton); // 닫기 버튼 전에 추가
+                
+                // 업데이트는 keydown에서 처리되므로 별도 호출 불필요
+            },
+            removeElement: function(id) {
+                var $popup = $('#' + id);
+                // 마지막 내부 포커스 가능한 요소 삭제 (예: 마지막 버튼 삭제, 하지만 추가/삭제/닫기 버튼 제외)
+                var focusableSelectors = 'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+                var $internalFocusable = $popup.find(focusableSelectors).filter(':visible');
+                var $toRemove = $internalFocusable.not('button[onclick*="addElement"], button[onclick*="removeElement"], button[onclick*="close"]');
+                
+                if ($toRemove.length > 0) {
+                    $toRemove.last().remove();
+                }
+                
+                // 업데이트는 keydown에서 처리되므로 별도 호출 불필요
             }
         }
     </script>
