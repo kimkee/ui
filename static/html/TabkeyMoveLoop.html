@@ -18,6 +18,7 @@
 
 <body>
     <button onclick="popup.open('popup1')">팝업열기</button>
+    <button onclick="popup.open('popup2')">팝업열기</button>
 
     <div class="popup" id="popup1">
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
@@ -37,10 +38,27 @@
         <button onclick="popup.close('popup1')">닫기</button>
     </div>
 
+    <div class="popup" id="popup2">
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
+        <textarea name="" id="">sfsfds</textarea>
+        <button>버튼</button>
+        <input type="checkbox" name="" id="">
+        <input type="checkbox" name="" id="">
+        <input type="radio" name="rname1" id="">
+        <input type="radio" name="rname1" id="">
+        <a href="javascript:;">버튼</a>
+
+        <button onclick="popup.addElement('popup2')">요소추가</button>
+        <button onclick="popup.removeElement('popup2')">요소삭제</button>
+        <button onclick="popup.close('popup2')">닫기</button>
+    </div>
+
     <script>
         var popup = {
             open: function(id) {
+                var _this = this;
                 var $popup = $('#' + id);
+                if( $popup.length === 0 ) return;
                 $popup.addClass('open').attr('tabindex', '-1');
                 
                 var popupElement = $popup[0];
@@ -48,49 +66,12 @@
                 // 초기 포커스: .popup에 줌
                 $popup.focus();
                 
-                // 포커스 가능한 내부 요소 목록 가져오기 및 업데이트 함수
-                var updateFocusable = function() {
-                    var standardSelectors = 'a[href], area[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), textarea:not([disabled]), select:not([disabled]), iframe, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
-                    var $standardFocusable = $popup.find(standardSelectors).filter(':visible');
-                    
-                    // 스크롤 가능한 요소 찾기 (overflow: auto 또는 scroll이고 실제 오버플로 발생)
-                    var $scrollableElements = $popup.find('*').filter(function() {
-                        if (this.tabIndex < 0 || $(this).is('[disabled]') || !$(this).is(':visible')) return false;
-                        var style = window.getComputedStyle(this);
-                        var overflowY = style.overflowY;
-                        var overflowX = style.overflowX;
-                        if ((overflowY === 'auto' || overflowY === 'scroll' || overflowX === 'auto' || overflowX === 'scroll') &&
-                            (this.scrollHeight > this.clientHeight || this.scrollWidth > this.clientWidth)) {
-                            return true;
-                        }
-                        return false;
-                    });
-                    
-                    // 중복 제거하고 병합
-                    var $internalFocusable = $standardFocusable.add($scrollableElements).not($popup);
-                    
-                    var data = $popup.data('focusableElements') || {};
-                    
-                    if ($internalFocusable.length > 0) {
-                        // DOM 순서대로 정렬 (자연스러운 탭 순서 유지)
-                        $internalFocusable.sort(function(a, b) {
-                            return (a.compareDocumentPosition(b) & 6) - 2; // 4: preceding, 2: following
-                        });
-                        data.firstInternal = $internalFocusable[0];
-                        data.lastInternal = $internalFocusable[$internalFocusable.length - 1];
-                    } else {
-                        data.firstInternal = null;
-                        data.lastInternal = null;
-                    }
-                    
-                    $popup.data('focusableElements', data);
-                };
                 
                 // 키다운 이벤트 리스너 (동적 데이터 참조, 매번 업데이트 호출)
                 var handleKeydown = function(e) {
                     if (e.key === 'Tab') {
                         // 매 탭 키 눌림마다 요소 목록 업데이트 (동적 변화 대응)
-                        updateFocusable();
+                        _this.updateFocusable(id);
                         
                         var data = $popup.data('focusableElements');
                         var firstInternal = data.firstInternal;
@@ -130,7 +111,7 @@
                 });
                 
                 // 초기 업데이트
-                updateFocusable();
+                _this.updateFocusable(id);
             },
             close: function(id) {
                 var $popup = $('#' + id);
@@ -142,6 +123,45 @@
                 // 데이터 정리
                 $popup.removeData('focusableElements');
             },
+            updateFocusable: function(id){
+                var $popup = $('#' + id);
+                if( $popup.length === 0 ) return;
+                // 표준 포커스 가능한 요소 선택자
+                var standardSelectors = 'a[href], area[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), textarea:not([disabled]), select:not([disabled]), iframe, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
+                var $standardFocusable = $popup.find(standardSelectors).filter(':visible');
+                
+                // 스크롤 가능한 요소 찾기 (overflow: auto 또는 scroll이고 실제 오버플로 발생)
+                var $scrollableElements = $popup.find('*').filter(function() {
+                    if (this.tabIndex < 0 || $(this).is('[disabled]') || !$(this).is(':visible')) return false;
+                    var style = window.getComputedStyle(this);
+                    var overflowY = style.overflowY;
+                    var overflowX = style.overflowX;
+                    if ((overflowY === 'auto' || overflowY === 'scroll' || overflowX === 'auto' || overflowX === 'scroll') &&
+                        (this.scrollHeight > this.clientHeight || this.scrollWidth > this.clientWidth)) {
+                        return true;
+                    }
+                    return false;
+                });
+                
+                // 중복 제거하고 병합
+                var $internalFocusable = $standardFocusable.add($scrollableElements).not($popup);
+                
+                var data = $popup.data('focusableElements') || {};
+                
+                if ($internalFocusable.length > 0) {
+                    // DOM 순서대로 정렬 (자연스러운 탭 순서 유지)
+                    $internalFocusable.sort(function(a, b) {
+                        return (a.compareDocumentPosition(b) & 6) - 2; // 4: preceding, 2: following
+                    });
+                    data.firstInternal = $internalFocusable[0];
+                    data.lastInternal = $internalFocusable[$internalFocusable.length - 1];
+                } else {
+                    data.firstInternal = null;
+                    data.lastInternal = null;
+                }
+                
+                $popup.data('focusableElements', data);
+            },
             addElement: function(id) {
                 var $popup = $('#' + id);
                 // 새로운 요소 추가 (예: 버튼)
@@ -149,6 +169,7 @@
                 $popup.find('button[onclick*="close"]').before(newButton); // 닫기 버튼 전에 추가
                 
                 // 업데이트는 keydown에서 처리되므로 별도 호출 불필요
+
             },
             removeElement: function(id) {
                 var $popup = $('#' + id);

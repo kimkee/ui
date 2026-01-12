@@ -46,45 +46,47 @@
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
     </div>
 
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
         function updateScrollableTabIndex(el) {
-            const hasScroll = el.scrollHeight > el.clientHeight;
+            var $el = $(el);
+            var hasScroll = el.scrollHeight > el.clientHeight;
             if (hasScroll) {
-                el.setAttribute("tabindex", "0");
+                $el.attr("tabindex", "0");
             } else {
-                el.removeAttribute("tabindex");
+                $el.removeAttr("tabindex");
             }
         }
 
         function initAutoScrollableTabIndex(selector) {
             if (!selector) return;
 
-            const elements = document.querySelectorAll(selector);
-            if (!elements.length) return;
+            var $elements = $(selector);
+            if (!$elements.length) return;
 
-            const updateAll = () => {
-                elements.forEach(updateScrollableTabIndex);
+            var updateAll = function() {
+                $elements.each(function() {
+                    updateScrollableTabIndex(this);
+                });
             };
 
             // 초기 1회 체크
             updateAll();
 
             // 각 영역 내용 변경 감지
-            elements.forEach(el => {
-                const observer = new MutationObserver(updateAll);
-                observer.observe(el, { childList: true, subtree: true });
+            $elements.each(function() {
+                var observer = new MutationObserver(updateAll);
+                observer.observe(this, { childList: true, subtree: true });
             });
 
             // 리사이즈 시 전체 다시 계산
-            window.addEventListener("resize", updateAll);
+            $(window).resize(updateAll);
         }
 
-        document.addEventListener("DOMContentLoaded", () => {
+        $(document).ready(function() {
             // 필요에 따라 원하는 셀렉터로 호출
-            
+            initAutoScrollableTabIndex(".pop, .autoTabindexBox");
         });
-
-        initAutoScrollableTabIndex(".pop, .autoTabindexBox");
     </script>
 
 </body>
