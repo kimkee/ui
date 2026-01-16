@@ -4,35 +4,12 @@
 <head>
     <title>autoTabindex</title>
     <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-        body {
-            background-color: #111111;
-            color: #dddddd;
-            font-size: 12px;
-        }
-
+        *, *::before, *::after { box-sizing: border-box; }
+        body { font-size: 14px; margin: 20px; }
         a,
-        button {
-            color: #dddddd;
-        }
-
-        button {
-            cursor: pointer;
-            border: #666 solid 1px;
-            background-color: #222222;
-            padding: 0.2rem 0.5rem;
-            margin-right: 0.2rem;
-        }
-        .pop, .autoTabindexBox {
-            width: 300px;
-            height: 100px;
-            overflow: auto;
-            border: 1px solid #666666;
-            padding: 0.5rem;
-            margin: 1rem 0;
-        }
+        button { color: #dddddd; }
+        button { cursor: pointer; border: #666 solid 1px; background-color: #222222; padding: 0.2rem 0.5rem; margin-right: 0.2rem; }
+        .pop, .autoTabindexBox { width: 300px; height: 106px; overflow: auto; border: 1px solid #666666; padding: 0.5rem; margin: 1rem 0; }
         .autoTabindexBox{width: 100%;}
     </style>
 </head>
@@ -41,6 +18,9 @@
     <div class="pop">
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos reprehenderit odio ipsam necessitatibus optio voluptates tempore incidunt maiores obcaecati, in repellat! Pariatur iusto ullam sunt. Voluptatem minus illo est modi.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid vero natus culpa, ipsum distinctio placeat eius error officiis incidunt dicta inventore cum! Perspiciatis, dolores quibusdam hic dignissimos eaque aliquam. Tenetur?</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa veniam modi animi dolorem, iure est et quibusdam beatae rerum, nulla ab mollitia fuga optio veritatis vitae, voluptates eius recusandae sit.</p>
     </div>
     <div class="autoTabindexBox">
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
@@ -64,8 +44,8 @@
             var $elements = $(selector);
             if (!$elements.length) return;
 
-            var updateAll = function() {
-                $elements.each(function() {
+            var updateAll = function () {
+                $elements.each(function () {
                     updateScrollableTabIndex(this);
                 });
             };
@@ -74,7 +54,7 @@
             updateAll();
 
             // 각 영역 내용 변경 감지
-            $elements.each(function() {
+            $elements.each(function () {
                 var observer = new MutationObserver(updateAll);
                 observer.observe(this, { childList: true, subtree: true });
             });
@@ -83,7 +63,7 @@
             $(window).resize(updateAll);
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             // 필요에 따라 원하는 셀렉터로 호출
             initAutoScrollableTabIndex(".pop, .autoTabindexBox");
         });
