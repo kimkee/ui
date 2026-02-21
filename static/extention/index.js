@@ -2,8 +2,10 @@ const extention = {
     init: function(){
         this.bgs.init();
         this.speedScroll.init();
-        this.gesture.init();
         
+        // 네이버 웨일 부라우저에서는 실행 안되게
+        if (!/Whale/i.test(navigator.userAgent)) this.gesture.init(); 
+
         if(typeof window !== 'undefined') setTimeout(() => { this.iosx.init(); },50); 
         this.apppush.init();
         document.querySelector("head")?.insertAdjacentHTML("beforeend",`<style>a,button,input { user-select: auto; touch-action: auto; -webkit-tap-highlight-color: initial; } button{cursor: pointer;} </style>`);
