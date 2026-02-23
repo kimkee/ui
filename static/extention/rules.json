@@ -9,22 +9,8 @@
       ]
     },
     "condition": {
-      "urlFilter": "*.js*",
+      "regexFilter": "\\.js(\\?.*)?$",
       "resourceTypes": ["main_frame", "sub_frame", "script"]
-    }
-  },
-  {
-    "id": 2,
-    "priority": 1,
-    "action": {
-      "type": "modifyHeaders",
-      "responseHeaders": [
-        { "header": "content-type", "operation": "set", "value": "text/css; charset=utf-8" }
-      ]
-    },
-    "condition": {
-      "urlFilter": "*.css*",
-      "resourceTypes": ["main_frame", "sub_frame", "stylesheet"]
     }
   }
 ]
