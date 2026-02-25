@@ -9,7 +9,7 @@
       ]
     },
     "condition": {
-      "regexFilter": "\\.js(\\?.*)?$",
+      "regexFilter": "[^#]*\\.js(\\?.*)?$",
       "resourceTypes": ["main_frame", "sub_frame", "script"]
     }
   }
