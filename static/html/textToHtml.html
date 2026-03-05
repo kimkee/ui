@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코딩샘 - 양방향 변환기 (XSS 방어 적용)</title>
+    <style>
+        body { font-family: 'Malgun Gothic', sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; background-color: #1e1e1e; color: #d4d4d4; }
+        h2, h3 {margin-top: 0;color: #ffffff;}
+        .editor-box {width: 100%;min-height: 180px;font-family: 'Malgun Gothic', sans-serif;font-size: 15px;line-height: 1.6;font-weight: 400;color: #d4d4d4;letter-spacing: 0px;padding: 15px;box-sizing: border-box;border: 1px solid #3e3e42;border-radius: 5px;background-color: #252526;margin-bottom: 15px;word-break: break-all;}
+        .editor-box:focus { outline: none; border-color: #007acc; box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.3); background-color: #1e1e1e; }
+        textarea.editor-box { resize: vertical; }
+        .btn-group { display: flex; gap: 10px; margin-bottom: 25px; }
+        button {flex: 1;padding: 10px 20px;color: white;border: none;border-radius: 5px;cursor: pointer;font-size: 14px;/* font-weight: bold; */transition: background-color 0.2s;}
+        .btn-html { background-color: #007acc; }
+        .btn-html:hover { background-color: #005f9e; }
+        .btn-text { background-color: #2ea043; }
+        .btn-text:hover { background-color: #238636; }
+        a { color: #569cd6; text-decoration: none; font-weight: inherit; }
+        a:hover { text-decoration: underline; color: #9cdcfe; }
+    </style>
+</head>
+<body>
+
+    <h2>텍스트 ↔ HTML 양방향 실시간 변환기</h2>
+
+    <h3>1. 순수 텍스트 영역 (태그 입력 테스트)</h3>
+    <textarea id="textInput" class="editor-box">여기를 보세요: https://gemini.google.com/gem/b1635eeacad5.
+정상적인 파라미터 ([http://aaa.com/page?id=1.5&type=A]);
+
+태그 입력 테스트입니다!
+이 코드는 버튼으로 렌더링되지 않고 텍스트로 보입니다:
+<button id="btnText" class="btn-text">버튼</button></textarea>
+
+    <div class="btn-group">
+        <button id="btnToHtml" class="btn-html">HTML로 변환하기 ↓</button>
+        <button id="btnToText" class="btn-text">Text로 변환하기 ↑</button>
+    </div>
+
+    <h3>2. HTML 렌더링 및 편집 영역 (태그가 무력화됨)</h3>
+    <div id="htmlOutput" class="editor-box" contenteditable="true">결과가 여기에 표시됩니다.</div>
+
+    <script>
+        function textToHtml(str) {
+            if (!str) return "";
+
+            const urls = [];
+            const urlRegex = /(https?:\/\/[^\sㄱ-ㅎㅏ-ㅣ가-힣"']+)/g;
+            
+            // 1단계: URL 임시 분리
+            let processedStr = str.replace(urlRegex, function(match) {
+                const trailingRegex = /[.,;:(){}[\]!?]+$/;
+                let cleanUrl = match;
+                let trailingChars = '';
+                
+                if (trailingRegex.test(match)) {
+                    trailingChars = match.match(trailingRegex)[0];
+                    cleanUrl = match.slice(0, -trailingChars.length);
+                }
+                
+                urls.push(cleanUrl);
+                return `__URL_${urls.length - 1}__${trailingChars}`;
+            });
+
+            // 2단계: HTML 태그 무력화 (XSS 방어 로직 추가)
+            // 반드시 줄바꿈/공백 치환 전에 실행해야 합니다.
+            processedStr = processedStr
+                .replace(/&/g, '&amp;')   // & 기호를 최우선으로 변환
+                .replace(/</g, '&lt;')    // < 꺾쇠 이스케이프
+                .replace(/>/g, '&gt;');   // > 꺾쇠 이스케이프
+
+            // 3단계: 줄바꿈과 공백 변환
+            processedStr = processedStr
+                .replace(/\n/g, '<br>')
+                .replace(/ /g, '&nbsp;');
+
+            // 4단계: URL 복구
+            console.log(processedStr);
+            console.log(urls);
+            urls.forEach((url, index) => {
+                // URL 내부의 특수기호도 안전하게 이스케이프 처리
+                const safeUrl = url.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                const linkHtml = `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${safeUrl}</a>`;
+                processedStr = processedStr.replace(`__URL_${index}__`, linkHtml);
+            });
+
+            console.log(processedStr);
+            return processedStr;
+        }
+
+        function htmlToText(html) {
+            if (!html) return "";
+
+            return html
+                .replace(/<a [^>]*>([^<]+)<\/a>/g, '$1')
+                .replace(/<div><br><\/div>/gi, '\n')
+                .replace(/<div>/gi, '\n')
+                .replace(/<\/div>/gi, '')
+                .replace(/<p>/gi, '')
+                .replace(/<\/p>/gi, '\n')
+                .replace(/<br\s*\/?>/gi, '\n')
+                .replace(/&nbsp;/g, ' ')
+                // 우리가 저번 턴에 미리 만들어둔 엔티티 복원 로직 덕분에 역변환도 완벽!
+                .replace(/&amp;/g, '&')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>');
+        }
+
+        const btnToHtml = document.getElementById('btnToHtml');
+        const btnToText = document.getElementById('btnToText');
+        const textInput = document.getElementById('textInput');
+        const htmlOutput = document.getElementById('htmlOutput');
+
+        btnToHtml.addEventListener('click', function() {
+            const rawText = textInput.value;
+            htmlOutput.innerHTML = textToHtml(rawText);
+        });
+
+        btnToText.addEventListener('click', function() {
+            const rawHtml = htmlOutput.innerHTML;
+            textInput.value = htmlToText(rawHtml);
+        });
+        // 더블 클릭 시에만 링크 열기
+        htmlOutput.addEventListener('dblclick', function(e) {
+            const link = e.target.closest('a');
+            if (link) window.open(link.href, '_blank');
+        });
+        // 초기 실행
+        btnToHtml.click();
+    </script>
+</body>
+</html>
