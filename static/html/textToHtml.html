@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>코딩샘 - 양방향 변환기 (XSS 방어 적용)</title>
     <style>
-        body { font-family: 'Malgun Gothic', sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; background-color: #1e1e1e; color: #d4d4d4; }
+        *{box-sizing: border-box;}
+        body { font-family: 'Malgun Gothic', sans-serif; padding: 20px; max-width: 680px; margin: 0 auto; background-color: #1e1e1e; color: #d4d4d4; }
         h2, h3 {margin-top: 0;color: #ffffff;}
-        .editor-box {width: 100%;min-height: 180px;font-family: 'Malgun Gothic', sans-serif;font-size: 15px;line-height: 1.6;font-weight: 400;color: #d4d4d4;letter-spacing: 0px;padding: 15px;box-sizing: border-box;border: 1px solid #3e3e42;border-radius: 5px;background-color: #252526;margin-bottom: 15px;word-break: break-all;}
+        .editor-box {width: 100%;min-height: 180px;font-family: 'Malgun Gothic', sans-serif;font-size: 15px;line-height: 1.6;font-weight: 400;color: #d4d4d4;letter-spacing: 0px;padding: 15px;box-sizing: border-box;border: 1px solid #656565;border-radius: 5px;background-color: #252526;margin-bottom: 15px;word-break: break-all;}
         .editor-box:focus { outline: none; border-color: #007acc; box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.3); background-color: #1e1e1e; }
         textarea.editor-box { resize: vertical; }
         .btn-group { display: flex; gap: 10px; margin-bottom: 25px; }
@@ -45,11 +46,11 @@
             if (!str) return "";
 
             const urls = [];
-            const urlRegex = /(https?:\/\/[^\sㄱ-ㅎㅏ-ㅣ가-힣"']+)/g;
+            const urlRegex = /(https?:\/\/[^\sㄱ-ㅎㅏ-ㅣ가-힣"']+)/g; // URL 정규식 (한글, 특수문자, 공백, 따옴표 제외)
             
             // 1단계: URL 임시 분리
             let processedStr = str.replace(urlRegex, function(match) {
-                const trailingRegex = /[.,;:(){}[\]!?]+$/;
+                const trailingRegex = /[.,;:(){}[\]!?]+$/; // URL 뒤에 오는 특수문자 정규식
                 let cleanUrl = match;
                 let trailingChars = '';
                 
