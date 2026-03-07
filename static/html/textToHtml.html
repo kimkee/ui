@@ -12,7 +12,7 @@
         .editor-box:focus { outline: none; border-color: #007acc; box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.3); background-color: #1e1e1e; }
         textarea.editor-box { resize: vertical; }
         .btn-group { display: flex; gap: 10px; margin-bottom: 25px; }
-        button {flex: 1;padding: 10px 20px;color: white;border: none;border-radius: 5px;cursor: pointer;font-size: 14px;/* font-weight: bold; */transition: background-color 0.2s;}
+        button {flex: 1;padding: 10px 20px;color: white;border: none;border-radius: 5px;cursor: pointer;font-size: 14px;transition: background-color 0.2s;}
         .btn-html { background-color: #007acc; }
         .btn-html:hover { background-color: #005f9e; }
         .btn-text { background-color: #2ea043; }
@@ -46,8 +46,11 @@
             if (!str) return "";
 
             const urls = [];
-            const urlRegex = /(https?:\/\/[^\sㄱ-ㅎㅏ-ㅣ가-힣"']+)/g; // URL 정규식 (한글, 특수문자, 공백, 따옴표 제외)
-            
+
+            // [수정] RFC 3986 기반 화이트리스트 방식 URL 정규식 (WARN 1 수정)
+            // const urlRegex = /(https?:\/\/[\w\-._~:/?#\[\]@!$&'()*+,;=%]+)/g;
+            const urlRegex = /(https?:\/\/[\w\-._~:/?#\[\]@!$&'()*+,;=%가-힣ㄱ-ㅎㅏ-ㅣ]+)/g; // 한글 포함
+
             // 1단계: URL 임시 분리
             let processedStr = str.replace(urlRegex, function(match) {
                 const trailingRegex = /[.,;:(){}[\]!?]+$/; // URL 뒤에 오는 특수문자 정규식
@@ -71,17 +74,18 @@
                 .replace(/>/g, '&gt;');   // > 꺾쇠 이스케이프
 
             // 3단계: 줄바꿈과 공백 변환
+            // [수정] 연속 공백(2개 이상)만 &nbsp;로 변환, 단일 공백은 그대로 유지 (WARN 2 수정)
             processedStr = processedStr
                 .replace(/\n/g, '<br>')
-                .replace(/ /g, '&nbsp;');
+                .replace(/ {2,}/g, (m) => '&nbsp;'.repeat(m.length));
 
             // 4단계: URL 복구
             console.log(processedStr);
             console.log(urls);
             urls.forEach((url, index) => {
-                // URL 내부의 특수기호도 안전하게 이스케이프 처리
-                const safeUrl = url.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                const linkHtml = `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${safeUrl}</a>`;
+                const safeUrl = url.replace(/"/g, '&quot;');
+                // [수정] tabindex 추가로 접근성 개선 (TIP 3 반영)
+                const linkHtml = `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer" tabindex="0" title="더블클릭 또는 Ctrl+클릭으로 열기">${safeUrl}</a>`;
                 processedStr = processedStr.replace(`__URL_${index}__`, linkHtml);
             });
 
@@ -93,7 +97,8 @@
             if (!html) return "";
 
             return html
-                .replace(/<a [^>]*>([^<]+)<\/a>/g, '$1')
+                // [수정] href 속성값을 직접 추출하여 URL 복원 (BUG 2 수정)
+                .replace(/<a\s+[^>]*href="([^"]*)"[^>]*>[^<]*<\/a>/g, '$1')
                 .replace(/<div><br><\/div>/gi, '\n')
                 .replace(/<div>/gi, '\n')
                 .replace(/<\/div>/gi, '')
@@ -101,10 +106,13 @@
                 .replace(/<\/p>/gi, '\n')
                 .replace(/<br\s*\/?>/gi, '\n')
                 .replace(/&nbsp;/g, ' ')
-                // 우리가 저번 턴에 미리 만들어둔 엔티티 복원 로직 덕분에 역변환도 완벽!
                 .replace(/&amp;/g, '&')
                 .replace(/&lt;/g, '<')
-                .replace(/&gt;/g, '>');
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                // [추가] 3개 이상 연속 개행 정리 및 앞뒤 공백 제거 (TIP 2 반영)
+                .replace(/\n{3,}/g, '\n\n')
+                .trim();
         }
 
         const btnToHtml = document.getElementById('btnToHtml');
@@ -126,6 +134,15 @@
             const link = e.target.closest('a');
             if (link) window.open(link.href, '_blank');
         });
+
+        // [추가] Ctrl+클릭(또는 Mac의 Cmd+클릭)으로도 링크 열기 (TIP 3 반영)
+        htmlOutput.addEventListener('click', function(e) {
+            if (e.ctrlKey || e.metaKey) {
+                const link = e.target.closest('a');
+                if (link) window.open(link.href, '_blank');
+            }
+        });
+
         // 초기 실행
         btnToHtml.click();
     </script>
