@@ -48,7 +48,8 @@
             const urls = [];
 
             // [수정] RFC 3986 기반 화이트리스트 방식 URL 정규식 (WARN 1 수정)
-            const urlRegex = /(https?:\/\/[\w\-._~:/?#\[\]@!$&'()*+,;=%]+)/g;
+            // const urlRegex = /(https?:\/\/[\w\-._~:/?#\[\]@!$&'()*+,;=%]+)/g;
+            const urlRegex = /(https?:\/\/[\w\-._~:/?#\[\]@!$&'()*+,;=%가-힣ㄱ-ㅎㅏ-ㅣ]+)/g; // 한글 포함
 
             // 1단계: URL 임시 분리
             let processedStr = str.replace(urlRegex, function(match) {
