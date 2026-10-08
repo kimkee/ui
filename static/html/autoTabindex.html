@@ -39,8 +39,12 @@
 
 <body>
     <div class="pop">
+        <button onclick="document.querySelector('.pop').style.height = 'auto'">Button 1</button>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos reprehenderit odio ipsam necessitatibus optio voluptates tempore incidunt maiores obcaecati, in repellat! Pariatur iusto ullam sunt. Voluptatem minus illo est modi.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid vero natus culpa, ipsum distinctio placeat eius error officiis incidunt dicta inventore cum! Perspiciatis, dolores quibusdam hic dignissimos eaque aliquam. Tenetur?</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa veniam modi animi dolorem, iure est et quibusdam beatae rerum, nulla ab mollitia fuga optio veritatis vitae, voluptates eius recusandae sit.</p>
     </div>
     <div class="autoTabindexBox">
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
@@ -73,10 +77,12 @@
             elements.forEach(el => {
                 const observer = new MutationObserver(updateAll);
                 observer.observe(el, { childList: true, subtree: true });
+                const observer2 = new ResizeObserver(updateAll);
+                observer2.observe(el);
             });
 
             // 리사이즈 시 전체 다시 계산
-            window.addEventListener("resize", updateAll);
+            // window.addEventListener("resize", updateAll);
         }
 
         document.addEventListener("DOMContentLoaded", () => {

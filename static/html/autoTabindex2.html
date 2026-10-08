@@ -9,14 +9,15 @@
         a,
         button { color: #dddddd; }
         button { cursor: pointer; border: #666 solid 1px; background-color: #222222; padding: 0.2rem 0.5rem; margin-right: 0.2rem; }
-        .pop, .autoTabindexBox { width: 300px; height: 106px; overflow: auto; border: 1px solid #666666; padding: 0.5rem; margin: 1rem 0; }
+        .pop, .autoTabindexBox { width: 300px; height: 110px; overflow: auto; border: 1px solid #666666; padding: 0.5rem; margin: 1rem 0; }
         .autoTabindexBox{width: 100%;}
     </style>
 </head>
 
 <body>
     <div class="pop">
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
+        <button onclick="document.querySelector('.pop').style.height = 'auto'">Button 1</button>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores ipsa minima facere voluptatum voluptatem, eum incidunt debitis eveniet, aperiam architecto assumenda perspiciatis, pariatur amet. Suscipit quod ut dolorum quo sit?</p>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos reprehenderit odio ipsam necessitatibus optio voluptates tempore incidunt maiores obcaecati, in repellat! Pariatur iusto ullam sunt. Voluptatem minus illo est modi.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid vero natus culpa, ipsum distinctio placeat eius error officiis incidunt dicta inventore cum! Perspiciatis, dolores quibusdam hic dignissimos eaque aliquam. Tenetur?</p>
@@ -57,10 +58,12 @@
             $elements.each(function () {
                 var observer = new MutationObserver(updateAll);
                 observer.observe(this, { childList: true, subtree: true });
+                var observer2 = new ResizeObserver(updateAll);
+                observer2.observe(this);
             });
 
             // 리사이즈 시 전체 다시 계산
-            $(window).resize(updateAll);
+            // $(window).resize(updateAll);
         }
 
         $(document).ready(function () {
