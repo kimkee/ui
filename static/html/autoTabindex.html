@@ -4,35 +4,12 @@
 <head>
     <title>autoTabindex</title>
     <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-        body {
-            background-color: #111111;
-            color: #dddddd;
-            font-size: 12px;
-        }
-
+        *, *::before, *::after { box-sizing: border-box; }
+        body { background-color: #111111; color: #dddddd; font-size: 12px; }
         a,
-        button {
-            color: #dddddd;
-        }
-
-        button {
-            cursor: pointer;
-            border: #666 solid 1px;
-            background-color: #222222;
-            padding: 0.2rem 0.5rem;
-            margin-right: 0.2rem;
-        }
-        .pop, .autoTabindexBox {
-            width: 300px;
-            height: 100px;
-            overflow: auto;
-            border: 1px solid #666666;
-            padding: 0.5rem;
-            margin: 1rem 0;
-        }
+        button { color: #dddddd; }
+        button { cursor: pointer; border: #666 solid 1px; background-color: #222222; padding: 0.2rem 0.5rem; margin-right: 0.2rem; }
+        .pop, .autoTabindexBox { width: 300px; height: 100px; overflow: auto; border: 1px solid #666666; padding: 0.5rem; margin: 1rem 0; }
         .autoTabindexBox{width: 100%;}
     </style>
 </head>
@@ -87,10 +64,9 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             // 필요에 따라 원하는 셀렉터로 호출
-            
+            initAutoScrollableTabIndex(".pop, .autoTabindexBox");
         });
-
-        initAutoScrollableTabIndex(".pop, .autoTabindexBox");
+        
     </script>
 
 </body>

@@ -6,9 +6,9 @@
     <title>코딩샘 - 양방향 변환기 (XSS 방어 적용)</title>
     <style>
         *{box-sizing: border-box;}
-        body { font-family: 'Malgun Gothic', sans-serif; padding: 20px; max-width: 680px; margin: 0 auto; background-color: #1e1e1e; color: #d4d4d4; }
+        body {font-family: 'Malgun Gothic', sans-serif;padding: 20px;max-width: 740px;margin: 0 auto 0 0;background-color: #1e1e1e;color: #d4d4d4;}
         h2, h3 {margin-top: 0;color: #ffffff;}
-        .editor-box {width: 100%;min-height: 180px;font-family: 'Malgun Gothic', sans-serif;font-size: 15px;line-height: 1.6;font-weight: 400;color: #d4d4d4;letter-spacing: 0px;padding: 15px;box-sizing: border-box;border: 1px solid #656565;border-radius: 5px;background-color: #252526;margin-bottom: 15px;word-break: break-all;}
+        .editor-box {width: 100%;min-height: 180px;font-family: 'Malgun Gothic', sans-serif;font-size: 15px;line-height: 1.3;font-weight: 400;color: #d4d4d4;letter-spacing: 0px;padding: 15px;box-sizing: border-box;border: 1px solid #656565;border-radius: 5px;background-color: #252526;margin-bottom: 15px;word-break: break-all;}
         .editor-box:focus { outline: none; border-color: #007acc; box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.3); background-color: #1e1e1e; }
         textarea.editor-box { resize: vertical; }
         .btn-group { display: flex; gap: 10px; margin-bottom: 25px; }
@@ -18,28 +18,64 @@
         .btn-text { background-color: #2ea043; }
         .btn-text:hover { background-color: #238636; }
         a { color: #569cd6; text-decoration: none; font-weight: inherit; }
-        a:hover { text-decoration: underline; color: #9cdcfe; }
+        a:hover,
+        a:focus,
+        a:active { text-decoration: underline; color: #9cdcfe; }
     </style>
 </head>
 <body>
 
-    <h2>텍스트 ↔ HTML 양방향 실시간 변환기</h2>
+    <!-- <h2>텍스트 ↔ HTML 양방향 실시간 변환기</h2> -->
+
+    <!-- <h3>2. HTML 렌더링 및 편집 영역 (태그가 무력화됨)</h3> -->
+    <div id="htmlOutput" class="editor-box" contenteditable="t rue">결과가 여기에 표시됩니다.</div>
 
     <h3>1. 순수 텍스트 영역 (태그 입력 테스트)</h3>
-    <textarea id="textInput" class="editor-box">여기를 보세요: https://gemini.google.com/gem/b1635eeacad5.
-정상적인 파라미터 ([http://aaa.com/page?id=1.5&type=A]);
+    <textarea id="textInput" class="editor-box">
+2 롯데 VEEX 카드
+https://www.lottecard.co.kr/app/LPCDADB_V100.lc?vtCdKndC=P01472-A01472
+https://m.lottecard.co.kr/spa/card/cards/credit/catalog/card-detail?vtCdKndC=P01472-A01472
 
-태그 입력 테스트입니다!
-이 코드는 버튼으로 렌더링되지 않고 텍스트로 보입니다:
-<button id="btnText" class="btn-text">버튼</button></textarea>
+3 VEEX II 카드
+https://www.lottecard.co.kr/app/LPCDADB_V100.lc?vtCdKndC=P11908-A11908
+https://m.lottecard.co.kr/spa/card/cards/credit/catalog/card-detail?vtCdKndC=P11908-A11908
+
+4 LOCA for 롯데마트
+https://www.lottecard.co.kr/app/LPCDXAA_V001.lc?vtCdKndC=P14349-A14349
+https://m.lottecard.co.kr/app/LPCDXAA_V001.lc?vtCdKndC=P14349-A14349
+
+5 LOCA in MEGACITY
+https://www.lottecard.co.kr/app/LPCDXAA_V001.lc?vtCdKndC=P14034-A14034
+https://m.lottecard.co.kr/app/LPCDXAA_V001.lc?vtCdKndC=P14034-A14034
+
+6 LOCA in BUSAN
+https://www.lottecard.co.kr/app/LPCDXAA_V001.lc?vtCdKndC=P13719-A13719
+https://m.lottecard.co.kr/app/LPCDXAA_V001.lc?vtCdKndC=P13719-A13719
+
+8 롯데 포인트플러스 카드
+https://www.lottecard.co.kr/app/LPCDADB_V100.lc?vtCdKndC=P00276-A00276
+https://m.lottecard.co.kr/spa/card/cards/credit/catalog/card-detail?vtCdKndC=P00276-A00276
+
+9-1 롯데 Weekly 체크
+https://www.lottecard.co.kr/app/LPCDADB_V100.lc?vtCdKndC=C10343-A10343
+https://m.lottecard.co.kr/spa/card/cards/credit/catalog/card-detail?vtCdKndC=C10343-A10343
+
+9-2 롯데 Weekly 체크 은련
+https://www.lottecard.co.kr/app/LPCDADB_V100.lc?vtCdKndC=C10343-B10576
+https://m.lottecard.co.kr/spa/card/cards/credit/catalog/card-detail?vtCdKndC=C10343-B10576
+
+9-3 롯데 Weekly 체크 VISA
+https://www.lottecard.co.kr/app/LPCDADB_V100.lc?vtCdKndC=C10343-B10347
+https://m.lottecard.co.kr/spa/card/cards/credit/catalog/card-detail?vtCdKndC=C10343-B10347
+
+10 롯데 플래티늄 체크
+https://www.lottecard.co.kr/app/LPCDADB_V100.lc?vtCdKndC=C00539-A00539
+https://m.lottecard.co.kr/spa/card/cards/credit/catalog/card-detail?vtCdKndC=C00539-A00539</textarea>
 
     <div class="btn-group">
         <button id="btnToHtml" class="btn-html">HTML로 변환하기 ↓</button>
         <button id="btnToText" class="btn-text">Text로 변환하기 ↑</button>
     </div>
-
-    <h3>2. HTML 렌더링 및 편집 영역 (태그가 무력화됨)</h3>
-    <div id="htmlOutput" class="editor-box" contenteditable="true">결과가 여기에 표시됩니다.</div>
 
     <script>
         function textToHtml(str) {
